@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+.env
+*.sublime-project
+*.sublime-workspace
+*.log
+node_modules/
+.idea/
+.vscode/
+yarn.lock
+.eslintcache
+.cache/
+public/

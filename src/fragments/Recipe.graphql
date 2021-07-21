@@ -1,0 +1,68 @@
+fragment Recipe on Recipe {
+  stage
+  overnight
+  artemsFavorite
+  margaritasFavorite
+  leftovers
+  remoteId: id
+  createdAt
+  updatedAt
+  title
+  publishedAt
+  slug
+  yields
+  steps
+  ingredients
+  source
+  description
+  notes
+  privateNotes
+  time
+  recipes {
+    ... on Recipe {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  images {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  subrecipes {
+    ... on Recipe {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  tags
+  cuisines
+  difficulty
+  tools
+}

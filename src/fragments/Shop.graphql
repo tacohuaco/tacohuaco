@@ -1,0 +1,46 @@
+fragment Shop on Shop {
+  stage
+  remoteId: id
+  createdAt
+  updatedAt
+  publishedAt
+  name
+  slug
+  description
+  url
+  neighbourhood
+  location {
+    ... on Location {
+      latitude
+      longitude
+    }
+  }
+  address
+  city
+  zip
+  online
+  hasOfflineStore
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  country
+  type
+}
