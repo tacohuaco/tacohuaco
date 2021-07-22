@@ -1,6 +1,6 @@
 import { flow } from 'lodash';
-import visit from 'unist-util-visit';
-import { fromMarkdown } from 'mdast-util-from-markdown';
+// import visit from 'unist-util-visit';
+// import { fromMarkdown } from 'mdast-util-from-markdown';
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
 	[`GraphCMS_Recipe`]: ['description', 'ingredients', 'steps', 'notes'],
@@ -23,10 +23,10 @@ const UNITSLESS = ['a bit'];
 
 const print = (text: string) => (console.log(text), text);
 
-export const getIngredientLines = (text: string) => {
-	const tree = fromMarkdown(text);
-	console.log(tree);
-};
+// export const getIngredientLines = (text: string) => {
+// 	const tree = fromMarkdown(text);
+// 	console.log(tree);
+// };
 
 /**
  * Highlight amounts in ingredients
@@ -34,11 +34,11 @@ export const getIngredientLines = (text: string) => {
 export const boldizeAmounts = (text: string): string =>
 	text
 		.replace(
-			new RegExp(`^(\\d+(?:\\[/-]\\d+)? (?:${UNITS.join('|')}))\\b`, 'gm'),
+			new RegExp(`^- (\\d+(?:\\[/-]\\d+)? (?:${UNITS.join('|')}))\\b`, 'gm'),
 			'**$1**'
 		)
-		.replace(new RegExp(`^(${UNITSLESS.join('|')})`, 'gm'), '**$1**')
-		.replace(/^(\d+(?:[/-]\d+)?)/gm, '**$1**');
+		.replace(new RegExp(`^- (${UNITSLESS.join('|')})`, 'gm'), '**$1**')
+		.replace(/^- (\d+(?:[/-]\d+)?)/gm, '**$1**');
 
 /**
  * Reduce leveles of headings, so they match the page outline

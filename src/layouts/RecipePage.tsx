@@ -5,6 +5,7 @@ import { Flags } from '../util/client';
 import { Image as ImageType } from '../types/Image';
 import { MDXRenderer } from '../components/MDXRenderer';
 import TextContent from '../components/TextContent';
+import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
 import Subscription from '../components/Subscription';
 import Metatags from '../components/Metatags';
@@ -83,10 +84,12 @@ export default function RecipePage({
 						/>
 					)}
 					<Grid gridGap="m" gridTemplateColumns={['1fr', '1fr', '1fr 3fr']}>
-						<TextContent fontSize="s" lineHeight="large">
+						<TextContent>
 							<Heading level={2}>Ingredients</Heading>
 							{yields && <Text variant="small">Yields {yields}</Text>}
-							<MDXRenderer>{ingredientsMdx}</MDXRenderer>
+							<RecipeIngredients>
+								<MDXRenderer>{ingredientsMdx}</MDXRenderer>
+							</RecipeIngredients>
 						</TextContent>
 						<TextContent>
 							<Heading level={2}>Directions</Heading>
