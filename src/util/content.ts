@@ -1,4 +1,6 @@
 import { flow } from 'lodash';
+import visit from 'unist-util-visit';
+import { fromMarkdown } from 'mdast-util-from-markdown';
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
 	[`GraphCMS_Recipe`]: ['description', 'ingredients', 'steps', 'notes'],
@@ -21,12 +23,10 @@ const UNITSLESS = ['a bit'];
 
 const print = (text: string) => (console.log(text), text);
 
-/**
- * Add <br> tags between lines inside paragraphs so (ingredients) are rendered
- * on separate lines
- */
-export const addHardLineBreaksInsideParagraphs = (text: string): string =>
-	text.replace(/\n\n/g, '🦀🪗').replace(/\n/g, '<br/>').replace(/🦀🪗/g, '\n\n');
+export const getIngredientLines = (text: string) => {
+	const tree = fromMarkdown(text);
+	console.log(tree);
+};
 
 /**
  * Highlight amounts in ingredients
@@ -51,11 +51,7 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 	Record<string, (text: string) => string>
 > = {
 	[`GraphCMS_Recipe`]: {
-		ingredients: flow([
-			boldizeAmounts,
-			addHardLineBreaksInsideParagraphs,
-			demoteHeadings,
-		]),
+		ingredients: flow([boldizeAmounts, demoteHeadings]),
 		steps: flow([demoteHeadings]),
 	},
 };
