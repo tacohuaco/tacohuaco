@@ -14,7 +14,7 @@ export default function RecipePage({ recipes, url }: Props) {
 		<Page url={url}>
 			<Metatags slug={url} />
 			<main>
-				<Heading level={1}>Recepes</Heading>
+				<Heading level={1}>Recipes</Heading>
 				<Stack gap="l">
 					<RecipeList recipes={recipes} />
 				</Stack>
