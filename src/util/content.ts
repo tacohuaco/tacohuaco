@@ -35,10 +35,10 @@ export const boldizeAmounts = (text: string): string =>
 	text
 		.replace(
 			new RegExp(`^- (\\d+(?:\\[/-]\\d+)? (?:${UNITS.join('|')}))\\b`, 'gm'),
-			'**$1**'
+			'- **$1**'
 		)
-		.replace(new RegExp(`^- (${UNITSLESS.join('|')})`, 'gm'), '**$1**')
-		.replace(/^- (\d+(?:[/-]\d+)?)/gm, '**$1**');
+		.replace(new RegExp(`^- (${UNITSLESS.join('|')})`, 'gm'), '- **$1**')
+		.replace(/^- (\d+(?:[/-]\d+)?)/gm, '- **$1**');
 
 /**
  * Reduce leveles of headings, so they match the page outline
