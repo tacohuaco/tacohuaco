@@ -1,6 +1,7 @@
 import { flow } from 'lodash';
-// import visit from 'unist-util-visit';
-// import { fromMarkdown } from 'mdast-util-from-markdown';
+import { visit } from 'unist-util-visit';
+import { fromMarkdown } from 'mdast-util-from-markdown';
+import { toString } from 'mdast-util-to-string';
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
 	[`GraphCMS_Recipe`]: ['description', 'ingredients', 'steps', 'notes'],
@@ -23,10 +24,14 @@ const UNITSLESS = ['a bit'];
 
 const print = (text: string) => (console.log(text), text);
 
-// export const getIngredientLines = (text: string) => {
-// 	const tree = fromMarkdown(text);
-// 	console.log(tree);
-// };
+export const getIngredientLines = (text: string): string[] => {
+	const tree = fromMarkdown(text);
+	const ingredients: string[] = [];
+	visit(tree, 'listItem', (li) => {
+		ingredients.push(toString(li));
+	});
+	return ingredients;
+};
 
 /**
  * Highlight amounts in ingredients
