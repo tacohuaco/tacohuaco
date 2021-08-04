@@ -6,18 +6,18 @@ fragment Shop on Shop {
   publishedAt
   name
   slug
-  description
   url
+  description
+  city
   neighbourhood
+  zip
+  address
   location {
     ... on Location {
       latitude
       longitude
     }
   }
-  address
-  city
-  zip
   online
   hasOfflineStore
   createdBy {
@@ -41,6 +41,6 @@ fragment Shop on Shop {
       stage
     }
   }
-  country
   type
+  country
 }

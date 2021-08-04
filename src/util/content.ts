@@ -2,6 +2,9 @@ import { flow } from 'lodash';
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
+import { parse, normalize, analyze, IngredientKind } from './olivier';
+import { Flags } from '../types/Flags';
+
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
 	[`GraphCMS_Recipe`]: ['description', 'ingredients', 'steps', 'notes'],
@@ -34,6 +37,21 @@ export const getIngredientLines = (text: string): string[] => {
 		ingredients.push(toString(li));
 	});
 	return ingredients;
+};
+
+export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
+	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
+	const ingredients = ingredientsRaw.map((x) => analyze(normalize(parse(x))));
+	console.log('🦆', ingredients);
+	return {
+		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
+		vegetarian: ingredients.every((x) =>
+			[IngredientKind.Vegan, IngredientKind.Vegetarian].includes(x.kind)
+		),
+		gluten: ingredients.some((x) => x.hasGluten === true),
+		diary: ingredients.some((x) => x.hasDairy === true),
+		addedSugar: ingredients.some((x) => x.hasSugar === true),
+	};
 };
 
 /**

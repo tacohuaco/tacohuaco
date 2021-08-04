@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from 'tamia';
-import { Flags } from '../util/client';
+import { Flags } from '../types/Flags';
 import RecipeFlags from './RecipeFlags';
 import RecipeTags from './RecipeTags';
 import RecipeTimes from './RecipeTimes';

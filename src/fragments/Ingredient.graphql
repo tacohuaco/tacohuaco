@@ -5,13 +5,20 @@ fragment Ingredient on Ingredient {
   updatedAt
   publishedAt
   name
-  hasDairy
-  hasGluten
-  hasNuts
+  slug
   description
   storage
+  hasGluten
+  hasNuts
+  hasDairy
   hasSugar
-  slug
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -26,13 +33,6 @@ fragment Ingredient on Ingredient {
       stage
     }
   }
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
-  season
   kind
+  season
 }

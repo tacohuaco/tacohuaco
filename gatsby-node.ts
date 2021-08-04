@@ -6,6 +6,7 @@ import { getMdx } from './src/util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
 	GRAPHCMS_FIELD_PREPROCESSING,
+	getRecipeFlags,
 } from './src/util/content';
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
@@ -17,11 +18,35 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
 	});
 };
 
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
+	({ actions: { createTypes } }) => {
+		createTypes(`
+    type FlagsJson {
+      vegan: Boolean!
+      vegetarian: Boolean!
+      gluten: Boolean!
+      diary: Boolean!
+      addedSugar: Boolean!
+    }
+  `);
+	};
+
 // Create Mdx fields for all Markdown type fields from GraphCMS
 export const createResolvers: GatsbyNode['createResolvers'] = ({
 	// eslint-disable-next-line no-shadow
 	createResolvers,
 }) => {
+	createResolvers({
+		[`GraphCMS_Recipe`]: {
+			[`flags`]: {
+				type: 'FlagsJson!',
+				resolve(source: Record<string, string>) {
+					return getRecipeFlags(source.ingredients);
+				},
+			},
+		},
+	});
+
 	for (const [type, fields] of Object.entries(GRAPHCMS_MARKDOWN_FIELDS)) {
 		for (const field of fields) {
 			createResolvers({

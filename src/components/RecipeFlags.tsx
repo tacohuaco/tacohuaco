@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack } from 'tamia';
-import { Flags } from '../util/client';
+import { Flags } from '../types/Flags';
 import RecipeFlag from './RecipeFlag';
 
 type Props = {
@@ -16,11 +16,11 @@ export default function RecipeFlags({
 }: Props) {
 	return (
 		<Stack gap="s" direction="row">
-			{Object.entries(flags)
-				.filter(([, value]) => value)
-				.map(([key]) => (
-					<RecipeFlag key={key} type={key as keyof Flags} />
-				))}
+			{flags.vegan && <RecipeFlag type="vegan" />}
+			{flags.vegetarian && <RecipeFlag type="vegetarian" />}
+			{flags.gluten || <RecipeFlag type="glutenFree" />}
+			{flags.diary || <RecipeFlag type="diaryFree" />}
+			{flags.addedSugar || <RecipeFlag type="noAddedSugar" />}
 			{margaritasFavorite && <RecipeFlag type="margaritasFavorite" />}
 			{artemsFavorite && <RecipeFlag type="artemsFavorite" />}
 		</Stack>

@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import { Image } from '../types/Image';
 import Recipe from '../layouts/RecipePage';
 import { RecipePageQuery, GraphCms_Asset } from '../graphql-types';
-import { getRecipeIngredients, getFlags } from '../util/client';
 
 type Props = {
 	data: RecipePageQuery;
@@ -39,6 +38,7 @@ export default function RecipePage({
 		cuisines,
 		description,
 		descriptionMdx,
+		flags,
 		images,
 		ingredientsMdx,
 		margaritasFavorite,
@@ -49,11 +49,6 @@ export default function RecipePage({
 		title,
 		yields,
 	} = graphCmsRecipe;
-	const ingredients = getRecipeIngredients(
-		graphCmsRecipe,
-		allGraphCmsIngredient.nodes
-	);
-	const flags = getFlags(ingredients);
 	return (
 		<Recipe
 			artemsFavorite={artemsFavorite}
@@ -94,22 +89,18 @@ export const pageQuery = graphql`
 			title
 			tools
 			yields
+			flags {
+				vegan
+				vegetarian
+				gluten
+				diary
+				addedSugar
+			}
 			images {
 				url
 				handle
 				width
 				height
-			}
-		}
-		allGraphCmsIngredient {
-			nodes {
-				name
-				season
-				kind
-				hasDairy
-				hasGluten
-				hasNuts
-				hasSugar
 			}
 		}
 	}

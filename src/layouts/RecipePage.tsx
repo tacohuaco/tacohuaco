@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from '@graphcms/react-image';
 import { Stack, Grid, Heading, Text } from 'tamia';
-import { Flags } from '../util/client';
+import { Flags } from '../types/Flags';
 import { Image as ImageType } from '../types/Image';
 import { MDXRenderer } from '../components/MDXRenderer';
 import TextContent from '../components/TextContent';
