@@ -55,6 +55,7 @@ export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
 };
 
 /**
+ * TODO: Use Oliver to format
  * Highlight amounts in ingredients
  */
 export const boldizeAmounts = (text: string): string =>
