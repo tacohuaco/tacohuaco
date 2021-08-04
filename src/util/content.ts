@@ -22,7 +22,10 @@ const UNITS = [
 ];
 const UNITSLESS = ['a bit'];
 
-const print = (text: string) => (console.log(text), text);
+const print = (text: string) => {
+	console.log(text);
+	return text;
+};
 
 export const getIngredientLines = (text: string): string[] => {
 	const tree = fromMarkdown(text);

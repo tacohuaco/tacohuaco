@@ -1,5 +1,5 @@
 ```jsx
-import {Stack} from 'tamia';
+import { Stack } from 'tamia';
 <Stack gap="s" direction="row">
   <RecipeFlag type="vegan" />
   <RecipeFlag type="vegetarian" />
@@ -8,5 +8,5 @@ import {Stack} from 'tamia';
   <RecipeFlag type="noAddedSugar" />
   <RecipeFlag type="margaritasFavorite" />
   <RecipeFlag type="artemsFavorite" />
-</Stack>
+</Stack>;
 ```

@@ -1,2 +1,3 @@
 public/
 .cache/
+src/graphql-types.d.ts
