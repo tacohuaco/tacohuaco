@@ -1,4 +1,4 @@
-export const WORDS_TO_NUMBERS = {
+export const WORDS_TO_NUMBERS: Record<string, number> = {
 	zero: 0,
 	one: 1,
 	two: 2,

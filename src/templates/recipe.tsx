@@ -25,7 +25,7 @@ const mapImages = (
 	}));
 
 export default function RecipePage({
-	data: { graphCmsRecipe, allGraphCmsIngredient },
+	data: { graphCmsRecipe },
 	pageContext: { related = [] },
 	location: { pathname },
 }: Props) {

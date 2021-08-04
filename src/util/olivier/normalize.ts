@@ -4,7 +4,11 @@ import { INGREDIENTS } from './langs/en/ingredients';
 import { WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
 
-function normalizeAmount(amount: Amount): Amount {
+function normalizeAmount(amount?: Amount): Amount | undefined {
+	if (!amount) {
+		return undefined;
+	}
+
 	if (typeof amount === 'number') {
 		return amount;
 	}
@@ -14,10 +18,10 @@ function normalizeAmount(amount: Amount): Amount {
 		return numberMaybe;
 	}
 
-	return WORDS_TO_NUMBERS[amount] || amount;
+	return amount in WORDS_TO_NUMBERS ? WORDS_TO_NUMBERS[amount] : amount;
 }
 
-function normalizeUnit(unit?: string): string {
+function normalizeUnit(unit?: string): string | undefined {
 	if (!unit) {
 		return undefined;
 	}

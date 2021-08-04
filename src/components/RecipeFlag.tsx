@@ -1,11 +1,16 @@
 import React from 'react';
 import { Text } from 'tamia';
-import { Flags } from '../util/client';
 import Tooltip from './Tooltip';
 
 type Props = {
-	// TODO: Split into two components?
-	type: keyof Flags | 'margaritasFavorite' | 'artemsFavorite';
+	type:
+		| 'vegan'
+		| 'vegetarian'
+		| 'glutenFree'
+		| 'diaryFree'
+		| 'noAddedSugar'
+		| 'margaritasFavorite'
+		| 'artemsFavorite';
 };
 
 const Circle = ({
