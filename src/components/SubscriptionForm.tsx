@@ -54,7 +54,7 @@ export default function SubscriptionForm() {
 			<Stack
 				as="form"
 				method="post"
-				action="https://tinyletter.com/sapegin"
+				action="https://tinyletter.com/tacohuaco"
 				target="_blank"
 				direction={['column', 'row']}
 				gap={0}
