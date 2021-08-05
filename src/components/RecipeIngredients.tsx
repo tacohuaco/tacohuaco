@@ -10,6 +10,7 @@ const Container = styled(TextContentBase)`
 	/* Lists */
 	ul > li {
 		padding-left: 0;
+		margin-left: 0;
 		&::before {
 			display: none;
 		}
