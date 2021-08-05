@@ -8,7 +8,8 @@ type Props = React.ComponentProps<typeof Text> & {
 
 const Container = styled(TextContentBase)`
 	/* Lists */
-	ul li {
+	ul > li {
+		padding-left: 0;
 		&::before {
 			display: none;
 		}

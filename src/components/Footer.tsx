@@ -8,12 +8,12 @@ export default function Footer() {
 			<Text variant="xsmall" mb="xs">
 				©{' '}
 				<Link href="https://github.com/margaritadiaz">
-					Dr. Margarita Diaz Cortes
+					Dr.&nbsp;Margarita Diaz Cortes
 				</Link>{' '}
-				and <Link href="https://sapegin.me/">Artem Sapegin</Link>
+				and&nbsp;<Link href="https://sapegin.me/">Artem Sapegin</Link>
 				{', '}
-				{new Date().getFullYear()}. Made with The Secret Ingredient™ in Berlin.{' '}
-				<Link href="/atom.xml">RSS</Link>
+				{new Date().getFullYear()}. Made with The&nbsp;Secret Ingredient™
+				in&nbsp;Berlin. <Link href="/atom.xml">RSS</Link>
 			</Text>
 		</footer>
 	);

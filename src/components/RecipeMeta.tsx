@@ -27,7 +27,7 @@ export default function RecipeMeta({
 }: Props) {
 	return (
 		<Stack gap="xs">
-			<Stack gap="m" direction="row">
+			<Stack gap="m" direction={['column', 'row']}>
 				<RecipeFlags
 					flags={flags}
 					margaritasFavorite={margaritasFavorite}
