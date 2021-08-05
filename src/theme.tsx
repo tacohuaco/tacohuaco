@@ -22,7 +22,7 @@ const space = {
 const breakpoints = [
 	'38rem', // 608px
 	'48rem', // 768px
-	'62rem', // 992px
+	'66rem', // 1056px
 	'75rem', // 1200px
 ];
 const fonts = {
