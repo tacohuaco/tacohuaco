@@ -93,7 +93,7 @@ export default function Flag({ type, ...props }: Props) {
 			);
 		case 'noAddedSugar':
 			return (
-				<Circle title="No added sugar" {...props} color="#887676">
+				<Circle title="No refined sugar" {...props} color="#887676">
 					NS
 				</Circle>
 			);
