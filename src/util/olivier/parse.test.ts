@@ -8,7 +8,6 @@ test.each([
 			minAmount: '13',
 			maxAmount: '13',
 			unit: 'g',
-			comment: undefined,
 		},
 	],
 	[
@@ -17,8 +16,6 @@ test.each([
 			name: 'sausages',
 			minAmount: '10',
 			maxAmount: '10',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -28,7 +25,6 @@ test.each([
 			minAmount: '1.75',
 			maxAmount: '1.75',
 			unit: 'kg',
-			comment: undefined,
 		},
 	],
 	[
@@ -37,8 +33,6 @@ test.each([
 			name: 'sausage',
 			minAmount: '1/2',
 			maxAmount: '1/2',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -47,8 +41,6 @@ test.each([
 			name: 'sausage',
 			minAmount: '3 1/2',
 			maxAmount: '3 1/2',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -57,8 +49,6 @@ test.each([
 			name: 'sausage',
 			minAmount: '3',
 			maxAmount: '3 1/2',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -67,8 +57,6 @@ test.each([
 			name: 'sausages',
 			minAmount: '10',
 			maxAmount: '12',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -78,7 +66,6 @@ test.each([
 			minAmount: '3',
 			maxAmount: '4',
 			unit: 'sprigs',
-			comment: undefined,
 		},
 	],
 	[
@@ -87,8 +74,6 @@ test.each([
 			name: 'sausages',
 			minAmount: '1',
 			maxAmount: '2',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -97,8 +82,6 @@ test.each([
 			name: 'medium eggs',
 			minAmount: '4',
 			maxAmount: '4',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -108,7 +91,6 @@ test.each([
 			minAmount: '1',
 			maxAmount: '1',
 			unit: 'clove',
-			comment: undefined,
 		},
 	],
 	[
@@ -118,7 +100,6 @@ test.each([
 			minAmount: '1332',
 			maxAmount: '1332',
 			unit: 'kg',
-			comment: undefined,
 		},
 	],
 	[
@@ -127,8 +108,6 @@ test.each([
 			name: 'hot pepper',
 			minAmount: 'a bit',
 			maxAmount: 'a bit',
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
@@ -145,20 +124,38 @@ test.each([
 		'salt',
 		{
 			name: 'salt',
-			minAmount: undefined,
-			maxAmount: undefined,
-			unit: undefined,
-			comment: undefined,
 		},
 	],
 	[
 		'freshly ground black pepper',
 		{
 			name: 'freshly ground black pepper',
-			minAmount: undefined,
-			maxAmount: undefined,
-			unit: undefined,
-			comment: undefined,
+		},
+	],
+	[
+		'some nuts',
+		{
+			name: 'nuts',
+			minAmount: 'some',
+			maxAmount: 'some',
+		},
+	],
+	[
+		'a bit of blood',
+		{
+			name: 'blood',
+			minAmount: 'a bit',
+			maxAmount: 'a bit',
+		},
+	],
+	[
+		'100 g unsalted butter; cubed',
+		{
+			name: 'unsalted butter',
+			minAmount: '100',
+			maxAmount: '100',
+			unit: 'g',
+			comment: 'cubed',
 		},
 	],
 ])('parse ingredient: %s', (source, result) => {

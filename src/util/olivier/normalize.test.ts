@@ -33,7 +33,7 @@ test.each([
 	],
 	[
 		{
-			name: 'black pepper',
+			name: 'cayenne pepper',
 			minAmount: 'some',
 			maxAmount: 'some',
 			comment: undefined,
@@ -44,7 +44,7 @@ test.each([
 			maxAmount: 'some',
 			unit: undefined,
 			comment: undefined,
-			modifier: 'black',
+			modifier: 'cayenne',
 		},
 	],
 	[
@@ -110,6 +110,6 @@ test.each([
 			modifier: 'juicy',
 		},
 	],
-])('parse ingredient: %s', (source, result) => {
+])('normalize ingredient: %s', (source, result) => {
 	expect(normalize(source)).toEqual(result);
 });

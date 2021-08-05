@@ -2,7 +2,14 @@ import { flow } from 'lodash';
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
-import { parse, normalize, analyze, IngredientKind } from './olivier';
+import {
+	parse,
+	normalize,
+	analyze,
+	format,
+	Ingredient,
+	IngredientKind,
+} from './olivier';
 import { Flags } from '../types/Flags';
 
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
@@ -11,24 +18,10 @@ export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Shop`]: ['description'],
 };
 
-const UNITS = [
-	'm',
-	'ml',
-	'g',
-	'kg',
-	'clove',
-	'cloves',
-	'sprig',
-	'sprigs',
-	'tsp',
-	'tbsp',
-];
-const UNITSLESS = ['a bit'];
-
-const print = (text: string) => {
-	console.log(text);
-	return text;
-};
+// const print = (text: string) => {
+// 	console.log(text);
+// 	return text;
+// };
 
 export const getIngredientLines = (text: string): string[] => {
 	const tree = fromMarkdown(text);
@@ -42,7 +35,6 @@ export const getIngredientLines = (text: string): string[] => {
 export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
 	const ingredients = ingredientsRaw.map((x) => analyze(normalize(parse(x))));
-	console.log('🦆', ingredients);
 	return {
 		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
 		vegetarian: ingredients.every((x) =>
@@ -54,18 +46,43 @@ export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
 	};
 };
 
+const formatIngredient = ({
+	minAmount,
+	maxAmount,
+	modifier,
+	unit,
+	name,
+	comment,
+}: Ingredient): string =>
+	[
+		[
+			'**',
+			minAmount,
+			minAmount !== maxAmount ? `–${maxAmount}` : '',
+			unit ? ` ${unit}` : '',
+			'**',
+		].join(''),
+		unit || minAmount === 'a bit' ? 'of' : undefined,
+		modifier,
+		name,
+		comment ? `_${comment}_` : undefined,
+	]
+		.filter((x) => x && x !== '****')
+		.join(' ');
+
 /**
- * TODO: Use Oliver to format
- * Highlight amounts in ingredients
+ * Highlight amounts and comments in ingredients
  */
-export const boldizeAmounts = (text: string): string =>
-	text
-		.replace(
-			new RegExp(`^- (\\d+(?:\\[/-]\\d+)? (?:${UNITS.join('|')}))\\b`, 'gm'),
-			'- **$1**'
-		)
-		.replace(new RegExp(`^- (${UNITSLESS.join('|')})`, 'gm'), '- **$1**')
-		.replace(/^- (\d+(?:[/-]\d+)?)/gm, '- **$1**');
+export const formatIngredients = (text: string): string => {
+	let nextText = text;
+	const tree = fromMarkdown(text);
+	visit(tree, 'listItem', (li) => {
+		const ingredientText = toString(li);
+		const ingredient = format(normalize(parse(ingredientText)));
+		nextText = nextText.replace(ingredientText, formatIngredient(ingredient));
+	});
+	return nextText;
+};
 
 /**
  * Reduce leveles of headings, so they match the page outline
@@ -78,28 +95,7 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 	Record<string, (text: string) => string>
 > = {
 	[`GraphCMS_Recipe`]: {
-		ingredients: flow([boldizeAmounts, demoteHeadings]),
+		ingredients: flow([formatIngredients, demoteHeadings]),
 		steps: flow([demoteHeadings]),
 	},
 };
-
-const MAX_RELATED = 5;
-const DATE_FORMAT = 'MMMM D, YYYY';
-
-// function getRelatedPosts(
-// 	posts: { slug: string; tags: string[]; timestamp: string }[],
-// 	{ slug, tags }: { slug: string; tags: string[] }
-// ) {
-// 	const weighted = posts
-// 		.filter((d) => d.slug !== slug)
-// 		.map((d) => {
-// 			const common = (d.tags || []).filter((t) => (tags || []).includes(t));
-// 			return {
-// 				...d,
-// 				weight: common.length * Number(d.timestamp),
-// 			};
-// 		})
-// 		.filter((d) => d.weight > 0);
-// 	const sorted = sortBy(weighted, 'weight').reverse();
-// 	return sorted.slice(0, MAX_RELATED);
-// }

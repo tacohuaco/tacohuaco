@@ -34,6 +34,7 @@
     "@mdx-js/react": "^1.6.22",
     "@tippyjs/react": "^4.2.5",
     "country-code-emoji": "^2.3.0",
+    "format-quantity": "^1.0.1",
     "i18n-nationality": "^1.1.1",
     "install": "^0.13.0",
     "just-group-by": "^1.1.1",

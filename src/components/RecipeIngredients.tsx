@@ -12,6 +12,10 @@ const Container = styled(TextContentBase)`
 		&::before {
 			display: none;
 		}
+		em {
+			display: block;
+			margin-top: -${(p) => p.theme.space.xs};
+		}
 	}
 `;
 

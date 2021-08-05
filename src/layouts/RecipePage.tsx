@@ -78,7 +78,7 @@ export default function RecipePage({
 						<Image
 							image={images[0]}
 							alt=""
-							maxWidth={900}
+							maxWidth={1026}
 							transforms={['quality=value:75']}
 							withWebp
 						/>

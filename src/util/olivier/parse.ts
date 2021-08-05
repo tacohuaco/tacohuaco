@@ -21,6 +21,7 @@ const isArticle = (s: string) => ARTICLES.includes(s.toLowerCase());
 const isConnector = (s: string) => CONNECTORS.includes(s.toLowerCase());
 const isLastWordOfName = (s: string) => /;$/.test(s);
 const trimSemicolon = (s: string) => s.replace(/;$/, '');
+const append = (text: string, s: string) => (text === '' ? s : `${text} ${s}`);
 
 /**
  * Parse a line of recipe ingredient, like
@@ -37,7 +38,7 @@ export function parse(text: string): Ingredient {
 	while (token) {
 		switch (state) {
 			case 'BEGINNING':
-				if (isNumber(token) || isArticle(token)) {
+				if (isNumber(token) || isArticle(token) || isUnitless(token)) {
 					amount = token;
 					state = 'NUMBER';
 				} else {
@@ -51,7 +52,7 @@ export function parse(text: string): Ingredient {
 				} else if (isRangeSeparator(token)) {
 					amount += '-';
 				} else if (isNumber(token) || isUnitless(token)) {
-					amount += amount ? ` ${token}` : token;
+					amount = append(amount, token);
 				} else if (isUnit(token)) {
 					unit = token;
 					state = 'UNIT';
@@ -67,14 +68,14 @@ export function parse(text: string): Ingredient {
 				if (isConnector(token)) {
 					// Ignore
 				} else if (isLastWordOfName(token)) {
-					name += trimSemicolon(token);
+					name = append(name, trimSemicolon(token));
 					state = 'COMMENT';
 				} else {
-					name += name ? ` ${token}` : token;
+					name = append(name, token);
 				}
 				break;
 			case 'COMMENT':
-				comment += comment ? ` ${token}` : token;
+				comment = append(comment, token);
 				break;
 		}
 

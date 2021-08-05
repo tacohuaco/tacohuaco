@@ -100,7 +100,7 @@ const theme = {
 		bodyMaxWidth: null,
 		bodyPaddingX: 0,
 		bodyPaddingY: 0,
-		contentMaxWidth: '52rem',
+		contentMaxWidth: '59rem',
 		contentPaddingX: space.m,
 		contentPaddingY: space.l,
 		textMaxWidth: '44rem',

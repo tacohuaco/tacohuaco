@@ -1,4 +1,10 @@
 export const INGREDIENTS = [
+	// Spices
+	['salt'],
+	['black pepper'],
+	['bay leave', 'bay leaves'],
+	['rosemary seed', 'rosemary seeds'],
+	['cumin seed', 'cumin seeds'],
 	// Vegetables
 	['beetroot', 'beetroots', 'red beet', 'red beets', 'beet', 'beets'],
 	['bell pepper', 'bell peppers', 'paprika', 'paprikas'],
@@ -62,10 +68,6 @@ export const INGREDIENTS = [
 	['spelt flour'],
 	['all-purpose flour', 'all purpose flour', 'flour'],
 	['flour'],
-	// Spices
-	['bay leave', 'bay leaves'],
-	['rosemary seed', 'rosemary seeds'],
-	['cumin seed', 'cumin seeds'],
 	// Misc
 	['burger bun', 'burger buns'],
 	['egg', 'eggs'],
