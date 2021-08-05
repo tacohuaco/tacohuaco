@@ -115,12 +115,12 @@ export default {
 				siteUrl,
 			},
 		},
-		/*{
+		{
 			resolve: 'gatsby-plugin-goatcounter',
 			options: {
-				code: 'sapegin-blog',
+				code: 'tacohuaco',
 				allowLocal: false,
 			},
-		},*/
+		},
 	],
 };
