@@ -3,6 +3,7 @@ import {
 	FISHES,
 	GLUTENS,
 	MEATS,
+	NON_VEGANS,
 	POULTRIES,
 	SUGARS,
 } from './langs/en/info';
@@ -16,7 +17,7 @@ interface IngredientInfo {
 }
 
 function getKind(name: string): IngredientKind {
-	if (DIARIES.includes(name)) {
+	if (DIARIES.includes(name) || NON_VEGANS.includes(name)) {
 		return IngredientKind.Vegetarian;
 	}
 	if (POULTRIES.includes(name)) {

@@ -9,6 +9,7 @@ export const GLUTENS = [
 	'farro',
 	'pasta',
 ];
+export const NON_VEGANS = ['honey'];
 export const DIARIES = ['cheese', 'egg', 'milk', 'butter'];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
