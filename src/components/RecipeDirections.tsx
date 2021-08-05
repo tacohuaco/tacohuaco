@@ -37,7 +37,7 @@ const Container = styled(TextContentBase)`
 
 export default function RecipeDirections({ children, ...props }: Props) {
 	return (
-		<Text as="div" {...props}>
+		<Text as="div" fontSize={['l', 'l', 'm']} {...props}>
 			<Container>{children}</Container>
 		</Text>
 	);

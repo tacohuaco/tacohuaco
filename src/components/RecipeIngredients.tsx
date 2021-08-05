@@ -23,7 +23,7 @@ const Container = styled(TextContentBase)`
 
 export default function RecipeIngredients({ children, ...props }: Props) {
 	return (
-		<Text as="div" fontSize="s" lineHeight="large" {...props}>
+		<Text as="div" fontSize={['m', 'm', 's']} lineHeight="large" {...props}>
 			<Container>{children}</Container>
 		</Text>
 	);
