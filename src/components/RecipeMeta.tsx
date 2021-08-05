@@ -35,7 +35,7 @@ export default function RecipeMeta({
 				/>
 				{(cuisines || tags.length > 0) && (
 					<Stack gap="s" direction="row">
-						{cuisines && <RecipeCuisines cuisines={cuisines} />}
+						{cuisines.length > 0 && <RecipeCuisines cuisines={cuisines} />}
 						<RecipeTags tags={tags} />
 					</Stack>
 				)}
