@@ -6102,7 +6102,7 @@ export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<(
 export type ShopsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ShopsPageQuery = { allGraphCmsShop: { nodes: Array<Pick<GraphCms_Shop, 'name' | 'descriptionMdx'>> } };
+export type ShopsPageQuery = { allGraphCmsShop: { nodes: Array<Pick<GraphCms_Shop, 'address' | 'city' | 'country' | 'descriptionMdx' | 'name' | 'neighbourhood' | 'url' | 'zip'>> } };
 
 export type RecipePageQueryVariables = Exact<{
   slug: Scalars['String'];

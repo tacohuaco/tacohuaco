@@ -16,7 +16,7 @@ export default function RecipeCard({
 }: RecipeMeta) {
 	return (
 		<Stack gap="s" direction="column">
-			<Link href={slug}>
+			<Link href={`/recipes/${slug}`}>
 				<Stack gap="s" direction="column">
 					<Frame ratio={6 / 9} bg="light">
 						{images.length > 0 && (
