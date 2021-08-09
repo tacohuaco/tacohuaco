@@ -6086,7 +6086,23 @@ export type SiteBuildMetadataSortInput = {
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<Pick<GraphCms_Recipe, 'title' | 'slug'>> } };
+export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<(
+      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'slug'>
+      & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
+    )> } };
+
+export type RecipesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<(
+      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'slug'>
+      & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
+    )> } };
+
+export type ShopsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ShopsPageQuery = { allGraphCmsShop: { nodes: Array<Pick<GraphCms_Shop, 'name' | 'descriptionMdx'>> } };
 
 export type RecipePageQueryVariables = Exact<{
   slug: Scalars['String'];

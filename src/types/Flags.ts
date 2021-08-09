@@ -1,7 +1,6 @@
-export interface Flags {
-	vegan: boolean;
-	vegetarian: boolean;
-	gluten: boolean;
-	diary: boolean;
-	addedSugar: boolean;
-}
+import { FlagsJson } from '../graphql-types';
+
+export type Flags = Pick<
+	FlagsJson,
+	'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'
+>;

@@ -1,19 +1,20 @@
 import React from 'react';
-import { Box } from 'tamia';
-import { Link } from 'tamia-gatsby-link';
+import { Box, Grid } from 'tamia';
+import RecipeCard from './RecipeCard';
+import { RecipeMeta } from '../types/Recipe';
 
 type Props = {
-	recipes: any[];
+	recipes: RecipeMeta[];
 };
 
 const RecipeList = ({ recipes }: Props) => (
-	<Box as="ul" mb="m">
+	<Grid as="ul" minColumnWidth={300} gridColumnGap="m" gridRowGap="l">
 		{recipes.map((recipe) => (
-			<Box key={recipe.slug} as="li" mb="s">
-				<Link href={recipe.slug}>{recipe.title}</Link>
+			<Box key={recipe.slug} as="li">
+				<RecipeCard {...recipe} />
 			</Box>
 		))}
-	</Box>
+	</Grid>
 );
 
 export default RecipeList;

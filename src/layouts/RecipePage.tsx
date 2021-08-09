@@ -1,9 +1,9 @@
 import React from 'react';
-import Image from '@graphcms/react-image';
 import { Stack, Grid, Heading, Text } from 'tamia';
 import { Flags } from '../types/Flags';
-import { Image as ImageType } from '../types/Image';
+import { Asset } from '../types/Asset';
 import { MDXRenderer } from '../components/MDXRenderer';
+import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
 import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
@@ -18,17 +18,17 @@ type Props = {
 	description?: string;
 	descriptionMdx: string;
 	flags: Flags;
+	images: Asset[];
 	ingredientsMdx: string;
 	margaritasFavorite?: boolean;
 	overnight?: boolean;
-	yields?: string;
 	related: any[];
 	stepsMdx: string;
 	tags: string[];
 	time?: number;
 	title: string;
 	url: string;
-	images: ImageType[];
+	yields?: string;
 };
 
 export default function RecipePage({

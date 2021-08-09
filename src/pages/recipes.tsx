@@ -1,16 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { IndexPageQuery } from '../graphql-types';
+import { RecipesPageQuery } from '../graphql-types';
 import IndexPage from '../layouts/IndexPage';
 
 type Props = {
-	data: IndexPageQuery;
+	data: RecipesPageQuery;
 	location: {
 		pathname: string;
 	};
 };
 
-const Index = ({
+const Recipes = ({
 	data: { allGraphCmsRecipe },
 	location: { pathname },
 }: Props) => {
@@ -23,10 +23,10 @@ const Index = ({
 	return <IndexPage url={pathname} recipes={nodes} />;
 };
 
-export default Index;
+export default Recipes;
 
 export const pageQuery = graphql`
-	query IndexPage {
+	query RecipesPage {
 		allGraphCmsRecipe(sort: { fields: [title], order: ASC }) {
 			nodes {
 				flags {

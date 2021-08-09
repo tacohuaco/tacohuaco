@@ -18,10 +18,10 @@ const ITEMS: Item[] = [
 		title: 'Recipes',
 		href: '/recipes',
 	},
-	{
-		title: 'Ingredients',
-		href: '/ingredients',
-	},
+	// {
+	// 	title: 'Ingredients',
+	// 	href: '/ingredients',
+	// },
 	{
 		title: 'Shops',
 		href: '/shops',

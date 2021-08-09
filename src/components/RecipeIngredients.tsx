@@ -17,6 +17,7 @@ const Container = styled(TextContentBase)`
 		em {
 			display: block;
 			margin-top: -${(p) => p.theme.space.xs};
+			line-height: ${(p) => p.theme.lineHeights.small};
 		}
 	}
 `;

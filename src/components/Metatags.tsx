@@ -1,24 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Image as ImageType } from '../types/Image';
+import { getImageUrl } from '../util/client';
+import { Asset } from '../types/Asset';
 
 const SITE_URL = 'https://tacohuaco.co';
 const SITE_TITLE = 'Tacohuaco';
-
-const getImageUrl = (
-	baseUrl: string,
-	{ width, height }: { width: number; height: number }
-) =>
-	baseUrl.replace(
-		'https://media.graphcms.com/',
-		`https://media.graphcms.com/resize=height:${height},width:${width}/`
-	);
 
 type Props = {
 	slug: string;
 	title?: string;
 	description?: string;
-	images?: ImageType[];
+	images?: Asset[];
 	children?: React.ReactNode;
 };
 
