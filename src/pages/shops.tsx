@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { ShopsPageQuery } from '../graphql-types';
-import ShopsPage from '../layouts/ShopsPage';
+import AboutPage from '../layouts/ShopsPage';
 
 type Props = {
 	data: ShopsPageQuery;
@@ -20,7 +20,7 @@ const Shops = ({
 
 	const { nodes } = allGraphCmsShop;
 
-	return <ShopsPage url={pathname} shops={nodes} />;
+	return <AboutPage url={pathname} shops={nodes} />;
 };
 
 export default Shops;
@@ -29,8 +29,14 @@ export const pageQuery = graphql`
 	query ShopsPage {
 		allGraphCmsShop {
 			nodes {
-				name
+				address
+				city
+				country
 				descriptionMdx
+				name
+				neighbourhood
+				url
+				zip
 			}
 		}
 	}
