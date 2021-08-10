@@ -4,7 +4,7 @@ describe('boldizeAmounts', () => {
 	test.each([
 		['- 10 sausages\n- 1 onion', '- **10** sausages\n- **1** onion'],
 		['- 1/2 sausage', '- **½** sausage'],
-		['- 13 g of cocaine', '- **13 grams** of cocaine'],
+		['- 13 g of cocaine', '- **13 g** of cocaine'],
 		['- 4 medium eggs', '- **4** medium eggs'],
 		['- 3-4 sprigs of marijuana', '- **3–4 sprigs** of marijuana'],
 		['- 1 clove of garlic', '- **1 clove** of garlic'],

@@ -59,7 +59,7 @@ test.each([
 			name: 'cocaine',
 			minAmount: 13,
 			maxAmount: 13,
-			unit: 'gram',
+			unit: 'g',
 			comment: undefined,
 		},
 	],
@@ -75,7 +75,7 @@ test.each([
 			name: 'sausage',
 			minAmount: 2.75,
 			maxAmount: 3.5,
-			unit: 'gram',
+			unit: 'g',
 			comment: undefined,
 		},
 	],
@@ -108,6 +108,20 @@ test.each([
 			unit: undefined,
 			comment: undefined,
 			modifier: 'juicy',
+		},
+	],
+	[
+		{
+			name: 'chickpeas',
+			minAmount: '300',
+			maxAmount: '300',
+			unit: 'g',
+		},
+		{
+			name: 'chickpeas',
+			minAmount: 300,
+			maxAmount: 300,
+			unit: 'g',
 		},
 	],
 ])('normalize ingredient: %s', (source, result) => {

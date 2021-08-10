@@ -42,13 +42,13 @@ test.each([
 			name: 'pork',
 			minAmount: 200,
 			maxAmount: 200,
-			unit: 'gram',
+			unit: 'g',
 		},
 		{
 			name: 'pork',
 			minAmount: '200',
 			maxAmount: '200',
-			unit: 'grams',
+			unit: 'g',
 		},
 	],
 	[
