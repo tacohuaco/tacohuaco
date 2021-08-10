@@ -1,13 +1,37 @@
 import { GatsbyNode } from 'gatsby';
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
-import { AllRecipesQuery } from './src/graphql-types';
+import { AllRecipesQuery, GraphCms_Recipe } from './src/graphql-types';
 import { getMdx } from './src/util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
 	GRAPHCMS_FIELD_PREPROCESSING,
 	getRecipeFlags,
 } from './src/util/content';
+
+// XXX: Gatsby has no types for this anywhere :-/
+interface GatsbyContext {
+	nodeModel: {
+		getAllNodes<T>(params: { type?: string }): T[];
+	};
+}
+
+const getSubrecipeIngredients = (
+	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	context: GatsbyContext
+): string[] => {
+	if (source.subrecipes.length > 0) {
+		const remoteIds = source.subrecipes.map((x) => x.remoteId);
+		const subrecipes = context.nodeModel
+			.getAllNodes<typeof source>({
+				type: 'GraphCMS_Recipe',
+			})
+			.filter((x) => remoteIds.includes(x.remoteId));
+		return subrecipes.map((x) => x.ingredients || '');
+	} else {
+		return [];
+	}
+};
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
 	actions,
@@ -40,8 +64,18 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 		[`GraphCMS_Recipe`]: {
 			[`flags`]: {
 				type: 'FlagsJson!',
-				resolve(source: Record<string, string>) {
-					return getRecipeFlags(source.ingredients);
+				resolve(
+					source: Pick<
+						GraphCms_Recipe,
+						'ingredients' | 'subrecipes' | 'remoteId'
+					>,
+					args: unknown,
+					context: GatsbyContext
+				) {
+					const subrecipeIngredients = getSubrecipeIngredients(source, context);
+					return getRecipeFlags(
+						[source.ingredients, ...subrecipeIngredients].join('\n')
+					);
 				},
 			},
 		},
