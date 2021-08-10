@@ -93,11 +93,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
 			component: `${__dirname}/src/templates/recipe.tsx`,
 			context: {
 				slug,
-				// related: getRelatedPosts(recipes, {
-				// 	slug,
-				// 	tags,
-				// }),
-				// dateFormat: DATE_FORMAT,
 			},
 		});
 	});

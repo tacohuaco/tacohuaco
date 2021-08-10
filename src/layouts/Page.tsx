@@ -1,16 +1,9 @@
 import React from 'react';
-import {
-	Page as PageTamia,
-	Container,
-	Box,
-	Stack,
-	Text,
-	QuotedLink,
-} from 'tamia';
+import { Page as PageTamia, Container, Stack } from 'tamia';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Banner from '../components/Banner';
 import PageContainer from '../components/PageContainer';
+import Subscription from '../components/Subscription';
 import Base from './Base';
 
 type Props = {
@@ -22,30 +15,17 @@ type Props = {
 const Page = ({ children, url }: Props) => {
 	return (
 		<Base>
-			<Box as="aside" aria-label="Current offers" display="none">
-				<Banner>
-					<QuotedLink href="http://leanpub.com/washingcode/c/stayathome-blog">
-						<Text
-							as="span"
-							aria-hidden="true"
-							fontSize="l"
-							lineHeight={1}
-							verticalAlign="middle"
-						>
-							☞
-						</Text>
-						&nbsp;Wash your&nbsp;hands and&nbsp;your&nbsp;code:{' '}
-						<u>start reading my&nbsp;upcoming book on&nbsp;clean code</u> with
-						a&nbsp;discount
-					</QuotedLink>
-				</Banner>
-			</Box>
 			<PageContainer>
 				<Container>
 					<PageTamia>
 						<Stack gap="l">
 							<Header url={url} />
 							{children}
+							<Stack gap="l">
+								<aside aria-label="Newsletter">
+									<Subscription />
+								</aside>
+							</Stack>
 						</Stack>
 						<PageTamia.Footer>
 							<Footer />

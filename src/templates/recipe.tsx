@@ -5,9 +5,6 @@ import { RecipePageQuery } from '../graphql-types';
 
 type Props = {
 	data: RecipePageQuery;
-	pageContext: {
-		related: any[];
-	};
 	location: {
 		pathname: string;
 	};
@@ -15,7 +12,6 @@ type Props = {
 
 export default function RecipePage({
 	data: { graphCmsRecipe },
-	pageContext: { related = [] },
 	location: { pathname },
 }: Props) {
 	if (!graphCmsRecipe) {
@@ -30,7 +26,6 @@ export default function RecipePage({
 			time={time || undefined}
 			yields={yields || undefined}
 			url={pathname}
-			related={related}
 		/>
 	);
 }
@@ -65,6 +60,11 @@ export const pageQuery = graphql`
 				handle
 				width
 				height
+			}
+			subrecipes {
+				slug
+				ingredientsMdx
+				stepsMdx
 			}
 		}
 	}

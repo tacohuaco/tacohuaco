@@ -7,7 +7,6 @@ import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
 import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
-import Subscription from '../components/Subscription';
 import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
 import Page from './Page';
@@ -22,7 +21,6 @@ type Props = {
 	ingredientsMdx: string;
 	margaritasFavorite?: boolean;
 	overnight?: boolean;
-	related: any[];
 	stepsMdx: string;
 	tags: string[];
 	time?: number;
@@ -41,7 +39,6 @@ export default function RecipePage({
 	margaritasFavorite,
 	overnight,
 	yields,
-	related,
 	stepsMdx,
 	tags,
 	time,
@@ -98,11 +95,6 @@ export default function RecipePage({
 							</RecipeDirections>
 						</TextContent>
 					</Grid>
-				</Stack>
-				<Stack gap="l">
-					<aside aria-label="Newsletter">
-						<Subscription />
-					</aside>
 				</Stack>
 			</Stack>
 		</Page>

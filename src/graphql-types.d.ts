@@ -489,6 +489,7 @@ export type GraphCms_Tag =
   | 'Soup'
   | 'Lunch'
   | 'Salad'
+  | 'Dip'
   | 'Baking'
   | 'Dessert'
   | 'Breakfast'
@@ -6111,7 +6112,7 @@ export type RecipePageQueryVariables = Exact<{
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
     Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'tools' | 'yields'>
-    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>> }
+    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>> }
   )> };
 
 export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
