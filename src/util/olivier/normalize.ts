@@ -32,9 +32,8 @@ function normalizeUnit(unit?: string): string | undefined {
 }
 
 function normalizeName(name: string): Pick<Ingredient, 'name' | 'modifier'> {
-	const nameLowerCase = name.toLowerCase();
 	for (const aliases of INGREDIENTS) {
-		const alias = aliases.find((x) => nameLowerCase.endsWith(x));
+		const alias = aliases.find((x) => new RegExp(`\\b${x}$`, 'i').test(name));
 		if (alias) {
 			const modifier =
 				name.replace(new RegExp(`\\s*${alias}$`, 'i'), '') || undefined;

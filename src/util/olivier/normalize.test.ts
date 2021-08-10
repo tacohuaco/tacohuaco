@@ -118,7 +118,7 @@ test.each([
 			unit: 'g',
 		},
 		{
-			name: 'chickpeas',
+			name: 'chickpea',
 			minAmount: 300,
 			maxAmount: 300,
 			unit: 'g',
