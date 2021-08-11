@@ -24,17 +24,20 @@ export default function RecipePage({
 	description,
 	descriptionMdx,
 	flags,
+	images,
 	ingredientsMdx,
 	margaritasFavorite,
+	notesMdx,
 	overnight,
-	yields,
+	sourceMdx,
 	stepsMdx,
+	subrecipes,
 	tags,
 	time,
 	title,
+	toolsMdx,
 	url,
-	images,
-	subrecipes,
+	yields,
 }: Props) {
 	return (
 		<SubrecipesContext.Provider value={subrecipes}>
@@ -45,8 +48,8 @@ export default function RecipePage({
 					description={description}
 					images={images}
 				/>
-				<Stack gap="xl">
-					<Stack as="main" gap="m">
+				<Stack as="main" gap="l">
+					<Stack gap="m">
 						<Heading level={1}>{title}</Heading>
 						<RecipeMeta
 							flags={flags}
@@ -57,36 +60,53 @@ export default function RecipePage({
 							time={time}
 							overnight={overnight}
 						/>
-						{description && (
-							<TextContent fontSize="l" fontStyle="italic">
-								<MDXRenderer>{descriptionMdx}</MDXRenderer>
-							</TextContent>
-						)}
-						{images.length > 0 && (
-							<Image
-								image={images[0]}
-								alt=""
-								maxWidth={1026}
-								transforms={['quality=value:75']}
-								withWebp
-							/>
-						)}
-						<Grid gridGap="m" gridTemplateColumns={['1fr', '1fr', '1fr 3fr']}>
-							<TextContent>
-								<Heading level={2}>Ingredients</Heading>
-								{yields && <Text variant="small">Yields {yields}</Text>}
-								<RecipeIngredients>
-									<MDXRenderer>{ingredientsMdx}</MDXRenderer>
-								</RecipeIngredients>
-							</TextContent>
-							<TextContent>
-								<Heading level={2}>Directions</Heading>
-								<RecipeDirections>
-									<MDXRenderer>{stepsMdx}</MDXRenderer>
-								</RecipeDirections>
-							</TextContent>
-						</Grid>
 					</Stack>
+					{description && (
+						<TextContent fontSize="l" fontStyle="italic">
+							<MDXRenderer>{descriptionMdx}</MDXRenderer>
+						</TextContent>
+					)}
+					{images.length > 0 && (
+						<Image
+							image={images[0]}
+							alt=""
+							maxWidth={1026}
+							transforms={['quality=value:75']}
+							withWebp
+						/>
+					)}
+					<Grid gridGap="m" gridTemplateColumns={['1fr', '1fr', '1fr 3fr']}>
+						<TextContent>
+							<Heading level={2}>Ingredients</Heading>
+							{yields && <Text variant="small">Yields {yields}</Text>}
+							<RecipeIngredients>
+								<MDXRenderer>{ingredientsMdx}</MDXRenderer>
+								{toolsMdx && (
+									<>
+										<Heading level={3}>You will need</Heading>
+										<MDXRenderer>{toolsMdx}</MDXRenderer>
+									</>
+								)}
+							</RecipeIngredients>
+						</TextContent>
+						<TextContent>
+							<Heading level={2}>Directions</Heading>
+							<RecipeDirections>
+								<MDXRenderer>{stepsMdx}</MDXRenderer>
+							</RecipeDirections>
+							{(notesMdx || sourceMdx) && (
+								<>
+									<Heading level={2}>Notes</Heading>
+									{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
+									{sourceMdx && (
+										<TextContent fontSize="s">
+											<MDXRenderer>{sourceMdx}</MDXRenderer>
+										</TextContent>
+									)}
+								</>
+							)}
+						</TextContent>
+					</Grid>
 				</Stack>
 			</Page>
 		</SubrecipesContext.Provider>

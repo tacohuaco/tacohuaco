@@ -42,11 +42,12 @@ export const pageQuery = graphql`
 			margaritasFavorite
 			notesMdx
 			overnight
+			sourceMdx
 			stepsMdx
 			tags
 			time
 			title
-			tools
+			toolsMdx
 			yields
 			flags {
 				vegan

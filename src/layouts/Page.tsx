@@ -17,9 +17,11 @@ const Page = ({ children, url }: Props) => {
 		<Base>
 			<PageContainer>
 				<Container>
-					<Stack gap="l">
-						<Header url={url} />
-						{children}
+					<Stack gap="xl">
+						<Stack gap="l">
+							<Header url={url} />
+							{children}
+						</Stack>
 						<aside aria-label="Newsletter">
 							<Subscription />
 						</aside>

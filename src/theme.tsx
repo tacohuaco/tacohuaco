@@ -128,7 +128,7 @@ const theme = {
 		},
 		3: {
 			...headingBaseStyles,
-			fontSize: 'l',
+			fontSize: 'm',
 		},
 	},
 	textStyles: {

@@ -14,7 +14,14 @@ import { Flags } from '../types/Flags';
 
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
-	[`GraphCMS_Recipe`]: ['description', 'ingredients', 'steps', 'notes'],
+	[`GraphCMS_Recipe`]: [
+		'description',
+		'ingredients',
+		'notes',
+		'source',
+		'steps',
+		'tools',
+	],
 	[`GraphCMS_Shop`]: ['description'],
 };
 
