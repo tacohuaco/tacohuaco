@@ -9,15 +9,19 @@ type Props = React.ComponentProps<typeof Text> & {
 };
 
 const List = styled.ol`
-	padding-left: 0.35rem;
+	&& {
+		padding-left: 0.35rem;
+	}
 `;
 
 const ListItem = styled.li`
-	list-style: none;
-	counter-increment: steps-counter;
-	position: relative;
-	padding: 0 0 0 1.1rem;
-	margin-bottom: ${(p) => p.theme.space.m};
+	&& {
+		list-style: none;
+		counter-increment: steps-counter;
+		position: relative;
+		padding: 0 0 0 1.1rem;
+		margin-bottom: ${(p) => p.theme.space.m};
+	}
 	&::before {
 		content: counter(steps-counter);
 		position: absolute;
