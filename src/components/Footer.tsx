@@ -12,8 +12,11 @@ export default function Footer() {
 				</Link>{' '}
 				and&nbsp;<Link href="https://sapegin.me/">Artem Sapegin</Link>
 				{', '}
-				{new Date().getFullYear()}. Made with The&nbsp;Secret Ingredient™
-				in&nbsp;Berlin. <Link href="/atom.xml">RSS</Link>
+				{new Date().getFullYear()}
+				{' • '}Made with The&nbsp;Secret Ingredient™ in&nbsp;Berlin{' • '}
+				<Link href="https://www.buymeacoffee.com/sapegin">Buy us coffee</Link>
+				{' • '}
+				<Link href="/atom.xml">RSS</Link>
 			</Text>
 		</footer>
 	);
