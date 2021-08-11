@@ -16,7 +16,7 @@ export default function RecipeCard({
 }: RecipeMeta) {
 	return (
 		<Stack gap="s" direction="column">
-			<Link href={`/recipes/${slug}`}>
+			<Link href={`/recipes/${slug}/`}>
 				<Stack gap="s" direction="column">
 					<Box>
 						<Box mx={['-m', 0]}>

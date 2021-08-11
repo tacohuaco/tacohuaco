@@ -16,19 +16,19 @@ type Item = {
 const ITEMS: Item[] = [
 	{
 		title: 'Recipes',
-		href: '/recipes',
+		href: '/recipes/',
 	},
 	// {
 	// 	title: 'Ingredients',
-	// 	href: '/ingredients',
+	// 	href: '/ingredients/',
 	// },
 	{
 		title: 'Shops',
-		href: '/shops',
+		href: '/shops/',
 	},
 	{
 		title: 'About',
-		href: '/about',
+		href: '/about/',
 	},
 ];
 

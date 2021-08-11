@@ -123,7 +123,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
 	recipes.forEach(({ slug }) => {
 		createPage({
-			path: `/recipes/${slug}`,
+			path: `/recipes/${slug}/`,
 			component: `${__dirname}/src/templates/recipe.tsx`,
 			context: {
 				slug,
