@@ -587,6 +587,11 @@ export type SitePluginPluginOptions = {
   concurrency?: Maybe<Scalars['Int']>;
   documentPaths?: Maybe<Array<Maybe<Scalars['String']>>>;
   codegenDelay?: Maybe<Scalars['Int']>;
+  output?: Maybe<Scalars['String']>;
+  createLinkInHead?: Maybe<Scalars['Boolean']>;
+  entryLimit?: Maybe<Scalars['Int']>;
+  query?: Maybe<Scalars['String']>;
+  headers?: Maybe<SitePluginPluginOptionsHeaders>;
   isTSX?: Maybe<Scalars['Boolean']>;
   jsxPragma?: Maybe<Scalars['String']>;
   allExtensions?: Maybe<Scalars['Boolean']>;
@@ -595,6 +600,11 @@ export type SitePluginPluginOptions = {
   allowLocal?: Maybe<Scalars['Boolean']>;
   path?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
+};
+
+export type SitePluginPluginOptionsHeaders = {
+  _fonts__?: Maybe<Array<Maybe<Scalars['String']>>>;
+  _images__?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type SitePluginPackageJson = {
@@ -1947,6 +1957,11 @@ export type SitePluginPluginOptionsFilterInput = {
   concurrency?: Maybe<IntQueryOperatorInput>;
   documentPaths?: Maybe<StringQueryOperatorInput>;
   codegenDelay?: Maybe<IntQueryOperatorInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+  createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
+  entryLimit?: Maybe<IntQueryOperatorInput>;
+  query?: Maybe<StringQueryOperatorInput>;
+  headers?: Maybe<SitePluginPluginOptionsHeadersFilterInput>;
   isTSX?: Maybe<BooleanQueryOperatorInput>;
   jsxPragma?: Maybe<StringQueryOperatorInput>;
   allExtensions?: Maybe<BooleanQueryOperatorInput>;
@@ -1955,6 +1970,11 @@ export type SitePluginPluginOptionsFilterInput = {
   allowLocal?: Maybe<BooleanQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsHeadersFilterInput = {
+  _fonts__?: Maybe<StringQueryOperatorInput>;
+  _images__?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPackageJsonFilterInput = {
@@ -2191,6 +2211,12 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___concurrency'
   | 'pluginCreator___pluginOptions___documentPaths'
   | 'pluginCreator___pluginOptions___codegenDelay'
+  | 'pluginCreator___pluginOptions___output'
+  | 'pluginCreator___pluginOptions___createLinkInHead'
+  | 'pluginCreator___pluginOptions___entryLimit'
+  | 'pluginCreator___pluginOptions___query'
+  | 'pluginCreator___pluginOptions___headers____fonts__'
+  | 'pluginCreator___pluginOptions___headers____images__'
   | 'pluginCreator___pluginOptions___isTSX'
   | 'pluginCreator___pluginOptions___jsxPragma'
   | 'pluginCreator___pluginOptions___allExtensions'
@@ -5888,6 +5914,12 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___concurrency'
   | 'pluginOptions___documentPaths'
   | 'pluginOptions___codegenDelay'
+  | 'pluginOptions___output'
+  | 'pluginOptions___createLinkInHead'
+  | 'pluginOptions___entryLimit'
+  | 'pluginOptions___query'
+  | 'pluginOptions___headers____fonts__'
+  | 'pluginOptions___headers____images__'
   | 'pluginOptions___isTSX'
   | 'pluginOptions___jsxPragma'
   | 'pluginOptions___allExtensions'

@@ -89,8 +89,8 @@ export default {
 				],
 			},
 		},*/
-		// 'gatsby-plugin-sitemap',
-		/*{
+		'gatsby-plugin-sitemap',
+		{
 			resolve: 'gatsby-plugin-netlify',
 			options: {
 				headers: {
@@ -107,7 +107,7 @@ export default {
 					],
 				},
 			},
-		},*/
+		},
 		'gatsby-plugin-typescript',
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
