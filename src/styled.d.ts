@@ -1,3 +1,4 @@
+import {} from 'styled-components/cssprop';
 import theme from './theme';
 
 type ThemeInterface = typeof theme;

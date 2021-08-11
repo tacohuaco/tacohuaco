@@ -48,7 +48,7 @@ const SubmitButton = styled.button`
 	}
 `;
 
-export default function SubscriptionForm() {
+export function SubscriptionForm() {
 	return (
 		<>
 			<Stack

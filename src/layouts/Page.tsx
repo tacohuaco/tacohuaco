@@ -3,7 +3,7 @@ import { Container, Stack } from 'tamia';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageContainer from '../components/PageContainer';
-import Subscription from '../components/Subscription';
+import { Subscription } from '../components/Subscription';
 import Base from './Base';
 
 type Props = {
