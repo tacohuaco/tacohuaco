@@ -19,6 +19,7 @@ export const INGREDIENTS = [
 	['carrot', 'carrots'],
 	['chili', 'chilies'],
 	['pea', 'peas'],
+	['chickpea', 'chickpeas'],
 	['bean', 'beans'],
 	['pumpkin', 'pumpkins'],
 	['squash', 'squashes'],
@@ -70,7 +71,6 @@ export const INGREDIENTS = [
 	['flour'],
 	// Misc
 	['burger bun', 'burger buns'],
-	['chickpea', 'chickpeas'],
 	['egg', 'eggs'],
 	['sugar'],
 	['noodle', 'noodles'],

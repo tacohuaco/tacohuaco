@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page as PageTamia, Container, Stack } from 'tamia';
+import { Container, Stack } from 'tamia';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PageContainer from '../components/PageContainer';
@@ -17,20 +17,14 @@ const Page = ({ children, url }: Props) => {
 		<Base>
 			<PageContainer>
 				<Container>
-					<PageTamia>
-						<Stack gap="l">
-							<Header url={url} />
-							{children}
-							<Stack gap="l">
-								<aside aria-label="Newsletter">
-									<Subscription />
-								</aside>
-							</Stack>
-						</Stack>
-						<PageTamia.Footer>
-							<Footer />
-						</PageTamia.Footer>
-					</PageTamia>
+					<Stack gap="l">
+						<Header url={url} />
+						{children}
+						<aside aria-label="Newsletter">
+							<Subscription />
+						</aside>
+						<Footer />
+					</Stack>
 				</Container>
 			</PageContainer>
 		</Base>

@@ -46,13 +46,13 @@
     "react-helmet": "^6.1.0",
     "sentence-case": "^3.0.4",
     "styled-components": "^5.3.0",
-    "tamia": "^5.11.1",
+    "tamia": "^5.11.2",
     "tamia-gatsby-link": "^1.0.6"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/mdx-js__react": "^1.5.4",
-    "@types/react": "^17.0.16",
+    "@types/react": "^17.0.17",
     "@types/react-dom": "^17.0.9",
     "@types/react-helmet": "^6.1.2",
     "@types/styled-components": "^5.1.12",
