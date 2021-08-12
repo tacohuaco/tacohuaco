@@ -44,7 +44,7 @@ export default function RecipePage({
 			<Page url={url}>
 				<Metatags
 					slug={url}
-					title={title}
+					title={`${title} recipe`}
 					description={description}
 					images={images}
 				/>
