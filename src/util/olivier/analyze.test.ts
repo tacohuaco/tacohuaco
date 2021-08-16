@@ -1,5 +1,6 @@
 import { IngredientKind } from './types';
 import { analyze } from './analyze';
+import { Month } from './regions/germany';
 
 test.each([
 	[
@@ -14,6 +15,13 @@ test.each([
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
+			seasons: [
+				Month.May,
+				Month.June,
+				Month.July,
+				Month.August,
+				Month.September,
+			],
 		},
 	],
 	[
@@ -28,6 +36,7 @@ test.each([
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
+			seasons: [],
 		},
 	],
 	[
@@ -41,6 +50,7 @@ test.each([
 			hasDairy: true,
 			hasGluten: false,
 			hasSugar: false,
+			seasons: [],
 		},
 	],
 	[
@@ -55,6 +65,7 @@ test.each([
 			hasDairy: false,
 			hasGluten: true,
 			hasSugar: false,
+			seasons: [],
 		},
 	],
 	[
@@ -64,12 +75,14 @@ test.each([
 			maxAmount: 250,
 			unit: 'g',
 			modifier: 'brown',
+			seasons: [],
 		},
 		{
 			kind: IngredientKind.Vegan,
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: true,
+			seasons: [],
 		},
 	],
 ])('analyze ingredient: %s', (source, result) => {

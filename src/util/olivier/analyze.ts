@@ -7,6 +7,7 @@ import {
 	POULTRIES,
 	SUGARS,
 } from './langs/en/info';
+import { Month, SEASONS } from './regions/germany';
 import { IngredientKind, Ingredient } from './types';
 
 interface IngredientInfo {
@@ -14,6 +15,7 @@ interface IngredientInfo {
 	hasGluten: boolean;
 	hasDairy: boolean;
 	hasSugar: boolean;
+	seasons: Month[];
 }
 
 function getKind(name: string): IngredientKind {
@@ -32,6 +34,10 @@ function getKind(name: string): IngredientKind {
 	return IngredientKind.Vegan;
 }
 
+function getSeasons(name: string): Month[] {
+	return SEASONS[name] || [];
+}
+
 /**
  * Return info about an ingredient: kind, gluten, diary, sugar content
  */
@@ -41,5 +47,6 @@ export function analyze({ name }: Ingredient): IngredientInfo {
 		hasGluten: GLUTENS.includes(name),
 		hasDairy: DIARIES.includes(name),
 		hasSugar: SUGARS.includes(name),
+		seasons: getSeasons(name),
 	};
 }

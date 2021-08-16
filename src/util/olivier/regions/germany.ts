@@ -15,7 +15,7 @@ export enum Month {
 	December = 12,
 }
 
-export const SEASONS = {
+export const SEASONS: Record<string, Month[]> = {
 	[`apple`]: [Month.September, Month.October],
 	[`strawberry`]: [Month.May, Month.June, Month.July],
 	[`apricot`]: [Month.July, Month.August],
