@@ -7,6 +7,7 @@ import {
 	GRAPHCMS_MARKDOWN_FIELDS,
 	GRAPHCMS_FIELD_PREPROCESSING,
 	getRecipeFlags,
+	getRecipeSeasons,
 } from './src/util/content';
 
 // XXX: Gatsby has no types for this anywhere :-/
@@ -31,6 +32,14 @@ const getSubrecipeIngredients = (
 	} else {
 		return [];
 	}
+};
+
+const getAllRecipeIngredients = (
+	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	context: GatsbyContext
+): string => {
+	const subrecipeIngredients = getSubrecipeIngredients(source, context);
+	return [source.ingredients, ...subrecipeIngredients].join('\n');
 };
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
@@ -72,10 +81,20 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 					args: unknown,
 					context: GatsbyContext
 				) {
-					const subrecipeIngredients = getSubrecipeIngredients(source, context);
-					return getRecipeFlags(
-						[source.ingredients, ...subrecipeIngredients].join('\n')
-					);
+					return getRecipeFlags(getAllRecipeIngredients(source, context));
+				},
+			},
+			[`seasons`]: {
+				type: '[Int!]!',
+				resolve(
+					source: Pick<
+						GraphCms_Recipe,
+						'ingredients' | 'subrecipes' | 'remoteId'
+					>,
+					args: unknown,
+					context: GatsbyContext
+				) {
+					return getRecipeSeasons(getAllRecipeIngredients(source, context));
 				},
 			},
 		},

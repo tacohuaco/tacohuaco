@@ -27,7 +27,8 @@ export const SEASONS: Record<string, Month[]> = {
 		Month.December,
 	],
 	[`mangold`]: [Month.July, Month.August, Month.September],
-	[`onion`]: [Month.July, Month.August, Month.September, Month.October],
+	// Too generic
+	// [`onion`]: [Month.July, Month.August, Month.September, Month.October],
 	[`pea`]: [Month.July, Month.August],
 	[`runner bean`]: [Month.July, Month.August, Month.September, Month.October],
 	[`sweet corn`]: [Month.July, Month.August, Month.September, Month.October],
@@ -220,7 +221,8 @@ export const SEASONS: Record<string, Month[]> = {
 		Month.September,
 		Month.October,
 	],
-	[`scallion`]: [Month.May, Month.June, Month.July, Month.August],
+	// Too generic
+	// [`scallion`]: [Month.May, Month.June, Month.July, Month.August],
 	[`rhubarb`]: [Month.March, Month.April, Month.May, Month.June, Month.July],
 	[`rutabaga`]: [Month.January, Month.February, Month.November, Month.December],
 	[`salsify`]: [

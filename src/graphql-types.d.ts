@@ -422,6 +422,7 @@ export type GraphCms_Recipe = Node & {
   children: Array<Node>;
   internal: Internal;
   flags: FlagsJson;
+  seasons: Array<Scalars['Int']>;
   descriptionMdx: Scalars['String'];
   ingredientsMdx: Scalars['String'];
   notesMdx: Scalars['String'];
@@ -6122,7 +6123,7 @@ export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<(
-      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'slug'>
+      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
       & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
     )> } };
 

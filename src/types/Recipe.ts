@@ -4,7 +4,12 @@ import { Flags } from './Flags';
 
 export type RecipeMeta = Pick<
 	GraphCms_Recipe,
-	'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'slug'
+	| 'margaritasFavorite'
+	| 'artemsFavorite'
+	| 'time'
+	| 'title'
+	| 'seasons'
+	| 'slug'
 > & {
 	flags: Flags;
 	images: Asset[];

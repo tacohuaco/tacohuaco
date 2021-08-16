@@ -40,6 +40,7 @@ export const pageQuery = graphql`
 				artemsFavorite
 				time
 				title
+				seasons
 				slug
 				images {
 					handle
