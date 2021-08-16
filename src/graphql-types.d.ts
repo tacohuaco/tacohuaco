@@ -6131,7 +6131,7 @@ export type RecipesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<(
-      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'slug'>
+      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
       & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
     )> } };
 
