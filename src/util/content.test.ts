@@ -1,4 +1,8 @@
-import { formatIngredients, getIngredientLines } from './content';
+import {
+	formatIngredients,
+	getIngredientLines,
+	getRecipeSeasons,
+} from './content';
 
 describe('boldizeAmounts', () => {
 	test.each([
@@ -41,3 +45,31 @@ Array [
 `);
 	});
 });
+
+describe('getRecipeSeasons', () => {
+	test('return an array of ingredient lines from Markdown', () => {
+		const markdown = `
+- 60 g of rice noodles
+- 150 g of kimchi
+- 2 cloves of garlic
+- 1 carrot
+- 1 zucchini
+- extra-virgin olive oil
+- soy sauce
+- honey
+- salt
+- freshly ground black pepper
+		`;
+		expect(getRecipeSeasons(markdown)).toMatchInlineSnapshot(`
+Array [
+  7,
+  8,
+  9,
+]
+`);
+	});
+});
+
+// getRecipeFlags
+
+// formatIngredients

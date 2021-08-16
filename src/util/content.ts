@@ -1,4 +1,4 @@
-import { flow } from 'lodash';
+import { flow, intersection } from 'lodash';
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
@@ -9,6 +9,8 @@ import {
 	format,
 	Ingredient,
 	IngredientKind,
+	IngredientInfo,
+	Month,
 } from './olivier';
 import { Flags } from '../types/Flags';
 
@@ -30,6 +32,10 @@ export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 // 	return text;
 // };
 
+/**
+ * Return all ingredients (actually all list items) from Markdown as an array
+ * of strings
+ */
 export const getIngredientLines = (text: string): string[] => {
 	const tree = fromMarkdown(text);
 	const ingredients: string[] = [];
@@ -39,9 +45,21 @@ export const getIngredientLines = (text: string): string[] => {
 	return ingredients;
 };
 
-export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
+/**
+ * Analyze ingredients in a Markdown ingredients list
+ */
+export const getIngredientsInfo = (
+	ingredientsMarkdown: string
+): IngredientInfo[] => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
-	const ingredients = ingredientsRaw.map((x) => analyze(normalize(parse(x))));
+	return ingredientsRaw.map((x) => analyze(normalize(parse(x))));
+};
+
+/**
+ * Return flags for a Markdown ingredients list
+ */
+export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
+	const ingredients = getIngredientsInfo(ingredientsMarkdown);
 	return {
 		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
 		vegetarian: ingredients.every((x) =>
@@ -51,6 +69,17 @@ export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
 		diary: ingredients.some((x) => x.hasDairy === true),
 		addedSugar: ingredients.some((x) => x.hasSugar === true),
 	};
+};
+
+/**
+ * Recipe seasons: return months shared by all recipe ingredients
+ */
+export const getRecipeSeasons = (ingredientsMarkdown: string): Month[] => {
+	const ingredients = getIngredientsInfo(ingredientsMarkdown);
+	const allSeasons = ingredients
+		.map((x) => x.seasons)
+		.filter((x) => x.length > 0);
+	return intersection(...allSeasons);
 };
 
 const formatIngredient = ({

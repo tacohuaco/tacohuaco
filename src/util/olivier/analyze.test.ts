@@ -1,6 +1,5 @@
-import { IngredientKind } from './types';
+import { IngredientKind, Month } from './types';
 import { analyze } from './analyze';
-import { Month } from './regions/germany';
 
 test.each([
 	[

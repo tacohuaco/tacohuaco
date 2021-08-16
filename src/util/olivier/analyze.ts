@@ -7,16 +7,8 @@ import {
 	POULTRIES,
 	SUGARS,
 } from './langs/en/info';
-import { Month, SEASONS } from './regions/germany';
-import { IngredientKind, Ingredient } from './types';
-
-interface IngredientInfo {
-	kind: IngredientKind;
-	hasGluten: boolean;
-	hasDairy: boolean;
-	hasSugar: boolean;
-	seasons: Month[];
-}
+import { SEASONS } from './regions/germany';
+import { IngredientKind, Ingredient, Month, IngredientInfo } from './types';
 
 function getKind(name: string): IngredientKind {
 	if (DIARIES.includes(name) || NON_VEGANS.includes(name)) {
