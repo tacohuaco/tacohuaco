@@ -22,6 +22,7 @@ export const UNITS = [
 	['slice', 'slices'],
 	['sprig', 'sprigs'],
 	['stick', 'sticks'],
+	['straw', 'straws'],
 	['tablespoon', 'tablespoons', 'tbsp', 'tbsp.'],
 	['teaspoon', 'teaspoons', 'tsp', 'tsp.'],
 ];
