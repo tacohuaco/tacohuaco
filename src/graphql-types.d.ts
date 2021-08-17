@@ -550,6 +550,24 @@ export type GraphCms_ShopType =
 export type GraphCms_Country =
   | 'Germany';
 
+export type GraphCms_Tip = Node & {
+  remoteTypeName: Scalars['String'];
+  remoteId: Scalars['ID'];
+  stage: GraphCms_Stage;
+  createdAt: Scalars['JSON'];
+  updatedAt: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['JSON']>;
+  content?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<GraphCms_User>;
+  updatedBy?: Maybe<GraphCms_User>;
+  publishedBy?: Maybe<GraphCms_User>;
+  tags: Array<GraphCms_Tag>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
 export type GraphCms_UserKind =
   | 'MEMBER'
   | 'PAT'
@@ -672,6 +690,8 @@ export type Query = {
   allGraphCmsIngredient: GraphCms_IngredientConnection;
   graphCmsShop?: Maybe<GraphCms_Shop>;
   allGraphCmsShop: GraphCms_ShopConnection;
+  graphCmsTip?: Maybe<GraphCms_Tip>;
+  allGraphCmsTip: GraphCms_TipConnection;
   sitePlugin?: Maybe<SitePlugin>;
   allSitePlugin: SitePluginConnection;
   siteBuildMetadata?: Maybe<SiteBuildMetadata>;
@@ -1017,6 +1037,33 @@ export type QueryGraphCmsShopArgs = {
 export type QueryAllGraphCmsShopArgs = {
   filter?: Maybe<GraphCms_ShopFilterInput>;
   sort?: Maybe<GraphCms_ShopSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGraphCmsTipArgs = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  tags?: Maybe<GraphCms_TagQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllGraphCmsTipArgs = {
+  filter?: Maybe<GraphCms_TipFilterInput>;
+  sort?: Maybe<GraphCms_TipSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -5762,6 +5809,323 @@ export type GraphCms_ShopFilterInput = {
 
 export type GraphCms_ShopSortInput = {
   fields?: Maybe<Array<Maybe<GraphCms_ShopFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type GraphCms_TipConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_TipEdge>;
+  nodes: Array<GraphCms_Tip>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_TipGroupConnection>;
+};
+
+
+export type GraphCms_TipConnectionDistinctArgs = {
+  field: GraphCms_TipFieldsEnum;
+};
+
+
+export type GraphCms_TipConnectionMaxArgs = {
+  field: GraphCms_TipFieldsEnum;
+};
+
+
+export type GraphCms_TipConnectionMinArgs = {
+  field: GraphCms_TipFieldsEnum;
+};
+
+
+export type GraphCms_TipConnectionSumArgs = {
+  field: GraphCms_TipFieldsEnum;
+};
+
+
+export type GraphCms_TipConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: GraphCms_TipFieldsEnum;
+};
+
+export type GraphCms_TipEdge = {
+  next?: Maybe<GraphCms_Tip>;
+  node: GraphCms_Tip;
+  previous?: Maybe<GraphCms_Tip>;
+};
+
+export type GraphCms_TipFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'content'
+  | 'createdBy___remoteTypeName'
+  | 'createdBy___remoteId'
+  | 'createdBy___stage'
+  | 'createdBy___createdAt'
+  | 'createdBy___updatedAt'
+  | 'createdBy___publishedAt'
+  | 'createdBy___name'
+  | 'createdBy___picture'
+  | 'createdBy___isActive'
+  | 'createdBy___kind'
+  | 'createdBy___id'
+  | 'createdBy___parent___id'
+  | 'createdBy___parent___parent___id'
+  | 'createdBy___parent___parent___children'
+  | 'createdBy___parent___children'
+  | 'createdBy___parent___children___id'
+  | 'createdBy___parent___children___children'
+  | 'createdBy___parent___internal___content'
+  | 'createdBy___parent___internal___contentDigest'
+  | 'createdBy___parent___internal___description'
+  | 'createdBy___parent___internal___fieldOwners'
+  | 'createdBy___parent___internal___ignoreType'
+  | 'createdBy___parent___internal___mediaType'
+  | 'createdBy___parent___internal___owner'
+  | 'createdBy___parent___internal___type'
+  | 'createdBy___children'
+  | 'createdBy___children___id'
+  | 'createdBy___children___parent___id'
+  | 'createdBy___children___parent___children'
+  | 'createdBy___children___children'
+  | 'createdBy___children___children___id'
+  | 'createdBy___children___children___children'
+  | 'createdBy___children___internal___content'
+  | 'createdBy___children___internal___contentDigest'
+  | 'createdBy___children___internal___description'
+  | 'createdBy___children___internal___fieldOwners'
+  | 'createdBy___children___internal___ignoreType'
+  | 'createdBy___children___internal___mediaType'
+  | 'createdBy___children___internal___owner'
+  | 'createdBy___children___internal___type'
+  | 'createdBy___internal___content'
+  | 'createdBy___internal___contentDigest'
+  | 'createdBy___internal___description'
+  | 'createdBy___internal___fieldOwners'
+  | 'createdBy___internal___ignoreType'
+  | 'createdBy___internal___mediaType'
+  | 'createdBy___internal___owner'
+  | 'createdBy___internal___type'
+  | 'updatedBy___remoteTypeName'
+  | 'updatedBy___remoteId'
+  | 'updatedBy___stage'
+  | 'updatedBy___createdAt'
+  | 'updatedBy___updatedAt'
+  | 'updatedBy___publishedAt'
+  | 'updatedBy___name'
+  | 'updatedBy___picture'
+  | 'updatedBy___isActive'
+  | 'updatedBy___kind'
+  | 'updatedBy___id'
+  | 'updatedBy___parent___id'
+  | 'updatedBy___parent___parent___id'
+  | 'updatedBy___parent___parent___children'
+  | 'updatedBy___parent___children'
+  | 'updatedBy___parent___children___id'
+  | 'updatedBy___parent___children___children'
+  | 'updatedBy___parent___internal___content'
+  | 'updatedBy___parent___internal___contentDigest'
+  | 'updatedBy___parent___internal___description'
+  | 'updatedBy___parent___internal___fieldOwners'
+  | 'updatedBy___parent___internal___ignoreType'
+  | 'updatedBy___parent___internal___mediaType'
+  | 'updatedBy___parent___internal___owner'
+  | 'updatedBy___parent___internal___type'
+  | 'updatedBy___children'
+  | 'updatedBy___children___id'
+  | 'updatedBy___children___parent___id'
+  | 'updatedBy___children___parent___children'
+  | 'updatedBy___children___children'
+  | 'updatedBy___children___children___id'
+  | 'updatedBy___children___children___children'
+  | 'updatedBy___children___internal___content'
+  | 'updatedBy___children___internal___contentDigest'
+  | 'updatedBy___children___internal___description'
+  | 'updatedBy___children___internal___fieldOwners'
+  | 'updatedBy___children___internal___ignoreType'
+  | 'updatedBy___children___internal___mediaType'
+  | 'updatedBy___children___internal___owner'
+  | 'updatedBy___children___internal___type'
+  | 'updatedBy___internal___content'
+  | 'updatedBy___internal___contentDigest'
+  | 'updatedBy___internal___description'
+  | 'updatedBy___internal___fieldOwners'
+  | 'updatedBy___internal___ignoreType'
+  | 'updatedBy___internal___mediaType'
+  | 'updatedBy___internal___owner'
+  | 'updatedBy___internal___type'
+  | 'publishedBy___remoteTypeName'
+  | 'publishedBy___remoteId'
+  | 'publishedBy___stage'
+  | 'publishedBy___createdAt'
+  | 'publishedBy___updatedAt'
+  | 'publishedBy___publishedAt'
+  | 'publishedBy___name'
+  | 'publishedBy___picture'
+  | 'publishedBy___isActive'
+  | 'publishedBy___kind'
+  | 'publishedBy___id'
+  | 'publishedBy___parent___id'
+  | 'publishedBy___parent___parent___id'
+  | 'publishedBy___parent___parent___children'
+  | 'publishedBy___parent___children'
+  | 'publishedBy___parent___children___id'
+  | 'publishedBy___parent___children___children'
+  | 'publishedBy___parent___internal___content'
+  | 'publishedBy___parent___internal___contentDigest'
+  | 'publishedBy___parent___internal___description'
+  | 'publishedBy___parent___internal___fieldOwners'
+  | 'publishedBy___parent___internal___ignoreType'
+  | 'publishedBy___parent___internal___mediaType'
+  | 'publishedBy___parent___internal___owner'
+  | 'publishedBy___parent___internal___type'
+  | 'publishedBy___children'
+  | 'publishedBy___children___id'
+  | 'publishedBy___children___parent___id'
+  | 'publishedBy___children___parent___children'
+  | 'publishedBy___children___children'
+  | 'publishedBy___children___children___id'
+  | 'publishedBy___children___children___children'
+  | 'publishedBy___children___internal___content'
+  | 'publishedBy___children___internal___contentDigest'
+  | 'publishedBy___children___internal___description'
+  | 'publishedBy___children___internal___fieldOwners'
+  | 'publishedBy___children___internal___ignoreType'
+  | 'publishedBy___children___internal___mediaType'
+  | 'publishedBy___children___internal___owner'
+  | 'publishedBy___children___internal___type'
+  | 'publishedBy___internal___content'
+  | 'publishedBy___internal___contentDigest'
+  | 'publishedBy___internal___description'
+  | 'publishedBy___internal___fieldOwners'
+  | 'publishedBy___internal___ignoreType'
+  | 'publishedBy___internal___mediaType'
+  | 'publishedBy___internal___owner'
+  | 'publishedBy___internal___type'
+  | 'tags'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type GraphCms_TipGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_TipEdge>;
+  nodes: Array<GraphCms_Tip>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+export type GraphCms_TipFilterInput = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  content?: Maybe<StringQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  tags?: Maybe<GraphCms_TagQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type GraphCms_TipSortInput = {
+  fields?: Maybe<Array<Maybe<GraphCms_TipFieldsEnum>>>;
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
