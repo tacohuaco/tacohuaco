@@ -300,6 +300,8 @@ export type SitePage = Node & {
 
 export type SitePageContext = {
   slug?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']>;
+  cuisine?: Maybe<Scalars['String']>;
 };
 
 export type FlagsJson = {
@@ -1971,6 +1973,8 @@ export type SiteFunctionSortInput = {
 
 export type SitePageContextFilterInput = {
   slug?: Maybe<StringQueryOperatorInput>;
+  tag?: Maybe<StringQueryOperatorInput>;
+  cuisine?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginFilterInput = {
@@ -2203,6 +2207,8 @@ export type SitePageFieldsEnum =
   | 'internal___type'
   | 'isCreatedByStatefulCreatePages'
   | 'context___slug'
+  | 'context___tag'
+  | 'context___cuisine'
   | 'pluginCreator___id'
   | 'pluginCreator___parent___id'
   | 'pluginCreator___parent___parent___id'
@@ -6496,15 +6502,19 @@ export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragm
 export type RecipesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<(
-      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
-      & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
-    )> } };
+export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragment> } };
 
 export type ShopsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ShopsPageQuery = { allGraphCmsShop: { nodes: Array<Pick<GraphCms_Shop, 'address' | 'city' | 'country' | 'descriptionMdx' | 'name' | 'neighbourhood' | 'url' | 'zip'>> } };
+
+export type CuisinePageQueryVariables = Exact<{
+  cuisine: GraphCms_Cuisine;
+}>;
+
+
+export type CuisinePageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragment> } };
 
 export type RecipePageQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -6516,7 +6526,14 @@ export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
     & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>> }
   )> };
 
+export type TagsPageQueryVariables = Exact<{
+  tag: GraphCms_Tag;
+}>;
+
+
+export type TagsPageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragment> } };
+
 export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllRecipesQuery = { allGraphCmsRecipe: { nodes: Array<Pick<GraphCms_Recipe, 'slug'>> } };
+export type AllRecipesQuery = { allGraphCmsRecipe: { nodes: Array<Pick<GraphCms_Recipe, 'cuisines' | 'slug' | 'tags'>> } };

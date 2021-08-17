@@ -1,6 +1,7 @@
 import { GatsbyNode } from 'gatsby';
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
+import { kebabCase, uniq } from 'lodash';
 import { AllRecipesQuery, GraphCms_Recipe } from './src/graphql-types';
 import { getMdx } from './src/util/mdx';
 import {
@@ -127,7 +128,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		query AllRecipes {
 			allGraphCmsRecipe {
 				nodes {
+					cuisines
 					slug
+					tags
 				}
 			}
 		}
@@ -140,12 +143,39 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
 	const recipes = data.allGraphCmsRecipe.nodes;
 
+	// Create pages for all recipes
 	recipes.forEach(({ slug }) => {
 		createPage({
 			path: `/recipes/${slug}/`,
 			component: `${__dirname}/src/templates/recipe.tsx`,
 			context: {
 				slug,
+			},
+		});
+	});
+
+	// Create pages for all tags
+	const tags = uniq(recipes.flatMap((x) => x.tags));
+	tags.forEach((tag) => {
+		const slug = kebabCase(tag);
+		createPage({
+			path: `/tags/${slug}/`,
+			component: `${__dirname}/src/templates/tag.tsx`,
+			context: {
+				tag,
+			},
+		});
+	});
+
+	// Create pages for all cuisines
+	const cuisines = uniq(recipes.flatMap((x) => x.cuisines));
+	cuisines.forEach((cuisine) => {
+		const slug = kebabCase(cuisine);
+		createPage({
+			path: `/cuisines/${slug}/`,
+			component: `${__dirname}/src/templates/cuisine.tsx`,
+			context: {
+				cuisine,
 			},
 		});
 	});
