@@ -35,7 +35,7 @@ const getMapLink = ({ name, address, city, country, zip }: Shop) =>
 export default function AboutPage({ shops, url }: Props) {
 	return (
 		<Page url={url}>
-			<Metatags slug={url} />
+			<Metatags slug={url} title="Shops" />
 			<Stack as="main" gap="l">
 				<Heading level={1}>Shops</Heading>
 				<Stack as="ul" gap="l">

@@ -10,7 +10,7 @@ type Props = {
 export default function AboutPage({ url }: Props) {
 	return (
 		<Page url={url}>
-			<Metatags slug={url} />
+			<Metatags slug={url} title="About" />
 			<Stack as="main" gap="l">
 				<Heading level={1}>
 					About Tacohuaco <span aria-hidden="true">🌮</span>

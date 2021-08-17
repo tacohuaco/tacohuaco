@@ -12,11 +12,12 @@ type Props = {
 };
 
 export default function CuisinePage({ recipes, url, cuisine }: Props) {
+	const title = `${cuisine} recipes`;
 	return (
 		<Page url={url}>
-			<Metatags slug={url} images={recipes?.[0].images} />
+			<Metatags slug={url} title={title} images={recipes?.[0].images} />
 			<Stack as="main" gap="l">
-				<Heading level={1}>{cuisine} recipes</Heading>
+				<Heading level={1}>{title}</Heading>
 				<RecipeList recipes={recipes} />
 			</Stack>
 		</Page>

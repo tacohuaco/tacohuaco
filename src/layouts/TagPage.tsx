@@ -12,11 +12,12 @@ type Props = {
 };
 
 export default function TagPage({ recipes, url, tag }: Props) {
+	const title = `${tag} recipes`;
 	return (
 		<Page url={url}>
-			<Metatags slug={url} images={recipes?.[0].images} />
+			<Metatags slug={url} title={title} images={recipes?.[0].images} />
 			<Stack as="main" gap="l">
-				<Heading level={1}>{tag} recipes</Heading>
+				<Heading level={1}>{title}</Heading>
 				<RecipeList recipes={recipes} />
 			</Stack>
 		</Page>
