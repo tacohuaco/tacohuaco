@@ -29,25 +29,7 @@ export const pageQuery = graphql`
 	query RecipesPage {
 		allGraphCmsRecipe(sort: { fields: [title], order: ASC }) {
 			nodes {
-				flags {
-					vegan
-					vegetarian
-					gluten
-					diary
-					addedSugar
-				}
-				margaritasFavorite
-				artemsFavorite
-				time
-				title
-				seasons
-				slug
-				images {
-					handle
-					height
-					url
-					width
-				}
+				...RecipeMeta
 			}
 		}
 	}

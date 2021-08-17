@@ -6483,13 +6483,15 @@ export type SiteBuildMetadataSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type RecipeMetaFragment = (
+  Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
+  & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
+);
+
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<(
-      Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
-      & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
-    )> } };
+export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragment> } };
 
 export type RecipesPageQueryVariables = Exact<{ [key: string]: never; }>;
 

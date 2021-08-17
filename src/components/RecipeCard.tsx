@@ -1,4 +1,5 @@
 import React from 'react';
+import { graphql } from 'gatsby';
 import { Box, Stack, Text, Image, Frame } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 import { getImageUrl } from '../util/client';
@@ -46,3 +47,27 @@ export default function RecipeCard({
 		</Stack>
 	);
 }
+
+export const recipeMetaFragment = graphql`
+	fragment RecipeMeta on GraphCMS_Recipe {
+		flags {
+			vegan
+			vegetarian
+			gluten
+			diary
+			addedSugar
+		}
+		margaritasFavorite
+		artemsFavorite
+		time
+		title
+		seasons
+		slug
+		images {
+			handle
+			height
+			url
+			width
+		}
+	}
+`;
