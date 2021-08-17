@@ -10,6 +10,7 @@ type Props = React.ComponentProps<typeof Text> & {
 
 const ListItem = styled.li`
 	&& {
+		margin-left: 0;
 		padding-left: 0;
 	}
 	&::before {
