@@ -4,10 +4,10 @@ import { Stack, Heading, VisuallyHidden } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
-import { RecipeMeta } from '../types/Recipe';
+import { RecipeMetaFragment } from '../graphql-types';
 
 type Props = {
-	recipes: RecipeMeta[];
+	recipes: RecipeMetaFragment[];
 	url: string;
 };
 
@@ -15,7 +15,9 @@ const CURRENT_SEASON = new Date().getMonth() + 1;
 // const NEXT_SEASON = CURRENT_SEASON === 12 ? 1 : CURRENT_SEASON + 1;
 
 // Order recipies by the lengths of the seasons: recipes with shorter season
-const getCurrentSeasonRecipes = (recipes: RecipeMeta[]): RecipeMeta[] => {
+const getCurrentSeasonRecipes = (
+	recipes: RecipeMetaFragment[]
+): RecipeMetaFragment[] => {
 	return orderBy(
 		recipes.filter((x) => x.seasons.includes(CURRENT_SEASON)),
 		(x) => x.seasons.length
@@ -34,7 +36,7 @@ const RecipeListSection = ({
 	recipes,
 }: {
 	title: ReactNode;
-	recipes: RecipeMeta[];
+	recipes: RecipeMetaFragment[];
 }) => (
 	<Stack as="main" gap="l">
 		<Heading as="h2" level={1}>

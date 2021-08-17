@@ -3,10 +3,10 @@ import { Stack, Heading } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
-import { RecipeMeta } from '../types/Recipe';
+import { RecipeMetaFragment } from '../graphql-types';
 
 type Props = {
-	recipes: RecipeMeta[];
+	recipes: RecipeMetaFragment[];
 	url: string;
 };
 

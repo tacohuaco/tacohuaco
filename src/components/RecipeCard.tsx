@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import { Box, Stack, Text, Image, Frame } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 import { getImageUrl } from '../util/client';
-import { RecipeMeta } from '../types/Recipe';
+import { RecipeMetaFragment } from '../graphql-types';
 import RecipeFlags from './RecipeFlags';
 
 export default function RecipeCard({
@@ -11,10 +11,9 @@ export default function RecipeCard({
 	margaritasFavorite,
 	artemsFavorite,
 	images,
-	time,
 	title,
 	slug,
-}: RecipeMeta) {
+}: RecipeMetaFragment) {
 	return (
 		<Stack gap="s" direction="column">
 			<Link href={`/recipes/${slug}/`}>
