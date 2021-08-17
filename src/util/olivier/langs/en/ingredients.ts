@@ -64,7 +64,7 @@ export const INGREDIENTS = [
 	['tomato paste'],
 	['tomato', 'tomatoes'],
 	['olive', 'olives'],
-	['eggplant', 'eggplants'],
+	['eggplant', 'eggplants', 'aubergine', 'aubergines'],
 	['carrot', 'carrots'],
 	[
 		'mangold',
