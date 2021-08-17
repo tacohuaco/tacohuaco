@@ -94,7 +94,7 @@ const theme = {
 	baseFontSize: '1.125em',
 	blockMarginBottom: space.m,
 	headingMarginTop: space.l,
-	listMargin: 0,
+	listMargin: '1.2rem',
 	focusOutlineOffset: '2px',
 	page: {
 		bodyMaxWidth: null,

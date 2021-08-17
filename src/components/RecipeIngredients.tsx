@@ -9,6 +9,9 @@ type Props = React.ComponentProps<typeof Text> & {
 };
 
 const ListItem = styled.li`
+	&& {
+		padding-left: 0;
+	}
 	&::before {
 		display: none;
 	}
