@@ -158,6 +158,9 @@ export const INGREDIENTS = [
 	['fruit', 'fruits'],
 	// Diary
 	['cheese'],
+	// Meat
+	['chicken stock', 'chicken broth'],
+	['chicken', 'chicken'],
 	// Flours
 	['spelt flour'],
 	['all-purpose flour', 'all purpose flour', 'flour'],
