@@ -42,6 +42,7 @@ export const pageQuery = graphql`
 			margaritasFavorite
 			notesMdx
 			overnight
+			preconditions
 			sourceMdx
 			stepsMdx
 			tags

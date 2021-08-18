@@ -1,25 +1,25 @@
 import React, { ComponentType } from 'react';
 import styled from 'styled-components';
 import { MDXProvider } from '@mdx-js/react';
-import { Text, TextContent as TextContentBase } from 'tamia';
+import { Text } from 'tamia';
 import { Subrecipe } from './Subrecipe';
 
 type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
 };
 
-const ListItem = styled.li`
+export const IngredientItem = styled.li`
 	&& {
 		margin-left: 0;
 		padding-left: 0;
+		margin-bottom: ${(p) => p.theme.space.m};
+		line-height: ${(p) => p.theme.lineHeights.small};
 	}
 	&::before {
 		display: none;
 	}
 	em {
 		display: block;
-		margin-top: -${(p) => p.theme.space.xs};
-		line-height: ${(p) => p.theme.lineHeights.small};
 	}
 `;
 
@@ -32,7 +32,7 @@ const Paragraph: ComponentType<any> = ({ children }) => {
 
 const components = {
 	p: Paragraph,
-	li: ListItem,
+	li: IngredientItem,
 } as const;
 
 export default function RecipeIngredients({ children, ...props }: Props) {
@@ -43,9 +43,7 @@ export default function RecipeIngredients({ children, ...props }: Props) {
 			lineHeight="large"
 			{...props}
 		>
-			<MDXProvider components={components}>
-				<TextContentBase>{children}</TextContentBase>
-			</MDXProvider>
+			<MDXProvider components={components}>{children}</MDXProvider>
 		</Text>
 	);
 }

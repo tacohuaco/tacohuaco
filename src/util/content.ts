@@ -46,7 +46,15 @@ export const getIngredientLines = (text: string): string[] => {
 };
 
 /**
- * Analyze ingredients in a Markdown ingredients list
+ * Rreturn ingredients in a Markdown ingredients list
+ */
+export const getIngredients = (ingredientsMarkdown: string): Ingredient[] => {
+	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
+	return ingredientsRaw.map((x) => normalize(parse(x)));
+};
+
+/**
+ *  Analyzeingredients in a Markdown ingredients list
  */
 export const getIngredientsInfo = (
 	ingredientsMarkdown: string
@@ -80,6 +88,28 @@ export const getRecipeSeasons = (ingredientsMarkdown: string): Month[] => {
 		.map((x) => x.seasons)
 		.filter((x) => x.length > 0);
 	return intersection(...allSeasons);
+};
+
+/**
+ * Recipe precoditons: things to be done before starting cooking
+ */
+export const getRecipePreconditions = (
+	ingredientsMarkdown: string
+): string[] => {
+	const ingredients = getIngredients(ingredientsMarkdown);
+	return ingredients
+		.map(({ name, comment }) => {
+			if (comment === 'room temperature' || comment === 'at room temperature') {
+				return `Warm ${name} to room temperature`;
+			}
+
+			if (name === 'chicken stock') {
+				return `Unfreeze ${name} if frozen`;
+			}
+
+			return '';
+		})
+		.filter(Boolean);
 };
 
 const formatIngredient = ({

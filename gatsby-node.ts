@@ -9,6 +9,7 @@ import {
 	GRAPHCMS_FIELD_PREPROCESSING,
 	getRecipeFlags,
 	getRecipeSeasons,
+	getRecipePreconditions,
 } from './src/util/content';
 
 // XXX: Gatsby has no types for this anywhere :-/
@@ -96,6 +97,21 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 					context: GatsbyContext
 				) {
 					return getRecipeSeasons(getAllRecipeIngredients(source, context));
+				},
+			},
+			[`preconditions`]: {
+				type: '[String!]!',
+				resolve(
+					source: Pick<
+						GraphCms_Recipe,
+						'ingredients' | 'subrecipes' | 'remoteId'
+					>,
+					args: unknown,
+					context: GatsbyContext
+				) {
+					return getRecipePreconditions(
+						getAllRecipeIngredients(source, context)
+					);
 				},
 			},
 		},

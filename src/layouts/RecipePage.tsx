@@ -3,7 +3,9 @@ import { Stack, Grid, Heading, Text } from 'tamia';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
-import RecipeIngredients from '../components/RecipeIngredients';
+import RecipeIngredients, {
+	IngredientItem,
+} from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
 import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
@@ -29,6 +31,7 @@ export default function RecipePage({
 	margaritasFavorite,
 	notesMdx,
 	overnight,
+	preconditions,
 	sourceMdx,
 	stepsMdx,
 	subrecipes,
@@ -85,6 +88,18 @@ export default function RecipePage({
 									<>
 										<Heading level={3}>You will need</Heading>
 										<MDXRenderer>{toolsMdx}</MDXRenderer>
+									</>
+								)}{' '}
+								{preconditions.length > 0 && (
+									<>
+										<Heading level={3}>Before you start</Heading>
+										<ul>
+											{preconditions.map((precondition) => (
+												<IngredientItem key={precondition}>
+													{precondition}
+												</IngredientItem>
+											))}
+										</ul>
 									</>
 								)}
 							</RecipeIngredients>

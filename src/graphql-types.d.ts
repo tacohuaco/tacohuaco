@@ -425,6 +425,7 @@ export type GraphCms_Recipe = Node & {
   internal: Internal;
   flags: FlagsJson;
   seasons: Array<Scalars['Int']>;
+  preconditions: Array<Scalars['String']>;
   descriptionMdx: Scalars['String'];
   ingredientsMdx: Scalars['String'];
   notesMdx: Scalars['String'];
@@ -6522,7 +6523,7 @@ export type RecipePageQueryVariables = Exact<{
 
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
-    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'yields'>
+    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'yields'>
     & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>> }
   )> };
 
