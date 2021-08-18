@@ -1,3 +1,6 @@
+/**
+ * Return an image asset URL on GraphCMS for a given size
+ */
 export const getImageUrl = (
 	baseUrl: string,
 	{ width, height }: { width: number; height: number }
@@ -12,7 +15,6 @@ export const getImageUrl = (
  * Based on https://github.com/stiang/remove-markdown
  */
 export const stripMarkdown = (md: string): string => {
-	// Remove inline links
 	return (
 		md
 			// Remove HTML tags
