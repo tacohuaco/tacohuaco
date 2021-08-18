@@ -61,7 +61,7 @@ export default function RecipePage({
 							overnight={overnight}
 						/>
 					</Stack>
-					{description && (
+					{descriptionMdx && (
 						<TextContent fontSize="l" fontStyle="italic">
 							<MDXRenderer>{descriptionMdx}</MDXRenderer>
 						</TextContent>
