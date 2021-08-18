@@ -24,5 +24,6 @@ export const stripMarkdown = (md: string): string => {
 			// Remove emphasis (repeat the line to remove double emphasis)
 			.replace(/([*_]{1,3})(\S.*?\S{0,1})\1/g, '$2')
 			.replace(/([*_]{1,3})(\S.*?\S{0,1})\1/g, '$2')
+			.trim()
 	);
 };
