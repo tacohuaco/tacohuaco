@@ -3,9 +3,7 @@ import { Stack, Grid, Heading, Text } from 'tamia';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
-import RecipeIngredients, {
-	IngredientItem,
-} from '../components/RecipeIngredients';
+import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
 import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
