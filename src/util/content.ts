@@ -100,11 +100,11 @@ export const getRecipePreconditions = (
 	return ingredients
 		.map(({ name, comment }) => {
 			if (comment === 'room temperature' || comment === 'at room temperature') {
-				return `Warm ${name} to room temperature`;
+				return `warm ${name} to room temperature`;
 			}
 
 			if (name === 'chicken stock') {
-				return `Unfreeze ${name} if frozen`;
+				return `unfreeze ${name} if frozen`;
 			}
 
 			return '';

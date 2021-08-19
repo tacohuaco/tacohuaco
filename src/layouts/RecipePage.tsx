@@ -12,6 +12,7 @@ import RecipeMeta from '../components/RecipeMeta';
 import { SubrecipesContext } from '../components/SubrecipesContext';
 import { RecipePageQuery } from '../graphql-types';
 import Page from './Page';
+import { asList } from '../util/client';
 
 type Props = RecipePageQuery['graphCmsRecipe'] & {
 	description?: string;
@@ -89,23 +90,16 @@ export default function RecipePage({
 										<Heading level={3}>You will need</Heading>
 										<MDXRenderer>{toolsMdx}</MDXRenderer>
 									</>
-								)}{' '}
-								{preconditions.length > 0 && (
-									<>
-										<Heading level={3}>Before you start</Heading>
-										<ul>
-											{preconditions.map((precondition) => (
-												<IngredientItem key={precondition}>
-													{precondition}
-												</IngredientItem>
-											))}
-										</ul>
-									</>
 								)}
 							</RecipeIngredients>
 						</TextContent>
 						<TextContent>
 							<Heading level={2}>Directions</Heading>
+							{preconditions.length > 0 && (
+								<Text>
+									<strong>Before you start:</strong> {asList(preconditions)}.
+								</Text>
+							)}
 							<RecipeDirections>
 								<MDXRenderer>{stepsMdx}</MDXRenderer>
 							</RecipeDirections>

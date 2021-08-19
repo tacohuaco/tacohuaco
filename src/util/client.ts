@@ -29,3 +29,8 @@ export const stripMarkdown = (md: string): string => {
 			.trim()
 	);
 };
+
+export const asList = (list: string[]): string =>
+	list.reduce((acc, item, index) => {
+		return [acc, index === list.length - 1 ? ' and ' : ', ', item].join('');
+	});
