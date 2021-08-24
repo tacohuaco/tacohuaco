@@ -406,9 +406,9 @@ export type GraphCms_Recipe = Node & {
   margaritasFavorite: Scalars['Boolean'];
   artemsFavorite: Scalars['Boolean'];
   ingredients?: Maybe<Scalars['String']>;
-  leftovers?: Maybe<Scalars['String']>;
   steps?: Maybe<Scalars['String']>;
   notes?: Maybe<Scalars['String']>;
+  leftovers?: Maybe<Scalars['String']>;
   privateNotes?: Maybe<Scalars['String']>;
   createdBy?: Maybe<GraphCms_User>;
   updatedBy?: Maybe<GraphCms_User>;
@@ -445,15 +445,9 @@ export type GraphCms_Ingredient = Node & {
   slug: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   storage?: Maybe<Scalars['String']>;
-  hasGluten: Scalars['Boolean'];
-  hasNuts: Scalars['Boolean'];
-  hasDairy: Scalars['Boolean'];
-  hasSugar: Scalars['Boolean'];
   createdBy?: Maybe<GraphCms_User>;
   updatedBy?: Maybe<GraphCms_User>;
   publishedBy?: Maybe<GraphCms_User>;
-  kind: GraphCms_Kind;
-  season: Array<GraphCms_Month>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -461,27 +455,6 @@ export type GraphCms_Ingredient = Node & {
   descriptionMdx: Scalars['String'];
   storageMdx: Scalars['String'];
 };
-
-export type GraphCms_Kind =
-  | 'Vegan'
-  | 'Vegetarian'
-  | 'Poultry'
-  | 'Meat'
-  | 'Fish';
-
-export type GraphCms_Month =
-  | 'January'
-  | 'February'
-  | 'March'
-  | 'April'
-  | 'May'
-  | 'June'
-  | 'July'
-  | 'August'
-  | 'September'
-  | 'October'
-  | 'November'
-  | 'December';
 
 export type GraphCms_Cuisine =
   | 'Italian'
@@ -500,7 +473,9 @@ export type GraphCms_Tag =
   | 'SweetBread'
   | 'Picknick'
   | 'Charring'
+  | 'Pickling'
   | 'Dip'
+  | 'Leftovers'
   | 'Baking'
   | 'Dessert'
   | 'Breakfast'
@@ -566,6 +541,7 @@ export type GraphCms_Tip = Node & {
   updatedAt: Scalars['JSON'];
   publishedAt?: Maybe<Scalars['JSON']>;
   content?: Maybe<Scalars['String']>;
+  ingredient?: Maybe<Scalars['String']>;
   createdBy?: Maybe<GraphCms_User>;
   updatedBy?: Maybe<GraphCms_User>;
   publishedBy?: Maybe<GraphCms_User>;
@@ -949,9 +925,9 @@ export type QueryGraphCmsRecipeArgs = {
   margaritasFavorite?: Maybe<BooleanQueryOperatorInput>;
   artemsFavorite?: Maybe<BooleanQueryOperatorInput>;
   ingredients?: Maybe<StringQueryOperatorInput>;
-  leftovers?: Maybe<StringQueryOperatorInput>;
   steps?: Maybe<StringQueryOperatorInput>;
   notes?: Maybe<StringQueryOperatorInput>;
+  leftovers?: Maybe<StringQueryOperatorInput>;
   privateNotes?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
@@ -988,15 +964,9 @@ export type QueryGraphCmsIngredientArgs = {
   slug?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   storage?: Maybe<StringQueryOperatorInput>;
-  hasGluten?: Maybe<BooleanQueryOperatorInput>;
-  hasNuts?: Maybe<BooleanQueryOperatorInput>;
-  hasDairy?: Maybe<BooleanQueryOperatorInput>;
-  hasSugar?: Maybe<BooleanQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;
-  kind?: Maybe<GraphCms_KindQueryOperatorInput>;
-  season?: Maybe<GraphCms_MonthQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -1058,6 +1028,7 @@ export type QueryGraphCmsTipArgs = {
   updatedAt?: Maybe<JsonQueryOperatorInput>;
   publishedAt?: Maybe<JsonQueryOperatorInput>;
   content?: Maybe<StringQueryOperatorInput>;
+  ingredient?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;
@@ -2412,9 +2383,9 @@ export type GraphCms_RecipeFilterInput = {
   margaritasFavorite?: Maybe<BooleanQueryOperatorInput>;
   artemsFavorite?: Maybe<BooleanQueryOperatorInput>;
   ingredients?: Maybe<StringQueryOperatorInput>;
-  leftovers?: Maybe<StringQueryOperatorInput>;
   steps?: Maybe<StringQueryOperatorInput>;
   notes?: Maybe<StringQueryOperatorInput>;
+  leftovers?: Maybe<StringQueryOperatorInput>;
   privateNotes?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
@@ -2702,9 +2673,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___margaritasFavorite'
   | 'imagesRecipe___artemsFavorite'
   | 'imagesRecipe___ingredients'
-  | 'imagesRecipe___leftovers'
   | 'imagesRecipe___steps'
   | 'imagesRecipe___notes'
+  | 'imagesRecipe___leftovers'
   | 'imagesRecipe___privateNotes'
   | 'imagesRecipe___createdBy___remoteTypeName'
   | 'imagesRecipe___createdBy___remoteId'
@@ -2846,9 +2817,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___images___imagesRecipe___margaritasFavorite'
   | 'imagesRecipe___images___imagesRecipe___artemsFavorite'
   | 'imagesRecipe___images___imagesRecipe___ingredients'
-  | 'imagesRecipe___images___imagesRecipe___leftovers'
   | 'imagesRecipe___images___imagesRecipe___steps'
   | 'imagesRecipe___images___imagesRecipe___notes'
+  | 'imagesRecipe___images___imagesRecipe___leftovers'
   | 'imagesRecipe___images___imagesRecipe___privateNotes'
   | 'imagesRecipe___images___imagesRecipe___images'
   | 'imagesRecipe___images___imagesRecipe___subrecipes'
@@ -2890,9 +2861,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___subrecipes___margaritasFavorite'
   | 'imagesRecipe___subrecipes___artemsFavorite'
   | 'imagesRecipe___subrecipes___ingredients'
-  | 'imagesRecipe___subrecipes___leftovers'
   | 'imagesRecipe___subrecipes___steps'
   | 'imagesRecipe___subrecipes___notes'
+  | 'imagesRecipe___subrecipes___leftovers'
   | 'imagesRecipe___subrecipes___privateNotes'
   | 'imagesRecipe___subrecipes___createdBy___remoteTypeName'
   | 'imagesRecipe___subrecipes___createdBy___remoteId'
@@ -2966,9 +2937,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___subrecipes___subrecipes___margaritasFavorite'
   | 'imagesRecipe___subrecipes___subrecipes___artemsFavorite'
   | 'imagesRecipe___subrecipes___subrecipes___ingredients'
-  | 'imagesRecipe___subrecipes___subrecipes___leftovers'
   | 'imagesRecipe___subrecipes___subrecipes___steps'
   | 'imagesRecipe___subrecipes___subrecipes___notes'
+  | 'imagesRecipe___subrecipes___subrecipes___leftovers'
   | 'imagesRecipe___subrecipes___subrecipes___privateNotes'
   | 'imagesRecipe___subrecipes___subrecipes___images'
   | 'imagesRecipe___subrecipes___subrecipes___subrecipes'
@@ -2994,9 +2965,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___subrecipes___recipes___margaritasFavorite'
   | 'imagesRecipe___subrecipes___recipes___artemsFavorite'
   | 'imagesRecipe___subrecipes___recipes___ingredients'
-  | 'imagesRecipe___subrecipes___recipes___leftovers'
   | 'imagesRecipe___subrecipes___recipes___steps'
   | 'imagesRecipe___subrecipes___recipes___notes'
+  | 'imagesRecipe___subrecipes___recipes___leftovers'
   | 'imagesRecipe___subrecipes___recipes___privateNotes'
   | 'imagesRecipe___subrecipes___recipes___images'
   | 'imagesRecipe___subrecipes___recipes___subrecipes'
@@ -3039,9 +3010,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___recipes___margaritasFavorite'
   | 'imagesRecipe___recipes___artemsFavorite'
   | 'imagesRecipe___recipes___ingredients'
-  | 'imagesRecipe___recipes___leftovers'
   | 'imagesRecipe___recipes___steps'
   | 'imagesRecipe___recipes___notes'
+  | 'imagesRecipe___recipes___leftovers'
   | 'imagesRecipe___recipes___privateNotes'
   | 'imagesRecipe___recipes___createdBy___remoteTypeName'
   | 'imagesRecipe___recipes___createdBy___remoteId'
@@ -3115,9 +3086,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___recipes___subrecipes___margaritasFavorite'
   | 'imagesRecipe___recipes___subrecipes___artemsFavorite'
   | 'imagesRecipe___recipes___subrecipes___ingredients'
-  | 'imagesRecipe___recipes___subrecipes___leftovers'
   | 'imagesRecipe___recipes___subrecipes___steps'
   | 'imagesRecipe___recipes___subrecipes___notes'
+  | 'imagesRecipe___recipes___subrecipes___leftovers'
   | 'imagesRecipe___recipes___subrecipes___privateNotes'
   | 'imagesRecipe___recipes___subrecipes___images'
   | 'imagesRecipe___recipes___subrecipes___subrecipes'
@@ -3143,9 +3114,9 @@ export type GraphCms_AssetFieldsEnum =
   | 'imagesRecipe___recipes___recipes___margaritasFavorite'
   | 'imagesRecipe___recipes___recipes___artemsFavorite'
   | 'imagesRecipe___recipes___recipes___ingredients'
-  | 'imagesRecipe___recipes___recipes___leftovers'
   | 'imagesRecipe___recipes___recipes___steps'
   | 'imagesRecipe___recipes___recipes___notes'
+  | 'imagesRecipe___recipes___recipes___leftovers'
   | 'imagesRecipe___recipes___recipes___privateNotes'
   | 'imagesRecipe___recipes___recipes___images'
   | 'imagesRecipe___recipes___recipes___subrecipes'
@@ -3534,9 +3505,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'margaritasFavorite'
   | 'artemsFavorite'
   | 'ingredients'
-  | 'leftovers'
   | 'steps'
   | 'notes'
+  | 'leftovers'
   | 'privateNotes'
   | 'createdBy___remoteTypeName'
   | 'createdBy___remoteId'
@@ -3786,9 +3757,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'images___imagesRecipe___margaritasFavorite'
   | 'images___imagesRecipe___artemsFavorite'
   | 'images___imagesRecipe___ingredients'
-  | 'images___imagesRecipe___leftovers'
   | 'images___imagesRecipe___steps'
   | 'images___imagesRecipe___notes'
+  | 'images___imagesRecipe___leftovers'
   | 'images___imagesRecipe___privateNotes'
   | 'images___imagesRecipe___createdBy___remoteTypeName'
   | 'images___imagesRecipe___createdBy___remoteId'
@@ -3862,9 +3833,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'images___imagesRecipe___subrecipes___margaritasFavorite'
   | 'images___imagesRecipe___subrecipes___artemsFavorite'
   | 'images___imagesRecipe___subrecipes___ingredients'
-  | 'images___imagesRecipe___subrecipes___leftovers'
   | 'images___imagesRecipe___subrecipes___steps'
   | 'images___imagesRecipe___subrecipes___notes'
+  | 'images___imagesRecipe___subrecipes___leftovers'
   | 'images___imagesRecipe___subrecipes___privateNotes'
   | 'images___imagesRecipe___subrecipes___images'
   | 'images___imagesRecipe___subrecipes___subrecipes'
@@ -3890,9 +3861,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'images___imagesRecipe___recipes___margaritasFavorite'
   | 'images___imagesRecipe___recipes___artemsFavorite'
   | 'images___imagesRecipe___recipes___ingredients'
-  | 'images___imagesRecipe___recipes___leftovers'
   | 'images___imagesRecipe___recipes___steps'
   | 'images___imagesRecipe___recipes___notes'
+  | 'images___imagesRecipe___recipes___leftovers'
   | 'images___imagesRecipe___recipes___privateNotes'
   | 'images___imagesRecipe___recipes___images'
   | 'images___imagesRecipe___recipes___subrecipes'
@@ -3975,9 +3946,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___margaritasFavorite'
   | 'subrecipes___artemsFavorite'
   | 'subrecipes___ingredients'
-  | 'subrecipes___leftovers'
   | 'subrecipes___steps'
   | 'subrecipes___notes'
+  | 'subrecipes___leftovers'
   | 'subrecipes___privateNotes'
   | 'subrecipes___createdBy___remoteTypeName'
   | 'subrecipes___createdBy___remoteId'
@@ -4119,9 +4090,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___images___imagesRecipe___margaritasFavorite'
   | 'subrecipes___images___imagesRecipe___artemsFavorite'
   | 'subrecipes___images___imagesRecipe___ingredients'
-  | 'subrecipes___images___imagesRecipe___leftovers'
   | 'subrecipes___images___imagesRecipe___steps'
   | 'subrecipes___images___imagesRecipe___notes'
+  | 'subrecipes___images___imagesRecipe___leftovers'
   | 'subrecipes___images___imagesRecipe___privateNotes'
   | 'subrecipes___images___imagesRecipe___images'
   | 'subrecipes___images___imagesRecipe___subrecipes'
@@ -4163,9 +4134,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___subrecipes___margaritasFavorite'
   | 'subrecipes___subrecipes___artemsFavorite'
   | 'subrecipes___subrecipes___ingredients'
-  | 'subrecipes___subrecipes___leftovers'
   | 'subrecipes___subrecipes___steps'
   | 'subrecipes___subrecipes___notes'
+  | 'subrecipes___subrecipes___leftovers'
   | 'subrecipes___subrecipes___privateNotes'
   | 'subrecipes___subrecipes___createdBy___remoteTypeName'
   | 'subrecipes___subrecipes___createdBy___remoteId'
@@ -4239,9 +4210,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___subrecipes___subrecipes___margaritasFavorite'
   | 'subrecipes___subrecipes___subrecipes___artemsFavorite'
   | 'subrecipes___subrecipes___subrecipes___ingredients'
-  | 'subrecipes___subrecipes___subrecipes___leftovers'
   | 'subrecipes___subrecipes___subrecipes___steps'
   | 'subrecipes___subrecipes___subrecipes___notes'
+  | 'subrecipes___subrecipes___subrecipes___leftovers'
   | 'subrecipes___subrecipes___subrecipes___privateNotes'
   | 'subrecipes___subrecipes___subrecipes___images'
   | 'subrecipes___subrecipes___subrecipes___subrecipes'
@@ -4267,9 +4238,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___subrecipes___recipes___margaritasFavorite'
   | 'subrecipes___subrecipes___recipes___artemsFavorite'
   | 'subrecipes___subrecipes___recipes___ingredients'
-  | 'subrecipes___subrecipes___recipes___leftovers'
   | 'subrecipes___subrecipes___recipes___steps'
   | 'subrecipes___subrecipes___recipes___notes'
+  | 'subrecipes___subrecipes___recipes___leftovers'
   | 'subrecipes___subrecipes___recipes___privateNotes'
   | 'subrecipes___subrecipes___recipes___images'
   | 'subrecipes___subrecipes___recipes___subrecipes'
@@ -4312,9 +4283,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___recipes___margaritasFavorite'
   | 'subrecipes___recipes___artemsFavorite'
   | 'subrecipes___recipes___ingredients'
-  | 'subrecipes___recipes___leftovers'
   | 'subrecipes___recipes___steps'
   | 'subrecipes___recipes___notes'
+  | 'subrecipes___recipes___leftovers'
   | 'subrecipes___recipes___privateNotes'
   | 'subrecipes___recipes___createdBy___remoteTypeName'
   | 'subrecipes___recipes___createdBy___remoteId'
@@ -4388,9 +4359,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___recipes___subrecipes___margaritasFavorite'
   | 'subrecipes___recipes___subrecipes___artemsFavorite'
   | 'subrecipes___recipes___subrecipes___ingredients'
-  | 'subrecipes___recipes___subrecipes___leftovers'
   | 'subrecipes___recipes___subrecipes___steps'
   | 'subrecipes___recipes___subrecipes___notes'
+  | 'subrecipes___recipes___subrecipes___leftovers'
   | 'subrecipes___recipes___subrecipes___privateNotes'
   | 'subrecipes___recipes___subrecipes___images'
   | 'subrecipes___recipes___subrecipes___subrecipes'
@@ -4416,9 +4387,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'subrecipes___recipes___recipes___margaritasFavorite'
   | 'subrecipes___recipes___recipes___artemsFavorite'
   | 'subrecipes___recipes___recipes___ingredients'
-  | 'subrecipes___recipes___recipes___leftovers'
   | 'subrecipes___recipes___recipes___steps'
   | 'subrecipes___recipes___recipes___notes'
+  | 'subrecipes___recipes___recipes___leftovers'
   | 'subrecipes___recipes___recipes___privateNotes'
   | 'subrecipes___recipes___recipes___images'
   | 'subrecipes___recipes___recipes___subrecipes'
@@ -4502,9 +4473,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___margaritasFavorite'
   | 'recipes___artemsFavorite'
   | 'recipes___ingredients'
-  | 'recipes___leftovers'
   | 'recipes___steps'
   | 'recipes___notes'
+  | 'recipes___leftovers'
   | 'recipes___privateNotes'
   | 'recipes___createdBy___remoteTypeName'
   | 'recipes___createdBy___remoteId'
@@ -4646,9 +4617,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___images___imagesRecipe___margaritasFavorite'
   | 'recipes___images___imagesRecipe___artemsFavorite'
   | 'recipes___images___imagesRecipe___ingredients'
-  | 'recipes___images___imagesRecipe___leftovers'
   | 'recipes___images___imagesRecipe___steps'
   | 'recipes___images___imagesRecipe___notes'
+  | 'recipes___images___imagesRecipe___leftovers'
   | 'recipes___images___imagesRecipe___privateNotes'
   | 'recipes___images___imagesRecipe___images'
   | 'recipes___images___imagesRecipe___subrecipes'
@@ -4690,9 +4661,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___subrecipes___margaritasFavorite'
   | 'recipes___subrecipes___artemsFavorite'
   | 'recipes___subrecipes___ingredients'
-  | 'recipes___subrecipes___leftovers'
   | 'recipes___subrecipes___steps'
   | 'recipes___subrecipes___notes'
+  | 'recipes___subrecipes___leftovers'
   | 'recipes___subrecipes___privateNotes'
   | 'recipes___subrecipes___createdBy___remoteTypeName'
   | 'recipes___subrecipes___createdBy___remoteId'
@@ -4766,9 +4737,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___subrecipes___subrecipes___margaritasFavorite'
   | 'recipes___subrecipes___subrecipes___artemsFavorite'
   | 'recipes___subrecipes___subrecipes___ingredients'
-  | 'recipes___subrecipes___subrecipes___leftovers'
   | 'recipes___subrecipes___subrecipes___steps'
   | 'recipes___subrecipes___subrecipes___notes'
+  | 'recipes___subrecipes___subrecipes___leftovers'
   | 'recipes___subrecipes___subrecipes___privateNotes'
   | 'recipes___subrecipes___subrecipes___images'
   | 'recipes___subrecipes___subrecipes___subrecipes'
@@ -4794,9 +4765,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___subrecipes___recipes___margaritasFavorite'
   | 'recipes___subrecipes___recipes___artemsFavorite'
   | 'recipes___subrecipes___recipes___ingredients'
-  | 'recipes___subrecipes___recipes___leftovers'
   | 'recipes___subrecipes___recipes___steps'
   | 'recipes___subrecipes___recipes___notes'
+  | 'recipes___subrecipes___recipes___leftovers'
   | 'recipes___subrecipes___recipes___privateNotes'
   | 'recipes___subrecipes___recipes___images'
   | 'recipes___subrecipes___recipes___subrecipes'
@@ -4839,9 +4810,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___recipes___margaritasFavorite'
   | 'recipes___recipes___artemsFavorite'
   | 'recipes___recipes___ingredients'
-  | 'recipes___recipes___leftovers'
   | 'recipes___recipes___steps'
   | 'recipes___recipes___notes'
+  | 'recipes___recipes___leftovers'
   | 'recipes___recipes___privateNotes'
   | 'recipes___recipes___createdBy___remoteTypeName'
   | 'recipes___recipes___createdBy___remoteId'
@@ -4915,9 +4886,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___recipes___subrecipes___margaritasFavorite'
   | 'recipes___recipes___subrecipes___artemsFavorite'
   | 'recipes___recipes___subrecipes___ingredients'
-  | 'recipes___recipes___subrecipes___leftovers'
   | 'recipes___recipes___subrecipes___steps'
   | 'recipes___recipes___subrecipes___notes'
+  | 'recipes___recipes___subrecipes___leftovers'
   | 'recipes___recipes___subrecipes___privateNotes'
   | 'recipes___recipes___subrecipes___images'
   | 'recipes___recipes___subrecipes___subrecipes'
@@ -4943,9 +4914,9 @@ export type GraphCms_RecipeFieldsEnum =
   | 'recipes___recipes___recipes___margaritasFavorite'
   | 'recipes___recipes___recipes___artemsFavorite'
   | 'recipes___recipes___recipes___ingredients'
-  | 'recipes___recipes___recipes___leftovers'
   | 'recipes___recipes___recipes___steps'
   | 'recipes___recipes___recipes___notes'
+  | 'recipes___recipes___recipes___leftovers'
   | 'recipes___recipes___recipes___privateNotes'
   | 'recipes___recipes___recipes___images'
   | 'recipes___recipes___recipes___subrecipes'
@@ -5116,20 +5087,6 @@ export type GraphCms_RecipeSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type GraphCms_KindQueryOperatorInput = {
-  eq?: Maybe<GraphCms_Kind>;
-  ne?: Maybe<GraphCms_Kind>;
-  in?: Maybe<Array<Maybe<GraphCms_Kind>>>;
-  nin?: Maybe<Array<Maybe<GraphCms_Kind>>>;
-};
-
-export type GraphCms_MonthQueryOperatorInput = {
-  eq?: Maybe<GraphCms_Month>;
-  ne?: Maybe<GraphCms_Month>;
-  in?: Maybe<Array<Maybe<GraphCms_Month>>>;
-  nin?: Maybe<Array<Maybe<GraphCms_Month>>>;
-};
-
 export type GraphCms_IngredientConnection = {
   totalCount: Scalars['Int'];
   edges: Array<GraphCms_IngredientEdge>;
@@ -5186,10 +5143,6 @@ export type GraphCms_IngredientFieldsEnum =
   | 'slug'
   | 'description'
   | 'storage'
-  | 'hasGluten'
-  | 'hasNuts'
-  | 'hasDairy'
-  | 'hasSugar'
   | 'createdBy___remoteTypeName'
   | 'createdBy___remoteId'
   | 'createdBy___stage'
@@ -5334,8 +5287,6 @@ export type GraphCms_IngredientFieldsEnum =
   | 'publishedBy___internal___mediaType'
   | 'publishedBy___internal___owner'
   | 'publishedBy___internal___type'
-  | 'kind'
-  | 'season'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -5443,15 +5394,9 @@ export type GraphCms_IngredientFilterInput = {
   slug?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   storage?: Maybe<StringQueryOperatorInput>;
-  hasGluten?: Maybe<BooleanQueryOperatorInput>;
-  hasNuts?: Maybe<BooleanQueryOperatorInput>;
-  hasDairy?: Maybe<BooleanQueryOperatorInput>;
-  hasSugar?: Maybe<BooleanQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;
-  kind?: Maybe<GraphCms_KindQueryOperatorInput>;
-  season?: Maybe<GraphCms_MonthQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   parent?: Maybe<NodeFilterInput>;
   children?: Maybe<NodeFilterListInput>;
@@ -5877,6 +5822,7 @@ export type GraphCms_TipFieldsEnum =
   | 'updatedAt'
   | 'publishedAt'
   | 'content'
+  | 'ingredient'
   | 'createdBy___remoteTypeName'
   | 'createdBy___remoteId'
   | 'createdBy___stage'
@@ -6126,6 +6072,7 @@ export type GraphCms_TipFilterInput = {
   updatedAt?: Maybe<JsonQueryOperatorInput>;
   publishedAt?: Maybe<JsonQueryOperatorInput>;
   content?: Maybe<StringQueryOperatorInput>;
+  ingredient?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;

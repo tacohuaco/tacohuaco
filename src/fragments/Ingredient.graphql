@@ -8,10 +8,6 @@ fragment Ingredient on Ingredient {
   slug
   description
   storage
-  hasGluten
-  hasNuts
-  hasDairy
-  hasSugar
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -33,6 +29,4 @@ fragment Ingredient on Ingredient {
       stage
     }
   }
-  kind
-  season
 }

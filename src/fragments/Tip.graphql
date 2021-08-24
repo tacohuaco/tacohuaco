@@ -5,6 +5,7 @@ fragment Tip on Tip {
   updatedAt
   publishedAt
   content
+  ingredient
   createdBy {
     ... on User {
       remoteTypeName: __typename

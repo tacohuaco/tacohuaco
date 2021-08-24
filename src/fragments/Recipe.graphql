@@ -15,9 +15,9 @@ fragment Recipe on Recipe {
   margaritasFavorite
   artemsFavorite
   ingredients
-  leftovers
   steps
   notes
+  leftovers
   privateNotes
   createdBy {
     ... on User {
