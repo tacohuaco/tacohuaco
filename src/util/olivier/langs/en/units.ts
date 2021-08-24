@@ -1,7 +1,9 @@
 export const UNITS = [
 	['bag', 'bags'],
 	['box', 'boxes'],
+	['bunch', 'bunches'],
 	['can', 'cans'],
+	['head', 'heads'],
 	['clove', 'cloves'],
 	['cup', 'cups', 'c', 'c.'],
 	['ft', 'ft', 'foot', 'feet', 'ft.'],
