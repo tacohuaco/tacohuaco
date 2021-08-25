@@ -2,12 +2,24 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Recipe from '../layouts/RecipePage';
 import { RecipePageQuery } from '../graphql-types';
+import { Amount, IngredientKind, Month } from '../util/olivier';
 
 type Props = {
 	data: RecipePageQuery;
 	location: {
 		pathname: string;
 	};
+};
+
+const stringToNumber = (value?: string | null): Amount | undefined => {
+	if (!value) {
+		return undefined;
+	}
+	const numberMaybe = parseInt(value);
+	if (!isNaN(numberMaybe)) {
+		return numberMaybe;
+	}
+	return value;
 };
 
 export default function RecipePage({
@@ -18,7 +30,8 @@ export default function RecipePage({
 		return null;
 	}
 
-	const { description, time, yields, allIngredients } = graphCmsRecipe;
+	const { description, time, yields, allIngredients, allIngredientsInfo } =
+		graphCmsRecipe;
 	return (
 		<Recipe
 			{...graphCmsRecipe}
@@ -26,12 +39,21 @@ export default function RecipePage({
 			time={time || undefined}
 			yields={yields || undefined}
 			url={pathname}
-			allIngredients={allIngredients.map(
-				({ name, minAmount, maxAmount, unit }) => ({
+			allIngredients={
+				allIngredients.map(({ name, minAmount, maxAmount, unit }) => ({
 					name,
-					minAmount: minAmount || undefined,
-					maxAmount: maxAmount || undefined,
+					minAmount: stringToNumber(minAmount),
+					maxAmount: stringToNumber(maxAmount),
 					unit: unit || undefined,
+				})) as any
+			}
+			allIngredientsInfo={allIngredientsInfo.map(
+				({ kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
+					kind: kind as IngredientKind,
+					hasGluten,
+					hasDairy,
+					hasSugar,
+					seasons: seasons as Month[],
 				})
 			)}
 		/>
@@ -81,6 +103,13 @@ export const pageQuery = graphql`
 				minAmount
 				maxAmount
 				unit
+			}
+			allIngredientsInfo {
+				kind
+				hasGluten
+				hasDairy
+				hasSugar
+				seasons
 			}
 		}
 	}

@@ -11,6 +11,7 @@ import {
 	getRecipeSeasons,
 	getRecipePreconditions,
 	getIngredients,
+	getIngredientsInfo,
 } from './src/util/content';
 
 // XXX: Gatsby has no types for this anywhere :-/
@@ -72,6 +73,13 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 		modifier: String
 		comment: String
 	}
+	type IngredientInfoJson {
+		kind: Int!
+		hasGluten: Boolean!
+		hasDairy: Boolean!
+		hasSugar: Boolean!
+		seasons: [Int!]!
+	}
   `);
 	};
 
@@ -88,6 +96,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 				type: '[IngredientJson!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getIngredients(getAllRecipeIngredients(source, context));
+				},
+			},
+			[`allIngredientsInfo`]: {
+				type: '[IngredientInfoJson!]!',
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
+					return getIngredientsInfo(getAllRecipeIngredients(source, context));
 				},
 			},
 			[`flags`]: {

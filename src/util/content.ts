@@ -145,7 +145,9 @@ export const formatIngredients = (text: string): string => {
  * in Mdx
  */
 export const placeholdersToItalic = (text: string): string =>
-	text.replace(/} (\w+)/gm, '_} $1_').replace(/(\w+) {/gm, '_$1 {_');
+	text
+		.replace(/([^_])} (\w+)/gm, '$1_} $2_')
+		.replace(/(\w+) {([^_])/gm, '_$1 {_$2');
 
 /**
  * Reduce leveles of headings, so they match the page outline

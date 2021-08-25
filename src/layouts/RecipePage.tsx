@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Grid, Heading, Text } from 'tamia';
+import { Box, Stack, Grid, Heading, Text, VisuallyHidden } from 'tamia';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
@@ -7,12 +7,14 @@ import RecipeIngredients from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
 import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
+import { IngredientsExplorer } from '../components/IngredientsExplorer';
 import { SubrecipesContext } from '../components/SubrecipesContext';
 import { RecipeContext } from '../components/RecipeContext';
 import { RecipePageQuery } from '../graphql-types';
 import Page from './Page';
-import { Ingredient } from '../util/olivier';
+import { Ingredient, IngredientInfo } from '../util/olivier';
 import { asList } from '../util/client';
+import { Collapsible } from '../components/Collapsible';
 
 type Props = RecipePageQuery['graphCmsRecipe'] & {
 	description?: string;
@@ -20,6 +22,7 @@ type Props = RecipePageQuery['graphCmsRecipe'] & {
 	yields?: string;
 	url: string;
 	allIngredients: Ingredient[];
+	allIngredientsInfo: IngredientInfo[];
 };
 
 export default function RecipePage({
@@ -44,6 +47,7 @@ export default function RecipePage({
 	url,
 	yields,
 	allIngredients,
+	allIngredientsInfo,
 }: Props) {
 	return (
 		<SubrecipesContext.Provider value={subrecipes}>
@@ -97,26 +101,43 @@ export default function RecipePage({
 								</RecipeIngredients>
 							</TextContent>
 							<TextContent>
-								<Heading level={2}>Directions</Heading>
-								{preconditions.length > 0 && (
-									<Text>
-										<strong>Before you start:</strong> {asList(preconditions)}.
-									</Text>
-								)}
-								<RecipeDirections allIngredients={allIngredients}>
-									<MDXRenderer>{stepsMdx}</MDXRenderer>
-								</RecipeDirections>
-								{(notesMdx || sourceMdx) && (
-									<>
-										<Heading level={2}>Notes</Heading>
-										{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
-										{sourceMdx && (
-											<TextContent fontSize="s">
-												<MDXRenderer>{sourceMdx}</MDXRenderer>
-											</TextContent>
+								<Stack gap="l">
+									<Box>
+										<Heading level={2}>Directions</Heading>
+										{preconditions.length > 0 && (
+											<Text>
+												<strong>Before you start:</strong>{' '}
+												{asList(preconditions)}.
+											</Text>
 										)}
-									</>
-								)}
+										<RecipeDirections allIngredients={allIngredients}>
+											<MDXRenderer>{stepsMdx}</MDXRenderer>
+										</RecipeDirections>
+										{(notesMdx || sourceMdx) && (
+											<>
+												<Heading level={2}>Notes</Heading>
+												{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
+												{sourceMdx && (
+													<TextContent fontSize="s">
+														<MDXRenderer>{sourceMdx}</MDXRenderer>
+													</TextContent>
+												)}
+											</>
+										)}
+									</Box>
+									<Collapsible
+										label="Explore ingredients"
+										id="ingredients-explorer"
+									>
+										<VisuallyHidden as="h2">
+											Ingredients explorer
+										</VisuallyHidden>
+										<IngredientsExplorer
+											ingredients={allIngredients}
+											infos={allIngredientsInfo}
+										/>
+									</Collapsible>
+								</Stack>
 							</TextContent>
 						</Grid>
 					</Stack>

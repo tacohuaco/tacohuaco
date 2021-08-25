@@ -179,6 +179,7 @@ export const INGREDIENTS = [
 	['egg', 'eggs'],
 	['sugar'],
 	['mustard'],
+	['vinegar'],
 	['vodka'],
 	['noodle', 'noodles'],
 	['rice noodle', 'rice noodles'],
