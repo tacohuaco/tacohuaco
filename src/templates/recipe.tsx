@@ -48,7 +48,8 @@ export default function RecipePage({
 				})) as any
 			}
 			allIngredientsInfo={allIngredientsInfo.map(
-				({ kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
+				({ name, kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
+					name,
 					kind: kind as IngredientKind,
 					hasGluten,
 					hasDairy,
@@ -105,6 +106,7 @@ export const pageQuery = graphql`
 				unit
 			}
 			allIngredientsInfo {
+				name
 				kind
 				hasGluten
 				hasDairy

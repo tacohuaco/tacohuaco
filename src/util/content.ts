@@ -1,4 +1,4 @@
-import { flow, intersection } from 'lodash';
+import { flow, intersection, uniqBy } from 'lodash';
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { toString } from 'mdast-util-to-string';
@@ -61,7 +61,10 @@ export const getIngredientsInfo = (
 	ingredientsMarkdown: string
 ): IngredientInfo[] => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
-	return ingredientsRaw.map((x) => analyze(normalize(parse(x))));
+	return uniqBy(
+		ingredientsRaw.map((x) => analyze(normalize(parse(x)))),
+		(x) => x.name
+	);
 };
 
 /**

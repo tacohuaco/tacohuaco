@@ -322,6 +322,7 @@ export type IngredientJson = {
 };
 
 export type IngredientInfoJson = {
+  name: Scalars['String'];
   kind: Scalars['Int'];
   hasGluten: Scalars['Boolean'];
   hasDairy: Scalars['Boolean'];
@@ -6495,7 +6496,7 @@ export type RecipePageQueryVariables = Exact<{
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
     Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'yields'>
-    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
+    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'name' | 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
   )> };
 
 export type TagsPageQueryVariables = Exact<{

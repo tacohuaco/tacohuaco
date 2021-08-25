@@ -183,5 +183,5 @@ export const INGREDIENTS = [
 	['vodka'],
 	['noodle', 'noodles'],
 	['rice noodle', 'rice noodles'],
-	['extra virgin olive oil', 'extra-virgin olive oil'],
+	['olive oil', 'extra virgin olive oil', 'extra-virgin olive oil'],
 ];

@@ -74,6 +74,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 		comment: String
 	}
 	type IngredientInfoJson {
+		name: String!
 		kind: Int!
 		hasGluten: Boolean!
 		hasDairy: Boolean!

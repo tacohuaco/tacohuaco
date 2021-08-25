@@ -34,6 +34,7 @@ export enum IngredientKind {
 }
 
 export interface IngredientInfo {
+	name: string;
 	kind: IngredientKind;
 	hasGluten: boolean;
 	hasDairy: boolean;

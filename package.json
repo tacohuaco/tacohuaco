@@ -48,7 +48,7 @@
     "react-helmet": "^6.1.0",
     "sentence-case": "^3.0.4",
     "styled-components": "^5.3.1",
-    "tamia": "^5.11.3",
+    "tamia": "^5.11.4",
     "tamia-gatsby-link": "^1.0.6"
   },
   "devDependencies": {

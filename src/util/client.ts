@@ -30,7 +30,14 @@ export const stripMarkdown = (md: string): string => {
 	);
 };
 
-export const asList = (list: string[]): string =>
-	list.reduce((acc, item, index) => {
+export const asList = (list: (string | false | undefined | null)[]): string => {
+	const filtered = list.filter((x) => typeof x === 'string').map(String);
+
+	if (filtered.length === 0) {
+		return '';
+	}
+
+	return filtered.reduce((acc, item, index) => {
 		return [acc, index === list.length - 1 ? ' and ' : ', ', item].join('');
 	});
+};
