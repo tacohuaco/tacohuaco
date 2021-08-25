@@ -18,7 +18,7 @@ export default function RecipePage({
 		return null;
 	}
 
-	const { description, time, yields } = graphCmsRecipe;
+	const { description, time, yields, allIngredients } = graphCmsRecipe;
 	return (
 		<Recipe
 			{...graphCmsRecipe}
@@ -26,6 +26,14 @@ export default function RecipePage({
 			time={time || undefined}
 			yields={yields || undefined}
 			url={pathname}
+			allIngredients={allIngredients.map(
+				({ name, minAmount, maxAmount, unit }) => ({
+					name,
+					minAmount: minAmount || undefined,
+					maxAmount: maxAmount || undefined,
+					unit: unit || undefined,
+				})
+			)}
 		/>
 	);
 }
@@ -67,6 +75,12 @@ export const pageQuery = graphql`
 				slug
 				ingredientsMdx
 				stepsMdx
+			}
+			allIngredients {
+				name
+				minAmount
+				maxAmount
+				unit
 			}
 		}
 	}

@@ -10,6 +10,7 @@ import {
 	getRecipeFlags,
 	getRecipeSeasons,
 	getRecipePreconditions,
+	getIngredients,
 } from './src/util/content';
 
 // XXX: Gatsby has no types for this anywhere :-/
@@ -63,8 +64,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       diary: Boolean!
       addedSugar: Boolean!
     }
+    type IngredientJson {
+		name: String!
+		minAmount: String
+		maxAmount: String
+		unit: String
+		modifier: String
+		comment: String
+	}
   `);
 	};
+
+type Source = Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>;
 
 // Create Mdx fields for all Markdown type fields from GraphCMS
 export const createResolvers: GatsbyNode['createResolvers'] = ({
@@ -73,42 +84,27 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 }) => {
 	createResolvers({
 		[`GraphCMS_Recipe`]: {
+			[`allIngredients`]: {
+				type: '[IngredientJson!]!',
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
+					return getIngredients(getAllRecipeIngredients(source, context));
+				},
+			},
 			[`flags`]: {
 				type: 'FlagsJson!',
-				resolve(
-					source: Pick<
-						GraphCms_Recipe,
-						'ingredients' | 'subrecipes' | 'remoteId'
-					>,
-					args: unknown,
-					context: GatsbyContext
-				) {
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getRecipeFlags(getAllRecipeIngredients(source, context));
 				},
 			},
 			[`seasons`]: {
 				type: '[Int!]!',
-				resolve(
-					source: Pick<
-						GraphCms_Recipe,
-						'ingredients' | 'subrecipes' | 'remoteId'
-					>,
-					args: unknown,
-					context: GatsbyContext
-				) {
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getRecipeSeasons(getAllRecipeIngredients(source, context));
 				},
 			},
 			[`preconditions`]: {
 				type: '[String!]!',
-				resolve(
-					source: Pick<
-						GraphCms_Recipe,
-						'ingredients' | 'subrecipes' | 'remoteId'
-					>,
-					args: unknown,
-					context: GatsbyContext
-				) {
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getRecipePreconditions(
 						getAllRecipeIngredients(source, context)
 					);

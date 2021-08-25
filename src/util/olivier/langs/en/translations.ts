@@ -33,7 +33,9 @@ export const WORDS_TO_NUMBERS: Record<string, number> = {
 	dozen: 12,
 	score: 20,
 };
+export const A_BIT = 'a bit';
+export const OF = 'of';
 export const RANGE_SEPARATORS = ['-', '–', '—', 'or', 'to'];
 export const UNITLESS = ['bit', 'some'];
 export const ARTICLES = ['a', 'an'];
-export const CONNECTORS = ['of'];
+export const CONNECTORS = [OF];

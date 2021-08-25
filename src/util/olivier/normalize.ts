@@ -31,7 +31,9 @@ function normalizeUnit(unit?: string): string | undefined {
 	return aliases?.[0] || unit;
 }
 
-function normalizeName(name: string): Pick<Ingredient, 'name' | 'modifier'> {
+export function normalizeName(
+	name: string
+): Pick<Ingredient, 'name' | 'modifier'> {
 	for (const aliases of INGREDIENTS) {
 		const alias = aliases.find((x) => new RegExp(`\\b${x}$`, 'i').test(name));
 		if (alias) {

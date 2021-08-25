@@ -7,6 +7,7 @@ import {
 	normalize,
 	analyze,
 	format,
+	print,
 	Ingredient,
 	IngredientKind,
 	IngredientInfo,
@@ -112,29 +113,18 @@ export const getRecipePreconditions = (
 		.filter(Boolean);
 };
 
-const formatIngredient = ({
-	minAmount,
-	maxAmount,
-	modifier,
-	unit,
-	name,
-	comment,
-}: Ingredient): string =>
-	[
-		[
-			'**',
-			minAmount,
-			minAmount !== maxAmount ? `–${maxAmount}` : '',
-			unit ? ` ${unit}` : '',
-			'**',
-		].join(''),
-		unit || minAmount === 'a bit' ? 'of' : undefined,
+export function printIngredient(ingredient: Ingredient): string {
+	const { amount, suffix, modifier, name, comment } = print(ingredient);
+	return [
+		amount && ['**', amount, '**'].join(''),
+		suffix,
 		modifier,
 		name,
 		comment ? `_${comment}_` : undefined,
 	]
-		.filter((x) => x && x !== '****')
+		.filter(Boolean)
 		.join(' ');
+}
 
 /**
  * Highlight amounts and comments in ingredients
@@ -145,10 +135,17 @@ export const formatIngredients = (text: string): string => {
 	visit(tree, 'listItem', (li) => {
 		const ingredientText = toString(li);
 		const ingredient = format(normalize(parse(ingredientText)));
-		nextText = nextText.replace(ingredientText, formatIngredient(ingredient));
+		nextText = nextText.replace(ingredientText, printIngredient(ingredient));
 	});
 	return nextText;
 };
+
+/**
+ * Wrap ingredient amount placeholders into italic so they could be replaced
+ * in Mdx
+ */
+export const placeholdersToItalic = (text: string): string =>
+	text.replace(/} (\w+)/gm, '_} $1_').replace(/(\w+) {/gm, '_$1 {_');
 
 /**
  * Reduce leveles of headings, so they match the page outline
@@ -162,6 +159,6 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 > = {
 	[`GraphCMS_Recipe`]: {
 		ingredients: flow([formatIngredients, demoteHeadings]),
-		steps: flow([demoteHeadings]),
+		steps: flow([placeholdersToItalic, demoteHeadings]),
 	},
 };

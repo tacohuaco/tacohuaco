@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import { MDXProvider } from '@mdx-js/react';
 import { Text, TextContent as TextContentBase } from 'tamia';
 import { Subrecipe } from './Subrecipe';
+import { useRecipe } from './RecipeContext';
+import { Ingredient, normalizeName, print } from '../util/olivier';
 
 type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
 };
+
+const findIngredientByName = (ingredients: Ingredient[], name: string) =>
+	ingredients.find((x) => x.name === name);
 
 const List = styled.ol`
 	&& {
@@ -46,10 +51,50 @@ const Paragraph: ComponentType<any> = ({ children }) => {
 	return children;
 };
 
+const Em: ComponentType<any> = ({ children }) => {
+	const { ingredients } = useRecipe();
+	if (children.startsWith('}')) {
+		const nameRaw = children.replace(/^}\s+/, '');
+		const ingredient = findIngredientByName(
+			ingredients,
+			normalizeName(nameRaw).name
+		);
+		if (!ingredient) {
+			return children;
+		}
+		const { amount, suffix, name } = print(ingredient);
+		return (
+			<>
+				<em>{amount}</em> {suffix} {name}
+			</>
+		);
+	}
+
+	if (children.endsWith('{')) {
+		const nameRaw = children.replace(/\s+\{/, '');
+		const ingredient = findIngredientByName(
+			ingredients,
+			normalizeName(nameRaw).name
+		);
+		if (!ingredient) {
+			return children;
+		}
+		const { amount, name } = print(ingredient);
+		return (
+			<>
+				{name} (<em>{amount}</em>)
+			</>
+		);
+	}
+
+	return children;
+};
+
 const components = {
 	p: Paragraph,
 	ol: List,
 	li: ListItem,
+	em: Em,
 } as const;
 
 export default function RecipeDirections({ children, ...props }: Props) {
