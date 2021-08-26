@@ -1,5 +1,5 @@
 import React from 'react';
-import { upperFirst } from 'lodash';
+import { sortBy, upperFirst } from 'lodash';
 import { Text, VisuallyHidden } from 'tamia';
 import { asList } from '../util/client';
 import {
@@ -82,6 +82,7 @@ const Season = ({ ingredient }: { ingredient: IngredientInfo }) => (
 );
 
 export function IngredientsExplorer({ infos }: Props) {
+	const sorted = sortBy(infos, (x) => x.name);
 	return (
 		<table>
 			<thead>
@@ -93,10 +94,10 @@ export function IngredientsExplorer({ infos }: Props) {
 				</tr>
 			</thead>
 			<tbody>
-				{infos.map((ingredient) => {
+				{sorted.map((ingredient) => {
 					return (
 						<tr key={ingredient.name}>
-							<th>{ingredient.name}</th>
+							<th>{upperFirst(ingredient.name)}</th>
 							<td>{KINDS[ingredient.kind]}</td>
 							<td>
 								<Season ingredient={ingredient} />
