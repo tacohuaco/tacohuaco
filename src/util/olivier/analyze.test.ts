@@ -10,6 +10,7 @@ test.each([
 			comment: 'sliced',
 		},
 		{
+			name: 'cucumber',
 			kind: IngredientKind.Vegan,
 			hasDairy: false,
 			hasGluten: false,
@@ -31,6 +32,7 @@ test.each([
 			unit: 'g',
 		},
 		{
+			name: 'beef',
 			kind: IngredientKind.Meat,
 			hasDairy: false,
 			hasGluten: false,
@@ -45,6 +47,7 @@ test.each([
 			maxAmount: 3,
 		},
 		{
+			name: 'egg',
 			kind: IngredientKind.Vegetarian,
 			hasDairy: true,
 			hasGluten: false,
@@ -60,6 +63,7 @@ test.each([
 			unit: 'g',
 		},
 		{
+			name: 'all-purpose flour',
 			kind: IngredientKind.Vegan,
 			hasDairy: false,
 			hasGluten: true,
@@ -77,6 +81,7 @@ test.each([
 			seasons: [],
 		},
 		{
+			name: 'sugar',
 			kind: IngredientKind.Vegan,
 			hasDairy: false,
 			hasGluten: false,

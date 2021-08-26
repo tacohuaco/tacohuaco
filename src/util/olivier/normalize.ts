@@ -14,7 +14,7 @@ function normalizeAmount(amount?: Amount): Amount | undefined {
 		return amount;
 	}
 
-	const numberMaybe = numericQuantity(amount);
+	const numberMaybe = numericQuantity(amount.replace(',', '.'));
 	if (!isNaN(numberMaybe)) {
 		return numberMaybe;
 	}

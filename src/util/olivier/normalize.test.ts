@@ -65,6 +65,21 @@ test.each([
 	],
 	[
 		{
+			name: 'salt',
+			minAmount: '0,5',
+			maxAmount: '0,5',
+			unit: 'g',
+		},
+		{
+			name: 'salt',
+			minAmount: 0.5,
+			maxAmount: 0.5,
+			unit: 'g',
+			comment: undefined,
+		},
+	],
+	[
+		{
 			name: 'sausage',
 			minAmount: '2.75',
 			maxAmount: '3 1/2',

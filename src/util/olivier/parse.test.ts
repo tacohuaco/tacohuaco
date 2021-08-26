@@ -28,6 +28,15 @@ test.each([
 		},
 	],
 	[
+		'0,5 g of salt',
+		{
+			name: 'salt',
+			minAmount: '0,5',
+			maxAmount: '0,5',
+			unit: 'g',
+		},
+	],
+	[
 		'1/2 sausage',
 		{
 			name: 'sausage',
