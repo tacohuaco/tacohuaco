@@ -167,7 +167,6 @@ export const INGREDIENTS = [
 	['pecan', 'pecans'],
 	['fruit', 'fruits'],
 	// Dairy
-	['cheese'],
 	[
 		'parmesan cheese',
 		'parmesan cheese',
@@ -177,6 +176,7 @@ export const INGREDIENTS = [
 		'parmigiano cheese',
 		'parmigiano',
 	],
+	['cheese'],
 	['butter', 'butter', 'unsalted butter'],
 	// Meat
 	['chicken stock', 'chicken broth'],
