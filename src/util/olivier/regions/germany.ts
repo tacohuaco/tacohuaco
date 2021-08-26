@@ -29,7 +29,8 @@ export const SEASONS: Record<string, Month[]> = {
 	[`mangold`]: [Month.July, Month.August, Month.September],
 	// Too generic
 	// [`onion`]: [Month.July, Month.August, Month.September, Month.October],
-	[`pea`]: [Month.July, Month.August],
+	// We use frozen peas in recipes
+	// [`pea`]: [Month.July, Month.August],
 	[`runner bean`]: [Month.July, Month.August, Month.September, Month.October],
 	[`sweet corn`]: [Month.July, Month.August, Month.September, Month.October],
 	[`raspberry`]: [Month.June, Month.July, Month.August],
