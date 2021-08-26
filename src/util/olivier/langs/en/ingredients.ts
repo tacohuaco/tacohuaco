@@ -168,6 +168,15 @@ export const INGREDIENTS = [
 	['fruit', 'fruits'],
 	// Dairy
 	['cheese'],
+	[
+		'parmesan cheese',
+		'parmesan cheese',
+		'parmesan',
+		'parmigiano-reggiano cheese',
+		'parmigiano-reggiano',
+		'parmigiano cheese',
+		'parmigiano',
+	],
 	['butter', 'butter', 'unsalted butter'],
 	// Meat
 	['chicken stock', 'chicken broth'],
