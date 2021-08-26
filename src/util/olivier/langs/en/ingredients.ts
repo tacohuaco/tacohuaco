@@ -138,6 +138,7 @@ export const INGREDIENTS = [
 		'tangerines',
 		'clementine',
 		'clementines',
+		'clementines',
 	],
 	['apple', 'apples'],
 	['apricot', 'apricots'],
@@ -165,8 +166,9 @@ export const INGREDIENTS = [
 	['almond', 'almonds'],
 	['pecan', 'pecans'],
 	['fruit', 'fruits'],
-	// Diary
+	// Dairy
 	['cheese'],
+	['butter', 'butter', 'unsalted butter'],
 	// Meat
 	['chicken stock', 'chicken broth'],
 	['chicken', 'chicken'],
