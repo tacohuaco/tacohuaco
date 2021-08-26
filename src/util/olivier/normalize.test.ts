@@ -124,6 +124,20 @@ test.each([
 			unit: 'g',
 		},
 	],
+	[
+		{
+			name: 'extra virgin olive oil',
+			minAmount: '100',
+			maxAmount: '100',
+			unit: 'g',
+		},
+		{
+			name: 'olive oil',
+			minAmount: 100,
+			maxAmount: 100,
+			unit: 'g',
+		},
+	],
 ])('normalize ingredient: %s', (source, result) => {
 	expect(normalize(source)).toEqual(result);
 });
