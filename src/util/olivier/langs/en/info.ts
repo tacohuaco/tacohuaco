@@ -1,13 +1,14 @@
 export const GLUTENS = [
 	'all-purpose flour',
-	'flour',
-	'spelt flour',
-	'couscous',
 	'bulgur',
-	'semolina',
+	'burger bun'
+	'couscous',
 	'farina',
 	'farro',
+	'flour',
 	'pasta',
+	'semolina',
+	'spelt flour',
 ];
 export const NON_VEGANS = ['honey'];
 export const DIARIES = ['cheese', 'parmesan cheese', 'egg', 'milk', 'butter'];
