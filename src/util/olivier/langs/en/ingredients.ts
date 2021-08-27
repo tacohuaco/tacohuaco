@@ -8,6 +8,7 @@ export const INGREDIENTS = [
 	['sunflower seed', 'sunflower seeds'],
 	['sesame seeds', 'sesame seeds'],
 	['pumpkin seed', 'pumpkin seeds', 'pepita', 'pepitas'],
+	['cinnamon'],
 	// Vegetables
 	['beetroot', 'beetroots', 'red beet', 'red beets', 'beet', 'beets'],
 	['bell pepper', 'bell peppers', 'paprika', 'paprikas'],
@@ -200,4 +201,7 @@ export const INGREDIENTS = [
 		'extra virgin olive oil',
 		'extra-virgin olive oil',
 	],
+	['coconut oil'],
+	['sunflower oil'],
+	['oil'],
 ];
