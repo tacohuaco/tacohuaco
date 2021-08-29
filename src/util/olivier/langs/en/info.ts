@@ -1,7 +1,7 @@
 export const GLUTENS = [
 	'all-purpose flour',
 	'bulgur',
-	'burger bun'
+	'burger bun',
 	'couscous',
 	'farina',
 	'farro',
