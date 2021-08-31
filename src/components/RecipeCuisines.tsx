@@ -17,7 +17,7 @@ const getCountryCodeByNationality = (nationality: string): string =>
 const getEmojiByNationality = (nationality: string): string =>
 	countryCodeEmoji(getCountryCodeByNationality(nationality));
 
-export default function RecipeCuisine({ cuisines }: Props) {
+export function RecipeCuisines({ cuisines }: Props) {
 	return (
 		<Stack gap="s" direction="row">
 			{cuisines.map((cuisine) => (

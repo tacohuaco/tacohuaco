@@ -10,7 +10,7 @@ Everything:
     noAddedSugar: true
   }}
   margaritasFavorite
-  cuisine="Mexican"
+  cuisines={['Mexican']}
   tags={['Breakfast', 'Baking', 'SpicyAsHell']}
   time={45}
   overnight
@@ -29,7 +29,7 @@ No time:
     noAddedSugar: true
   }}
   artemsFavorite
-  cuisine="Russian"
+  cuisines={['Russian']}
   tags={['Breakfast', 'Baking', 'SpicyAsHell']}
 />
 ```
@@ -46,7 +46,7 @@ Without tags but with time and cuisine:
     noAddedSugar: false
   }}
   time={20}
-  cuisine="Mexican"
+  cuisines={['Mexican']}
 />
 ```
 
@@ -62,6 +62,7 @@ Overnight recipe:
     noAddedSugar: false
   }}
   time={45}
+  cuisines={[]}
   overnight
 />
 ```

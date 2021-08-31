@@ -4,7 +4,7 @@ import { Flags } from '../types/Flags';
 import RecipeFlags from './RecipeFlags';
 import RecipeTags from './RecipeTags';
 import RecipeTimes from './RecipeTimes';
-import RecipeCuisines from './RecipeCuisines';
+import { RecipeCuisines } from './RecipeCuisines';
 
 type Props = {
 	flags: Flags;

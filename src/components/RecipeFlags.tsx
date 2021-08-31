@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack } from 'tamia';
 import { Flags } from '../types/Flags';
-import RecipeFlag from './RecipeFlag';
+import { RecipeFlag } from './RecipeFlag';
 
 type Props = {
 	flags: Flags;

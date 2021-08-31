@@ -12,7 +12,7 @@
 ```
 
 ```tsx
-<RecipeMeta
+<RecipeFlags
   flags={{
     vegan: true,
     vegetarian: true,

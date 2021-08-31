@@ -1,8 +1,8 @@
 ```tsx
 import { Stack } from 'tamia';
 <Stack gap="s">
-  <RecipeCuisines cuisine={['Russian']} />
-  <RecipeCuisines cuisine={['Mexican']} />
-  <RecipeCuisines cuisine={['Japanise', 'French', 'Ethiopian']} />
+  <RecipeCuisines cuisines={['Russian']} />
+  <RecipeCuisines cuisines={['Mexican']} />
+  <RecipeCuisines cuisines={['Japanese', 'French', 'Ethiopian']} />
 </Stack>;
 ```

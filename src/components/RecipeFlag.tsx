@@ -65,7 +65,7 @@ const Round = ({
 	</Tooltip>
 );
 
-export default function Flag({ type, ...props }: Props) {
+export function RecipeFlag({ type, ...props }: Props) {
 	switch (type) {
 		case 'vegan':
 			return (
