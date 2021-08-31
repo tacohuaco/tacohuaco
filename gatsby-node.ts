@@ -2,7 +2,11 @@ import { GatsbyNode } from 'gatsby';
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
 import { kebabCase, uniq } from 'lodash';
-import { AllRecipesQuery, GraphCms_Recipe } from './src/graphql-types';
+import {
+	AllRecipesQuery,
+	GraphCms_Recipe,
+	GraphCms_Ingredient,
+} from './src/graphql-types';
 import { getMdx } from './src/util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
@@ -28,7 +32,7 @@ const getSubrecipeIngredients = (
 	if (source.subrecipes.length > 0) {
 		const remoteIds = source.subrecipes.map((x) => x.remoteId);
 		const subrecipes = context.nodeModel
-			.getAllNodes<typeof source>({
+			.getAllNodes<GraphCms_Recipe>({
 				type: 'GraphCMS_Recipe',
 			})
 			.filter((x) => remoteIds.includes(x.remoteId));
@@ -44,6 +48,28 @@ const getAllRecipeIngredients = (
 ): string => {
 	const subrecipeIngredients = getSubrecipeIngredients(source, context);
 	return [source.ingredients, ...subrecipeIngredients].join('\n');
+};
+
+const getRecipeWarnings = (
+	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	context: GatsbyContext
+): Promise<string[]> => {
+	const recipeIngredients = getIngredients(
+		getAllRecipeIngredients(source, context)
+	);
+	const promises = context.nodeModel
+		.getAllNodes<GraphCms_Ingredient>({
+			type: 'GraphCMS_Ingredient',
+		})
+		.filter((ingredient) =>
+			recipeIngredients.some(
+				({ name }) => name === ingredient.name.toLowerCase()
+			)
+		)
+		.map((x) => x.warnings)
+		.filter(Boolean)
+		.map(getMdx);
+	return Promise.all(promises);
 };
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
@@ -123,6 +149,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 					return getRecipePreconditions(
 						getAllRecipeIngredients(source, context)
 					);
+				},
+			},
+			[`warnings`]: {
+				type: '[String!]!',
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
+					return getRecipeWarnings(source, context);
 				},
 			},
 		},

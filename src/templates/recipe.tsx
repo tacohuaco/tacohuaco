@@ -80,6 +80,7 @@ export const pageQuery = graphql`
 			time
 			title
 			toolsMdx
+			warnings
 			yields
 			flags {
 				vegan

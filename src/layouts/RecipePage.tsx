@@ -3,7 +3,9 @@ import { Box, Stack, Grid, Heading, Text, VisuallyHidden } from 'tamia';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
 import TextContent from '../components/TextContent';
-import RecipeIngredients from '../components/RecipeIngredients';
+import RecipeIngredients, {
+	IngredientItem,
+} from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
 import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
@@ -45,6 +47,7 @@ export default function RecipePage({
 	title,
 	toolsMdx,
 	url,
+	warnings,
 	yields,
 	allIngredients,
 	allIngredientsInfo,
@@ -92,6 +95,22 @@ export default function RecipePage({
 								{yields && <Text variant="small">Yields {yields}</Text>}
 								<RecipeIngredients>
 									<MDXRenderer>{ingredientsMdx}</MDXRenderer>
+									{warnings.length > 0 && (
+										<>
+											<Heading level={3}>Warnings</Heading>
+											<ul>
+												{warnings.map((warning) => (
+													<Text
+														key={warning}
+														as={IngredientItem}
+														variant="small"
+													>
+														<MDXRenderer>{warning}</MDXRenderer>
+													</Text>
+												))}
+											</ul>
+										</>
+									)}
 									{toolsMdx && (
 										<>
 											<Heading level={3}>You will need</Heading>

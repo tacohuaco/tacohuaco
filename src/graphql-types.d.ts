@@ -446,6 +446,7 @@ export type GraphCms_Recipe = Node & {
   flags: FlagsJson;
   seasons: Array<Scalars['Int']>;
   preconditions: Array<Scalars['String']>;
+  warnings: Array<Scalars['String']>;
   descriptionMdx: Scalars['String'];
   ingredientsMdx: Scalars['String'];
   notesMdx: Scalars['String'];
@@ -465,6 +466,7 @@ export type GraphCms_Ingredient = Node & {
   slug: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   storage?: Maybe<Scalars['String']>;
+  warnings?: Maybe<Scalars['String']>;
   createdBy?: Maybe<GraphCms_User>;
   updatedBy?: Maybe<GraphCms_User>;
   publishedBy?: Maybe<GraphCms_User>;
@@ -493,6 +495,7 @@ export type GraphCms_Tag =
   | 'SweetBread'
   | 'Picknick'
   | 'Charring'
+  | 'Drink'
   | 'Pickling'
   | 'Dip'
   | 'Leftovers'
@@ -984,6 +987,7 @@ export type QueryGraphCmsIngredientArgs = {
   slug?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   storage?: Maybe<StringQueryOperatorInput>;
+  warnings?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;
@@ -5163,6 +5167,7 @@ export type GraphCms_IngredientFieldsEnum =
   | 'slug'
   | 'description'
   | 'storage'
+  | 'warnings'
   | 'createdBy___remoteTypeName'
   | 'createdBy___remoteId'
   | 'createdBy___stage'
@@ -5414,6 +5419,7 @@ export type GraphCms_IngredientFilterInput = {
   slug?: Maybe<StringQueryOperatorInput>;
   description?: Maybe<StringQueryOperatorInput>;
   storage?: Maybe<StringQueryOperatorInput>;
+  warnings?: Maybe<StringQueryOperatorInput>;
   createdBy?: Maybe<GraphCms_UserFilterInput>;
   updatedBy?: Maybe<GraphCms_UserFilterInput>;
   publishedBy?: Maybe<GraphCms_UserFilterInput>;
@@ -6495,7 +6501,7 @@ export type RecipePageQueryVariables = Exact<{
 
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
-    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'yields'>
+    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'warnings' | 'yields'>
     & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'dairy' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'name' | 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
   )> };
 

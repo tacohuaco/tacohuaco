@@ -8,6 +8,7 @@ fragment Ingredient on Ingredient {
   slug
   description
   storage
+  warnings
   createdBy {
     ... on User {
       remoteTypeName: __typename
