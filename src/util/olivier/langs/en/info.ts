@@ -11,7 +11,15 @@ export const GLUTENS = [
 	'spelt flour',
 ];
 export const NON_VEGANS = ['honey'];
-export const DIARIES = ['cheese', 'parmesan cheese', 'egg', 'milk', 'butter'];
+export const DAIRIES = [
+	'cheese',
+	'parmesan cheese',
+	'egg',
+	'milk',
+	'butter',
+	'smetana',
+	'tvorog',
+];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
 export const MEATS = ['pork', 'beef', 'lamb'];

@@ -1,5 +1,5 @@
 import {
-	DIARIES,
+	DAIRIES,
 	FISHES,
 	GLUTENS,
 	MEATS,
@@ -11,7 +11,7 @@ import { SEASONS } from './regions/germany';
 import { IngredientKind, Ingredient, Month, IngredientInfo } from './types';
 
 function getKind(name: string): IngredientKind {
-	if (DIARIES.includes(name) || NON_VEGANS.includes(name)) {
+	if (DAIRIES.includes(name) || NON_VEGANS.includes(name)) {
 		return IngredientKind.Vegetarian;
 	}
 	if (POULTRIES.includes(name)) {
@@ -38,7 +38,7 @@ export function analyze({ name }: Ingredient): IngredientInfo {
 		name,
 		kind: getKind(name),
 		hasGluten: GLUTENS.includes(name),
-		hasDairy: DIARIES.includes(name),
+		hasDairy: DAIRIES.includes(name),
 		hasSugar: SUGARS.includes(name),
 		seasons: getSeasons(name),
 	};
