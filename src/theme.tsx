@@ -1,4 +1,4 @@
-const baseFont = 'LeMondeJournal, serif';
+const baseFont = 'LeMondeJournal, Georgia, serif';
 const headingFont = 'AzoSans, Helvetica Neue, sans-serif';
 const space = {
 	0: 0,
