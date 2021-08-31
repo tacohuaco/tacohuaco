@@ -10,11 +10,10 @@ export const GLUTENS = [
 	'semolina',
 	'spelt flour',
 ];
-export const NON_VEGANS = ['honey'];
+export const NON_VEGANS = ['honey', 'egg'];
 export const DAIRIES = [
 	'cheese',
 	'parmesan cheese',
-	'egg',
 	'milk',
 	'butter',
 	'smetana',
