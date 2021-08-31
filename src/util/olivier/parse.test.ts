@@ -167,6 +167,14 @@ test.each([
 			comment: 'cubed',
 		},
 	],
+	[
+		'2 cloves',
+		{
+			name: 'cloves',
+			minAmount: '2',
+			maxAmount: '2',
+		},
+	],
 ])('parse ingredient: %s', (source, result) => {
 	expect(parse(source)).toEqual(result);
 });

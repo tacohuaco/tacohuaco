@@ -81,7 +81,15 @@ export function parse(text: string): Ingredient {
 
 		token = tokens.shift();
 	}
+
 	const [min, max] = amount.split(/\s*-\s*/);
+
+	// Adjust for cases when the name of an ingredient is a unit too (like cloves)
+	if (!name) {
+		name = unit;
+		unit = '';
+	}
+
 	return {
 		name,
 		minAmount: min || undefined,
