@@ -53,7 +53,7 @@ export const recipeMetaFragment = graphql`
 			vegan
 			vegetarian
 			gluten
-			diary
+			dairy
 			addedSugar
 		}
 		margaritasFavorite

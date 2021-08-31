@@ -7,7 +7,7 @@ type Props = {
 		| 'vegan'
 		| 'vegetarian'
 		| 'glutenFree'
-		| 'diaryFree'
+		| 'dairyFree'
 		| 'noAddedSugar'
 		| 'margaritasFavorite'
 		| 'artemsFavorite';
@@ -85,9 +85,9 @@ export default function Flag({ type, ...props }: Props) {
 					GF
 				</Circle>
 			);
-		case 'diaryFree':
+		case 'dairyFree':
 			return (
-				<Circle title="Diary free" {...props} color="#a67bb1">
+				<Circle title="Dairy free" {...props} color="#a67bb1">
 					DF
 				</Circle>
 			);

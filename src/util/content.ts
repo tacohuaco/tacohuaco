@@ -78,7 +78,7 @@ export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
 			[IngredientKind.Vegan, IngredientKind.Vegetarian].includes(x.kind)
 		),
 		gluten: ingredients.some((x) => x.hasGluten === true),
-		diary: ingredients.some((x) => x.hasDairy === true),
+		dairy: ingredients.some((x) => x.hasDairy === true),
 		addedSugar: ingredients.some((x) => x.hasSugar === true),
 	};
 };

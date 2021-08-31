@@ -6,7 +6,7 @@
         vegan: true,
         vegetarian: true,
         gluten: false,
-        diary: false,
+        dairy: false,
         addedSugar: false
       },
       margaritasFavorite: true,
@@ -28,7 +28,7 @@
         vegan: false,
         vegetarian: true,
         gluten: false,
-        diary: false,
+        dairy: false,
         addedSugar: false
       },
       margaritasFavorite: false,
@@ -50,7 +50,7 @@
         vegan: false,
         vegetarian: true,
         gluten: true,
-        diary: true,
+        dairy: true,
         addedSugar: true
       },
       margaritasFavorite: false,
@@ -72,7 +72,7 @@
         vegan: false,
         vegetarian: true,
         gluten: true,
-        diary: true,
+        dairy: true,
         addedSugar: true
       },
       margaritasFavorite: false,
@@ -94,7 +94,7 @@
         vegan: true,
         vegetarian: true,
         gluten: false,
-        diary: false,
+        dairy: false,
         addedSugar: false
       },
       margaritasFavorite: false,
@@ -109,7 +109,7 @@
         vegan: false,
         vegetarian: true,
         gluten: true,
-        diary: true,
+        dairy: true,
         addedSugar: true
       },
       margaritasFavorite: false,
@@ -124,7 +124,7 @@
         vegan: true,
         vegetarian: true,
         gluten: false,
-        diary: false,
+        dairy: false,
         addedSugar: false
       },
       margaritasFavorite: false,
@@ -146,7 +146,7 @@
         vegan: false,
         vegetarian: true,
         gluten: false,
-        diary: true,
+        dairy: true,
         addedSugar: false
       },
       margaritasFavorite: false,

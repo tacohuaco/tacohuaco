@@ -31,7 +31,7 @@ function getSeasons(name: string): Month[] {
 }
 
 /**
- * Return info about an ingredient: kind, gluten, diary, sugar content
+ * Return info about an ingredient: kind, gluten, dairy, sugar content
  */
 export function analyze({ name }: Ingredient): IngredientInfo {
 	return {

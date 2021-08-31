@@ -308,7 +308,7 @@ export type FlagsJson = {
   vegan: Scalars['Boolean'];
   vegetarian: Scalars['Boolean'];
   gluten: Scalars['Boolean'];
-  diary: Scalars['Boolean'];
+  dairy: Scalars['Boolean'];
   addedSugar: Scalars['Boolean'];
 };
 
@@ -6464,7 +6464,7 @@ export type SiteBuildMetadataSortInput = {
 
 export type RecipeMetaFragment = (
   Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
-  & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
+  & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'dairy' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
 );
 
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
@@ -6496,7 +6496,7 @@ export type RecipePageQueryVariables = Exact<{
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
     Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'yields'>
-    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'diary' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'name' | 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
+    & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'gluten' | 'dairy' | 'addedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'name' | 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
   )> };
 
 export type TagsPageQueryVariables = Exact<{

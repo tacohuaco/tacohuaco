@@ -4,7 +4,7 @@
     vegan: false,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: true
   }}
   margaritasFavorite
@@ -17,7 +17,7 @@
     vegan: true,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: false
   }}
   margaritasFavorite

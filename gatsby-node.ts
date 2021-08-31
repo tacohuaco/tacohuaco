@@ -62,7 +62,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       vegan: Boolean!
       vegetarian: Boolean!
       gluten: Boolean!
-      diary: Boolean!
+      dairy: Boolean!
       addedSugar: Boolean!
     }
     type IngredientJson {

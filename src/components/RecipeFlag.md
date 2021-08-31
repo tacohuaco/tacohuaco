@@ -4,7 +4,7 @@ import { Stack } from 'tamia';
   <RecipeFlag type="vegan" />
   <RecipeFlag type="vegetarian" />
   <RecipeFlag type="glutenFree" />
-  <RecipeFlag type="diaryFree" />
+  <RecipeFlag type="dairyFree" />
   <RecipeFlag type="noAddedSugar" />
   <RecipeFlag type="margaritasFavorite" />
   <RecipeFlag type="artemsFavorite" />

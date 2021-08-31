@@ -4,7 +4,7 @@
     vegan: true,
     vegetarian: true,
     gluten: true,
-    diary: true,
+    dairy: true,
     addedSugar: true
   }}
   margaritasFavorite

@@ -6,7 +6,7 @@ Everything:
     vegan: false,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: true
   }}
   margaritasFavorite
@@ -25,7 +25,7 @@ No time:
     vegan: false,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: true
   }}
   artemsFavorite
@@ -42,7 +42,7 @@ Without tags but with time and cuisine:
     vegan: true,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: false
   }}
   time={20}
@@ -58,7 +58,7 @@ Overnight recipe:
     vegan: true,
     vegetarian: true,
     glutenFree: true,
-    diaryFree: false,
+    dairyFree: false,
     noAddedSugar: false
   }}
   time={45}

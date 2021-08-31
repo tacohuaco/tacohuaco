@@ -85,7 +85,7 @@ export const pageQuery = graphql`
 				vegan
 				vegetarian
 				gluten
-				diary
+				dairy
 				addedSugar
 			}
 			images {
