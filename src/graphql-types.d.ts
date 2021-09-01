@@ -448,6 +448,7 @@ export type GraphCms_Recipe = Node & {
   seasons: Array<Scalars['Int']>;
   preconditions: Array<Scalars['String']>;
   warnings: Array<Scalars['String']>;
+  tips: Array<Scalars['String']>;
   descriptionMdx: Scalars['String'];
   ingredientsMdx: Scalars['String'];
   notesMdx: Scalars['String'];
@@ -6509,7 +6510,7 @@ export type RecipePageQueryVariables = Exact<{
 
 
 export type RecipePageQuery = { graphCmsRecipe?: Maybe<(
-    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'toolsMdx' | 'warnings' | 'yields'>
+    Pick<GraphCms_Recipe, 'artemsFavorite' | 'cuisines' | 'description' | 'descriptionMdx' | 'ingredients' | 'ingredientsMdx' | 'margaritasFavorite' | 'notesMdx' | 'overnight' | 'preconditions' | 'sourceMdx' | 'stepsMdx' | 'tags' | 'time' | 'title' | 'tips' | 'toolsMdx' | 'warnings' | 'yields'>
     & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'glutenFree' | 'dairyFree' | 'noAddedSugar'>, images: Array<Pick<GraphCms_Asset, 'url' | 'handle' | 'width' | 'height'>>, subrecipes: Array<Pick<GraphCms_Recipe, 'slug' | 'ingredientsMdx' | 'stepsMdx'>>, allIngredients: Array<Pick<IngredientJson, 'name' | 'minAmount' | 'maxAmount' | 'unit'>>, allIngredientsInfo: Array<Pick<IngredientInfoJson, 'name' | 'kind' | 'hasGluten' | 'hasDairy' | 'hasSugar' | 'seasons'>> }
   )> };
 

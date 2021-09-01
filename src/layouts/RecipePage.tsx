@@ -44,6 +44,7 @@ export default function RecipePage({
 	subrecipes,
 	tags,
 	time,
+	tips,
 	title,
 	toolsMdx,
 	url,
@@ -132,10 +133,13 @@ export default function RecipePage({
 										<RecipeDirections allIngredients={allIngredients}>
 											<MDXRenderer>{stepsMdx}</MDXRenderer>
 										</RecipeDirections>
-										{(notesMdx || sourceMdx) && (
+										{(notesMdx || sourceMdx || tips.length > 0) && (
 											<>
-												<Heading level={2}>Notes</Heading>
+												<Heading level={2}>Notes &amp; tips</Heading>
 												{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
+												{tips.map((tip) => (
+													<MDXRenderer key={tip}>{tip}</MDXRenderer>
+												))}
 												{sourceMdx && (
 													<TextContent fontSize="s">
 														<MDXRenderer>{sourceMdx}</MDXRenderer>

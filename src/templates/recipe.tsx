@@ -79,6 +79,7 @@ export const pageQuery = graphql`
 			tags
 			time
 			title
+			tips
 			toolsMdx
 			warnings
 			yields

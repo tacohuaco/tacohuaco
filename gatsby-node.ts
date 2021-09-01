@@ -6,6 +6,7 @@ import {
 	AllRecipesQuery,
 	GraphCms_Recipe,
 	GraphCms_Ingredient,
+	GraphCms_Tip,
 } from './src/graphql-types';
 import { getMdx } from './src/util/mdx';
 import {
@@ -73,6 +74,34 @@ const getRecipeWarnings = (
 	return Promise.all(promises);
 };
 
+const getRecipeTips = (
+	source: Pick<
+		GraphCms_Recipe,
+		'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
+	>,
+	context: GatsbyContext
+): Promise<string[]> => {
+	const recipeIngredients = getIngredients(
+		getAllRecipeIngredients(source, context)
+	);
+	const promises = context.nodeModel
+		.getAllNodes<GraphCms_Tip>({
+			type: 'GraphCMS_Tip',
+		})
+		.filter(
+			(tip) =>
+				(!tip.ingredient ||
+					recipeIngredients.some(
+						({ name }) => name === String(tip.ingredient).toLowerCase()
+					)) &&
+				tip.tags.every((tag) => source.tags.includes(tag))
+		)
+		.map((x) => x.content)
+		.filter(Boolean)
+		.map(getMdx);
+	return Promise.all(promises);
+};
+
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
 	actions,
 }) => {
@@ -111,7 +140,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
   `);
 	};
 
-type Source = Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>;
+type Source = Pick<
+	GraphCms_Recipe,
+	'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
+>;
 
 // Create Mdx fields for all Markdown type fields from GraphCMS
 export const createResolvers: GatsbyNode['createResolvers'] = ({
@@ -156,6 +188,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 				type: '[String!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getRecipeWarnings(source, context);
+				},
+			},
+			[`tips`]: {
+				type: '[String!]!',
+				resolve(source: Source, args: unknown, context: GatsbyContext) {
+					return getRecipeTips(source, context);
 				},
 			},
 		},
