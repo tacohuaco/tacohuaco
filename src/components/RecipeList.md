@@ -5,9 +5,9 @@
       flags: {
         vegan: true,
         vegetarian: true,
-        gluten: false,
-        dairy: false,
-        addedSugar: false
+        glutenFree: true,
+        dairyFree: true,
+        noAddedSugar: true
       },
       margaritasFavorite: true,
       artemsFavorite: true,
@@ -27,9 +27,9 @@
       flags: {
         vegan: false,
         vegetarian: true,
-        gluten: false,
-        dairy: false,
-        addedSugar: false
+        glutenFree: true,
+        dairyFree: true,
+        noAddedSugar: true
       },
       margaritasFavorite: false,
       artemsFavorite: false,
@@ -49,9 +49,9 @@
       flags: {
         vegan: false,
         vegetarian: true,
-        gluten: true,
-        dairy: true,
-        addedSugar: true
+        glutenFree: false,
+        dairyFree: false,
+        noAddedSugar: false
       },
       margaritasFavorite: false,
       artemsFavorite: false,
@@ -71,9 +71,9 @@
       flags: {
         vegan: false,
         vegetarian: true,
-        gluten: true,
-        dairy: true,
-        addedSugar: true
+        glutenFree: false,
+        dairyFree: false,
+        noAddedSugar: false
       },
       margaritasFavorite: false,
       artemsFavorite: false,
@@ -93,9 +93,9 @@
       flags: {
         vegan: true,
         vegetarian: true,
-        gluten: false,
-        dairy: false,
-        addedSugar: false
+        glutenFree: true,
+        dairyFree: true,
+        noAddedSugar: true
       },
       margaritasFavorite: false,
       artemsFavorite: false,
@@ -108,9 +108,9 @@
       flags: {
         vegan: false,
         vegetarian: true,
-        gluten: true,
-        dairy: true,
-        addedSugar: true
+        glutenFree: false,
+        dairyFree: false,
+        noAddedSugar: false
       },
       margaritasFavorite: false,
       artemsFavorite: true,
@@ -123,9 +123,9 @@
       flags: {
         vegan: true,
         vegetarian: true,
-        gluten: false,
-        dairy: false,
-        addedSugar: false
+        glutenFree: true,
+        dairyFree: true,
+        noAddedSugar: true
       },
       margaritasFavorite: false,
       artemsFavorite: false,
@@ -145,9 +145,9 @@
       flags: {
         vegan: false,
         vegetarian: true,
-        gluten: false,
-        dairy: true,
-        addedSugar: false
+        glutenFree: true,
+        dairyFree: false,
+        noAddedSugar: true
       },
       margaritasFavorite: false,
       artemsFavorite: true,

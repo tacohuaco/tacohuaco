@@ -85,9 +85,9 @@ export const pageQuery = graphql`
 			flags {
 				vegan
 				vegetarian
-				gluten
-				dairy
-				addedSugar
+				glutenFree
+				dairyFree
+				noAddedSugar
 			}
 			images {
 				url

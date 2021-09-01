@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { forwardRef, ComponentProps, ReactElement } from 'react';
 import styled from 'styled-components';
 import Tippy from '@tippyjs/react/headless';
 import { Box, Text } from 'tamia';
 
 type Props = {
 	value: string;
-	children: React.ReactNode;
+	children: ReactElement;
+	renderTrigger?: boolean;
 };
 
 const ARROW_SIZE = '0.25rem';
@@ -16,7 +17,11 @@ const Arrow = styled(Box)`
 	border-bottom: ${ARROW_SIZE} solid;
 `;
 
-export default function Tooltip({ value, children }: Props) {
+const DefaultTrigger = forwardRef((props: ComponentProps<typeof Box>, ref) => (
+	<Box ref={ref} as="button" border="none" bg="transparent" p={0} {...props} />
+));
+
+export default function Tooltip({ value, children, renderTrigger }: Props) {
 	return (
 		<Tippy
 			placement="bottom"
@@ -45,9 +50,7 @@ export default function Tooltip({ value, children }: Props) {
 				</Text>
 			)}
 		>
-			<Box as="button" border="none" bg="transparent" p={0}>
-				{children}
-			</Box>
+			{renderTrigger ? <DefaultTrigger>{children}</DefaultTrigger> : children}
 		</Tippy>
 	);
 }

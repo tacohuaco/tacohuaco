@@ -13,7 +13,7 @@ import {
 	IngredientInfo,
 	Month,
 } from './olivier';
-import { Flags } from '../types/Flags';
+import { FlagsJson } from '../graphql-types';
 
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
@@ -27,11 +27,6 @@ export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	],
 	[`GraphCMS_Shop`]: ['description'],
 };
-
-// const print = (text: string) => {
-// 	console.log(text);
-// 	return text;
-// };
 
 /**
  * Return all ingredients (actually all list items) from Markdown as an array
@@ -70,16 +65,16 @@ export const getIngredientsInfo = (
 /**
  * Return flags for a Markdown ingredients list
  */
-export const getRecipeFlags = (ingredientsMarkdown: string): Flags => {
+export const getRecipeFlags = (ingredientsMarkdown: string): FlagsJson => {
 	const ingredients = getIngredientsInfo(ingredientsMarkdown);
 	return {
 		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
 		vegetarian: ingredients.every((x) =>
 			[IngredientKind.Vegan, IngredientKind.Vegetarian].includes(x.kind)
 		),
-		gluten: ingredients.some((x) => x.hasGluten === true),
-		dairy: ingredients.some((x) => x.hasDairy === true),
-		addedSugar: ingredients.some((x) => x.hasSugar === true),
+		glutenFree: ingredients.every((x) => x.hasGluten === false),
+		dairyFree: ingredients.every((x) => x.hasDairy === false),
+		noAddedSugar: ingredients.every((x) => x.hasSugar === false),
 	};
 };
 

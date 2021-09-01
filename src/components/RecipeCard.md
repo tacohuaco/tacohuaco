@@ -3,9 +3,9 @@
   flags={{
     vegan: true,
     vegetarian: true,
-    gluten: true,
-    dairy: true,
-    addedSugar: true
+    glutenFree: false,
+    dairyFree: false,
+    noAddedSugar: false
   }}
   margaritasFavorite
   artemsFavorite

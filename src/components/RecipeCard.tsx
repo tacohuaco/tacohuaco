@@ -52,9 +52,9 @@ export const recipeMetaFragment = graphql`
 		flags {
 			vegan
 			vegetarian
-			gluten
-			dairy
-			addedSugar
+			glutenFree
+			dairyFree
+			noAddedSugar
 		}
 		margaritasFavorite
 		artemsFavorite

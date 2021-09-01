@@ -17,6 +17,7 @@ import {
 	getIngredients,
 	getIngredientsInfo,
 } from './src/util/content';
+import { ALL_FLAGS } from './src/consts';
 
 // XXX: Gatsby has no types for this anywhere :-/
 interface GatsbyContext {
@@ -87,9 +88,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     type FlagsJson {
       vegan: Boolean!
       vegetarian: Boolean!
-      gluten: Boolean!
-      dairy: Boolean!
-      addedSugar: Boolean!
+      glutenFree: Boolean!
+      dairyFree: Boolean!
+      noAddedSugar: Boolean!
     }
     type IngredientJson {
 		name: String!
@@ -235,6 +236,18 @@ export const createPages: GatsbyNode['createPages'] = async ({
 			component: `${__dirname}/src/templates/cuisine.tsx`,
 			context: {
 				cuisine,
+			},
+		});
+	});
+
+	// Create pages for all flags
+	ALL_FLAGS.forEach((flag) => {
+		const slug = kebabCase(flag);
+		createPage({
+			path: `/flags/${slug}/`,
+			component: `${__dirname}/src/templates/flag.tsx`,
+			context: {
+				flag,
 			},
 		});
 	});
