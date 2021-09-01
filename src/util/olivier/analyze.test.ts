@@ -49,7 +49,7 @@ test.each([
 		{
 			name: 'egg',
 			kind: IngredientKind.Vegetarian,
-			hasDairy: true,
+			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
 			seasons: [],

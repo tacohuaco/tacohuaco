@@ -1,1 +1,0 @@
-import { graphql } from 'gatsby';
