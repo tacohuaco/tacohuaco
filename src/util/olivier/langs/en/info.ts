@@ -17,7 +17,10 @@ export const DAIRIES = [
 	'milk',
 	'butter',
 	'smetana',
-	'tvorog',
+	'sour cream',
+	'heavy cream',
+	'crème fraîche',
+	'cottage cheese (tvorog)',
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];

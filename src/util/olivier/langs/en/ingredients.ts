@@ -178,6 +178,8 @@ export const INGREDIENTS = [
 		'parmigiano',
 	],
 	['cheese'],
+	['cottage cheese (tvorog)', 'cottage cheese', 'tvorog'],
+	['crème fraîche', 'creme fraiche'],
 	['butter', 'butter', 'unsalted butter'],
 	// Meat
 	['chicken stock', 'chicken broth'],
