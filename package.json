@@ -77,7 +77,7 @@
     "gatsby-plugin-react-helmet": "^4.14.0",
     "gatsby-plugin-sitemap": "^4.10.0",
     "gatsby-plugin-styled-components": "^4.14.0",
-    "gatsby-plugin-ts-config": "^1.1.6",
+    "gatsby-plugin-ts-config": "^2.1.2",
     "gatsby-plugin-typescript": "^3.14.0",
     "gatsby-source-graphcms": "^2.6.0",
     "glob": "^7.1.7",

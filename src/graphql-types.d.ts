@@ -401,32 +401,6 @@ export type SiteBuildMetadataBuildTimeArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
-export type FlagsJson = {
-  vegan: Scalars['Boolean'];
-  vegetarian: Scalars['Boolean'];
-  glutenFree: Scalars['Boolean'];
-  dairyFree: Scalars['Boolean'];
-  noAddedSugar: Scalars['Boolean'];
-};
-
-export type IngredientJson = {
-  name: Scalars['String'];
-  minAmount?: Maybe<Scalars['String']>;
-  maxAmount?: Maybe<Scalars['String']>;
-  unit?: Maybe<Scalars['String']>;
-  modifier?: Maybe<Scalars['String']>;
-  comment?: Maybe<Scalars['String']>;
-};
-
-export type IngredientInfoJson = {
-  name: Scalars['String'];
-  kind: Scalars['Int'];
-  hasGluten: Scalars['Boolean'];
-  hasDairy: Scalars['Boolean'];
-  hasSugar: Scalars['Boolean'];
-  seasons: Array<Scalars['Int']>;
-};
-
 export type GraphCms_Asset = Node & {
   remoteTypeName: Scalars['String'];
   remoteId: Scalars['ID'];
@@ -679,6 +653,32 @@ export type GraphCms_UserKind =
   | 'PAT'
   | 'PUBLIC'
   | 'WEBHOOK';
+
+export type FlagsJson = {
+  vegan: Scalars['Boolean'];
+  vegetarian: Scalars['Boolean'];
+  glutenFree: Scalars['Boolean'];
+  dairyFree: Scalars['Boolean'];
+  noAddedSugar: Scalars['Boolean'];
+};
+
+export type IngredientJson = {
+  name: Scalars['String'];
+  minAmount?: Maybe<Scalars['String']>;
+  maxAmount?: Maybe<Scalars['String']>;
+  unit?: Maybe<Scalars['String']>;
+  modifier?: Maybe<Scalars['String']>;
+  comment?: Maybe<Scalars['String']>;
+};
+
+export type IngredientInfoJson = {
+  name: Scalars['String'];
+  kind: Scalars['Int'];
+  hasGluten: Scalars['Boolean'];
+  hasDairy: Scalars['Boolean'];
+  hasSugar: Scalars['Boolean'];
+  seasons: Array<Scalars['Int']>;
+};
 
 export type Query = {
   file?: Maybe<File>;
@@ -6898,6 +6898,11 @@ export type RecipeMetaFragment = (
   & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'glutenFree' | 'dairyFree' | 'noAddedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
 );
 
+export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllRecipesQuery = { allGraphCmsRecipe: { nodes: Array<Pick<GraphCms_Recipe, 'cuisines' | 'slug' | 'tags'>> } };
+
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6941,8 +6946,3 @@ export type TagsPageQueryVariables = Exact<{
 
 
 export type TagsPageQuery = { allGraphCmsRecipe: { nodes: Array<RecipeMetaFragment> } };
-
-export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllRecipesQuery = { allGraphCmsRecipe: { nodes: Array<Pick<GraphCms_Recipe, 'cuisines' | 'slug' | 'tags'>> } };

@@ -1,3 +1,4 @@
+import path from 'path';
 import { GatsbyNode } from 'gatsby';
 import richtypo from 'richtypo';
 import rules from 'richtypo-rules-en';
@@ -7,8 +8,8 @@ import {
 	GraphCms_Recipe,
 	GraphCms_Ingredient,
 	GraphCms_Tip,
-} from './src/graphql-types';
-import { getMdx } from './src/util/mdx';
+} from '../graphql-types';
+import { getMdx } from '../util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
 	GRAPHCMS_FIELD_PREPROCESSING,
@@ -17,8 +18,8 @@ import {
 	getRecipePreconditions,
 	getIngredients,
 	getIngredientsInfo,
-} from './src/util/content';
-import { ALL_FLAGS } from './src/consts';
+} from '../util/content';
+import { ALL_FLAGS } from '../consts';
 
 // XXX: Gatsby has no types for this anywhere :-/
 interface GatsbyContext {
@@ -245,7 +246,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 	recipes.forEach(({ slug }) => {
 		createPage({
 			path: `/recipes/${slug}/`,
-			component: `${__dirname}/src/templates/recipe.tsx`,
+			component: path.resolve(__dirname, '../templates/recipe.tsx'),
 			context: {
 				slug,
 			},
@@ -258,7 +259,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(tag);
 		createPage({
 			path: `/tags/${slug}/`,
-			component: `${__dirname}/src/templates/tag.tsx`,
+			component: path.resolve(__dirname, '../templates/tag.tsx'),
 			context: {
 				tag,
 			},
@@ -271,7 +272,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(cuisine);
 		createPage({
 			path: `/cuisines/${slug}/`,
-			component: `${__dirname}/src/templates/cuisine.tsx`,
+			component: path.resolve(__dirname, '../templates/cuisine.tsx'),
 			context: {
 				cuisine,
 			},
@@ -283,7 +284,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(flag);
 		createPage({
 			path: `/flags/${slug}/`,
-			component: `${__dirname}/src/templates/flag.tsx`,
+			component: path.resolve(__dirname, '../templates/flag.tsx'),
 			context: {
 				flag,
 			},
