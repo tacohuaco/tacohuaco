@@ -98,7 +98,10 @@ export const getRecipePreconditions = (
 	const ingredients = getIngredients(ingredientsMarkdown);
 	return ingredients
 		.map(({ name, comment }) => {
-			if (comment === 'room temperature' || comment === 'at room temperature') {
+			if (
+				comment?.startsWith('room temperature') ||
+				comment?.startsWith('at room temperature')
+			) {
 				return `warm ${name} to room temperature`;
 			}
 
