@@ -64,9 +64,9 @@ const Em: ComponentType<any> = ({ children }) => {
 		}
 		const { amount, suffix, name } = print(format(ingredient));
 		return (
-			<>
+			<nobr>
 				<em>{amount}</em> {suffix} {name}
-			</>
+			</nobr>
 		);
 	}
 
@@ -81,9 +81,9 @@ const Em: ComponentType<any> = ({ children }) => {
 		}
 		const { amount, name } = print(format(ingredient));
 		return (
-			<>
+			<nobr>
 				{name} <em>({amount})</em>
-			</>
+			</nobr>
 		);
 	}
 
