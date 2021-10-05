@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { graphql } from 'gatsby';
 import { Box, Stack, Text, Image, Frame } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
@@ -13,9 +13,10 @@ export default function RecipeCard({
 	images,
 	title,
 	slug,
-}: RecipeMetaFragment) {
+	...rest
+}: RecipeMetaFragment & ComponentProps<typeof Stack>) {
 	return (
-		<Stack gap="s" direction="column">
+		<Stack {...rest} gap="s" direction="column">
 			<Link href={`/recipes/${slug}/`}>
 				<Stack gap="s" direction="column">
 					<Box>

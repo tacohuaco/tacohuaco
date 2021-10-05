@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid } from 'tamia';
+import { Grid } from 'tamia';
 import RecipeCard from './RecipeCard';
 import { RecipeMetaFragment } from '../graphql-types';
 
@@ -10,9 +10,7 @@ type Props = {
 const RecipeList = ({ recipes }: Props) => (
 	<Grid as="ul" minColumnWidth={300} gridColumnGap="m" gridRowGap="l">
 		{recipes.map((recipe) => (
-			<Box key={recipe.slug} as="li">
-				<RecipeCard {...recipe} />
-			</Box>
+			<RecipeCard key={recipe.slug} as="li" {...recipe} />
 		))}
 	</Grid>
 );
