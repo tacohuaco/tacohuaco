@@ -148,6 +148,7 @@ export const INGREDIENTS = [
 	['blackberry', 'blackberries'],
 	['gooseberry', 'gooseberries'],
 	['cherry', 'cherries'],
+	['dried cranberry', 'dried cranberries'],
 	['cranberry', 'cranberries'],
 	['grapefruit', 'grapefruits'],
 	['lemon', 'lemons'],
@@ -206,4 +207,5 @@ export const INGREDIENTS = [
 	['coconut oil'],
 	['sunflower oil'],
 	['oil'],
+	['soy cauce'],
 ];

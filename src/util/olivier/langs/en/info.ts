@@ -9,6 +9,7 @@ export const GLUTENS = [
 	'pasta',
 	'semolina',
 	'spelt flour',
+	'soy sauce',
 ];
 export const NON_VEGANS = ['honey', 'egg'];
 export const DAIRIES = [
@@ -25,4 +26,4 @@ export const DAIRIES = [
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
 export const MEATS = ['pork', 'beef', 'lamb'];
-export const SUGARS = ['sugar'];
+export const SUGARS = ['sugar', 'dried cranberry'];
