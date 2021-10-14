@@ -8,20 +8,21 @@ export const GLUTENS = [
 	'flour',
 	'pasta',
 	'semolina',
-	'spelt flour',
 	'soy sauce',
+	'spelt flour',
 ];
 export const NON_VEGANS = ['honey', 'egg'];
 export const DAIRIES = [
-	'cheese',
-	'parmesan cheese',
-	'milk',
 	'butter',
+	'cheese',
+	'cottage cheese (tvorog)',
+	'crème fraîche',
+	'heavy cream',
+	'milk',
+	'parmesan cheese',
 	'smetana',
 	'sour cream',
-	'heavy cream',
-	'crème fraîche',
-	'cottage cheese (tvorog)',
+	'yogurt',
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
