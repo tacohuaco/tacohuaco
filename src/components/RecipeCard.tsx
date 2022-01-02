@@ -50,6 +50,7 @@ export default function RecipeCard({
 
 export const recipeMetaFragment = graphql`
 	fragment RecipeMeta on GraphCMS_Recipe {
+		createdAt
 		flags {
 			vegan
 			vegetarian

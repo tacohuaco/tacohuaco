@@ -12,9 +12,8 @@ type Props = {
 };
 
 const CURRENT_SEASON = new Date().getMonth() + 1;
-// const NEXT_SEASON = CURRENT_SEASON === 12 ? 1 : CURRENT_SEASON + 1;
 
-// Order recipies by the lengths of the seasons: recipes with shorter season
+// Order recipies by the lengths of the seasons list: recipes with shorter season
 const getCurrentSeasonRecipes = (
 	recipes: RecipeMetaFragment[]
 ): RecipeMetaFragment[] => {
@@ -24,12 +23,9 @@ const getCurrentSeasonRecipes = (
 	);
 };
 
-// const getNextSeasonRecipes = (recipes: RecipeMeta[]): RecipeMeta[] => {
-// 	return orderBy(
-// 		recipes.filter((x) => x.seasons.includes(NEXT_SEASON)),
-// 		(x) => x.seasons.length
-// 	);
-// };
+const getNewRecipes = (recipes: RecipeMetaFragment[]): RecipeMetaFragment[] => {
+	return orderBy(recipes, (x) => -Date.parse(x.createdAt)).slice(0, 3);
+};
 
 const RecipeListSection = ({
 	title,
@@ -47,19 +43,23 @@ const RecipeListSection = ({
 );
 
 export default function RecipePage({ recipes, url }: Props) {
+	const recipesInSeason = getCurrentSeasonRecipes(recipes);
+	const newRecipes = getNewRecipes(recipes);
 	return (
 		<Page url={url}>
 			<Metatags slug={url} images={recipes?.[0].images} />
 			<VisuallyHidden as="h1">Recipes</VisuallyHidden>
 			<Stack as="main" gap="xl">
+				{recipesInSeason.length > 0 && (
+					<RecipeListSection
+						title="Recipes with ingredients in season"
+						recipes={recipesInSeason}
+					/>
+				)}
 				<RecipeListSection
-					title="Recipes with ingredients in season"
-					recipes={getCurrentSeasonRecipes(recipes)}
+					title="Recently added recipes"
+					recipes={newRecipes}
 				/>
-				{/* <RecipeListSection
-					title="Recipes for the next month"
-					recipes={getNextSeasonRecipes(recipes)}
-				/> */}
 				<RecipeListSection title="All recipes" recipes={recipes} />
 			</Stack>
 		</Page>

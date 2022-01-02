@@ -578,42 +578,75 @@ export type GraphCms_Tag =
   | 'Sauce'
   | 'Spicy'
   | 'Dressing'
-  | 'Icing';
+  | 'Icing'
+  | 'NewYear'
+  | 'Christmas';
 
 export type GraphCms_Difficulty =
   | 'Easy'
   | 'Medium'
   | 'Hardcore';
 
-export type GraphCms_Shop = Node & {
+export type GraphCms_ScheduledOperation = Node & {
   remoteTypeName: Scalars['String'];
   remoteId: Scalars['ID'];
   stage: GraphCms_Stage;
   createdAt: Scalars['JSON'];
   updatedAt: Scalars['JSON'];
   publishedAt?: Maybe<Scalars['JSON']>;
-  name: Scalars['String'];
-  slug: Scalars['String'];
-  url?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  neighbourhood?: Maybe<Scalars['String']>;
-  zip?: Maybe<Scalars['Int']>;
-  address?: Maybe<Scalars['String']>;
-  location?: Maybe<GraphCms_Location>;
-  online: Scalars['Boolean'];
-  hasOfflineStore: Scalars['Boolean'];
+  errorMessage?: Maybe<Scalars['String']>;
+  rawPayload: Scalars['JSON'];
   createdBy?: Maybe<GraphCms_User>;
   updatedBy?: Maybe<GraphCms_User>;
   publishedBy?: Maybe<GraphCms_User>;
-  type: Array<GraphCms_ShopType>;
-  country?: Maybe<GraphCms_Country>;
+  release?: Maybe<GraphCms_ScheduledRelease>;
+  status: GraphCms_ScheduledOperationStatus;
+  affectedDocuments: Array<GraphCms_ScheduledOperationAffectedDocument>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  descriptionMdx: Scalars['String'];
 };
+
+export type GraphCms_ScheduledRelease = Node & {
+  remoteTypeName: Scalars['String'];
+  remoteId: Scalars['ID'];
+  stage: GraphCms_Stage;
+  createdAt: Scalars['JSON'];
+  updatedAt: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['JSON']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  isActive: Scalars['Boolean'];
+  isImplicit: Scalars['Boolean'];
+  releaseAt?: Maybe<Scalars['JSON']>;
+  createdBy?: Maybe<GraphCms_User>;
+  updatedBy?: Maybe<GraphCms_User>;
+  publishedBy?: Maybe<GraphCms_User>;
+  operations: Array<GraphCms_ScheduledOperation>;
+  status: GraphCms_ScheduledReleaseStatus;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+export type GraphCms_ScheduledOperationStatus =
+  | 'PENDING'
+  | 'IN_PROGRESS'
+  | 'COMPLETED'
+  | 'FAILED'
+  | 'CANCELED';
+
+export type GraphCms_ScheduledOperationAffectedDocument = GraphCms_Asset | GraphCms_Ingredient | GraphCms_Recipe | GraphCms_Shop | GraphCms_Tip;
+
+export type GraphCms_ScheduledReleaseStatus =
+  | 'PENDING'
+  | 'IN_PROGRESS'
+  | 'COMPLETED'
+  | 'FAILED';
 
 export type GraphCms_Location = {
   remoteTypeName: Scalars['String'];
@@ -628,25 +661,6 @@ export type GraphCms_ShopType =
 
 export type GraphCms_Country =
   | 'Germany';
-
-export type GraphCms_Tip = Node & {
-  remoteTypeName: Scalars['String'];
-  remoteId: Scalars['ID'];
-  stage: GraphCms_Stage;
-  createdAt: Scalars['JSON'];
-  updatedAt: Scalars['JSON'];
-  publishedAt?: Maybe<Scalars['JSON']>;
-  content?: Maybe<Scalars['String']>;
-  ingredient?: Maybe<Scalars['String']>;
-  createdBy?: Maybe<GraphCms_User>;
-  updatedBy?: Maybe<GraphCms_User>;
-  publishedBy?: Maybe<GraphCms_User>;
-  tags: Array<GraphCms_Tag>;
-  id: Scalars['ID'];
-  parent?: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
 
 export type GraphCms_UserKind =
   | 'MEMBER'
@@ -680,6 +694,55 @@ export type IngredientInfoJson = {
   seasons: Array<Scalars['Int']>;
 };
 
+export type GraphCms_Shop = Node & {
+  remoteTypeName: Scalars['String'];
+  remoteId: Scalars['ID'];
+  stage: GraphCms_Stage;
+  createdAt: Scalars['JSON'];
+  updatedAt: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['JSON']>;
+  name: Scalars['String'];
+  slug: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  neighbourhood?: Maybe<Scalars['String']>;
+  zip?: Maybe<Scalars['Int']>;
+  address?: Maybe<Scalars['String']>;
+  location?: Maybe<GraphCms_Location>;
+  online: Scalars['Boolean'];
+  hasOfflineStore: Scalars['Boolean'];
+  createdBy?: Maybe<GraphCms_User>;
+  updatedBy?: Maybe<GraphCms_User>;
+  publishedBy?: Maybe<GraphCms_User>;
+  type: Array<GraphCms_ShopType>;
+  country?: Maybe<GraphCms_Country>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+  descriptionMdx: Scalars['String'];
+};
+
+export type GraphCms_Tip = Node & {
+  remoteTypeName: Scalars['String'];
+  remoteId: Scalars['ID'];
+  stage: GraphCms_Stage;
+  createdAt: Scalars['JSON'];
+  updatedAt: Scalars['JSON'];
+  publishedAt?: Maybe<Scalars['JSON']>;
+  content?: Maybe<Scalars['String']>;
+  ingredient?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<GraphCms_User>;
+  updatedBy?: Maybe<GraphCms_User>;
+  publishedBy?: Maybe<GraphCms_User>;
+  tags: Array<GraphCms_Tag>;
+  id: Scalars['ID'];
+  parent?: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
 export type Query = {
   file?: Maybe<File>;
   allFile: FileConnection;
@@ -703,6 +766,10 @@ export type Query = {
   allGraphCmsRecipe: GraphCms_RecipeConnection;
   graphCmsIngredient?: Maybe<GraphCms_Ingredient>;
   allGraphCmsIngredient: GraphCms_IngredientConnection;
+  graphCmsScheduledOperation?: Maybe<GraphCms_ScheduledOperation>;
+  allGraphCmsScheduledOperation: GraphCms_ScheduledOperationConnection;
+  graphCmsScheduledRelease?: Maybe<GraphCms_ScheduledRelease>;
+  allGraphCmsScheduledRelease: GraphCms_ScheduledReleaseConnection;
   graphCmsShop?: Maybe<GraphCms_Shop>;
   allGraphCmsShop: GraphCms_ShopConnection;
   graphCmsTip?: Maybe<GraphCms_Tip>;
@@ -1047,6 +1114,69 @@ export type QueryGraphCmsIngredientArgs = {
 export type QueryAllGraphCmsIngredientArgs = {
   filter?: Maybe<GraphCms_IngredientFilterInput>;
   sort?: Maybe<GraphCms_IngredientSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGraphCmsScheduledOperationArgs = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  errorMessage?: Maybe<StringQueryOperatorInput>;
+  rawPayload?: Maybe<JsonQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  release?: Maybe<GraphCms_ScheduledReleaseFilterInput>;
+  status?: Maybe<GraphCms_ScheduledOperationStatusQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllGraphCmsScheduledOperationArgs = {
+  filter?: Maybe<GraphCms_ScheduledOperationFilterInput>;
+  sort?: Maybe<GraphCms_ScheduledOperationSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryGraphCmsScheduledReleaseArgs = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  errorMessage?: Maybe<StringQueryOperatorInput>;
+  isActive?: Maybe<BooleanQueryOperatorInput>;
+  isImplicit?: Maybe<BooleanQueryOperatorInput>;
+  releaseAt?: Maybe<JsonQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  operations?: Maybe<GraphCms_ScheduledOperationFilterListInput>;
+  status?: Maybe<GraphCms_ScheduledReleaseStatusQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllGraphCmsScheduledReleaseArgs = {
+  filter?: Maybe<GraphCms_ScheduledReleaseFilterInput>;
+  sort?: Maybe<GraphCms_ScheduledReleaseSortInput>;
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
 };
@@ -6149,6 +6279,1135 @@ export type GraphCms_IngredientSortInput = {
   order?: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type GraphCms_ScheduledReleaseFilterInput = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  errorMessage?: Maybe<StringQueryOperatorInput>;
+  isActive?: Maybe<BooleanQueryOperatorInput>;
+  isImplicit?: Maybe<BooleanQueryOperatorInput>;
+  releaseAt?: Maybe<JsonQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  operations?: Maybe<GraphCms_ScheduledOperationFilterListInput>;
+  status?: Maybe<GraphCms_ScheduledReleaseStatusQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type GraphCms_ScheduledOperationFilterListInput = {
+  elemMatch?: Maybe<GraphCms_ScheduledOperationFilterInput>;
+};
+
+export type GraphCms_ScheduledOperationFilterInput = {
+  remoteTypeName?: Maybe<StringQueryOperatorInput>;
+  remoteId?: Maybe<IdQueryOperatorInput>;
+  stage?: Maybe<GraphCms_StageQueryOperatorInput>;
+  createdAt?: Maybe<JsonQueryOperatorInput>;
+  updatedAt?: Maybe<JsonQueryOperatorInput>;
+  publishedAt?: Maybe<JsonQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
+  errorMessage?: Maybe<StringQueryOperatorInput>;
+  rawPayload?: Maybe<JsonQueryOperatorInput>;
+  createdBy?: Maybe<GraphCms_UserFilterInput>;
+  updatedBy?: Maybe<GraphCms_UserFilterInput>;
+  publishedBy?: Maybe<GraphCms_UserFilterInput>;
+  release?: Maybe<GraphCms_ScheduledReleaseFilterInput>;
+  status?: Maybe<GraphCms_ScheduledOperationStatusQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+export type GraphCms_ScheduledOperationStatusQueryOperatorInput = {
+  eq?: Maybe<GraphCms_ScheduledOperationStatus>;
+  ne?: Maybe<GraphCms_ScheduledOperationStatus>;
+  in?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>;
+  nin?: Maybe<Array<Maybe<GraphCms_ScheduledOperationStatus>>>;
+};
+
+export type GraphCms_ScheduledReleaseStatusQueryOperatorInput = {
+  eq?: Maybe<GraphCms_ScheduledReleaseStatus>;
+  ne?: Maybe<GraphCms_ScheduledReleaseStatus>;
+  in?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>;
+  nin?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseStatus>>>;
+};
+
+export type GraphCms_ScheduledOperationConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_ScheduledOperationEdge>;
+  nodes: Array<GraphCms_ScheduledOperation>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_ScheduledOperationGroupConnection>;
+};
+
+
+export type GraphCms_ScheduledOperationConnectionDistinctArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationConnectionMaxArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationConnectionMinArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationConnectionSumArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+export type GraphCms_ScheduledOperationEdge = {
+  next?: Maybe<GraphCms_ScheduledOperation>;
+  node: GraphCms_ScheduledOperation;
+  previous?: Maybe<GraphCms_ScheduledOperation>;
+};
+
+export type GraphCms_ScheduledOperationFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'description'
+  | 'errorMessage'
+  | 'rawPayload'
+  | 'createdBy___remoteTypeName'
+  | 'createdBy___remoteId'
+  | 'createdBy___stage'
+  | 'createdBy___createdAt'
+  | 'createdBy___updatedAt'
+  | 'createdBy___publishedAt'
+  | 'createdBy___name'
+  | 'createdBy___picture'
+  | 'createdBy___isActive'
+  | 'createdBy___kind'
+  | 'createdBy___id'
+  | 'createdBy___parent___id'
+  | 'createdBy___parent___parent___id'
+  | 'createdBy___parent___parent___children'
+  | 'createdBy___parent___children'
+  | 'createdBy___parent___children___id'
+  | 'createdBy___parent___children___children'
+  | 'createdBy___parent___internal___content'
+  | 'createdBy___parent___internal___contentDigest'
+  | 'createdBy___parent___internal___description'
+  | 'createdBy___parent___internal___fieldOwners'
+  | 'createdBy___parent___internal___ignoreType'
+  | 'createdBy___parent___internal___mediaType'
+  | 'createdBy___parent___internal___owner'
+  | 'createdBy___parent___internal___type'
+  | 'createdBy___children'
+  | 'createdBy___children___id'
+  | 'createdBy___children___parent___id'
+  | 'createdBy___children___parent___children'
+  | 'createdBy___children___children'
+  | 'createdBy___children___children___id'
+  | 'createdBy___children___children___children'
+  | 'createdBy___children___internal___content'
+  | 'createdBy___children___internal___contentDigest'
+  | 'createdBy___children___internal___description'
+  | 'createdBy___children___internal___fieldOwners'
+  | 'createdBy___children___internal___ignoreType'
+  | 'createdBy___children___internal___mediaType'
+  | 'createdBy___children___internal___owner'
+  | 'createdBy___children___internal___type'
+  | 'createdBy___internal___content'
+  | 'createdBy___internal___contentDigest'
+  | 'createdBy___internal___description'
+  | 'createdBy___internal___fieldOwners'
+  | 'createdBy___internal___ignoreType'
+  | 'createdBy___internal___mediaType'
+  | 'createdBy___internal___owner'
+  | 'createdBy___internal___type'
+  | 'updatedBy___remoteTypeName'
+  | 'updatedBy___remoteId'
+  | 'updatedBy___stage'
+  | 'updatedBy___createdAt'
+  | 'updatedBy___updatedAt'
+  | 'updatedBy___publishedAt'
+  | 'updatedBy___name'
+  | 'updatedBy___picture'
+  | 'updatedBy___isActive'
+  | 'updatedBy___kind'
+  | 'updatedBy___id'
+  | 'updatedBy___parent___id'
+  | 'updatedBy___parent___parent___id'
+  | 'updatedBy___parent___parent___children'
+  | 'updatedBy___parent___children'
+  | 'updatedBy___parent___children___id'
+  | 'updatedBy___parent___children___children'
+  | 'updatedBy___parent___internal___content'
+  | 'updatedBy___parent___internal___contentDigest'
+  | 'updatedBy___parent___internal___description'
+  | 'updatedBy___parent___internal___fieldOwners'
+  | 'updatedBy___parent___internal___ignoreType'
+  | 'updatedBy___parent___internal___mediaType'
+  | 'updatedBy___parent___internal___owner'
+  | 'updatedBy___parent___internal___type'
+  | 'updatedBy___children'
+  | 'updatedBy___children___id'
+  | 'updatedBy___children___parent___id'
+  | 'updatedBy___children___parent___children'
+  | 'updatedBy___children___children'
+  | 'updatedBy___children___children___id'
+  | 'updatedBy___children___children___children'
+  | 'updatedBy___children___internal___content'
+  | 'updatedBy___children___internal___contentDigest'
+  | 'updatedBy___children___internal___description'
+  | 'updatedBy___children___internal___fieldOwners'
+  | 'updatedBy___children___internal___ignoreType'
+  | 'updatedBy___children___internal___mediaType'
+  | 'updatedBy___children___internal___owner'
+  | 'updatedBy___children___internal___type'
+  | 'updatedBy___internal___content'
+  | 'updatedBy___internal___contentDigest'
+  | 'updatedBy___internal___description'
+  | 'updatedBy___internal___fieldOwners'
+  | 'updatedBy___internal___ignoreType'
+  | 'updatedBy___internal___mediaType'
+  | 'updatedBy___internal___owner'
+  | 'updatedBy___internal___type'
+  | 'publishedBy___remoteTypeName'
+  | 'publishedBy___remoteId'
+  | 'publishedBy___stage'
+  | 'publishedBy___createdAt'
+  | 'publishedBy___updatedAt'
+  | 'publishedBy___publishedAt'
+  | 'publishedBy___name'
+  | 'publishedBy___picture'
+  | 'publishedBy___isActive'
+  | 'publishedBy___kind'
+  | 'publishedBy___id'
+  | 'publishedBy___parent___id'
+  | 'publishedBy___parent___parent___id'
+  | 'publishedBy___parent___parent___children'
+  | 'publishedBy___parent___children'
+  | 'publishedBy___parent___children___id'
+  | 'publishedBy___parent___children___children'
+  | 'publishedBy___parent___internal___content'
+  | 'publishedBy___parent___internal___contentDigest'
+  | 'publishedBy___parent___internal___description'
+  | 'publishedBy___parent___internal___fieldOwners'
+  | 'publishedBy___parent___internal___ignoreType'
+  | 'publishedBy___parent___internal___mediaType'
+  | 'publishedBy___parent___internal___owner'
+  | 'publishedBy___parent___internal___type'
+  | 'publishedBy___children'
+  | 'publishedBy___children___id'
+  | 'publishedBy___children___parent___id'
+  | 'publishedBy___children___parent___children'
+  | 'publishedBy___children___children'
+  | 'publishedBy___children___children___id'
+  | 'publishedBy___children___children___children'
+  | 'publishedBy___children___internal___content'
+  | 'publishedBy___children___internal___contentDigest'
+  | 'publishedBy___children___internal___description'
+  | 'publishedBy___children___internal___fieldOwners'
+  | 'publishedBy___children___internal___ignoreType'
+  | 'publishedBy___children___internal___mediaType'
+  | 'publishedBy___children___internal___owner'
+  | 'publishedBy___children___internal___type'
+  | 'publishedBy___internal___content'
+  | 'publishedBy___internal___contentDigest'
+  | 'publishedBy___internal___description'
+  | 'publishedBy___internal___fieldOwners'
+  | 'publishedBy___internal___ignoreType'
+  | 'publishedBy___internal___mediaType'
+  | 'publishedBy___internal___owner'
+  | 'publishedBy___internal___type'
+  | 'release___remoteTypeName'
+  | 'release___remoteId'
+  | 'release___stage'
+  | 'release___createdAt'
+  | 'release___updatedAt'
+  | 'release___publishedAt'
+  | 'release___title'
+  | 'release___description'
+  | 'release___errorMessage'
+  | 'release___isActive'
+  | 'release___isImplicit'
+  | 'release___releaseAt'
+  | 'release___createdBy___remoteTypeName'
+  | 'release___createdBy___remoteId'
+  | 'release___createdBy___stage'
+  | 'release___createdBy___createdAt'
+  | 'release___createdBy___updatedAt'
+  | 'release___createdBy___publishedAt'
+  | 'release___createdBy___name'
+  | 'release___createdBy___picture'
+  | 'release___createdBy___isActive'
+  | 'release___createdBy___kind'
+  | 'release___createdBy___id'
+  | 'release___createdBy___parent___id'
+  | 'release___createdBy___parent___children'
+  | 'release___createdBy___children'
+  | 'release___createdBy___children___id'
+  | 'release___createdBy___children___children'
+  | 'release___createdBy___internal___content'
+  | 'release___createdBy___internal___contentDigest'
+  | 'release___createdBy___internal___description'
+  | 'release___createdBy___internal___fieldOwners'
+  | 'release___createdBy___internal___ignoreType'
+  | 'release___createdBy___internal___mediaType'
+  | 'release___createdBy___internal___owner'
+  | 'release___createdBy___internal___type'
+  | 'release___updatedBy___remoteTypeName'
+  | 'release___updatedBy___remoteId'
+  | 'release___updatedBy___stage'
+  | 'release___updatedBy___createdAt'
+  | 'release___updatedBy___updatedAt'
+  | 'release___updatedBy___publishedAt'
+  | 'release___updatedBy___name'
+  | 'release___updatedBy___picture'
+  | 'release___updatedBy___isActive'
+  | 'release___updatedBy___kind'
+  | 'release___updatedBy___id'
+  | 'release___updatedBy___parent___id'
+  | 'release___updatedBy___parent___children'
+  | 'release___updatedBy___children'
+  | 'release___updatedBy___children___id'
+  | 'release___updatedBy___children___children'
+  | 'release___updatedBy___internal___content'
+  | 'release___updatedBy___internal___contentDigest'
+  | 'release___updatedBy___internal___description'
+  | 'release___updatedBy___internal___fieldOwners'
+  | 'release___updatedBy___internal___ignoreType'
+  | 'release___updatedBy___internal___mediaType'
+  | 'release___updatedBy___internal___owner'
+  | 'release___updatedBy___internal___type'
+  | 'release___publishedBy___remoteTypeName'
+  | 'release___publishedBy___remoteId'
+  | 'release___publishedBy___stage'
+  | 'release___publishedBy___createdAt'
+  | 'release___publishedBy___updatedAt'
+  | 'release___publishedBy___publishedAt'
+  | 'release___publishedBy___name'
+  | 'release___publishedBy___picture'
+  | 'release___publishedBy___isActive'
+  | 'release___publishedBy___kind'
+  | 'release___publishedBy___id'
+  | 'release___publishedBy___parent___id'
+  | 'release___publishedBy___parent___children'
+  | 'release___publishedBy___children'
+  | 'release___publishedBy___children___id'
+  | 'release___publishedBy___children___children'
+  | 'release___publishedBy___internal___content'
+  | 'release___publishedBy___internal___contentDigest'
+  | 'release___publishedBy___internal___description'
+  | 'release___publishedBy___internal___fieldOwners'
+  | 'release___publishedBy___internal___ignoreType'
+  | 'release___publishedBy___internal___mediaType'
+  | 'release___publishedBy___internal___owner'
+  | 'release___publishedBy___internal___type'
+  | 'release___operations'
+  | 'release___operations___remoteTypeName'
+  | 'release___operations___remoteId'
+  | 'release___operations___stage'
+  | 'release___operations___createdAt'
+  | 'release___operations___updatedAt'
+  | 'release___operations___publishedAt'
+  | 'release___operations___description'
+  | 'release___operations___errorMessage'
+  | 'release___operations___rawPayload'
+  | 'release___operations___createdBy___remoteTypeName'
+  | 'release___operations___createdBy___remoteId'
+  | 'release___operations___createdBy___stage'
+  | 'release___operations___createdBy___createdAt'
+  | 'release___operations___createdBy___updatedAt'
+  | 'release___operations___createdBy___publishedAt'
+  | 'release___operations___createdBy___name'
+  | 'release___operations___createdBy___picture'
+  | 'release___operations___createdBy___isActive'
+  | 'release___operations___createdBy___kind'
+  | 'release___operations___createdBy___id'
+  | 'release___operations___createdBy___children'
+  | 'release___operations___updatedBy___remoteTypeName'
+  | 'release___operations___updatedBy___remoteId'
+  | 'release___operations___updatedBy___stage'
+  | 'release___operations___updatedBy___createdAt'
+  | 'release___operations___updatedBy___updatedAt'
+  | 'release___operations___updatedBy___publishedAt'
+  | 'release___operations___updatedBy___name'
+  | 'release___operations___updatedBy___picture'
+  | 'release___operations___updatedBy___isActive'
+  | 'release___operations___updatedBy___kind'
+  | 'release___operations___updatedBy___id'
+  | 'release___operations___updatedBy___children'
+  | 'release___operations___publishedBy___remoteTypeName'
+  | 'release___operations___publishedBy___remoteId'
+  | 'release___operations___publishedBy___stage'
+  | 'release___operations___publishedBy___createdAt'
+  | 'release___operations___publishedBy___updatedAt'
+  | 'release___operations___publishedBy___publishedAt'
+  | 'release___operations___publishedBy___name'
+  | 'release___operations___publishedBy___picture'
+  | 'release___operations___publishedBy___isActive'
+  | 'release___operations___publishedBy___kind'
+  | 'release___operations___publishedBy___id'
+  | 'release___operations___publishedBy___children'
+  | 'release___operations___release___remoteTypeName'
+  | 'release___operations___release___remoteId'
+  | 'release___operations___release___stage'
+  | 'release___operations___release___createdAt'
+  | 'release___operations___release___updatedAt'
+  | 'release___operations___release___publishedAt'
+  | 'release___operations___release___title'
+  | 'release___operations___release___description'
+  | 'release___operations___release___errorMessage'
+  | 'release___operations___release___isActive'
+  | 'release___operations___release___isImplicit'
+  | 'release___operations___release___releaseAt'
+  | 'release___operations___release___operations'
+  | 'release___operations___release___status'
+  | 'release___operations___release___id'
+  | 'release___operations___release___children'
+  | 'release___operations___status'
+  | 'release___operations___id'
+  | 'release___operations___parent___id'
+  | 'release___operations___parent___children'
+  | 'release___operations___children'
+  | 'release___operations___children___id'
+  | 'release___operations___children___children'
+  | 'release___operations___internal___content'
+  | 'release___operations___internal___contentDigest'
+  | 'release___operations___internal___description'
+  | 'release___operations___internal___fieldOwners'
+  | 'release___operations___internal___ignoreType'
+  | 'release___operations___internal___mediaType'
+  | 'release___operations___internal___owner'
+  | 'release___operations___internal___type'
+  | 'release___status'
+  | 'release___id'
+  | 'release___parent___id'
+  | 'release___parent___parent___id'
+  | 'release___parent___parent___children'
+  | 'release___parent___children'
+  | 'release___parent___children___id'
+  | 'release___parent___children___children'
+  | 'release___parent___internal___content'
+  | 'release___parent___internal___contentDigest'
+  | 'release___parent___internal___description'
+  | 'release___parent___internal___fieldOwners'
+  | 'release___parent___internal___ignoreType'
+  | 'release___parent___internal___mediaType'
+  | 'release___parent___internal___owner'
+  | 'release___parent___internal___type'
+  | 'release___children'
+  | 'release___children___id'
+  | 'release___children___parent___id'
+  | 'release___children___parent___children'
+  | 'release___children___children'
+  | 'release___children___children___id'
+  | 'release___children___children___children'
+  | 'release___children___internal___content'
+  | 'release___children___internal___contentDigest'
+  | 'release___children___internal___description'
+  | 'release___children___internal___fieldOwners'
+  | 'release___children___internal___ignoreType'
+  | 'release___children___internal___mediaType'
+  | 'release___children___internal___owner'
+  | 'release___children___internal___type'
+  | 'release___internal___content'
+  | 'release___internal___contentDigest'
+  | 'release___internal___description'
+  | 'release___internal___fieldOwners'
+  | 'release___internal___ignoreType'
+  | 'release___internal___mediaType'
+  | 'release___internal___owner'
+  | 'release___internal___type'
+  | 'status'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type GraphCms_ScheduledOperationGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_ScheduledOperationEdge>;
+  nodes: Array<GraphCms_ScheduledOperation>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_ScheduledOperationGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type GraphCms_ScheduledOperationGroupConnectionDistinctArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationGroupConnectionMaxArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationGroupConnectionMinArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationGroupConnectionSumArgs = {
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledOperationGroupConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: GraphCms_ScheduledOperationFieldsEnum;
+};
+
+export type GraphCms_ScheduledOperationSortInput = {
+  fields?: Maybe<Array<Maybe<GraphCms_ScheduledOperationFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type GraphCms_ScheduledReleaseConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_ScheduledReleaseEdge>;
+  nodes: Array<GraphCms_ScheduledRelease>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_ScheduledReleaseGroupConnection>;
+};
+
+
+export type GraphCms_ScheduledReleaseConnectionDistinctArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseConnectionMaxArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseConnectionMinArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseConnectionSumArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+export type GraphCms_ScheduledReleaseEdge = {
+  next?: Maybe<GraphCms_ScheduledRelease>;
+  node: GraphCms_ScheduledRelease;
+  previous?: Maybe<GraphCms_ScheduledRelease>;
+};
+
+export type GraphCms_ScheduledReleaseFieldsEnum =
+  | 'remoteTypeName'
+  | 'remoteId'
+  | 'stage'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'publishedAt'
+  | 'title'
+  | 'description'
+  | 'errorMessage'
+  | 'isActive'
+  | 'isImplicit'
+  | 'releaseAt'
+  | 'createdBy___remoteTypeName'
+  | 'createdBy___remoteId'
+  | 'createdBy___stage'
+  | 'createdBy___createdAt'
+  | 'createdBy___updatedAt'
+  | 'createdBy___publishedAt'
+  | 'createdBy___name'
+  | 'createdBy___picture'
+  | 'createdBy___isActive'
+  | 'createdBy___kind'
+  | 'createdBy___id'
+  | 'createdBy___parent___id'
+  | 'createdBy___parent___parent___id'
+  | 'createdBy___parent___parent___children'
+  | 'createdBy___parent___children'
+  | 'createdBy___parent___children___id'
+  | 'createdBy___parent___children___children'
+  | 'createdBy___parent___internal___content'
+  | 'createdBy___parent___internal___contentDigest'
+  | 'createdBy___parent___internal___description'
+  | 'createdBy___parent___internal___fieldOwners'
+  | 'createdBy___parent___internal___ignoreType'
+  | 'createdBy___parent___internal___mediaType'
+  | 'createdBy___parent___internal___owner'
+  | 'createdBy___parent___internal___type'
+  | 'createdBy___children'
+  | 'createdBy___children___id'
+  | 'createdBy___children___parent___id'
+  | 'createdBy___children___parent___children'
+  | 'createdBy___children___children'
+  | 'createdBy___children___children___id'
+  | 'createdBy___children___children___children'
+  | 'createdBy___children___internal___content'
+  | 'createdBy___children___internal___contentDigest'
+  | 'createdBy___children___internal___description'
+  | 'createdBy___children___internal___fieldOwners'
+  | 'createdBy___children___internal___ignoreType'
+  | 'createdBy___children___internal___mediaType'
+  | 'createdBy___children___internal___owner'
+  | 'createdBy___children___internal___type'
+  | 'createdBy___internal___content'
+  | 'createdBy___internal___contentDigest'
+  | 'createdBy___internal___description'
+  | 'createdBy___internal___fieldOwners'
+  | 'createdBy___internal___ignoreType'
+  | 'createdBy___internal___mediaType'
+  | 'createdBy___internal___owner'
+  | 'createdBy___internal___type'
+  | 'updatedBy___remoteTypeName'
+  | 'updatedBy___remoteId'
+  | 'updatedBy___stage'
+  | 'updatedBy___createdAt'
+  | 'updatedBy___updatedAt'
+  | 'updatedBy___publishedAt'
+  | 'updatedBy___name'
+  | 'updatedBy___picture'
+  | 'updatedBy___isActive'
+  | 'updatedBy___kind'
+  | 'updatedBy___id'
+  | 'updatedBy___parent___id'
+  | 'updatedBy___parent___parent___id'
+  | 'updatedBy___parent___parent___children'
+  | 'updatedBy___parent___children'
+  | 'updatedBy___parent___children___id'
+  | 'updatedBy___parent___children___children'
+  | 'updatedBy___parent___internal___content'
+  | 'updatedBy___parent___internal___contentDigest'
+  | 'updatedBy___parent___internal___description'
+  | 'updatedBy___parent___internal___fieldOwners'
+  | 'updatedBy___parent___internal___ignoreType'
+  | 'updatedBy___parent___internal___mediaType'
+  | 'updatedBy___parent___internal___owner'
+  | 'updatedBy___parent___internal___type'
+  | 'updatedBy___children'
+  | 'updatedBy___children___id'
+  | 'updatedBy___children___parent___id'
+  | 'updatedBy___children___parent___children'
+  | 'updatedBy___children___children'
+  | 'updatedBy___children___children___id'
+  | 'updatedBy___children___children___children'
+  | 'updatedBy___children___internal___content'
+  | 'updatedBy___children___internal___contentDigest'
+  | 'updatedBy___children___internal___description'
+  | 'updatedBy___children___internal___fieldOwners'
+  | 'updatedBy___children___internal___ignoreType'
+  | 'updatedBy___children___internal___mediaType'
+  | 'updatedBy___children___internal___owner'
+  | 'updatedBy___children___internal___type'
+  | 'updatedBy___internal___content'
+  | 'updatedBy___internal___contentDigest'
+  | 'updatedBy___internal___description'
+  | 'updatedBy___internal___fieldOwners'
+  | 'updatedBy___internal___ignoreType'
+  | 'updatedBy___internal___mediaType'
+  | 'updatedBy___internal___owner'
+  | 'updatedBy___internal___type'
+  | 'publishedBy___remoteTypeName'
+  | 'publishedBy___remoteId'
+  | 'publishedBy___stage'
+  | 'publishedBy___createdAt'
+  | 'publishedBy___updatedAt'
+  | 'publishedBy___publishedAt'
+  | 'publishedBy___name'
+  | 'publishedBy___picture'
+  | 'publishedBy___isActive'
+  | 'publishedBy___kind'
+  | 'publishedBy___id'
+  | 'publishedBy___parent___id'
+  | 'publishedBy___parent___parent___id'
+  | 'publishedBy___parent___parent___children'
+  | 'publishedBy___parent___children'
+  | 'publishedBy___parent___children___id'
+  | 'publishedBy___parent___children___children'
+  | 'publishedBy___parent___internal___content'
+  | 'publishedBy___parent___internal___contentDigest'
+  | 'publishedBy___parent___internal___description'
+  | 'publishedBy___parent___internal___fieldOwners'
+  | 'publishedBy___parent___internal___ignoreType'
+  | 'publishedBy___parent___internal___mediaType'
+  | 'publishedBy___parent___internal___owner'
+  | 'publishedBy___parent___internal___type'
+  | 'publishedBy___children'
+  | 'publishedBy___children___id'
+  | 'publishedBy___children___parent___id'
+  | 'publishedBy___children___parent___children'
+  | 'publishedBy___children___children'
+  | 'publishedBy___children___children___id'
+  | 'publishedBy___children___children___children'
+  | 'publishedBy___children___internal___content'
+  | 'publishedBy___children___internal___contentDigest'
+  | 'publishedBy___children___internal___description'
+  | 'publishedBy___children___internal___fieldOwners'
+  | 'publishedBy___children___internal___ignoreType'
+  | 'publishedBy___children___internal___mediaType'
+  | 'publishedBy___children___internal___owner'
+  | 'publishedBy___children___internal___type'
+  | 'publishedBy___internal___content'
+  | 'publishedBy___internal___contentDigest'
+  | 'publishedBy___internal___description'
+  | 'publishedBy___internal___fieldOwners'
+  | 'publishedBy___internal___ignoreType'
+  | 'publishedBy___internal___mediaType'
+  | 'publishedBy___internal___owner'
+  | 'publishedBy___internal___type'
+  | 'operations'
+  | 'operations___remoteTypeName'
+  | 'operations___remoteId'
+  | 'operations___stage'
+  | 'operations___createdAt'
+  | 'operations___updatedAt'
+  | 'operations___publishedAt'
+  | 'operations___description'
+  | 'operations___errorMessage'
+  | 'operations___rawPayload'
+  | 'operations___createdBy___remoteTypeName'
+  | 'operations___createdBy___remoteId'
+  | 'operations___createdBy___stage'
+  | 'operations___createdBy___createdAt'
+  | 'operations___createdBy___updatedAt'
+  | 'operations___createdBy___publishedAt'
+  | 'operations___createdBy___name'
+  | 'operations___createdBy___picture'
+  | 'operations___createdBy___isActive'
+  | 'operations___createdBy___kind'
+  | 'operations___createdBy___id'
+  | 'operations___createdBy___parent___id'
+  | 'operations___createdBy___parent___children'
+  | 'operations___createdBy___children'
+  | 'operations___createdBy___children___id'
+  | 'operations___createdBy___children___children'
+  | 'operations___createdBy___internal___content'
+  | 'operations___createdBy___internal___contentDigest'
+  | 'operations___createdBy___internal___description'
+  | 'operations___createdBy___internal___fieldOwners'
+  | 'operations___createdBy___internal___ignoreType'
+  | 'operations___createdBy___internal___mediaType'
+  | 'operations___createdBy___internal___owner'
+  | 'operations___createdBy___internal___type'
+  | 'operations___updatedBy___remoteTypeName'
+  | 'operations___updatedBy___remoteId'
+  | 'operations___updatedBy___stage'
+  | 'operations___updatedBy___createdAt'
+  | 'operations___updatedBy___updatedAt'
+  | 'operations___updatedBy___publishedAt'
+  | 'operations___updatedBy___name'
+  | 'operations___updatedBy___picture'
+  | 'operations___updatedBy___isActive'
+  | 'operations___updatedBy___kind'
+  | 'operations___updatedBy___id'
+  | 'operations___updatedBy___parent___id'
+  | 'operations___updatedBy___parent___children'
+  | 'operations___updatedBy___children'
+  | 'operations___updatedBy___children___id'
+  | 'operations___updatedBy___children___children'
+  | 'operations___updatedBy___internal___content'
+  | 'operations___updatedBy___internal___contentDigest'
+  | 'operations___updatedBy___internal___description'
+  | 'operations___updatedBy___internal___fieldOwners'
+  | 'operations___updatedBy___internal___ignoreType'
+  | 'operations___updatedBy___internal___mediaType'
+  | 'operations___updatedBy___internal___owner'
+  | 'operations___updatedBy___internal___type'
+  | 'operations___publishedBy___remoteTypeName'
+  | 'operations___publishedBy___remoteId'
+  | 'operations___publishedBy___stage'
+  | 'operations___publishedBy___createdAt'
+  | 'operations___publishedBy___updatedAt'
+  | 'operations___publishedBy___publishedAt'
+  | 'operations___publishedBy___name'
+  | 'operations___publishedBy___picture'
+  | 'operations___publishedBy___isActive'
+  | 'operations___publishedBy___kind'
+  | 'operations___publishedBy___id'
+  | 'operations___publishedBy___parent___id'
+  | 'operations___publishedBy___parent___children'
+  | 'operations___publishedBy___children'
+  | 'operations___publishedBy___children___id'
+  | 'operations___publishedBy___children___children'
+  | 'operations___publishedBy___internal___content'
+  | 'operations___publishedBy___internal___contentDigest'
+  | 'operations___publishedBy___internal___description'
+  | 'operations___publishedBy___internal___fieldOwners'
+  | 'operations___publishedBy___internal___ignoreType'
+  | 'operations___publishedBy___internal___mediaType'
+  | 'operations___publishedBy___internal___owner'
+  | 'operations___publishedBy___internal___type'
+  | 'operations___release___remoteTypeName'
+  | 'operations___release___remoteId'
+  | 'operations___release___stage'
+  | 'operations___release___createdAt'
+  | 'operations___release___updatedAt'
+  | 'operations___release___publishedAt'
+  | 'operations___release___title'
+  | 'operations___release___description'
+  | 'operations___release___errorMessage'
+  | 'operations___release___isActive'
+  | 'operations___release___isImplicit'
+  | 'operations___release___releaseAt'
+  | 'operations___release___createdBy___remoteTypeName'
+  | 'operations___release___createdBy___remoteId'
+  | 'operations___release___createdBy___stage'
+  | 'operations___release___createdBy___createdAt'
+  | 'operations___release___createdBy___updatedAt'
+  | 'operations___release___createdBy___publishedAt'
+  | 'operations___release___createdBy___name'
+  | 'operations___release___createdBy___picture'
+  | 'operations___release___createdBy___isActive'
+  | 'operations___release___createdBy___kind'
+  | 'operations___release___createdBy___id'
+  | 'operations___release___createdBy___children'
+  | 'operations___release___updatedBy___remoteTypeName'
+  | 'operations___release___updatedBy___remoteId'
+  | 'operations___release___updatedBy___stage'
+  | 'operations___release___updatedBy___createdAt'
+  | 'operations___release___updatedBy___updatedAt'
+  | 'operations___release___updatedBy___publishedAt'
+  | 'operations___release___updatedBy___name'
+  | 'operations___release___updatedBy___picture'
+  | 'operations___release___updatedBy___isActive'
+  | 'operations___release___updatedBy___kind'
+  | 'operations___release___updatedBy___id'
+  | 'operations___release___updatedBy___children'
+  | 'operations___release___publishedBy___remoteTypeName'
+  | 'operations___release___publishedBy___remoteId'
+  | 'operations___release___publishedBy___stage'
+  | 'operations___release___publishedBy___createdAt'
+  | 'operations___release___publishedBy___updatedAt'
+  | 'operations___release___publishedBy___publishedAt'
+  | 'operations___release___publishedBy___name'
+  | 'operations___release___publishedBy___picture'
+  | 'operations___release___publishedBy___isActive'
+  | 'operations___release___publishedBy___kind'
+  | 'operations___release___publishedBy___id'
+  | 'operations___release___publishedBy___children'
+  | 'operations___release___operations'
+  | 'operations___release___operations___remoteTypeName'
+  | 'operations___release___operations___remoteId'
+  | 'operations___release___operations___stage'
+  | 'operations___release___operations___createdAt'
+  | 'operations___release___operations___updatedAt'
+  | 'operations___release___operations___publishedAt'
+  | 'operations___release___operations___description'
+  | 'operations___release___operations___errorMessage'
+  | 'operations___release___operations___rawPayload'
+  | 'operations___release___operations___status'
+  | 'operations___release___operations___id'
+  | 'operations___release___operations___children'
+  | 'operations___release___status'
+  | 'operations___release___id'
+  | 'operations___release___parent___id'
+  | 'operations___release___parent___children'
+  | 'operations___release___children'
+  | 'operations___release___children___id'
+  | 'operations___release___children___children'
+  | 'operations___release___internal___content'
+  | 'operations___release___internal___contentDigest'
+  | 'operations___release___internal___description'
+  | 'operations___release___internal___fieldOwners'
+  | 'operations___release___internal___ignoreType'
+  | 'operations___release___internal___mediaType'
+  | 'operations___release___internal___owner'
+  | 'operations___release___internal___type'
+  | 'operations___status'
+  | 'operations___id'
+  | 'operations___parent___id'
+  | 'operations___parent___parent___id'
+  | 'operations___parent___parent___children'
+  | 'operations___parent___children'
+  | 'operations___parent___children___id'
+  | 'operations___parent___children___children'
+  | 'operations___parent___internal___content'
+  | 'operations___parent___internal___contentDigest'
+  | 'operations___parent___internal___description'
+  | 'operations___parent___internal___fieldOwners'
+  | 'operations___parent___internal___ignoreType'
+  | 'operations___parent___internal___mediaType'
+  | 'operations___parent___internal___owner'
+  | 'operations___parent___internal___type'
+  | 'operations___children'
+  | 'operations___children___id'
+  | 'operations___children___parent___id'
+  | 'operations___children___parent___children'
+  | 'operations___children___children'
+  | 'operations___children___children___id'
+  | 'operations___children___children___children'
+  | 'operations___children___internal___content'
+  | 'operations___children___internal___contentDigest'
+  | 'operations___children___internal___description'
+  | 'operations___children___internal___fieldOwners'
+  | 'operations___children___internal___ignoreType'
+  | 'operations___children___internal___mediaType'
+  | 'operations___children___internal___owner'
+  | 'operations___children___internal___type'
+  | 'operations___internal___content'
+  | 'operations___internal___contentDigest'
+  | 'operations___internal___description'
+  | 'operations___internal___fieldOwners'
+  | 'operations___internal___ignoreType'
+  | 'operations___internal___mediaType'
+  | 'operations___internal___owner'
+  | 'operations___internal___type'
+  | 'status'
+  | 'id'
+  | 'parent___id'
+  | 'parent___parent___id'
+  | 'parent___parent___parent___id'
+  | 'parent___parent___parent___children'
+  | 'parent___parent___children'
+  | 'parent___parent___children___id'
+  | 'parent___parent___children___children'
+  | 'parent___parent___internal___content'
+  | 'parent___parent___internal___contentDigest'
+  | 'parent___parent___internal___description'
+  | 'parent___parent___internal___fieldOwners'
+  | 'parent___parent___internal___ignoreType'
+  | 'parent___parent___internal___mediaType'
+  | 'parent___parent___internal___owner'
+  | 'parent___parent___internal___type'
+  | 'parent___children'
+  | 'parent___children___id'
+  | 'parent___children___parent___id'
+  | 'parent___children___parent___children'
+  | 'parent___children___children'
+  | 'parent___children___children___id'
+  | 'parent___children___children___children'
+  | 'parent___children___internal___content'
+  | 'parent___children___internal___contentDigest'
+  | 'parent___children___internal___description'
+  | 'parent___children___internal___fieldOwners'
+  | 'parent___children___internal___ignoreType'
+  | 'parent___children___internal___mediaType'
+  | 'parent___children___internal___owner'
+  | 'parent___children___internal___type'
+  | 'parent___internal___content'
+  | 'parent___internal___contentDigest'
+  | 'parent___internal___description'
+  | 'parent___internal___fieldOwners'
+  | 'parent___internal___ignoreType'
+  | 'parent___internal___mediaType'
+  | 'parent___internal___owner'
+  | 'parent___internal___type'
+  | 'children'
+  | 'children___id'
+  | 'children___parent___id'
+  | 'children___parent___parent___id'
+  | 'children___parent___parent___children'
+  | 'children___parent___children'
+  | 'children___parent___children___id'
+  | 'children___parent___children___children'
+  | 'children___parent___internal___content'
+  | 'children___parent___internal___contentDigest'
+  | 'children___parent___internal___description'
+  | 'children___parent___internal___fieldOwners'
+  | 'children___parent___internal___ignoreType'
+  | 'children___parent___internal___mediaType'
+  | 'children___parent___internal___owner'
+  | 'children___parent___internal___type'
+  | 'children___children'
+  | 'children___children___id'
+  | 'children___children___parent___id'
+  | 'children___children___parent___children'
+  | 'children___children___children'
+  | 'children___children___children___id'
+  | 'children___children___children___children'
+  | 'children___children___internal___content'
+  | 'children___children___internal___contentDigest'
+  | 'children___children___internal___description'
+  | 'children___children___internal___fieldOwners'
+  | 'children___children___internal___ignoreType'
+  | 'children___children___internal___mediaType'
+  | 'children___children___internal___owner'
+  | 'children___children___internal___type'
+  | 'children___internal___content'
+  | 'children___internal___contentDigest'
+  | 'children___internal___description'
+  | 'children___internal___fieldOwners'
+  | 'children___internal___ignoreType'
+  | 'children___internal___mediaType'
+  | 'children___internal___owner'
+  | 'children___internal___type'
+  | 'internal___content'
+  | 'internal___contentDigest'
+  | 'internal___description'
+  | 'internal___fieldOwners'
+  | 'internal___ignoreType'
+  | 'internal___mediaType'
+  | 'internal___owner'
+  | 'internal___type';
+
+export type GraphCms_ScheduledReleaseGroupConnection = {
+  totalCount: Scalars['Int'];
+  edges: Array<GraphCms_ScheduledReleaseEdge>;
+  nodes: Array<GraphCms_ScheduledRelease>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  sum?: Maybe<Scalars['Float']>;
+  group: Array<GraphCms_ScheduledReleaseGroupConnection>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+};
+
+
+export type GraphCms_ScheduledReleaseGroupConnectionDistinctArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseGroupConnectionMaxArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseGroupConnectionMinArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseGroupConnectionSumArgs = {
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+
+export type GraphCms_ScheduledReleaseGroupConnectionGroupArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+  field: GraphCms_ScheduledReleaseFieldsEnum;
+};
+
+export type GraphCms_ScheduledReleaseSortInput = {
+  fields?: Maybe<Array<Maybe<GraphCms_ScheduledReleaseFieldsEnum>>>;
+  order?: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type GraphCms_LocationFilterInput = {
   remoteTypeName?: Maybe<StringQueryOperatorInput>;
   latitude?: Maybe<FloatQueryOperatorInput>;
@@ -6894,7 +8153,7 @@ export type GraphCms_TipSortInput = {
 };
 
 export type RecipeMetaFragment = (
-  Pick<GraphCms_Recipe, 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
+  Pick<GraphCms_Recipe, 'createdAt' | 'margaritasFavorite' | 'artemsFavorite' | 'time' | 'title' | 'seasons' | 'slug'>
   & { flags: Pick<FlagsJson, 'vegan' | 'vegetarian' | 'glutenFree' | 'dairyFree' | 'noAddedSugar'>, images: Array<Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>> }
 );
 
