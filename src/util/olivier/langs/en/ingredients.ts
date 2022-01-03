@@ -2,7 +2,7 @@ export const INGREDIENTS = [
 	// Spices
 	['salt'],
 	['black pepper'],
-	['bay leave', 'bay leaves'],
+	['bay leaf', 'bay leaves'],
 	['rosemary seed', 'rosemary seeds'],
 	['cumin seed', 'cumin seeds'],
 	['sunflower seed', 'sunflower seeds'],
@@ -220,4 +220,5 @@ export const INGREDIENTS = [
 	['sunflower oil'],
 	['oil'],
 	['soy cauce'],
+	['buckwheat'],
 ];
