@@ -21,7 +21,7 @@ export function RecipeCuisines({ cuisines }: Props) {
 	return (
 		<Stack gap="s" direction="row">
 			{cuisines.map((cuisine) => (
-				<Tag key={cuisine} href={`/cuisines/${paramCase(cuisine)}`}>
+				<Tag key={cuisine} href={`/cuisines/${paramCase(cuisine)}/`}>
 					<Stack as="span" gap="xs" direction="row">
 						<Box as="span" aria-hidden="true">
 							{getEmojiByNationality(cuisine)}

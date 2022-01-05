@@ -98,14 +98,14 @@ export function RecipeFlag({ type, ...props }: Props) {
 	switch (type) {
 		case 'vegan':
 			return (
-				<Circle href="/flags/vegan" title="Vegan" {...props} color="#6fa565">
+				<Circle href="/flags/vegan/" title="Vegan" {...props} color="#6fa565">
 					VG
 				</Circle>
 			);
 		case 'vegetarian':
 			return (
 				<Circle
-					href="/flags/vegetarian"
+					href="/flags/vegetarian/"
 					title="Vegetarian"
 					{...props}
 					color="#ebd660"
@@ -116,7 +116,7 @@ export function RecipeFlag({ type, ...props }: Props) {
 		case 'glutenFree':
 			return (
 				<Circle
-					href="/flags/gluten-free"
+					href="/flags/gluten-free/"
 					title="Gluten free"
 					{...props}
 					color="#6c94bd"
@@ -127,7 +127,7 @@ export function RecipeFlag({ type, ...props }: Props) {
 		case 'dairyFree':
 			return (
 				<Circle
-					href="/flags/dairy-free"
+					href="/flags/dairy-free/"
 					title="Dairy free"
 					{...props}
 					color="#a67bb1"
@@ -138,7 +138,7 @@ export function RecipeFlag({ type, ...props }: Props) {
 		case 'noAddedSugar':
 			return (
 				<Circle
-					href="/flags/no-added-sugar"
+					href="/flags/no-added-sugar/"
 					title="No refined sugar"
 					{...props}
 					color="#887676"
@@ -149,7 +149,7 @@ export function RecipeFlag({ type, ...props }: Props) {
 		case 'margaritasFavorite':
 			return (
 				<Round
-					href="/flags/margaritas-favorite"
+					href="/flags/margaritas-favorite/"
 					title="Margarita’s favorite"
 					{...props}
 					color="accent"
@@ -160,7 +160,7 @@ export function RecipeFlag({ type, ...props }: Props) {
 		case 'artemsFavorite':
 			return (
 				<Round
-					href="/flags/artems-favorite"
+					href="/flags/artems-favorite/"
 					title="Artem’s favorite"
 					{...props}
 					color="accent"

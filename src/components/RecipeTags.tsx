@@ -12,7 +12,7 @@ export default function RecipeTags({ tags = [] }: Props) {
 	return (
 		<Stack gap="s" direction="row">
 			{tags.map((tag) => (
-				<Tag key={tag} href={`/tags/${paramCase(tag)}`}>
+				<Tag key={tag} href={`/tags/${paramCase(tag)}/`}>
 					{sentenceCase(tag)}
 				</Tag>
 			))}
