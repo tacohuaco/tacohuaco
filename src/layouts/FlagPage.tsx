@@ -20,6 +20,7 @@ const TITLES: Record<FlagName, string> = {
 	dairyFree: 'Dairy free recipes',
 	noAddedSugar: 'Recipes without refined sugar',
 	glutenFree: 'Gluten free recipes',
+	lowGluten: 'Low gluten recipes',
 };
 
 export default function FlagPage({ recipes, url, flag }: Props) {

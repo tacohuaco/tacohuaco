@@ -63,18 +63,47 @@ export const getIngredientsInfo = (
 };
 
 /**
+ * Gluten free recipe: less than 30% of the flour amount has gluten
+ */
+const isLowGlutenRecipe = (
+	ingredients: Ingredient[],
+	infos: IngredientInfo[]
+) => {
+	let glutenFloursAmount = 0;
+	let glutenlessFloursAmount = 0;
+
+	ingredients.forEach((ingredient) => {
+		if (
+			typeof ingredient.minAmount === 'number' &&
+			(ingredient.name.endsWith(' flour') || ingredient.name.endsWith('starch'))
+		) {
+			const info = infos.find((x) => x.name === ingredient.name);
+			if (info && info.hasGluten) {
+				glutenFloursAmount += ingredient.minAmount;
+			} else {
+				glutenlessFloursAmount += ingredient.minAmount;
+			}
+		}
+	});
+	const glutennes = glutenFloursAmount / glutenlessFloursAmount;
+	return glutennes < 0.33;
+};
+
+/**
  * Return flags for a Markdown ingredients list
  */
 export const getRecipeFlags = (ingredientsMarkdown: string): FlagsJson => {
-	const ingredients = getIngredientsInfo(ingredientsMarkdown);
+	const ingredients = getIngredients(ingredientsMarkdown);
+	const infos = getIngredientsInfo(ingredientsMarkdown);
 	return {
-		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
-		vegetarian: ingredients.every((x) =>
+		vegan: infos.every((x) => x.kind === IngredientKind.Vegan),
+		vegetarian: infos.every((x) =>
 			[IngredientKind.Vegan, IngredientKind.Vegetarian].includes(x.kind)
 		),
-		glutenFree: ingredients.every((x) => x.hasGluten === false),
-		dairyFree: ingredients.every((x) => x.hasDairy === false),
-		noAddedSugar: ingredients.every((x) => x.hasSugar === false),
+		glutenFree: infos.every((x) => x.hasGluten === false),
+		lowGluten: isLowGlutenRecipe(ingredients, infos),
+		dairyFree: infos.every((x) => x.hasDairy === false),
+		noAddedSugar: infos.every((x) => x.hasSugar === false),
 	};
 };
 

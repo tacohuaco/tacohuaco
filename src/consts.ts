@@ -2,6 +2,7 @@ export const CONTENTS_FLAGS = [
 	'vegan',
 	'vegetarian',
 	'glutenFree',
+	'lowGluten',
 	'dairyFree',
 	'noAddedSugar',
 ] as const;

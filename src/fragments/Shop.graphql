@@ -43,4 +43,11 @@ fragment Shop on Shop {
   }
   type
   country
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
 }

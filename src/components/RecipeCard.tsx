@@ -55,6 +55,7 @@ export const recipeMetaFragment = graphql`
 			vegan
 			vegetarian
 			glutenFree
+			lowGluten
 			dairyFree
 			noAddedSugar
 		}

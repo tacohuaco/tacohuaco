@@ -119,6 +119,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       vegan: Boolean!
       vegetarian: Boolean!
       glutenFree: Boolean!
+      lowGluten: Boolean!
       dairyFree: Boolean!
       noAddedSugar: Boolean!
     }

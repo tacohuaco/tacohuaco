@@ -87,6 +87,7 @@ export const pageQuery = graphql`
 				vegan
 				vegetarian
 				glutenFree
+				lowGluten
 				dairyFree
 				noAddedSugar
 			}

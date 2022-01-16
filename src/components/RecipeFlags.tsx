@@ -19,6 +19,7 @@ export default function RecipeFlags({
 			{flags.vegan && <RecipeFlag type="vegan" />}
 			{flags.vegetarian && <RecipeFlag type="vegetarian" />}
 			{flags.glutenFree && <RecipeFlag type="glutenFree" />}
+			{flags.lowGluten && <RecipeFlag type="lowGluten" />}
 			{flags.dairyFree && <RecipeFlag type="dairyFree" />}
 			{flags.noAddedSugar && <RecipeFlag type="noAddedSugar" />}
 			{margaritasFavorite && <RecipeFlag type="margaritasFavorite" />}

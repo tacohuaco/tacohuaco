@@ -65,4 +65,11 @@ fragment Recipe on Recipe {
   cuisines
   tags
   difficulty
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
 }

@@ -124,6 +124,17 @@ export function RecipeFlag({ type, ...props }: Props) {
 					GF
 				</Circle>
 			);
+		case 'lowGluten':
+			return (
+				<Circle
+					href="/flags/low-gluten/"
+					title="Low gluten"
+					{...props}
+					color="#78bdc9"
+				>
+					LG
+				</Circle>
+			);
 		case 'dairyFree':
 			return (
 				<Circle
