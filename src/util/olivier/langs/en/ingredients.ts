@@ -182,6 +182,8 @@ export const INGREDIENTS = [
 	['cottage cheese (tvorog)', 'cottage cheese', 'tvorog'],
 	['crème fraîche', 'creme fraiche'],
 	['butter', 'butter', 'unsalted butter'],
+	['milk chocolate'],
+	['chocolate'],
 	// Meat
 	['chicken stock', 'chicken broth'],
 	['chicken', 'chicken'],

@@ -24,6 +24,7 @@ export const DAIRIES = [
 	'smetana',
 	'sour cream',
 	'yogurt',
+	'milk chocolate',
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
