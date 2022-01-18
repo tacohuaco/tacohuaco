@@ -227,4 +227,5 @@ export const INGREDIENTS = [
 	['soy cauce'],
 	['buckwheat'],
 	['marmalade'],
+	['pasta'],
 ];
