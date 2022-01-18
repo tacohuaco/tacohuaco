@@ -142,6 +142,7 @@ export const INGREDIENTS = [
 		'clementines',
 	],
 	['apple', 'apples'],
+	['dried apricot', 'dried apricots'],
 	['apricot', 'apricots'],
 	['banana', 'bananas'],
 	['blueberry', 'blueberries'],
@@ -184,6 +185,7 @@ export const INGREDIENTS = [
 	['butter', 'butter', 'unsalted butter'],
 	['milk chocolate'],
 	['chocolate'],
+	['whipping cream', 'schlagsahne'],
 	// Meat
 	['chicken stock', 'chicken broth'],
 	['chicken', 'chicken'],
@@ -206,6 +208,7 @@ export const INGREDIENTS = [
 	['burger bun', 'burger buns'],
 	['egg', 'eggs'],
 	['date sugar'],
+	['coconut sugar'],
 	['sugar'],
 	['mustard'],
 	['vinegar'],
@@ -223,4 +226,5 @@ export const INGREDIENTS = [
 	['oil'],
 	['soy cauce'],
 	['buckwheat'],
+	['marmalade'],
 ];

@@ -23,10 +23,11 @@ export const DAIRIES = [
 	'parmesan cheese',
 	'smetana',
 	'sour cream',
+	'whipping cream',
 	'yogurt',
 	'milk chocolate',
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon'];
 export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage'];
-export const SUGARS = ['sugar', 'dried cranberry'];
+export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
