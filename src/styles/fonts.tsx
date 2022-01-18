@@ -3,6 +3,10 @@ import { createGlobalStyle } from 'styled-components';
 const fontDisplay = 'fallback';
 
 export const Fonts = createGlobalStyle`
+	body {
+		/* Disable hyphenation because of the issue with the Le Monde font */
+		hyphens: none;
+	}
 	@font-face {
 		font-family: "AzoSans";
 		src: url("/fonts/Azo-Sans-Light.woff2");
