@@ -200,7 +200,7 @@ export const INGREDIENTS = [
 	['flaxseed flour', 'flax seed flour'],
 	['oat flour', 'oatmeal flour'],
 	['spelt flour'],
-	['all-purpose flour', 'all purpose flour', 'flour'],
+	['all-purpose flour', 'all purpose flour', 'wheat flour', 'flour'],
 	['flour'],
 	// Misc
 	['sausage'],
