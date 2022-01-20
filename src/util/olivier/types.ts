@@ -41,3 +41,9 @@ export interface IngredientInfo {
 	hasSugar: boolean;
 	seasons: Month[];
 }
+
+export interface PrintIngredient
+	extends Omit<Ingredient, 'minAmount' | 'maxAmount' | 'unit'> {
+	amount?: string;
+	suffix?: string;
+}

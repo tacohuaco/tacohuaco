@@ -54,11 +54,11 @@ function formatAmount(amount?: Amount): string | undefined {
 }
 
 /**
- * Format an ingredient for display:
+ * Format an ingredient option for display:
  * - pluralize the name and the unit
  * - format amounts as strings (1.5 → 1½)
  */
-export function format(ingredient: Ingredient): Ingredient {
+function formatOption(ingredient: Ingredient): Ingredient {
 	return {
 		...ingredient,
 		name: pluralizeName(ingredient),
@@ -66,4 +66,11 @@ export function format(ingredient: Ingredient): Ingredient {
 		maxAmount: formatAmount(ingredient.maxAmount),
 		unit: pluralizeUnit(ingredient),
 	};
+}
+
+/**
+ * Format an ingredient for display
+ */
+export function format(options: Ingredient[]): Ingredient[] {
+	return options.map(formatOption);
 }

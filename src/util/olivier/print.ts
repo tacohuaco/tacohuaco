@@ -1,11 +1,15 @@
 import { A_BIT, OF } from './langs/en/translations';
-import { Ingredient } from './types';
+import { Ingredient, PrintIngredient } from './types';
 
 function printAmount({
 	minAmount,
 	maxAmount,
 	unit,
 }: Ingredient): string | undefined {
+	if (!minAmount) {
+		return undefined;
+	}
+
 	return (
 		[
 			minAmount,
@@ -16,16 +20,14 @@ function printAmount({
 }
 
 function printSuffix({ minAmount, unit }: Ingredient): string | undefined {
+	if (!minAmount) {
+		return undefined;
+	}
+
 	return unit || minAmount === A_BIT ? OF : undefined;
 }
 
-interface PrintIngredient
-	extends Omit<Ingredient, 'minAmount' | 'maxAmount' | 'unit'> {
-	amount?: string;
-	suffix?: string;
-}
-
-export function print(ingredient: Ingredient): PrintIngredient {
+function printOption(ingredient: Ingredient): PrintIngredient {
 	const { modifier, name, comment } = ingredient;
 	return {
 		amount: printAmount(ingredient),
@@ -34,4 +36,26 @@ export function print(ingredient: Ingredient): PrintIngredient {
 		name,
 		comment,
 	};
+}
+
+export function print(options: Ingredient[]): PrintIngredient[] {
+	const areAmountsSame = options.every(
+		(option) =>
+			option.minAmount === options[0].minAmount &&
+			option.maxAmount === options[0].maxAmount
+	);
+
+	// Only keep amounts of the first option if amounts of all options are the same
+	const optionsToPrint = options.map((option, index) => {
+		if (areAmountsSame && index !== 0) {
+			return {
+				...option,
+				minAmount: undefined,
+				maxAmount: undefined,
+			};
+		}
+		return option;
+	});
+
+	return optionsToPrint.map(printOption);
 }

@@ -63,7 +63,7 @@ export function normalizeName(
  * - find normal forms of ingredient names and units
  * - extract the ingredient modifier (5 _large_ apples)
  */
-export function normalize({
+function normalizeOption({
 	name,
 	minAmount,
 	maxAmount,
@@ -77,4 +77,11 @@ export function normalize({
 		unit: normalizeUnit(unit),
 		comment,
 	};
+}
+
+/**
+ * Normalize ingredient objects list
+ */
+export function normalize(options: Ingredient[]): Ingredient[] {
+	return options.map(normalizeOption);
 }

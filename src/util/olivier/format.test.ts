@@ -1,3 +1,4 @@
+import { castArray } from 'lodash';
 import { format } from './format';
 
 test.each([
@@ -80,5 +81,5 @@ test.each([
 		},
 	],
 ])('format ingredient: %s', (source, result) => {
-	expect(format(source)).toEqual(result);
+	expect(format(castArray(source))).toEqual(castArray(result));
 });

@@ -11,6 +11,7 @@ import {
 	Ingredient,
 	IngredientKind,
 	IngredientInfo,
+	PrintIngredient,
 	Month,
 } from './olivier';
 import { FlagsJson } from '../graphql-types';
@@ -46,7 +47,7 @@ export const getIngredientLines = (text: string): string[] => {
  */
 export const getIngredients = (ingredientsMarkdown: string): Ingredient[] => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
-	return ingredientsRaw.map((x) => normalize(parse(x)));
+	return ingredientsRaw.flatMap((x) => normalize(parse(x)));
 };
 
 /**
@@ -57,7 +58,7 @@ export const getIngredientsInfo = (
 ): IngredientInfo[] => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
 	return uniqBy(
-		ingredientsRaw.map((x) => analyze(normalize(parse(x)))),
+		ingredientsRaw.flatMap((x) => analyze(normalize(parse(x)))),
 		(x) => x.name
 	);
 };
@@ -143,8 +144,13 @@ export const getRecipePreconditions = (
 		.filter(Boolean);
 };
 
-export function printIngredient(ingredient: Ingredient): string {
-	const { amount, suffix, modifier, name, comment } = print(ingredient);
+function printIngredientOption({
+	amount,
+	suffix,
+	modifier,
+	name,
+	comment,
+}: PrintIngredient): string {
 	return [
 		amount && ['**', amount, '**'].join(''),
 		suffix,
@@ -154,6 +160,10 @@ export function printIngredient(ingredient: Ingredient): string {
 	]
 		.filter(Boolean)
 		.join(' ');
+}
+
+export function printIngredient(options: Ingredient[]): string {
+	return print(options).map(printIngredientOption).join(' _or_ ');
 }
 
 /**
@@ -180,7 +190,7 @@ export const placeholdersToItalic = (text: string): string =>
 		.replace(/(\w+) {([^_])/gm, '_$1 {_$2');
 
 /**
- * Reduce leveles of headings, so they match the page outline
+ * Reduce level of headings, so they match the page outline
  */
 export const demoteHeadings = (text: string): string =>
 	text.replace(/^##? /gm, '### ');

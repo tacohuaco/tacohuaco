@@ -24,10 +24,10 @@ const trimSemicolon = (s: string) => s.replace(/;$/, '');
 const append = (text: string, s: string) => (text === '' ? s : `${text} ${s}`);
 
 /**
- * Parse a line of recipe ingredient, like
+ * Parse an option of recipe ingredient, like
  * 1-3 g apples; in small dice
  */
-export function parse(text: string): Ingredient {
+function parseOption(text: string): Ingredient {
 	const tokens = text.split(/\s+/);
 	let state: State = 'BEGINNING';
 	let name = '';
@@ -97,4 +97,12 @@ export function parse(text: string): Ingredient {
 		unit: unit || undefined,
 		comment: comment || undefined,
 	};
+}
+
+/**
+ * Parse a line of recipe ingredient, like
+ * 30 g of hazelnut flour / 15 g coconut flour
+ */
+export function parse(text: string): Ingredient[] {
+	return text.split(/\s+\/\s+/).map(parseOption);
 }

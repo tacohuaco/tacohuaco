@@ -1,3 +1,4 @@
+import { castArray } from 'lodash';
 import { IngredientKind, Month } from './types';
 import { analyze } from './analyze';
 
@@ -90,5 +91,5 @@ test.each([
 		},
 	],
 ])('analyze ingredient: %s', (source, result) => {
-	expect(analyze(source)).toEqual(result);
+	expect(analyze(castArray(source))).toEqual(castArray(result));
 });

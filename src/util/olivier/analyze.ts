@@ -31,9 +31,9 @@ function getSeasons(name: string): Month[] {
 }
 
 /**
- * Return info about an ingredient: kind, gluten, dairy, sugar content
+ * Return info about an ingredient option: kind, gluten, dairy, sugar content
  */
-export function analyze({ name }: Ingredient): IngredientInfo {
+function analyzeOption({ name }: Ingredient): IngredientInfo {
 	return {
 		name,
 		kind: getKind(name),
@@ -42,4 +42,11 @@ export function analyze({ name }: Ingredient): IngredientInfo {
 		hasSugar: SUGARS.includes(name),
 		seasons: getSeasons(name),
 	};
+}
+
+/**
+ * Return info about an ingredient: kind, gluten, dairy, sugar content
+ */
+export function analyze(options: Ingredient[]): IngredientInfo[] {
+	return options.map(analyzeOption);
 }
