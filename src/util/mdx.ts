@@ -10,7 +10,7 @@ import rules, {
 const { hairspace } = definitions;
 
 const degreeSigns = (text: string) =>
-	text.replace(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}°º˚C`);
+	text.replace(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}˚C`);
 
 const numberRanges = (text: string) =>
 	text.replace(/\b(\d+)-(\d+)\b/g, '$1&ndash;$2');
