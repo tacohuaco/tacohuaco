@@ -217,7 +217,7 @@ export const INGREDIENTS = [
 	],
 	['flour'],
 	// Misc
-	['sausage'],
+	['sausage', 'sausages'],
 	['ham'],
 	['burger bun', 'burger buns'],
 	['egg', 'eggs'],
