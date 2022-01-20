@@ -27,7 +27,7 @@ function printSuffix({ minAmount, unit }: Ingredient): string | undefined {
 	return unit || minAmount === A_BIT ? OF : undefined;
 }
 
-function printOption(ingredient: Ingredient): PrintIngredient {
+export function printOption(ingredient: Ingredient): PrintIngredient {
 	const { modifier, name, comment } = ingredient;
 	return {
 		amount: printAmount(ingredient),

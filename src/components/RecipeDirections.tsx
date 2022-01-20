@@ -4,7 +4,12 @@ import { MDXProvider } from '@mdx-js/react';
 import { Text, TextContent as TextContentBase } from 'tamia';
 import { Subrecipe } from './Subrecipe';
 import { useRecipe } from './RecipeContext';
-import { format, Ingredient, normalizeName, print } from '../util/olivier';
+import {
+	formatOption,
+	printOption,
+	Ingredient,
+	normalizeName,
+} from '../util/olivier';
 
 type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
@@ -62,7 +67,7 @@ const Em: ComponentType<any> = ({ children }) => {
 		if (!ingredient) {
 			return children;
 		}
-		const { amount, suffix, name } = print(format(ingredient));
+		const { amount, suffix, name } = printOption(formatOption(ingredient));
 		return (
 			<nobr>
 				<em>{amount}</em> {suffix} {name}
@@ -79,7 +84,7 @@ const Em: ComponentType<any> = ({ children }) => {
 		if (!ingredient) {
 			return children;
 		}
-		const { amount, name } = print(format(ingredient));
+		const { amount, name } = printOption(formatOption(ingredient));
 		return (
 			<nobr>
 				{name} <em>({amount})</em>

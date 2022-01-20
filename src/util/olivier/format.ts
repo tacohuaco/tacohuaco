@@ -58,7 +58,7 @@ function formatAmount(amount?: Amount): string | undefined {
  * - pluralize the name and the unit
  * - format amounts as strings (1.5 → 1½)
  */
-function formatOption(ingredient: Ingredient): Ingredient {
+export function formatOption(ingredient: Ingredient): Ingredient {
 	return {
 		...ingredient,
 		name: pluralizeName(ingredient),
