@@ -1,3 +1,5 @@
+// WARNING: The second position is a plural, so if there's no plural but there are
+// alternatives, you should repeat the first array item twice
 export const INGREDIENTS = [
 	// Spices
 	['salt'],
@@ -180,14 +182,19 @@ export const INGREDIENTS = [
 		'parmigiano',
 	],
 	['cheese'],
-	['cottage cheese (tvorog)', 'cottage cheese', 'tvorog'],
-	['crème fraîche', 'creme fraiche'],
+	[
+		'cottage cheese (tvorog)',
+		'cottage cheese (tvorog)',
+		'cottage cheese',
+		'tvorog',
+	],
+	['crème fraîche', 'crème fraîche', 'creme fraiche'],
 	['butter', 'butter', 'unsalted butter'],
 	['milk chocolate'],
 	['chocolate'],
-	['whipping cream', 'schlagsahne'],
+	['whipping cream', 'whipping cream', 'schlagsahne'],
 	// Meat
-	['chicken stock', 'chicken broth'],
+	['chicken stock', 'chicken stock', 'chicken broth'],
 	['chicken', 'chicken'],
 	// Flours
 	['buckwheat flour'],
@@ -196,11 +203,18 @@ export const INGREDIENTS = [
 	['coconut flour'],
 	['bamboo flour'],
 	['hazelnut flour'],
+	['chestnut flour'],
 	['potato peel flour'],
-	['flaxseed flour', 'flax seed flour'],
-	['oat flour', 'oatmeal flour'],
+	['flaxseed flour', 'flaxseed flour', 'flax seed flour'],
+	['oat flour', 'oat flour', 'oatmeal flour'],
 	['spelt flour'],
-	['all-purpose flour', 'all purpose flour', 'wheat flour', 'flour'],
+	[
+		'all-purpose flour',
+		'all-purpose flour',
+		'all purpose flour',
+		'wheat flour',
+		'flour',
+	],
 	['flour'],
 	// Misc
 	['sausage'],
