@@ -18,7 +18,7 @@ export const IngredientItem = styled.li`
 	&::before {
 		display: none;
 	}
-	em {
+	em:last-child {
 		display: block;
 	}
 `;
