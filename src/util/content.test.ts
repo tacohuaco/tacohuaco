@@ -5,8 +5,6 @@ import {
 	getRecipeFlags,
 	getRecipeSeasons,
 	getRecipePreconditions,
-	printIngredient,
-	formatIngredients,
 	placeholdersToItalic,
 	demoteHeadings,
 } from './content';
@@ -50,7 +48,8 @@ Array [
     "comment": undefined,
     "maxAmount": 10,
     "minAmount": 10,
-    "name": "sausages",
+    "modifier": undefined,
+    "name": "sausage",
     "unit": undefined,
   },
   Object {
@@ -251,43 +250,6 @@ describe('getRecipePreconditions', () => {
 		['- 500 g of chicken stock', ['unfreeze chicken stock if frozen']],
 	])('return recipe preconditions: %s', (source, result) => {
 		expect(getRecipePreconditions(source)).toEqual(result);
-	});
-});
-
-describe('printIngredient', () => {
-	test.each([
-		[[{ name: 'salt' }], 'salt'],
-		[[{ name: 'eggs', minAmount: 3, maxAmount: 3 }], '**3** eggs'],
-		[
-			[{ name: 'salt', minAmount: 3, maxAmount: 3, unit: 'g' }],
-			'**3 g** of salt',
-		],
-		[[{ name: 'salt', comment: 'roasted' }], 'salt _roasted_'],
-	])('format ingredient: %s', (source, result) => {
-		expect(printIngredient(source)).toEqual(result);
-	});
-});
-
-describe('formatIngredients', () => {
-	test.each([
-		['- 10 sausages\n- 1 onion', '- **10** sausages\n- **1** onion'],
-		['- 1/2 sausage', '- **½** sausage'],
-		['- 13 g of cocaine', '- **13 g** of cocaine'],
-		['- 4 medium eggs', '- **4** medium eggs'],
-		['- 3-4 sprigs of marijuana', '- **3–4 sprigs** of marijuana'],
-		['- 1 clove of garlic', '- **1 clove** of garlic'],
-		['- a bit of hot pepper', '- **a bit** of hot pepper'],
-		['- salt', '- salt'],
-		[
-			'- 10 g of almond flour / 15 g of coconut flour',
-			'- **10 g** of almond flour _or_ **15 g** of coconut flour',
-		],
-		[
-			'- 10 g of almond flour / 10 g of coconut flour',
-			'- **10 g** of almond flour _or_ coconut flour',
-		],
-	])('format ingredients: %s', (source, result) => {
-		expect(formatIngredients(source)).toBe(result);
 	});
 });
 

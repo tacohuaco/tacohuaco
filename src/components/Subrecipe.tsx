@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text } from 'tamia';
-import { useSubrecipes } from './SubrecipesContext';
 import { MDXRenderer } from './MDXRenderer';
+import { RecipeContext } from './RecipeContext';
+import { getIngredientsBySlug, useSubrecipes } from './SubrecipesContext';
 
 type Props = {
 	slug: string;
@@ -11,6 +12,10 @@ type Props = {
 export function Subrecipe({ slug, value }: Props) {
 	const subrecipes = useSubrecipes();
 	const subrecipe = subrecipes.find((x) => x.slug === slug);
+	const ingredients = getIngredientsBySlug(
+		subrecipe?.allIngredients || [],
+		slug
+	);
 
 	if (!subrecipe) {
 		return (
@@ -22,8 +27,12 @@ export function Subrecipe({ slug, value }: Props) {
 	}
 
 	return (
-		<MDXRenderer>
-			{value === 'ingredients' ? subrecipe.ingredientsMdx : subrecipe.stepsMdx}
-		</MDXRenderer>
+		<RecipeContext.Provider value={{ slug, ingredients }}>
+			<MDXRenderer>
+				{value === 'ingredients'
+					? subrecipe.ingredientsMdx
+					: subrecipe.stepsMdx}
+			</MDXRenderer>
+		</RecipeContext.Provider>
 	);
 }

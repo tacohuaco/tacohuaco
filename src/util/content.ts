@@ -6,12 +6,9 @@ import {
 	parse,
 	normalize,
 	analyze,
-	format,
-	print,
 	Ingredient,
 	IngredientKind,
 	IngredientInfo,
-	PrintIngredient,
 	Month,
 } from './olivier';
 import { FlagsJson } from '../graphql-types';
@@ -43,7 +40,7 @@ export const getIngredientLines = (text: string): string[] => {
 };
 
 /**
- * Rreturn ingredients in a Markdown ingredients list
+ * Return ingredients in a Markdown ingredients list
  */
 export const getIngredients = (ingredientsMarkdown: string): Ingredient[] => {
 	const ingredientsRaw = getIngredientLines(ingredientsMarkdown);
@@ -51,7 +48,7 @@ export const getIngredients = (ingredientsMarkdown: string): Ingredient[] => {
 };
 
 /**
- *  Analyzeingredients in a Markdown ingredients list
+ *  Analyze ingredients in a Markdown ingredients list
  */
 export const getIngredientsInfo = (
 	ingredientsMarkdown: string
@@ -144,42 +141,6 @@ export const getRecipePreconditions = (
 		.filter(Boolean);
 };
 
-function printIngredientOption({
-	amount,
-	suffix,
-	modifier,
-	name,
-	comment,
-}: PrintIngredient): string {
-	return [
-		amount && ['**', amount, '**'].join(''),
-		suffix,
-		modifier,
-		name,
-		comment ? `_${comment}_` : undefined,
-	]
-		.filter(Boolean)
-		.join(' ');
-}
-
-export function printIngredient(options: Ingredient[]): string {
-	return print(options).map(printIngredientOption).join(' _or_ ');
-}
-
-/**
- * Highlight amounts and comments in ingredients
- */
-export const formatIngredients = (text: string): string => {
-	let nextText = text;
-	const tree = fromMarkdown(text);
-	visit(tree, 'listItem', (li) => {
-		const ingredientText = toString(li);
-		const ingredient = format(normalize(parse(ingredientText)));
-		nextText = nextText.replace(ingredientText, printIngredient(ingredient));
-	});
-	return nextText;
-};
-
 /**
  * Wrap ingredient amount placeholders into italic so they could be replaced
  * in Mdx
@@ -200,7 +161,7 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 	Record<string, (text: string) => string>
 > = {
 	[`GraphCMS_Recipe`]: {
-		ingredients: flow([formatIngredients, demoteHeadings]),
+		ingredients: flow([demoteHeadings]),
 		steps: flow([placeholdersToItalic, demoteHeadings]),
 	},
 };

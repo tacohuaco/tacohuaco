@@ -57,6 +57,7 @@ const borders = {
 };
 const radii = {
 	base: '0.15rem',
+	button: '0.25rem',
 	round: '99999px',
 };
 const fontWeights = {

@@ -1,7 +1,5 @@
 import path from 'path';
 import { GatsbyNode } from 'gatsby';
-import richtypo from 'richtypo';
-import rules from 'richtypo-rules-en';
 import { kebabCase, uniq } from 'lodash';
 import {
 	AllRecipesQuery,
@@ -28,10 +26,15 @@ interface GatsbyContext {
 	};
 }
 
+interface IngredientsWithMetaRaw {
+	slug: string;
+	ingredients: string;
+}
+
 const getSubrecipeIngredients = (
 	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
 	context: GatsbyContext
-): string[] => {
+): IngredientsWithMetaRaw[] => {
 	if (source.subrecipes.length > 0) {
 		const remoteIds = source.subrecipes.map((x) => x.remoteId);
 		const subrecipes = context.nodeModel
@@ -39,26 +42,53 @@ const getSubrecipeIngredients = (
 				type: 'GraphCMS_Recipe',
 			})
 			.filter((x) => remoteIds.includes(x.remoteId));
-		return subrecipes.map((x) => x.ingredients || '');
+		return subrecipes.map((x) => ({
+			slug: x.slug,
+			ingredients: x.ingredients || '',
+		}));
 	} else {
 		return [];
 	}
 };
 
 const getAllRecipeIngredients = (
-	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	source: Pick<
+		GraphCms_Recipe,
+		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
+	>,
+	context: GatsbyContext
+): IngredientsWithMetaRaw[] => {
+	const subrecipeIngredients = getSubrecipeIngredients(source, context);
+	return [
+		{
+			slug: source.slug,
+			ingredients: source.ingredients || '',
+		},
+		...subrecipeIngredients,
+	];
+};
+
+const getAllRecipeIngredientsFlattened = (
+	source: Pick<
+		GraphCms_Recipe,
+		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
+	>,
 	context: GatsbyContext
 ): string => {
-	const subrecipeIngredients = getSubrecipeIngredients(source, context);
-	return [source.ingredients, ...subrecipeIngredients].join('\n');
+	return getAllRecipeIngredients(source, context)
+		.map((x) => x.ingredients)
+		.join('\n');
 };
 
 const getRecipeWarnings = (
-	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	source: Pick<
+		GraphCms_Recipe,
+		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
+	>,
 	context: GatsbyContext
 ): Promise<string[]> => {
 	const recipeIngredients = getIngredients(
-		getAllRecipeIngredients(source, context)
+		getAllRecipeIngredientsFlattened(source, context)
 	);
 	const promises = context.nodeModel
 		.getAllNodes<GraphCms_Ingredient>({
@@ -78,12 +108,12 @@ const getRecipeWarnings = (
 const getRecipeTips = (
 	source: Pick<
 		GraphCms_Recipe,
-		'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
+		'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
 	>,
 	context: GatsbyContext
 ): Promise<string[]> => {
 	const recipeIngredients = getIngredients(
-		getAllRecipeIngredients(source, context)
+		getAllRecipeIngredientsFlattened(source, context)
 	);
 	const promises = context.nodeModel
 		.getAllNodes<GraphCms_Tip>({
@@ -131,6 +161,10 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 		modifier: String
 		comment: String
 	}
+	type IngredientsJson {
+		slug: String!
+		ingredients: [IngredientJson!]!
+	}
 	type IngredientInfoJson {
 		name: String!
 		kind: Int!
@@ -144,7 +178,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
 type Source = Pick<
 	GraphCms_Recipe,
-	'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
+	'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
 >;
 
 // Create Mdx fields for all Markdown type fields from GraphCMS
@@ -155,34 +189,43 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 	createResolvers({
 		[`GraphCMS_Recipe`]: {
 			[`allIngredients`]: {
-				type: '[IngredientJson!]!',
+				type: '[IngredientsJson!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
-					return getIngredients(getAllRecipeIngredients(source, context));
+					return getAllRecipeIngredients(source, context).map((x) => ({
+						slug: x.slug,
+						ingredients: getIngredients(x.ingredients),
+					}));
 				},
 			},
 			[`allIngredientsInfo`]: {
 				type: '[IngredientInfoJson!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
-					return getIngredientsInfo(getAllRecipeIngredients(source, context));
+					return getIngredientsInfo(
+						getAllRecipeIngredientsFlattened(source, context)
+					);
 				},
 			},
 			[`flags`]: {
 				type: 'FlagsJson!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
-					return getRecipeFlags(getAllRecipeIngredients(source, context));
+					return getRecipeFlags(
+						getAllRecipeIngredientsFlattened(source, context)
+					);
 				},
 			},
 			[`seasons`]: {
 				type: '[Int!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
-					return getRecipeSeasons(getAllRecipeIngredients(source, context));
+					return getRecipeSeasons(
+						getAllRecipeIngredientsFlattened(source, context)
+					);
 				},
 			},
 			[`preconditions`]: {
 				type: '[String!]!',
 				resolve(source: Source, args: unknown, context: GatsbyContext) {
 					return getRecipePreconditions(
-						getAllRecipeIngredients(source, context)
+						getAllRecipeIngredientsFlattened(source, context)
 					);
 				},
 			},

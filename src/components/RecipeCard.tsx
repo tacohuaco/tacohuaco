@@ -73,3 +73,16 @@ export const recipeMetaFragment = graphql`
 		}
 	}
 `;
+
+export const allIngredientsFragment = graphql`
+	fragment AllIngredients on IngredientsJson {
+		slug
+		ingredients {
+			name
+			minAmount
+			maxAmount
+			unit
+			modifier
+		}
+	}
+`;

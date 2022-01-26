@@ -1,8 +1,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Recipe from '../layouts/RecipePage';
-import { RecipePageQuery } from '../graphql-types';
-import { Amount, IngredientKind, Month } from '../util/olivier';
+import {
+	IngredientsJson,
+	IngredientInfoJson,
+	RecipePageQuery,
+	GraphCms_Recipe,
+} from '../graphql-types';
+import { Amount, IngredientInfo, IngredientKind, Month } from '../util/olivier';
+import { Subrecipe } from '../types/Subrecipe';
+import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 
 type Props = {
 	data: RecipePageQuery;
@@ -22,6 +29,47 @@ const stringToNumber = (value?: string | null): Amount | undefined => {
 	return value;
 };
 
+const mapAllIngredients = (
+	allIngredients: IngredientsJson[]
+): IngredientsWithMeta[] =>
+	allIngredients.map(({ slug, ingredients }) => ({
+		slug,
+		ingredients: ingredients.map(
+			({ name, minAmount, maxAmount, unit, modifier }) => ({
+				name,
+				minAmount: stringToNumber(minAmount),
+				maxAmount: stringToNumber(maxAmount),
+				unit: unit || undefined,
+				modifier: modifier || undefined,
+			})
+		),
+	}));
+
+const mapAllIngredientsInfo = (
+	allIngredientsInfo: IngredientInfoJson[]
+): IngredientInfo[] =>
+	allIngredientsInfo.map(
+		({ name, kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
+			name,
+			kind: kind as IngredientKind,
+			hasGluten,
+			hasDairy,
+			hasSugar,
+			seasons: seasons as Month[],
+		})
+	);
+
+const mapSubrecipes = (
+	subrecipes: Pick<
+		GraphCms_Recipe,
+		'slug' | 'allIngredients' | 'ingredients' | 'ingredientsMdx' | 'stepsMdx'
+	>[]
+): Subrecipe[] =>
+	subrecipes.map((subrecipe) => ({
+		...subrecipe,
+		allIngredients: mapAllIngredients(subrecipe.allIngredients),
+	}));
+
 export default function RecipePage({
 	data: { graphCmsRecipe },
 	location: { pathname },
@@ -30,33 +78,25 @@ export default function RecipePage({
 		return null;
 	}
 
-	const { description, time, yields, allIngredients, allIngredientsInfo } =
-		graphCmsRecipe;
+	const {
+		description,
+		time,
+		yields,
+		allIngredients,
+		allIngredientsInfo,
+		subrecipes,
+		...rest
+	} = graphCmsRecipe;
 	return (
 		<Recipe
-			{...graphCmsRecipe}
+			{...rest}
 			description={description || undefined}
 			time={time || undefined}
 			yields={yields || undefined}
 			url={pathname}
-			allIngredients={
-				allIngredients.map(({ name, minAmount, maxAmount, unit }) => ({
-					name,
-					minAmount: stringToNumber(minAmount),
-					maxAmount: stringToNumber(maxAmount),
-					unit: unit || undefined,
-				})) as any
-			}
-			allIngredientsInfo={allIngredientsInfo.map(
-				({ name, kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
-					name,
-					kind: kind as IngredientKind,
-					hasGluten,
-					hasDairy,
-					hasSugar,
-					seasons: seasons as Month[],
-				})
-			)}
+			allIngredients={mapAllIngredients(allIngredients)}
+			allIngredientsInfo={mapAllIngredientsInfo(allIngredientsInfo)}
+			subrecipes={mapSubrecipes(subrecipes)}
 		/>
 	);
 }
@@ -74,6 +114,7 @@ export const pageQuery = graphql`
 			notesMdx
 			overnight
 			preconditions
+			slug
 			sourceMdx
 			stepsMdx
 			tags
@@ -99,14 +140,14 @@ export const pageQuery = graphql`
 			}
 			subrecipes {
 				slug
+				allIngredients {
+					...AllIngredients
+				}
 				ingredientsMdx
 				stepsMdx
 			}
 			allIngredients {
-				name
-				minAmount
-				maxAmount
-				unit
+				...AllIngredients
 			}
 			allIngredientsInfo {
 				name

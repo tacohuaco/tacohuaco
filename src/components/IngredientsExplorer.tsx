@@ -2,15 +2,9 @@ import React from 'react';
 import { sortBy, upperFirst } from 'lodash';
 import { Text, VisuallyHidden } from 'tamia';
 import { asList } from '../util/client';
-import {
-	Ingredient,
-	IngredientInfo,
-	IngredientKind,
-	Month,
-} from '../util/olivier';
+import { IngredientInfo, IngredientKind, Month } from '../util/olivier';
 
 type Props = {
-	ingredients: Ingredient[];
 	infos: IngredientInfo[];
 };
 
