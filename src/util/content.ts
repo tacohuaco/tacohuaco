@@ -11,6 +11,7 @@ import {
 	IngredientInfo,
 	Month,
 } from './olivier';
+import { typo, typoLite } from '../util/typo';
 import { FlagsJson } from '../graphql-types';
 
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
@@ -161,7 +162,7 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 	Record<string, (text: string) => string>
 > = {
 	[`GraphCMS_Recipe`]: {
-		ingredients: flow([demoteHeadings]),
-		steps: flow([placeholdersToItalic, demoteHeadings]),
+		ingredients: flow([demoteHeadings, typoLite]),
+		steps: flow([placeholdersToItalic, demoteHeadings, typo]),
 	},
 };

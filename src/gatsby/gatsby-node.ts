@@ -18,6 +18,7 @@ import {
 	getIngredientsInfo,
 } from '../util/content';
 import { ALL_FLAGS } from '../consts';
+import { typo } from '../util/typo';
 
 // XXX: Gatsby has no types for this anywhere :-/
 interface GatsbyContext {
@@ -99,8 +100,9 @@ const getRecipeWarnings = (
 				({ name }) => name === ingredient.name.toLowerCase()
 			)
 		)
-		.map((x) => x.warnings)
+		.map((x) => x.warnings || '')
 		.filter(Boolean)
+		.map(typo)
 		.map(getMdx);
 	return Promise.all(promises);
 };
@@ -127,8 +129,9 @@ const getRecipeTips = (
 					)) &&
 				tip.tags.every((tag) => source.tags.includes(tag))
 		)
-		.map((x) => x.content)
+		.map((x) => x.content || '')
 		.filter(Boolean)
+		.map(typo)
 		.map(getMdx);
 	return Promise.all(promises);
 };
