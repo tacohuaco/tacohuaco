@@ -2,16 +2,22 @@ import styled from 'styled-components';
 
 export const Button = styled.button`
 	display: inline-block;
-	width: 1.2rem;
-	height: 1.2rem;
+	width: 1.6rem;
+	height: 1.6rem;
 	padding: 0 ${(p) => p.theme.space.xs} 0.2rem;
 	border: 1px solid;
 	border-radius: ${(p) => p.theme.radii.button};
 	text-align: center;
 	font-family: ${(p) => p.theme.fonts.base};
-	font-size: ${(p) => p.theme.fontSizes.s};
+	font-size: ${(p) => p.theme.fontSizes.m};
 	color: ${(p) => p.theme.colors.base};
 	background: transparent;
+
+	@media (any-hover: hover) {
+		width: 1.2rem;
+		height: 1.2rem;
+		font-size: ${(p) => p.theme.fontSizes.s};
+	}
 
 	&:hover,
 	&:active {
