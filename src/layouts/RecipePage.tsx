@@ -17,10 +17,19 @@ import {
 import { RecipeContext } from '../components/RecipeContext';
 import { GraphCms_Recipe } from '../graphql-types';
 import Page from './Page';
-import { scale, IngredientInfo } from '../util/olivier';
+import {
+	scale,
+	IngredientInfo,
+	parse,
+	normalize,
+	Ingredient,
+	formatOption,
+	Amount,
+	printOption,
+} from '../util/olivier';
 import { asList } from '../util/client';
 import { Collapsible } from '../components/Collapsible';
-import { RecipeYields } from '../components/RecipeYields';
+import { Button } from '../components/Button';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Subrecipe } from '../types/Subrecipe';
 import { Asset } from '../types/Asset';
@@ -59,17 +68,15 @@ type Props = Pick<
 	yields?: string;
 };
 
-// TODO: Try to use Olivier parser
-const parseYields = (yields = '') => {
-	const match = yields.match(/(\d+)\s+(\w+)/);
-	if (!match) {
-		return { amount: 0, unit: yields };
-	}
+const parseYields = (yields = ''): Ingredient => {
+	return normalize(parse(`${yields} yields`))[0];
+};
 
-	return {
-		amount: Number(match[1]),
-		unit: match[2],
-	};
+const printYields = (ingredient: Ingredient): string => {
+	const { amount, ...printed } = printOption(formatOption(ingredient));
+	const name = printed.name.replace(/\s*yields$/, '');
+	const suffix = name ? printed.suffix : '';
+	return `Yields ${amount} ${suffix} ${name}`;
 };
 
 const getRatio = (amount: number, nextAmout: number) => {
@@ -109,6 +116,10 @@ const scaleAllIngredients = (
 		ingredients: scale(x.ingredients, getRatio(amount, currentAmout)),
 	}));
 
+const normalizeAmount = (amount?: Amount): number => {
+	return typeof amount === 'number' ? amount : 1;
+};
+
 export default function RecipePage({
 	artemsFavorite,
 	cuisines,
@@ -136,17 +147,23 @@ export default function RecipePage({
 	allIngredients,
 	allIngredientsInfo,
 }: Props) {
-	const { amount, unit } = parseYields(yields);
-	const [currentAmout, setCurrentAmout] = useState(amount);
+	const parsedYields = parseYields(yields);
+	const baseAmount = normalizeAmount(parsedYields.minAmount);
+
+	const [currentAmout, setCurrentAmout] = useState(baseAmount);
 
 	const recipeIngredients = getIngredientsBySlug(allIngredients, slug);
 	const scaledRecipeIngredients = scale(
 		recipeIngredients,
-		getRatio(amount, currentAmout)
+		getRatio(baseAmount, currentAmout)
 	);
 	const scaledSubrecipes = subrecipes.map((x) => ({
 		...x,
-		allIngredients: scaleAllIngredients(x.allIngredients, amount, currentAmout),
+		allIngredients: scaleAllIngredients(
+			x.allIngredients,
+			baseAmount,
+			currentAmout
+		),
 	}));
 
 	return (
@@ -190,16 +207,38 @@ export default function RecipePage({
 						)}
 						<Grid gridGap="m" gridTemplateColumns={['1fr', '1fr', '1fr 3fr']}>
 							<Stack gap="m">
-								<Heading level={2}>Ingredients</Heading>
+								<Stack direction="row" gap="m" alignItems="center">
+									<Heading level={2}>Ingredients</Heading>
+									{yields && (
+										<Stack
+											direction="row"
+											gap="s"
+											alignItems="center"
+											minWidth="auto"
+										>
+											<Button
+												onClick={() => setCurrentAmout((x) => getPrevAmount(x))}
+												aria-label="Less"
+											>
+												–
+											</Button>
+											<Button
+												onClick={() => setCurrentAmout((x) => getNextAmount(x))}
+												aria-label="More"
+											>
+												+
+											</Button>
+										</Stack>
+									)}
+								</Stack>
 								{yields && (
-									<Box>
-										<RecipeYields
-											amount={currentAmout}
-											unit={unit}
-											onLess={() => setCurrentAmout((x) => getPrevAmount(x))}
-											onMore={() => setCurrentAmout((x) => getNextAmount(x))}
-										/>
-									</Box>
+									<Text variant="small">
+										{printYields({
+											...parsedYields,
+											minAmount: currentAmout,
+											maxAmount: currentAmout,
+										})}
+									</Text>
 								)}
 								<TextContent>
 									<RecipeIngredients>
