@@ -80,7 +80,7 @@ const getPrevAmount = (amount: number) => {
 	if (amount > 100) {
 		return amount - 100;
 	}
-	if (amount > 12) {
+	if (amount > 20) {
 		return amount - 10;
 	}
 	if (amount === 1) {
@@ -90,10 +90,10 @@ const getPrevAmount = (amount: number) => {
 };
 
 const getNextAmount = (amount: number) => {
-	if (amount <= 12) {
+	if (amount < 20) {
 		return amount + 1;
 	}
-	if (amount <= 100) {
+	if (amount < 100) {
 		return amount + 10;
 	}
 	return amount + 100;
