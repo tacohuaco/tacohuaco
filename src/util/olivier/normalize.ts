@@ -5,7 +5,7 @@ import { WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
 import { orderBy } from 'lodash';
 
-function normalizeAmount(amount?: Amount): Amount | undefined {
+export function normalizeAmount(amount?: Amount): Amount | undefined {
 	if (!amount) {
 		return undefined;
 	}

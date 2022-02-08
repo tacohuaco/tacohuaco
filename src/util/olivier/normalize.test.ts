@@ -81,6 +81,20 @@ test.each([
 	],
 	[
 		{
+			name: 'onion',
+			minAmount: '1/2',
+			maxAmount: '1',
+			comment: undefined,
+		},
+		{
+			name: 'onion',
+			minAmount: 0.5,
+			maxAmount: 1,
+			comment: undefined,
+		},
+	],
+	[
+		{
 			name: 'sausage',
 			minAmount: '2.75',
 			maxAmount: '3 1/2',

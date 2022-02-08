@@ -25,6 +25,25 @@ test.each<[[Ingredient[], number], Ingredient[]]>([
 		[
 			[
 				{
+					name: 'onion',
+					minAmount: 0.5,
+					maxAmount: 0.5,
+				},
+			],
+			3,
+		],
+		[
+			{
+				name: 'onion',
+				minAmount: 2,
+				maxAmount: 2,
+			},
+		],
+	],
+	[
+		[
+			[
+				{
 					name: 'cucumber',
 					minAmount: 3,
 					maxAmount: 4,

@@ -110,11 +110,12 @@ const scaleAllIngredients = (
 	allIngredients: IngredientsWithMeta[],
 	amount: number,
 	currentAmout: number
-) =>
-	allIngredients.map((x) => ({
+) => {
+	return allIngredients.map((x) => ({
 		...x,
 		ingredients: scale(x.ingredients, getRatio(amount, currentAmout)),
 	}));
+};
 
 const normalizeAmount = (amount?: Amount): number => {
 	return typeof amount === 'number' ? amount : 1;

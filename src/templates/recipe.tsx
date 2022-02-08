@@ -7,7 +7,12 @@ import {
 	RecipePageQuery,
 	GraphCms_Recipe,
 } from '../graphql-types';
-import { Amount, IngredientInfo, IngredientKind, Month } from '../util/olivier';
+import {
+	normalizeAmount,
+	IngredientInfo,
+	IngredientKind,
+	Month,
+} from '../util/olivier';
 import { Subrecipe } from '../types/Subrecipe';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 
@@ -18,17 +23,6 @@ type Props = {
 	};
 };
 
-const stringToNumber = (value?: string | null): Amount | undefined => {
-	if (!value) {
-		return undefined;
-	}
-	const numberMaybe = parseInt(value);
-	if (!isNaN(numberMaybe)) {
-		return numberMaybe;
-	}
-	return value;
-};
-
 const mapAllIngredients = (
 	allIngredients: IngredientsJson[]
 ): IngredientsWithMeta[] =>
@@ -37,8 +31,8 @@ const mapAllIngredients = (
 		ingredients: ingredients.map(
 			({ name, minAmount, maxAmount, unit, modifier }) => ({
 				name,
-				minAmount: stringToNumber(minAmount),
-				maxAmount: stringToNumber(maxAmount),
+				minAmount: normalizeAmount(minAmount || ''),
+				maxAmount: normalizeAmount(maxAmount || ''),
 				unit: unit || undefined,
 				modifier: modifier || undefined,
 			})
