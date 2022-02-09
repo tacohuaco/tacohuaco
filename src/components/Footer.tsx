@@ -7,7 +7,7 @@ export default function Footer() {
 		<footer>
 			<Text variant="xsmall" mb="xs">
 				©{' '}
-				<Link href="https://github.com/margaritadiaz">
+				<Link href="https://www.linkedin.com/in/dr-margarita-diaz-cortes-4544a513a/">
 					Dr.&nbsp;Margarita Diaz Cortes
 				</Link>{' '}
 				and&nbsp;<Link href="https://sapegin.me/">Artem Sapegin</Link>
