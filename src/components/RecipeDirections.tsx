@@ -2,6 +2,7 @@ import React, { ComponentType } from 'react';
 import styled from 'styled-components';
 import { MDXProvider } from '@mdx-js/react';
 import { Text, TextContent as TextContentBase } from 'tamia';
+import { castArray, last } from 'lodash';
 import { Subrecipe } from './Subrecipe';
 import { useRecipe, findIngredient } from './RecipeContext';
 import { formatOption, printOption, normalizeName } from '../util/olivier';
@@ -10,19 +11,20 @@ type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
 };
 
-const List = styled.ol`
+const Ol = styled.ol`
 	&& {
 		padding-left: 0.35rem;
 	}
 `;
 
-const ListItem = styled.li`
+const Li = styled.li<{ isOvernight: boolean }>`
 	&& {
 		list-style: none;
 		counter-increment: steps-counter;
 		position: relative;
 		padding: 0 0 0 1.1rem;
-		margin-bottom: ${(p) => p.theme.space.m};
+		margin-bottom: ${(p) =>
+			p.isOvernight ? p.theme.space.xl : p.theme.space.m};
 	}
 	&::before {
 		content: counter(steps-counter);
@@ -33,13 +35,32 @@ const ListItem = styled.li`
 		height: 1.5em;
 		text-align: center;
 		color: ${(p) => p.theme.colors.bg};
-		background-color: ${(p) => p.theme.colors.accent};
+		background-color: ${(p) =>
+			p.isOvernight ? p.theme.colors.moon : p.theme.colors.accent};
 		font-family: ${(p) => p.theme.fonts.ui};
 		font-size: ${(p) => p.theme.fontSizes.xs};
 		font-weight: ${(p) => p.theme.fontWeights.ui};
 		border-radius: ${(p) => p.theme.radii.round};
 	}
+	&&::after {
+		display: ${(p) => (p.isOvernight ? 'block' : 'none')};
+		content: '···';
+		position: absolute;
+		bottom: -2.5em;
+		left: 0;
+		right: 1em;
+		text-align: center;
+		letter-spacing: 0.75em;
+		font-size: ${(p) => p.theme.fontSizes.l};
+		color: ${(p) => p.theme.colors.dim};
+	}
 `;
+
+const ListItem: ComponentType<any> = ({ children }) => {
+	const lastPiece = last(castArray(children));
+	const isOvernight = lastPiece.endsWith('overnight.');
+	return <Li isOvernight={isOvernight}>{children}</Li>;
+};
 
 const Paragraph: ComponentType<any> = ({ children }) => {
 	if (children?.props?.href && children?.props?.children === '#') {
@@ -48,7 +69,7 @@ const Paragraph: ComponentType<any> = ({ children }) => {
 	return children;
 };
 
-const Em: ComponentType<any> = ({ children }) => {
+const Emphasis: ComponentType<any> = ({ children }) => {
 	const { ingredients } = useRecipe();
 	if (children.startsWith('}')) {
 		const nameRaw = children.replace(/^}\s+/, '');
@@ -87,9 +108,9 @@ const Em: ComponentType<any> = ({ children }) => {
 
 const components = {
 	p: Paragraph,
-	ol: List,
+	ol: Ol,
 	li: ListItem,
-	em: Em,
+	em: Emphasis,
 } as const;
 
 export default function RecipeDirections({ children, ...props }: Props) {
