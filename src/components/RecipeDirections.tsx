@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, ReactNode } from 'react';
 import styled from 'styled-components';
 import { MDXProvider } from '@mdx-js/react';
 import { Text, TextContent as TextContentBase } from 'tamia';
@@ -56,9 +56,10 @@ const Li = styled.li<{ isOvernight: boolean }>`
 	}
 `;
 
-const ListItem: ComponentType<any> = ({ children }) => {
+const ListItem: ComponentType<{ children: ReactNode }> = ({ children }) => {
 	const lastPiece = last(castArray(children));
-	const isOvernight = lastPiece.endsWith('overnight.');
+	const isOvernight =
+		typeof lastPiece === 'string' && lastPiece.endsWith('overnight.');
 	return <Li isOvernight={isOvernight}>{children}</Li>;
 };
 
