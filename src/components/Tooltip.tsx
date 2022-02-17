@@ -21,7 +21,11 @@ const DefaultTrigger = forwardRef((props: ComponentProps<typeof Box>, ref) => (
 	<Box ref={ref} as="button" border="none" bg="transparent" p={0} {...props} />
 ));
 
-export default function Tooltip({ value, children, renderTrigger }: Props) {
+export default function Tooltip({
+	value,
+	children,
+	renderTrigger = true,
+}: Props) {
 	return (
 		<Tippy
 			placement="bottom"

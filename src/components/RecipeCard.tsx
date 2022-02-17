@@ -5,6 +5,7 @@ import { Link } from 'tamia-gatsby-link';
 import { getImageUrl } from '../util/client';
 import { RecipeMetaFragment } from '../graphql-types';
 import RecipeFlags from './RecipeFlags';
+import RecipeTimes from './RecipeTimes';
 
 export default function RecipeCard({
 	flags,
@@ -13,6 +14,8 @@ export default function RecipeCard({
 	images,
 	title,
 	slug,
+	time,
+	overnight,
 	...rest
 }: RecipeMetaFragment & ComponentProps<typeof Stack>) {
 	return (
@@ -39,17 +42,21 @@ export default function RecipeCard({
 					</Text>
 				</Stack>
 			</Link>
-			<RecipeFlags
-				flags={flags}
-				margaritasFavorite={margaritasFavorite}
-				artemsFavorite={artemsFavorite}
-			/>
+			<Stack gap="s" direction="row" alignItems="center">
+				<RecipeFlags
+					flags={flags}
+					margaritasFavorite={margaritasFavorite}
+					artemsFavorite={artemsFavorite}
+				/>
+				{time && <RecipeTimes time={time} overnight={overnight} size="small" />}
+			</Stack>
 		</Stack>
 	);
 }
 
 export const recipeMetaFragment = graphql`
 	fragment RecipeMeta on GraphCMS_Recipe {
+		artemsFavorite
 		createdAt
 		flags {
 			vegan
@@ -59,18 +66,18 @@ export const recipeMetaFragment = graphql`
 			dairyFree
 			noAddedSugar
 		}
-		margaritasFavorite
-		artemsFavorite
-		time
-		title
-		seasons
-		slug
 		images {
 			handle
 			height
 			url
 			width
 		}
+		margaritasFavorite
+		overnight
+		seasons
+		slug
+		time
+		title
 	}
 `;
 
