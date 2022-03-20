@@ -1,21 +1,12 @@
 import React from 'react';
 import { paramCase } from 'param-case';
-import { countryCodeEmoji } from 'country-code-emoji';
-import nationalities from 'i18n-nationality/langs/en.json';
 import { Stack, Box } from 'tamia';
+import { getEmojiByNationality } from '../util/emojis';
 import Tag from './Tag';
 
 type Props = {
 	cuisines: string[];
 };
-
-const getCountryCodeByNationality = (nationality: string): string =>
-	Object.entries(nationalities.nationalities).find(
-		([, n]) => n === nationality
-	)?.[0] || '';
-
-const getEmojiByNationality = (nationality: string): string =>
-	countryCodeEmoji(getCountryCodeByNationality(nationality));
 
 export function RecipeCuisines({ cuisines }: Props) {
 	return (

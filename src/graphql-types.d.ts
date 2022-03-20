@@ -583,6 +583,7 @@ export type GraphCms_Cuisine =
   | 'Vietnamese'
   | 'Japanese'
   | 'Chinese'
+  | 'Korean'
   | 'French';
 
 export type GraphCms_Tag =
