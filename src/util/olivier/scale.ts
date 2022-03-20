@@ -5,6 +5,9 @@ function roundAmount(amount: number) {
 	if (amount > 50) {
 		return round(amount, -1);
 	}
+	if (amount < 0.5) {
+		return 0.25;
+	}
 	if (amount < 1) {
 		return 0.5;
 	}
