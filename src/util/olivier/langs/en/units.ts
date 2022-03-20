@@ -9,6 +9,7 @@ export const UNITS = [
 	['ft', 'ft', 'foot', 'feet', 'ft.'],
 	['g', 'g', 'gram', 'grams', 'g.'],
 	['gal', 'gal', 'gallon', 'gallons', 'gal.'],
+	['handful', 'handfuls'],
 	['head', 'heads'],
 	['in', 'in', 'inch', 'inches', 'in.'],
 	['jar', 'jars'],
