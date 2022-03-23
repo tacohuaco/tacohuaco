@@ -193,9 +193,10 @@ export const INGREDIENTS = [
 	['milk chocolate'],
 	['chocolate'],
 	['whipping cream', 'whipping cream', 'schlagsahne'],
-	// Meat
+	// Meat and fish
 	['chicken stock', 'chicken stock', 'chicken broth'],
-	['chicken', 'chicken'],
+	['chicken'],
+	['salmon'],
 	// Flours
 	['buckwheat flour'],
 	['teff flour'],
