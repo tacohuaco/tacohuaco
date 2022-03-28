@@ -3,9 +3,9 @@ import { getImageUrl, stripMarkdown, asList } from './client';
 describe('getImageUrl', () => {
 	test('return URL with sizes', () => {
 		expect(
-			getImageUrl('https://media.graphcms.com/pizza', { width: 11, height: 22 })
+			getImageUrl('https://media.graphassets.com/pizza', { width: 11, height: 22 })
 		).toBe(
-			'https://media.graphcms.com/resize=height:22,width:11/quality=value:65/pizza'
+			'https://media.graphassets.com/resize=height:22,width:11/quality=value:65/pizza'
 		);
 	});
 });

@@ -6,8 +6,8 @@ export const getImageUrl = (
 	{ width, height }: { width: number; height: number }
 ) =>
 	baseUrl.replace(
-		'https://media.graphcms.com/',
-		`https://media.graphcms.com/resize=height:${height},width:${width}/quality=value:65/`
+		'https://media.graphassets.com/',
+		`https://media.graphassets.com/resize=height:${height},width:${width}/quality=value:65/`
 	);
 
 /**

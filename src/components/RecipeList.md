@@ -18,7 +18,7 @@
         {
           handle: 'MBQKOd8lRSGFIeD3bvrC',
           height: 4160,
-          url: 'https://media.graphcms.com/MBQKOd8lRSGFIeD3bvrC',
+          url: 'https://media.graphassets.com/MBQKOd8lRSGFIeD3bvrC',
           width: 6240
         }
       ]
@@ -40,7 +40,7 @@
         {
           handle: 'f6YiclKIT8ilnp8eh55u',
           height: 2965,
-          url: 'https://media.graphcms.com/f6YiclKIT8ilnp8eh55u',
+          url: 'https://media.graphassets.com/f6YiclKIT8ilnp8eh55u',
           width: 3860
         }
       ]
@@ -62,7 +62,7 @@
         {
           handle: 'GVcv7HGFSc2hSzHktWlK',
           height: 2624,
-          url: 'https://media.graphcms.com/GVcv7HGFSc2hSzHktWlK',
+          url: 'https://media.graphassets.com/GVcv7HGFSc2hSzHktWlK',
           width: 2875
         }
       ]
@@ -84,7 +84,7 @@
         {
           handle: 'IS73aYruS9CitDm3sCWA',
           height: 3782,
-          url: 'https://media.graphcms.com/IS73aYruS9CitDm3sCWA',
+          url: 'https://media.graphassets.com/IS73aYruS9CitDm3sCWA',
           width: 2637
         }
       ]
@@ -136,7 +136,7 @@
         {
           handle: 'Gx3hjxoLQGNV17JOAskX',
           height: 2866,
-          url: 'https://media.graphcms.com/Gx3hjxoLQGNV17JOAskX',
+          url: 'https://media.graphassets.com/Gx3hjxoLQGNV17JOAskX',
           width: 2945
         }
       ]

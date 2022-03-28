@@ -16,7 +16,7 @@
     {
       handle: 'MBQKOd8lRSGFIeD3bvrC',
       height: 4160,
-      url: 'https://media.graphcms.com/MBQKOd8lRSGFIeD3bvrC',
+      url: 'https://media.graphassets.com/MBQKOd8lRSGFIeD3bvrC',
       width: 6240
     }
   ]}
