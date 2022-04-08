@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../shared';
 
 dotenv.config();
 
@@ -7,14 +8,11 @@ if (!process.env.GRAPHCMS_TOKEN) {
 	process.exit(1);
 }
 
-const title = 'Tacohuaco';
-const siteUrl = 'https://tacohuaco.co';
-
 export default {
 	siteMetadata: {
-		siteUrl,
-		title,
-		description: 'TODO',
+		siteUrl: SITE_URL,
+		title: SITE_TITLE,
+		description: SITE_DESCRIPTION,
 	},
 	plugins: [
 		'gatsby-plugin-react-helmet',
@@ -112,7 +110,7 @@ export default {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl,
+				siteUrl: SITE_URL,
 			},
 		},
 		{

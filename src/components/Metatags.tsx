@@ -2,9 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { getImageUrl, stripMarkdown } from '../util/client';
 import { Asset } from '../types/Asset';
-
-const SITE_URL = 'https://tacohuaco.co';
-const SITE_TITLE = 'Tacohuaco';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../shared';
 
 type Props = {
 	slug: string;
@@ -17,7 +15,7 @@ type Props = {
 export default function Metatags({
 	slug,
 	title,
-	description = 'TODO',
+	description,
 	images = [],
 	children,
 }: Props) {
@@ -25,7 +23,7 @@ export default function Metatags({
 		images.length > 0 &&
 		getImageUrl(images[0].url, { width: 1500, height: 1000 });
 
-	const descriptionText = stripMarkdown(description);
+	const descriptionText = stripMarkdown(description || SITE_DESCRIPTION);
 	return (
 		<Helmet title={title ? `${title} — ${SITE_TITLE}` : SITE_TITLE}>
 			<meta name="description" content={descriptionText} />
