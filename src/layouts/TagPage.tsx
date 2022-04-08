@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack, Heading } from 'tamia';
+import { upperFirst, lowerCase } from 'lodash';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
@@ -11,8 +12,19 @@ type Props = {
 	tag: GraphCms_Tag;
 };
 
+const TAGS_TO_TITLES: Record<string, string> = {
+	NewYear: 'New Yearʼs eve recipes',
+};
+
+const tagToTitle = (tag: string) => {
+	if (tag in TAGS_TO_TITLES) {
+		return TAGS_TO_TITLES[tag];
+	}
+	return `${upperFirst(lowerCase(tag))} recipes`;
+};
+
 export default function TagPage({ recipes, url, tag }: Props) {
-	const title = `${tag} recipes`;
+	const title = tagToTitle(tag);
 	return (
 		<Page url={url}>
 			<Metatags slug={url} title={title} images={recipes?.[0].images} />

@@ -606,11 +606,12 @@ export type GraphCms_Tag =
   | 'Spicy'
   | 'Dressing'
   | 'Icing'
+  | 'Celebration'
+  | 'Crowd'
   | 'NewYear'
   | 'Christmas'
   | 'Warming'
-  | 'Dinner'
-  | 'Holidays';
+  | 'Dinner';
 
 export type GraphCms_Difficulty =
   | 'Easy'
