@@ -15,6 +15,7 @@ export default {
 		description: SITE_DESCRIPTION,
 	},
 	plugins: [
+		'gatsby-plugin-image',
 		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-styled-components',
 		{

@@ -20,6 +20,9 @@ import {
 import { ALL_FLAGS } from '../consts';
 import { typo } from '../util/typo';
 
+// TODO: Replace getAllNodes with findAllNodes
+// https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/#nodemodelgetallnodes-is-deprecated
+
 // XXX: Gatsby has no types for this anywhere :-/
 interface GatsbyContext {
 	nodeModel: {
