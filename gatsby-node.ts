@@ -20,13 +20,10 @@ import {
 import { ALL_FLAGS } from './src/consts';
 import { typo } from './src/util/typo';
 
-// TODO: Replace getAllNodes with findAllNodes
-// https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/#nodemodelgetallnodes-is-deprecated
-
 // XXX: Gatsby has no types for this anywhere :-/
 interface GatsbyContext {
 	nodeModel: {
-		getAllNodes<T>(params: { type?: string }): T[];
+		findAll<T>(params: { type?: string }): Promise<{ entries: T[] }>;
 	};
 }
 
@@ -35,17 +32,18 @@ interface IngredientsWithMetaRaw {
 	ingredients: string;
 }
 
-const getSubrecipeIngredients = (
+const getSubrecipeIngredients = async (
 	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
 	context: GatsbyContext
-): IngredientsWithMetaRaw[] => {
+): Promise<IngredientsWithMetaRaw[]> => {
 	if (source.subrecipes.length > 0) {
 		const remoteIds = source.subrecipes.map((x) => x.remoteId);
-		const subrecipes = context.nodeModel
-			.getAllNodes<GraphCms_Recipe>({
-				type: 'GraphCMS_Recipe',
-			})
-			.filter((x) => remoteIds.includes(x.remoteId));
+		const allSubrecipes = await context.nodeModel.findAll<GraphCms_Recipe>({
+			type: 'GraphCMS_Recipe',
+		});
+		const subrecipes = allSubrecipes.entries.filter((x) =>
+			remoteIds.includes(x.remoteId)
+		);
 		return subrecipes.map((x) => ({
 			slug: x.slug,
 			ingredients: x.ingredients || '',
@@ -55,14 +53,14 @@ const getSubrecipeIngredients = (
 	}
 };
 
-const getAllRecipeIngredients = (
+const getAllRecipeIngredients = async (
 	source: Pick<
 		GraphCms_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
 	>,
 	context: GatsbyContext
-): IngredientsWithMetaRaw[] => {
-	const subrecipeIngredients = getSubrecipeIngredients(source, context);
+): Promise<IngredientsWithMetaRaw[]> => {
+	const subrecipeIngredients = await getSubrecipeIngredients(source, context);
 	return [
 		{
 			slug: source.slug,
@@ -72,19 +70,18 @@ const getAllRecipeIngredients = (
 	];
 };
 
-const getAllRecipeIngredientsFlattened = (
+const getAllRecipeIngredientsFlattened = async (
 	source: Pick<
 		GraphCms_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
 	>,
 	context: GatsbyContext
-): string => {
-	return getAllRecipeIngredients(source, context)
-		.map((x) => x.ingredients)
-		.join('\n');
+): Promise<string> => {
+	const allRecipeIngredients = await getAllRecipeIngredients(source, context);
+	return allRecipeIngredients.map((x) => x.ingredients).join('\n');
 };
 
-const getRecipeWarnings = (
+const getRecipeWarnings = async (
 	source: Pick<
 		GraphCms_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
@@ -92,12 +89,12 @@ const getRecipeWarnings = (
 	context: GatsbyContext
 ): Promise<string[]> => {
 	const recipeIngredients = getIngredients(
-		getAllRecipeIngredientsFlattened(source, context)
+		await getAllRecipeIngredientsFlattened(source, context)
 	);
-	const promises = context.nodeModel
-		.getAllNodes<GraphCms_Ingredient>({
-			type: 'GraphCMS_Ingredient',
-		})
+	const allIngredients = await context.nodeModel.findAll<GraphCms_Ingredient>({
+		type: 'GraphCMS_Ingredient',
+	});
+	const promises = allIngredients.entries
 		.filter((ingredient) =>
 			recipeIngredients.some(
 				({ name }) => name === ingredient.name.toLowerCase()
@@ -110,7 +107,7 @@ const getRecipeWarnings = (
 	return Promise.all(promises);
 };
 
-const getRecipeTips = (
+const getRecipeTips = async (
 	source: Pick<
 		GraphCms_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
@@ -118,12 +115,12 @@ const getRecipeTips = (
 	context: GatsbyContext
 ): Promise<string[]> => {
 	const recipeIngredients = getIngredients(
-		getAllRecipeIngredientsFlattened(source, context)
+		await getAllRecipeIngredientsFlattened(source, context)
 	);
-	const promises = context.nodeModel
-		.getAllNodes<GraphCms_Tip>({
-			type: 'GraphCMS_Tip',
-		})
+	const allTips = await context.nodeModel.findAll<GraphCms_Tip>({
+		type: 'GraphCMS_Tip',
+	});
+	const promises = allTips.entries
 		.filter(
 			(tip) =>
 				(!tip.ingredient ||
@@ -196,8 +193,13 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 		[`GraphCMS_Recipe`]: {
 			[`allIngredients`]: {
 				type: '[IngredientsJson!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
-					return getAllRecipeIngredients(source, context).map((x) => ({
+				resolve: async (
+					source: Source,
+					args: unknown,
+					context: GatsbyContext
+				) => {
+					const allIngredients = await getAllRecipeIngredients(source, context);
+					return allIngredients.map((x) => ({
 						slug: x.slug,
 						ingredients: getIngredients(x.ingredients),
 					}));
@@ -205,45 +207,61 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 			},
 			[`allIngredientsInfo`]: {
 				type: '[IngredientInfoJson!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: async (
+					source: Source,
+					args: unknown,
+					context: GatsbyContext
+				) => {
 					return getIngredientsInfo(
-						getAllRecipeIngredientsFlattened(source, context)
+						await getAllRecipeIngredientsFlattened(source, context)
 					);
 				},
 			},
 			[`flags`]: {
 				type: 'FlagsJson!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: async (
+					source: Source,
+					args: unknown,
+					context: GatsbyContext
+				) => {
 					return getRecipeFlags(
-						getAllRecipeIngredientsFlattened(source, context)
+						await getAllRecipeIngredientsFlattened(source, context)
 					);
 				},
 			},
 			[`seasons`]: {
 				type: '[Int!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: async (
+					source: Source,
+					args: unknown,
+					context: GatsbyContext
+				) => {
 					return getRecipeSeasons(
-						getAllRecipeIngredientsFlattened(source, context)
+						await getAllRecipeIngredientsFlattened(source, context)
 					);
 				},
 			},
 			[`preconditions`]: {
 				type: '[String!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: async (
+					source: Source,
+					args: unknown,
+					context: GatsbyContext
+				) => {
 					return getRecipePreconditions(
-						getAllRecipeIngredientsFlattened(source, context)
+						await getAllRecipeIngredientsFlattened(source, context)
 					);
 				},
 			},
 			[`warnings`]: {
 				type: '[String!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: (source: Source, args: unknown, context: GatsbyContext) => {
 					return getRecipeWarnings(source, context);
 				},
 			},
 			[`tips`]: {
 				type: '[String!]!',
-				resolve(source: Source, args: unknown, context: GatsbyContext) {
+				resolve: (source: Source, args: unknown, context: GatsbyContext) => {
 					return getRecipeTips(source, context);
 				},
 			},
