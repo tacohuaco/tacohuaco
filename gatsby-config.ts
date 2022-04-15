@@ -30,7 +30,7 @@ const config: GatsbyConfig = {
 			resolve: 'gatsby-plugin-graphql-codegen',
 			options: {
 				fileName: 'src/graphql-types.d.ts',
-				documentPaths: ['src/**/!(*.d).{ts,tsx}'],
+				documentPaths: ['src/**/!(*.d).{ts,tsx}', 'gatsby-*.ts'],
 				codegenDelay: 10000,
 			},
 		},
