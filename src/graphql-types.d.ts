@@ -235,8 +235,6 @@ export type DirectoryCtimeArgs = {
 export type Site = Node & {
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Int']>;
-  host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
   jsxRuntime?: Maybe<Scalars['String']>;
@@ -824,8 +822,6 @@ export type QueryAllDirectoryArgs = {
 export type QuerySiteArgs = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
-  port?: InputMaybe<IntQueryOperatorInput>;
-  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -1839,8 +1835,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___title'
   | 'siteMetadata___description'
   | 'siteMetadata___siteUrl'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'jsxRuntime'
@@ -1976,8 +1970,6 @@ export type SiteGroupConnectionGroupArgs = {
 export type SiteFilterInput = {
   buildTime?: InputMaybe<DateQueryOperatorInput>;
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
-  port?: InputMaybe<IntQueryOperatorInput>;
-  host?: InputMaybe<StringQueryOperatorInput>;
   polyfill?: InputMaybe<BooleanQueryOperatorInput>;
   pathPrefix?: InputMaybe<StringQueryOperatorInput>;
   jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
@@ -9390,11 +9382,6 @@ export type GraphCms_TipSortInput = {
 export type RecipeMetaFragment = { artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> };
 
 export type AllIngredientsFragment = { slug: string, ingredients: Array<{ name: string, minAmount?: string | null, maxAmount?: string | null, unit?: string | null, modifier?: string | null }> };
-
-export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllRecipesQuery = { allGraphCmsRecipe: { nodes: Array<{ cuisines: Array<GraphCms_Cuisine>, slug: string, tags: Array<GraphCms_Tag> }> } };
 
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 

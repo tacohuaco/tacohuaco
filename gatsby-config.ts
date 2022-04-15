@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../shared';
+import type { GatsbyConfig } from 'gatsby';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from './src/shared';
 
 dotenv.config();
 
@@ -8,7 +9,7 @@ if (!process.env.GRAPHCMS_TOKEN) {
 	process.exit(1);
 }
 
-export default {
+const config: GatsbyConfig = {
 	siteMetadata: {
 		siteUrl: SITE_URL,
 		title: SITE_TITLE,
@@ -107,7 +108,6 @@ export default {
 				},
 			},
 		},
-		'gatsby-plugin-typescript',
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
@@ -123,3 +123,5 @@ export default {
 		},
 	],
 };
+
+export default config;

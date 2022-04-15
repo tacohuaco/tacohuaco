@@ -1,13 +1,13 @@
 import path from 'path';
-import { GatsbyNode } from 'gatsby';
 import { kebabCase, uniq } from 'lodash';
+import type { GatsbyNode } from 'gatsby';
 import {
 	AllRecipesQuery,
 	GraphCms_Recipe,
 	GraphCms_Ingredient,
 	GraphCms_Tip,
-} from '../graphql-types';
-import { getMdx } from '../util/mdx';
+} from './src/graphql-types';
+import { getMdx } from './src/util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
 	GRAPHCMS_FIELD_PREPROCESSING,
@@ -16,9 +16,9 @@ import {
 	getRecipePreconditions,
 	getIngredients,
 	getIngredientsInfo,
-} from '../util/content';
-import { ALL_FLAGS } from '../consts';
-import { typo } from '../util/typo';
+} from './src/util/content';
+import { ALL_FLAGS } from './src/consts';
+import { typo } from './src/util/typo';
 
 // TODO: Replace getAllNodes with findAllNodes
 // https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v3-to-v4/#nodemodelgetallnodes-is-deprecated
@@ -296,7 +296,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 	recipes.forEach(({ slug }) => {
 		createPage({
 			path: `/recipes/${slug}/`,
-			component: path.resolve(__dirname, '../templates/recipe.tsx'),
+			component: path.resolve('src/templates/recipe.tsx'),
 			context: {
 				slug,
 			},
@@ -309,7 +309,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(tag);
 		createPage({
 			path: `/tags/${slug}/`,
-			component: path.resolve(__dirname, '../templates/tag.tsx'),
+			component: path.resolve('src/templates/tag.tsx'),
 			context: {
 				tag,
 			},
@@ -322,7 +322,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(cuisine);
 		createPage({
 			path: `/cuisines/${slug}/`,
-			component: path.resolve(__dirname, '../templates/cuisine.tsx'),
+			component: path.resolve('src/templates/cuisine.tsx'),
 			context: {
 				cuisine,
 			},
@@ -334,7 +334,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 		const slug = kebabCase(flag);
 		createPage({
 			path: `/flags/${slug}/`,
-			component: path.resolve(__dirname, '../templates/flag.tsx'),
+			component: path.resolve('src/templates/flag.tsx'),
 			context: {
 				flag,
 			},
