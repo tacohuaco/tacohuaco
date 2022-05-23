@@ -4,6 +4,7 @@ export const INGREDIENTS = [
 	// Spices
 	['salt'],
 	['black pepper'],
+	['star anise'],
 	['bay leaf', 'bay leaves'],
 	['rosemary seed', 'rosemary seeds'],
 	['cumin seed', 'cumin seeds'],

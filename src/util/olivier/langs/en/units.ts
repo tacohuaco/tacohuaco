@@ -24,6 +24,7 @@ export const UNITS = [
 	['package', 'packages', 'pkg', 'pkgs'],
 	['piece', 'pieces', 'pcs', 'pcs.'],
 	['pinch', 'pinches'],
+	['pod', 'pods'],
 	['portion', 'portions'],
 	['pt', 'pt', 'pint', 'pints', 'pt.'],
 	['qt', 'qts', 'quart', 'quarts', 'qt.', 'qts.'],
