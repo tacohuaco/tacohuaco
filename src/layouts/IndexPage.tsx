@@ -1,11 +1,15 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { orderBy } from 'lodash';
-import { Stack, Heading, VisuallyHidden } from 'tamia';
+import { Stack, Heading, Text, VisuallyHidden } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
 import { RecipeMetaFragment } from '../graphql-types';
 import { DynamicContainer } from '../components/DynamicContainer';
+import { useSearchResults } from '../hooks/useSearchResults';
+import { useSearchIndex } from '../hooks/useSearchIndex';
+import { useDebouncedValue } from '../hooks/useDebouncedValue';
+import { SearchField } from '../components/SearchField';
 
 type Props = {
 	recipes: RecipeMetaFragment[];
@@ -50,26 +54,54 @@ const RecipeListSection = ({
 export default function IndexPage({ recipes, url }: Props) {
 	const recipesInSeason = getCurrentSeasonRecipes(recipes);
 	const newRecipes = getNewRecipes(recipes);
+
+	const [searchQuery, setSearchQuery] = useState('');
+	const searchQueryDebounced = useDebouncedValue(searchQuery);
+	const searchIndex = useSearchIndex(recipes);
+	const searchResults = useSearchResults(
+		searchIndex,
+		recipes,
+		searchQueryDebounced
+	);
+
 	return (
 		<Page url={url}>
 			<Metatags slug={url} images={recipes?.[0].images} />
 			<VisuallyHidden as="h1">Recipes</VisuallyHidden>
-			<Stack as="main" gap="xl">
-				<DynamicContainer>
-					<RecipeListSection
-						title="Recently added recipes"
-						recipes={newRecipes}
-					/>
-				</DynamicContainer>
-				{recipesInSeason.length > 0 && (
-					<DynamicContainer>
-						<RecipeListSection
-							title="Recipes with ingredients in season"
-							recipes={recipesInSeason}
-						/>
-					</DynamicContainer>
-				)}
-				<RecipeListSection title="All recipes" recipes={recipes} />
+			<Stack as="header" gap="l">
+				<SearchField
+					value={searchQuery}
+					onChange={(event) => setSearchQuery(event.target.value)}
+				/>
+				<Stack as="main" gap="xl">
+					{searchQuery !== '' ? (
+						searchResults.length > 0 ? (
+							<RecipeListSection
+								title="Search results"
+								recipes={searchResults}
+							/>
+						) : (
+							<Text>Computer says no</Text>
+						)
+					) : (
+						<>
+							<DynamicContainer>
+								<RecipeListSection
+									title="Recently added recipes"
+									recipes={newRecipes}
+								/>
+							</DynamicContainer>
+							{recipesInSeason.length > 0 && (
+								<DynamicContainer>
+									<RecipeListSection
+										title="Recipes with ingredients in season"
+										recipes={recipesInSeason}
+									/>
+								</DynamicContainer>
+							)}
+						</>
+					)}
+				</Stack>
 			</Stack>
 		</Page>
 	);

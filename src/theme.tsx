@@ -54,6 +54,7 @@ const colors = {
 };
 const borders = {
 	focus: '3px solid',
+	input: '2px solid',
 };
 const radii = {
 	base: '0.15rem',

@@ -56,6 +56,11 @@ export default function RecipeCard({
 
 export const recipeMetaFragment = graphql`
 	fragment RecipeMeta on GraphCMS_Recipe {
+		allIngredients {
+			ingredients {
+				name
+			}
+		}
 		artemsFavorite
 		createdAt
 		flags {
@@ -78,6 +83,7 @@ export const recipeMetaFragment = graphql`
 		slug
 		time
 		title
+		tags
 	}
 `;
 
