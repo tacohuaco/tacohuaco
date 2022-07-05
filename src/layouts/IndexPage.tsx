@@ -5,6 +5,7 @@ import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
 import { RecipeMetaFragment } from '../graphql-types';
+import { DynamicContainer } from '../components/DynamicContainer';
 
 type Props = {
 	recipes: RecipeMetaFragment[];
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const CURRENT_SEASON = new Date().getMonth() + 1;
+const NEW_RECIPES_TO_SHOW = 6;
 
 // Order recipies by the lengths of the seasons list: recipes with shorter season
 const getCurrentSeasonRecipes = (
@@ -24,7 +26,10 @@ const getCurrentSeasonRecipes = (
 };
 
 const getNewRecipes = (recipes: RecipeMetaFragment[]): RecipeMetaFragment[] => {
-	return orderBy(recipes, (x) => -Date.parse(x.createdAt)).slice(0, 3);
+	return orderBy(recipes, (x) => -Date.parse(x.createdAt)).slice(
+		0,
+		NEW_RECIPES_TO_SHOW
+	);
 };
 
 const RecipeListSection = ({
@@ -42,7 +47,7 @@ const RecipeListSection = ({
 	</Stack>
 );
 
-export default function RecipePage({ recipes, url }: Props) {
+export default function IndexPage({ recipes, url }: Props) {
 	const recipesInSeason = getCurrentSeasonRecipes(recipes);
 	const newRecipes = getNewRecipes(recipes);
 	return (
@@ -50,16 +55,20 @@ export default function RecipePage({ recipes, url }: Props) {
 			<Metatags slug={url} images={recipes?.[0].images} />
 			<VisuallyHidden as="h1">Recipes</VisuallyHidden>
 			<Stack as="main" gap="xl">
-				{recipesInSeason.length > 0 && (
+				<DynamicContainer>
 					<RecipeListSection
-						title="Recipes with ingredients in season"
-						recipes={recipesInSeason}
+						title="Recently added recipes"
+						recipes={newRecipes}
 					/>
+				</DynamicContainer>
+				{recipesInSeason.length > 0 && (
+					<DynamicContainer>
+						<RecipeListSection
+							title="Recipes with ingredients in season"
+							recipes={recipesInSeason}
+						/>
+					</DynamicContainer>
 				)}
-				<RecipeListSection
-					title="Recently added recipes"
-					recipes={newRecipes}
-				/>
 				<RecipeListSection title="All recipes" recipes={recipes} />
 			</Stack>
 		</Page>
