@@ -9387,19 +9387,19 @@ export type GraphCms_TipSortInput = {
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
 
-export type RecipeMetaFragment = { artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> };
+export type RecipeMetaFragment = { artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> };
 
 export type AllIngredientsFragment = { slug: string, ingredients: Array<{ name: string, minAmount?: string | null, maxAmount?: string | null, unit?: string | null, modifier?: string | null }> };
 
 export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
+export type IndexPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
 
 export type RecipesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
+export type RecipesPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
 
 export type ShopsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -9411,12 +9411,12 @@ export type CuisinePageQueryVariables = Exact<{
 }>;
 
 
-export type CuisinePageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
+export type CuisinePageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
 
 export type FlagPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FlagPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
+export type FlagPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
 
 export type RecipePageQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -9430,7 +9430,7 @@ export type TagsPageQueryVariables = Exact<{
 }>;
 
 
-export type TagsPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
+export type TagsPageQuery = { allGraphCmsRecipe: { nodes: Array<{ artemsFavorite: boolean, createdAt: any, cuisines: Array<GraphCms_Cuisine>, margaritasFavorite: boolean, overnight: boolean, seasons: Array<number>, slug: string, time?: number | null, title: string, tags: Array<GraphCms_Tag>, allIngredients: Array<{ ingredients: Array<{ name: string }> }>, flags: { vegan: boolean, vegetarian: boolean, glutenFree: boolean, lowGluten: boolean, dairyFree: boolean, noAddedSugar: boolean }, images: Array<{ handle: string, height?: number | null, url: string, width?: number | null }> }> } };
 
 export type AllRecipesQueryVariables = Exact<{ [key: string]: never; }>;
 

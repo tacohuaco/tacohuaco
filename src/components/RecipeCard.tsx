@@ -63,6 +63,7 @@ export const recipeMetaFragment = graphql`
 		}
 		artemsFavorite
 		createdAt
+		cuisines
 		flags {
 			vegan
 			vegetarian

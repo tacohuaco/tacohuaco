@@ -43,15 +43,17 @@ export function useSearchIndex(recipes: RecipeMetaFragment[]) {
 		return lunr(function () {
 			this.ref('slug');
 			this.field('title', { boost: 3 });
+			this.field('cuisines');
 			this.field('ingredients');
 			this.field('tags');
 			this.field('seasons');
 
 			recipes.forEach(
-				({ slug, title, allIngredients, tags, flags, seasons, ...recipe }) => {
+				({ slug, title, cuisines, allIngredients, tags, flags, seasons }) => {
 					this.add({
 						slug,
 						title,
+						cuisines,
 						ingredients: allIngredients.flatMap((x) =>
 							x.ingredients.flatMap((y) => y.name.split(' '))
 						),
