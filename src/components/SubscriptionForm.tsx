@@ -1,24 +1,11 @@
 import React from 'react';
 import { Box, Stack, VisuallyHidden } from 'tamia';
 import styled from 'styled-components';
+import { Input } from './Input';
 
-const EmailInput = styled.input`
-	width: 100%;
-	height: 2em;
-	padding: ${(p) => p.theme.space.xxs} ${(p) => p.theme.space.s};
-	background-color: ${(p) => p.theme.colors.bg};
-	color: ${(p) => p.theme.colors.base};
-	border: 2px solid ${(p) => p.theme.colors.primary};
-	border-radius: 0;
-	font-size: ${(p) => p.theme.fontSizes.m};
-	font-family: ${(p) => p.theme.fonts.ui};
-	font-weight: ${(p) => p.theme.fontWeights.ui};
-	appearance: none;
-
-	&:focus {
-		outline: 0;
-		border-color: ${(p) => p.theme.colors.hover};
-	}
+const EmailInput = styled(Input)`
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
 `;
 
 const SubmitButton = styled.button`
@@ -28,6 +15,9 @@ const SubmitButton = styled.button`
 	background-color: ${(p) => p.theme.colors.base};
 	color: ${(p) => p.theme.colors.bg};
 	border: 2px solid ${(p) => p.theme.colors.primary};
+	border-radius: ${(props) => props.theme.radii.button};
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 	font-size: ${(p) => p.theme.fontSizes.m};
 	font-family: ${(p) => p.theme.fonts.ui};
 	font-weight: ${(p) => p.theme.fontWeights.ui};
