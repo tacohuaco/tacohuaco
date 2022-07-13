@@ -9,7 +9,7 @@ type Props = {
 	value: 'ingredients' | 'steps';
 };
 
-export function Subrecipe({ slug, value }: Props) {
+export function SubrecipeRenderer({ slug, value }: Props) {
 	const subrecipes = useSubrecipes();
 	const subrecipe = subrecipes.find((x) => x.slug === slug);
 	const ingredients = getIngredientsBySlug(

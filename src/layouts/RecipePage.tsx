@@ -16,7 +16,6 @@ import {
 } from '../components/SubrecipesContext';
 import { RecipeContext } from '../components/RecipeContext';
 import { GraphCms_Recipe } from '../graphql-types';
-import Page from './Page';
 import {
 	scale,
 	IngredientInfo,
@@ -30,9 +29,11 @@ import {
 import { asList } from '../util/client';
 import { Collapsible } from '../components/Collapsible';
 import { Button } from '../components/Button';
+import { SubrecipesToTry } from '../components/SubrecipesToTry';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Subrecipe } from '../types/Subrecipe';
 import { Asset } from '../types/Asset';
+import Page from './Page';
 
 type Props = Pick<
 	GraphCms_Recipe,
@@ -286,6 +287,7 @@ export default function RecipePage({
 										{(notesMdx || sourceMdx || tips.length > 0) && (
 											<>
 												<Heading level={2}>Notes &amp; tips</Heading>
+												<SubrecipesToTry />
 												{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
 												{tips.map((tip) => (
 													<MDXRenderer key={tip}>{tip}</MDXRenderer>

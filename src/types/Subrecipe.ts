@@ -3,7 +3,7 @@ import { IngredientsWithMeta } from './IngredientsWithMeta';
 
 export type Subrecipe = Pick<
 	GraphCms_Recipe,
-	'slug' | 'ingredients' | 'ingredientsMdx' | 'stepsMdx'
+	'slug' | 'title' | 'ingredients' | 'ingredientsMdx' | 'stepsMdx'
 > & {
 	allIngredients: IngredientsWithMeta[];
 };

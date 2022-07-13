@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MDXProvider } from '@mdx-js/react';
 import { Text, TextContent as TextContentBase } from 'tamia';
 import { castArray, last } from 'lodash';
-import { Subrecipe } from './Subrecipe';
+import { SubrecipeRenderer } from './SubrecipeRenderer';
 import { useRecipe, findIngredient } from './RecipeContext';
 import { formatOption, printOption, normalizeName } from '../util/olivier';
 
@@ -79,7 +79,7 @@ const ListItem: ComponentType<{ children: ReactNode }> = ({ children }) => {
 
 const Paragraph: ComponentType<any> = ({ children }) => {
 	if (children?.props?.href && children?.props?.children === '#') {
-		return <Subrecipe slug={children?.props?.href} value="steps" />;
+		return <SubrecipeRenderer slug={children?.props?.href} value="steps" />;
 	}
 	return children;
 };

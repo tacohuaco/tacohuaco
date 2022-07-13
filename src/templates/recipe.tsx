@@ -134,6 +134,7 @@ export const pageQuery = graphql`
 			}
 			subrecipes {
 				slug
+				title
 				allIngredients {
 					...AllIngredients
 				}
