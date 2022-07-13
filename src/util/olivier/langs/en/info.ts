@@ -9,6 +9,7 @@ export const GLUTENS = [
 	'pasta',
 	'semolina',
 	'soy sauce',
+	'kimchi paste',
 	'spelt flour',
 	'rye flour',
 ];
@@ -28,6 +29,6 @@ export const DAIRIES = [
 	'milk chocolate',
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
-export const FISHES = ['salmon'];
+export const FISHES = ['salmon', 'fish sauce', 'oyster sauce', 'kimchi paste'];
 export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage'];
 export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
