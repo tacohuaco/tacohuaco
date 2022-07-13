@@ -6,6 +6,11 @@ import { Input } from './Input';
 const EmailInput = styled(Input)`
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
+
+	@media (max-width: ${(p) => p.theme.breakpoints[0]}) {
+		border-top-right-radius: ${(p) => p.theme.radii.button};
+		border-bottom-left-radius: 0;
+	}
 `;
 
 const SubmitButton = styled.button`
@@ -22,6 +27,11 @@ const SubmitButton = styled.button`
 	font-family: ${(p) => p.theme.fonts.ui};
 	font-weight: ${(p) => p.theme.fontWeights.ui};
 	user-select: none;
+
+	@media (max-width: ${(p) => p.theme.breakpoints[0]}) {
+		border-bottom-left-radius: ${(p) => p.theme.radii.button};
+		border-top-right-radius: 0;
+	}
 
 	&:hover,
 	&:active,
