@@ -11,6 +11,22 @@ type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
 };
 
+const isOvernightStep = (text: unknown) => {
+	if (typeof text !== 'string') {
+		return false;
+	}
+
+	if (
+		text.endsWith('overnight.') ||
+		text.endsWith('days.') ||
+		text.endsWith('weeks.')
+	) {
+		return true;
+	}
+
+	return false;
+};
+
 const Ol = styled.ol`
 	&& {
 		padding-left: 0.35rem;
@@ -42,7 +58,7 @@ const Li = styled.li<{ isOvernight: boolean }>`
 		font-weight: ${(p) => p.theme.fontWeights.ui};
 		border-radius: ${(p) => p.theme.radii.round};
 	}
-	&&::after {
+	&&:not(:last-child)::after {
 		display: ${(p) => (p.isOvernight ? 'block' : 'none')};
 		content: '···';
 		position: absolute;
@@ -58,9 +74,7 @@ const Li = styled.li<{ isOvernight: boolean }>`
 
 const ListItem: ComponentType<{ children: ReactNode }> = ({ children }) => {
 	const lastPiece = last(castArray(children));
-	const isOvernight =
-		typeof lastPiece === 'string' && lastPiece.endsWith('overnight.');
-	return <Li isOvernight={isOvernight}>{children}</Li>;
+	return <Li isOvernight={isOvernightStep(lastPiece)}>{children}</Li>;
 };
 
 const Paragraph: ComponentType<any> = ({ children }) => {
