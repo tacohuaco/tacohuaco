@@ -30,6 +30,10 @@ export function SubrecipesToTry() {
 			findIngredientBySubrecipe(ingredients, subrecipe) !== undefined
 	);
 
+	if (subrecipesInIngredients.length === 0) {
+		return null;
+	}
+
 	return (
 		<Text>
 			Try our{' '}
