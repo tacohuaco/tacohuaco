@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { RecipesPageQuery } from '../graphql-types';
-import IndexPage from '../layouts/IndexPage';
+import RecipesPage from '../layouts/RecipesPage';
 
 type Props = {
 	data: RecipesPageQuery;
@@ -20,7 +20,7 @@ const Recipes = ({
 
 	const { nodes } = allGraphCmsRecipe;
 
-	return <IndexPage url={pathname} recipes={nodes} />;
+	return <RecipesPage url={pathname} recipes={nodes} />;
 };
 
 export default Recipes;

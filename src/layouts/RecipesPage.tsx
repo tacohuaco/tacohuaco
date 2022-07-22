@@ -10,12 +10,12 @@ type Props = {
 	url: string;
 };
 
-export default function RecipePage({ recipes, url }: Props) {
+export default function RecipesPage({ recipes, url }: Props) {
 	return (
 		<Page url={url}>
 			<Metatags slug={url} images={recipes?.[0].images} />
 			<Stack as="main" gap="l">
-				<Heading level={1}>Recipes</Heading>
+				<Heading level={1}>All recipes</Heading>
 				<RecipeList recipes={recipes} />
 			</Stack>
 		</Page>
