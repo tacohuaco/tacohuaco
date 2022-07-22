@@ -17,6 +17,12 @@ const SearchInput = styled(Input)`
 	height: auto;
 	padding: ${(p) => p.theme.space.s};
 	font-size: ${(p) => p.theme.fontSizes.l};
+	&::-webkit-search-decoration,
+	&::-webkit-search-cancel-button,
+	&::-webkit-search-results-button,
+	&::-webkit-search-results-decoration {
+		display: none;
+	}
 `;
 
 const SearchCombobox = styled.div`
@@ -67,7 +73,7 @@ const getItemsToShow = (items: string[], value: string) => {
 	return filteredItems.slice(0, MAX_ITEMS_TO_SHOW);
 };
 
-export function SearchField({ items, value, onChange }: Props) {
+export function SearchForm({ items, value, onChange }: Props) {
 	const itemsToShow = getItemsToShow(items, value);
 	const {
 		getComboboxProps,
@@ -89,33 +95,37 @@ export function SearchField({ items, value, onChange }: Props) {
 		},
 	});
 	return (
-		<form>
-			<label {...getLabelProps()}>
-				<VisuallyHidden>Search recipes</VisuallyHidden>
-				<SearchCombobox {...getComboboxProps()}>
-					<SearchInput
-						{...getInputProps({
-							placeholder: 'Search recipes',
-						})}
-					/>
-					<SearchMenu {...getMenuProps()}>
-						{isOpen &&
-							itemsToShow.map((item, index) => (
-								<SearchItem
-									key={item}
-									highlighted={highlightedIndex === index}
-									{...getItemProps({
-										item,
-										index,
-										key: item,
-									})}
-								>
-									{item}
-								</SearchItem>
-							))}
-					</SearchMenu>
-				</SearchCombobox>
-			</label>
+		<form role="search">
+			<VisuallyHidden as="label" {...getLabelProps()}>
+				Search recipes
+			</VisuallyHidden>
+			<SearchCombobox {...getComboboxProps()}>
+				<SearchInput
+					{...getInputProps({
+						type: 'search',
+						placeholder: 'Search recipes',
+					})}
+				/>
+				<SearchMenu {...getMenuProps()}>
+					{isOpen &&
+						itemsToShow.map((item, index) => (
+							<SearchItem
+								key={item}
+								highlighted={highlightedIndex === index}
+								{...getItemProps({
+									item,
+									index,
+									key: item,
+								})}
+							>
+								{item}
+							</SearchItem>
+						))}
+				</SearchMenu>
+			</SearchCombobox>
+			<VisuallyHidden as="div">
+				<button type="submit">Search</button>
+			</VisuallyHidden>
 		</form>
 	);
 }
