@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from 'react';
-import { orderBy } from 'lodash';
+import { orderBy, uniq } from 'lodash';
+import { sentenceCase } from 'sentence-case';
 import { Stack, Heading, Text, VisuallyHidden } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
@@ -7,9 +8,19 @@ import Metatags from '../components/Metatags';
 import { RecipeMetaFragment } from '../graphql-types';
 import { DynamicContainer } from '../components/DynamicContainer';
 import { useSearchResults } from '../hooks/useSearchResults';
-import { useSearchIndex } from '../hooks/useSearchIndex';
+import {
+	MONTH_TO_NAME,
+	SEASON_SPRING,
+	SEASON_SUMMER,
+	SEASON_AUTUMN,
+	SEASON_WINTER,
+	useSearchIndex,
+	FLAG_VEGAN,
+	FLAG_VEGETARIAN,
+} from '../hooks/useSearchIndex';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { SearchField } from '../components/SearchField';
+import { Link } from 'tamia-gatsby-link';
 
 type Props = {
 	recipes: RecipeMetaFragment[];
@@ -34,6 +45,46 @@ const getNewRecipes = (recipes: RecipeMetaFragment[]): RecipeMetaFragment[] => {
 		0,
 		NEW_RECIPES_TO_SHOW
 	);
+};
+
+const DEFAULT_AUTOCOMPLETE_ITEMS = [
+	...Object.values(MONTH_TO_NAME),
+	...SEASON_WINTER,
+	...SEASON_SPRING,
+	...SEASON_SUMMER,
+	...SEASON_AUTUMN,
+	FLAG_VEGAN,
+	FLAG_VEGETARIAN,
+];
+
+const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {
+	const allTitles: string[] = [];
+	const allIngredients: string[] = [];
+	const allTags: string[] = [];
+	const allCuisines: string[] = [];
+
+	recipes.forEach((recipe) => {
+		allTitles.push(recipe.title);
+
+		const ingredientNames = recipe.allIngredients.flatMap(({ ingredients }) =>
+			ingredients.map(({ name }) => name)
+		);
+		allIngredients.push(...ingredientNames);
+
+		const tagNames = recipe.tags.map((x) => sentenceCase(x).toLowerCase());
+		allTags.push(...tagNames);
+
+		const cuisineNames = recipe.cuisines;
+		allCuisines.push(...cuisineNames);
+	});
+
+	return uniq([
+		...DEFAULT_AUTOCOMPLETE_ITEMS,
+		...allTitles,
+		...allIngredients,
+		...allTags,
+		...allCuisines,
+	]);
 };
 
 const RecipeListSection = ({
@@ -64,14 +115,17 @@ export default function IndexPage({ recipes, url }: Props) {
 		searchQueryDebounced
 	);
 
+	const autocompleteItems = getAutocompleteItems(recipes);
+
 	return (
 		<Page url={url}>
 			<Metatags slug={url} images={recipes?.[0].images} />
 			<VisuallyHidden as="h1">Recipes</VisuallyHidden>
 			<Stack as="header" gap="l">
 				<SearchField
+					items={autocompleteItems}
 					value={searchQuery}
-					onChange={(event) => setSearchQuery(event.target.value)}
+					onChange={(value) => setSearchQuery(value || '')}
 				/>
 				<Stack as="main" gap="xl">
 					{searchQuery !== '' ? (
@@ -81,7 +135,11 @@ export default function IndexPage({ recipes, url }: Props) {
 								recipes={searchResults}
 							/>
 						) : (
-							<Text>Computer says no</Text>
+							<Text>
+								We couldnʼt find any food matching “{searchQuery}”.
+								<br /> (Maybe youʼll find what youʼre looking for at{' '}
+								<Link href="/recipes/">the recipes page</Link>?)
+							</Text>
 						)
 					) : (
 						<>

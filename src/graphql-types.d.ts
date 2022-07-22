@@ -544,7 +544,9 @@ export type GraphCms_Tag =
   | 'NewYear'
   | 'Christmas'
   | 'Warming'
-  | 'Dinner';
+  | 'Dinner'
+  | 'OnePot'
+  | 'DutchOven';
 
 export type GraphCms_Difficulty =
   | 'Easy'

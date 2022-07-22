@@ -55,11 +55,15 @@ const colors = {
 const borders = {
 	focus: '3px solid',
 	input: '2px solid',
+	thin: '1px solid',
 };
 const radii = {
 	base: '0.15rem',
 	button: '0.25rem',
 	round: '99999px',
+};
+const shadows = {
+	popover: '0 6px 15px -2px hsla(0,0%,0%,0.25)',
 };
 const fontWeights = {
 	base: 'normal',
@@ -116,6 +120,7 @@ const theme = {
 	colors,
 	borders,
 	radii,
+	shadows,
 	breakpoints,
 	headingStyles: {
 		1: {

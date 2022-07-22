@@ -1,31 +1,120 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from 'tamia';
+import { useCombobox } from 'downshift';
+import { matchSorter } from 'match-sorter';
 import { Input } from './Input';
 
+const MAX_ITEMS_TO_SHOW = 12;
+
 type Props = {
+	items: string[];
 	value: string;
-	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	onChange: (value?: string) => void;
 };
 
 const SearchInput = styled(Input)`
 	height: auto;
-	padding: ${(props) => props.theme.space.s};
-	font-size: ${(props) => props.theme.fontSizes.l};
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+	padding: ${(p) => p.theme.space.s};
+	font-size: ${(p) => p.theme.fontSizes.l};
 `;
 
-export function SearchField({ value, onChange }: Props) {
+const SearchCombobox = styled.div`
+	position: relative;
+`;
+
+const SearchMenu = styled.div`
+	position: absolute;
+	z-index: 99;
+	left: 0;
+	right: 0;
+	margin-top: ${(p) => p.theme.space.xs};
+	padding: ${(p) => p.theme.space.xs} 0;
+	background-color: ${(p) => p.theme.colors.bg};
+	border: ${(p) => p.theme.borders.thin};
+	border-color: ${(p) => p.theme.colors.light};
+	border-radius: ${(p) => p.theme.radii.button};
+	box-shadow: ${(p) => p.theme.shadows.popover};
+	transition: all 0.15s ease-out;
+	will-change: opacity;
+
+	&:empty {
+		opacity: 0;
+	}
+`;
+
+const SearchItem = styled.div<{ highlighted: boolean }>`
+	padding: ${(p) => p.theme.space.xxs} ${(p) => p.theme.space.s};
+	font-family: ${(p) => p.theme.fonts.ui};
+	font-size: ${(p) => p.theme.fontSizes.m};
+	font-weight: ${(p) => p.theme.fontWeights.ui};
+	color: ${(p) => (p.highlighted ? p.theme.colors.bg : p.theme.colors.base)};
+	background-color: ${(p) =>
+		p.highlighted ? p.theme.colors.accent : 'transparent'};
+`;
+
+const getItemsToShow = (items: string[], value: string) => {
+	if (value === '') {
+		return [];
+	}
+
+	const filteredItems = matchSorter(items, value);
+
+	if (filteredItems.length === items.length) {
+		return [];
+	}
+
+	return filteredItems.slice(0, MAX_ITEMS_TO_SHOW);
+};
+
+export function SearchField({ items, value, onChange }: Props) {
+	const itemsToShow = getItemsToShow(items, value);
+	const {
+		getComboboxProps,
+		getLabelProps,
+		getInputProps,
+		getMenuProps,
+		getItemProps,
+		highlightedIndex,
+		isOpen,
+	} = useCombobox({
+		items: itemsToShow,
+		inputValue: value,
+		selectedItem: value,
+		onInputValueChange: (x) => {
+			onChange(x.inputValue);
+		},
+		onSelectedItemChange: (x) => {
+			onChange(x.inputValue);
+		},
+	});
 	return (
 		<form>
-			<label>
+			<label {...getLabelProps()}>
 				<VisuallyHidden>Search recipes</VisuallyHidden>
-				<SearchInput
-					placeholder="Search recipes"
-					value={value}
-					onChange={onChange}
-				/>
+				<SearchCombobox {...getComboboxProps()}>
+					<SearchInput
+						{...getInputProps({
+							placeholder: 'Search recipes',
+						})}
+					/>
+					<SearchMenu {...getMenuProps()}>
+						{isOpen &&
+							itemsToShow.map((item, index) => (
+								<SearchItem
+									key={item}
+									highlighted={highlightedIndex === index}
+									{...getItemProps({
+										item,
+										index,
+										key: item,
+									})}
+								>
+									{item}
+								</SearchItem>
+							))}
+					</SearchMenu>
+				</SearchCombobox>
 			</label>
 		</form>
 	);

@@ -4,14 +4,14 @@ export const Input = styled.input`
 	width: 100%;
 	height: 2em;
 	padding: ${(p) => p.theme.space.xxs} ${(p) => p.theme.space.s};
-	font-family: ${(props) => props.theme.fonts.ui};
-	font-size: ${(props) => props.theme.fontSizes.m};
-	font-weight: ${(props) => props.theme.fontWeights.ui};
+	font-family: ${(p) => p.theme.fonts.ui};
+	font-size: ${(p) => p.theme.fontSizes.m};
+	font-weight: ${(p) => p.theme.fontWeights.ui};
 	background-color: ${(p) => p.theme.colors.bg};
 	color: ${(p) => p.theme.colors.base};
-	border: ${(props) => props.theme.borders.input};
-	border-color: ${(props) => props.theme.colors.base};
-	border-radius: ${(props) => props.theme.radii.button};
+	border: ${(p) => p.theme.borders.input};
+	border-color: ${(p) => p.theme.colors.base};
+	border-radius: ${(p) => p.theme.radii.button};
 	appearance: none;
 
 	&:focus {

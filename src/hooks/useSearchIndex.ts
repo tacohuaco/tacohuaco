@@ -19,24 +19,27 @@ const MONTH_TO_NAME: Record<string, string> = {
 	[Month.December]: 'December',
 };
 
-const SEASSON_WINTER = ['winter'];
-const SEASSON_SPRING = ['spring'];
-const SEASSON_SUMMER = ['summer'];
-const SEASSON_AUTUMN = ['autumn', 'fall'];
+export const SEASON_WINTER = ['winter'];
+export const SEASON_SPRING = ['spring'];
+export const SEASON_SUMMER = ['summer'];
+export const SEASON_AUTUMN = ['autumn', 'fall'];
 const MONTH_TO_SEASON: Record<string, string[]> = {
-	[Month.January]: SEASSON_WINTER,
-	[Month.February]: SEASSON_WINTER,
-	[Month.March]: SEASSON_SPRING,
-	[Month.April]: SEASSON_SPRING,
-	[Month.May]: SEASSON_SPRING,
-	[Month.June]: SEASSON_SUMMER,
-	[Month.July]: SEASSON_SUMMER,
-	[Month.August]: SEASSON_SUMMER,
-	[Month.September]: SEASSON_AUTUMN,
-	[Month.October]: SEASSON_AUTUMN,
-	[Month.November]: SEASSON_AUTUMN,
-	[Month.December]: SEASSON_WINTER,
+	[Month.January]: SEASON_WINTER,
+	[Month.February]: SEASON_WINTER,
+	[Month.March]: SEASON_SPRING,
+	[Month.April]: SEASON_SPRING,
+	[Month.May]: SEASON_SPRING,
+	[Month.June]: SEASON_SUMMER,
+	[Month.July]: SEASON_SUMMER,
+	[Month.August]: SEASON_SUMMER,
+	[Month.September]: SEASON_AUTUMN,
+	[Month.October]: SEASON_AUTUMN,
+	[Month.November]: SEASON_AUTUMN,
+	[Month.December]: SEASON_WINTER,
 };
+
+export const FLAG_VEGAN = 'vegan';
+export const FLAG_VEGETARIAN = 'vegetarian';
 
 export function useSearchIndex(recipes: RecipeMetaFragment[]) {
 	return useMemo(() => {
@@ -62,8 +65,8 @@ export function useSearchIndex(recipes: RecipeMetaFragment[]) {
 						// them as separate words
 						tags: [
 							...tags.map((x) => sentenceCase(x).split(' ')),
-							flags.vegan ? 'vegan' : [],
-							flags.vegetarian ? 'vegetarian' : [],
+							flags.vegan ? FLAG_VEGAN : [],
+							flags.vegetarian ? FLAG_VEGETARIAN : [],
 						].flat(),
 						seasons: seasons
 							.flatMap((x) => [MONTH_TO_NAME[x], MONTH_TO_SEASON[x]])
