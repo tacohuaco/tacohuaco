@@ -21,6 +21,7 @@ import {
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { SearchField } from '../components/SearchField';
 import { Link } from 'tamia-gatsby-link';
+import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 
 type Props = {
 	recipes: RecipeMetaFragment[];
@@ -57,6 +58,10 @@ const DEFAULT_AUTOCOMPLETE_ITEMS = [
 	FLAG_VEGETARIAN,
 ];
 
+const getIngredientAliases = (name: string) => {
+	return INGREDIENTS.find((x) => x[0] === name) || [];
+};
+
 const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {
 	const allTitles: string[] = [];
 	const allIngredients: string[] = [];
@@ -67,7 +72,7 @@ const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {
 		allTitles.push(recipe.title);
 
 		const ingredientNames = recipe.allIngredients.flatMap(({ ingredients }) =>
-			ingredients.map(({ name }) => name)
+			ingredients.flatMap(({ name }) => getIngredientAliases(name))
 		);
 		allIngredients.push(...ingredientNames);
 
