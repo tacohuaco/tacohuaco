@@ -1,5 +1,5 @@
 import formatQuantity from 'format-quantity';
-import { INGREDIENTS } from './langs/en/ingredients';
+import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { UNITLESS } from './langs/en/translations';
 import { UNITS } from './langs/en/units';
 import { Amount, Ingredient } from './types';
@@ -26,7 +26,7 @@ function pluralizeName({
 	maxAmount,
 }: Ingredient): string {
 	if (!unit && typeof minAmount === 'number' && minAmount === maxAmount) {
-		return pluralize(INGREDIENTS, name, maxAmount);
+		return pluralize(ALL_INGREDIENTS, name, maxAmount);
 	}
 
 	if (
@@ -36,7 +36,7 @@ function pluralizeName({
 		return name;
 	}
 
-	return pluralize(INGREDIENTS, name, Infinity);
+	return pluralize(ALL_INGREDIENTS, name, Infinity);
 }
 
 function pluralizeUnit({ unit, maxAmount }: Ingredient): string | undefined {

@@ -4,7 +4,7 @@ import { deburr } from 'lodash';
 import { sentenceCase } from 'sentence-case';
 import { RecipeMetaFragment } from '../graphql-types';
 import { Month } from '../util/olivier';
-import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
+import { ALL_INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 
 export const MONTH_TO_NAME: Record<string, string> = {
 	[Month.January]: 'January',
@@ -44,7 +44,7 @@ export const FLAG_VEGAN = 'vegan';
 export const FLAG_VEGETARIAN = 'vegetarian';
 
 const getIngredientAliases = (name: string) => {
-	return INGREDIENTS.find((x) => x[0] === name) || [];
+	return ALL_INGREDIENTS.find((x) => x[0] === name) || [];
 };
 
 const getIngredients = (

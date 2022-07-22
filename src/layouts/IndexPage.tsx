@@ -59,7 +59,9 @@ const DEFAULT_AUTOCOMPLETE_ITEMS = [
 ];
 
 const getIngredientAliases = (name: string) => {
-	return INGREDIENTS.find((x) => x[0] === name) || [];
+	const aliases = INGREDIENTS.find((x) => x[0][0] === name) || [];
+	// Return a plural of each alias
+	return aliases.map((x) => (x.length > 1 ? x[1] : x[0]));
 };
 
 const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {

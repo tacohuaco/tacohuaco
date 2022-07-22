@@ -1,6 +1,6 @@
 import numericQuantity from 'numeric-quantity';
 import { UNITS } from './langs/en/units';
-import { INGREDIENTS } from './langs/en/ingredients';
+import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
 import { orderBy } from 'lodash';
@@ -35,7 +35,7 @@ function normalizeUnit(unit?: string): string | undefined {
 export function normalizeName(
 	name: string
 ): Pick<Ingredient, 'name' | 'modifier'> {
-	for (const aliases of INGREDIENTS) {
+	for (const aliases of ALL_INGREDIENTS) {
 		// Order aliases from longest to shortest to catch the longest name
 		const aliasesOrdered = orderBy(aliases, (x) => -x.length);
 		const alias = aliasesOrdered.find((x) =>
