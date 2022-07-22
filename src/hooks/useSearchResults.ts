@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Index } from 'lunr';
+import { deburr } from 'lodash';
 import { RecipeMetaFragment } from '../graphql-types';
 
 export function useSearchResults(
@@ -20,7 +21,7 @@ export function useSearchResults(
 			return [];
 		}
 
-		const results = index.search(query);
+		const results = index.search(deburr(query));
 
 		return results.flatMap(
 			({ ref }) => store.find((x) => x.slug === ref) || []

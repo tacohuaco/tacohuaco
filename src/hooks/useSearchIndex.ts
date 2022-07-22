@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import lunr from 'lunr';
+import { deburr } from 'lodash';
 import { sentenceCase } from 'sentence-case';
 import { RecipeMetaFragment } from '../graphql-types';
 import { Month } from '../util/olivier';
+import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 
-const MONTH_TO_NAME: Record<string, string> = {
+export const MONTH_TO_NAME: Record<string, string> = {
 	[Month.January]: 'January',
 	[Month.February]: 'February',
 	[Month.March]: 'March',
@@ -41,6 +43,20 @@ const MONTH_TO_SEASON: Record<string, string[]> = {
 export const FLAG_VEGAN = 'vegan';
 export const FLAG_VEGETARIAN = 'vegetarian';
 
+const getIngredientAliases = (name: string) => {
+	return INGREDIENTS.find((x) => x[0] === name) || [];
+};
+
+const getIngredients = (
+	allIngredients: RecipeMetaFragment['allIngredients']
+) => {
+	return allIngredients.flatMap((x) =>
+		x.ingredients.flatMap((y) =>
+			getIngredientAliases(y.name).flatMap((z) => deburr(z).split(' '))
+		)
+	);
+};
+
 export function useSearchIndex(recipes: RecipeMetaFragment[]) {
 	return useMemo(() => {
 		return lunr(function () {
@@ -55,11 +71,9 @@ export function useSearchIndex(recipes: RecipeMetaFragment[]) {
 				({ slug, title, cuisines, allIngredients, tags, flags, seasons }) => {
 					this.add({
 						slug,
-						title,
+						title: deburr(title),
 						cuisines,
-						ingredients: allIngredients.flatMap((x) =>
-							x.ingredients.flatMap((y) => y.name.split(' '))
-						),
+						ingredients: getIngredients(allIngredients),
 						// Tags come like `awesomePizza`, we need to convert them
 						// to words and then split into an array so Lurn indexes
 						// them as separate words
