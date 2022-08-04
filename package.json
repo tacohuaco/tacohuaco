@@ -14,8 +14,6 @@
     "format": "prettier --loglevel warn --write \"**/*.{js,ts,tsx,md}\"",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "sync": "node scripts/sync.js",
-    "deploy": "npm run sync && npm run build",
     "postinstall": "node scripts/esmtocjs.js",
     "prepare": "husky install"
   },
