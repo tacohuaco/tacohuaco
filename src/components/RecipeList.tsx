@@ -1,10 +1,9 @@
 import React from 'react';
 import { Grid } from 'tamia';
 import RecipeCard from './RecipeCard';
-import { RecipeMetaFragment } from '../graphql-types';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 };
 
 const RecipeList = ({ recipes }: Props) => (

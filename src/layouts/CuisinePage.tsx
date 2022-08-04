@@ -3,12 +3,11 @@ import { Stack, Heading } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
-import { GraphCms_Cuisine, RecipeMetaFragment } from '../graphql-types';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	url: string;
-	cuisine: GraphCms_Cuisine;
+	cuisine: Queries.GraphCMS_Cuisine;
 };
 
 export default function CuisinePage({ recipes, url, cuisine }: Props) {

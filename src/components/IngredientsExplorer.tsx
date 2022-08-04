@@ -5,7 +5,7 @@ import { asList } from '../util/client';
 import { IngredientInfo, IngredientKind, Month } from '../util/olivier';
 
 type Props = {
-	infos: IngredientInfo[];
+	infos: readonly IngredientInfo[];
 };
 
 const ALL_MONTHS = [

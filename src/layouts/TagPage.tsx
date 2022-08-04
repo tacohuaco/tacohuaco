@@ -4,12 +4,11 @@ import { upperFirst, lowerCase } from 'lodash';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
-import { GraphCms_Tag, RecipeMetaFragment } from '../graphql-types';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	url: string;
-	tag: GraphCms_Tag;
+	tag: Queries.GraphCMS_Tag;
 };
 
 const TAGS_TO_TITLES: Record<string, string> = {

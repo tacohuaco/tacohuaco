@@ -5,11 +5,10 @@ import Metatags from '../components/Metatags';
 import { SearchResults } from '../components/SearchResults';
 import { SearchForm } from '../components/SearchForm';
 import { useSearch } from '../hooks/useSearch';
-import { RecipeMetaFragment } from '../graphql-types';
 import Page from './Page';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	url: string;
 };
 

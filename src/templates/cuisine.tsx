@@ -1,15 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { GraphCms_Cuisine, RecipesPageQuery } from '../graphql-types';
 import CuisinePage from '../layouts/CuisinePage';
 
 type Props = {
-	data: RecipesPageQuery;
+	data: Queries.RecipesPageQuery;
 	location: {
 		pathname: string;
 	};
 	pageContext: {
-		cuisine: GraphCms_Cuisine;
+		cuisine: Queries.GraphCMS_Cuisine;
 	};
 };
 

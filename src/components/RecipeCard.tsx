@@ -3,7 +3,6 @@ import { graphql } from 'gatsby';
 import { Box, Stack, Text, Image, Frame } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 import { getImageUrl } from '../util/client';
-import { RecipeMetaFragment } from '../graphql-types';
 import RecipeFlags from './RecipeFlags';
 import RecipeTimes from './RecipeTimes';
 
@@ -17,7 +16,7 @@ export default function RecipeCard({
 	time,
 	overnight,
 	...rest
-}: RecipeMetaFragment & ComponentProps<typeof Stack>) {
+}: Queries.RecipeMetaFragment & ComponentProps<typeof Stack>) {
 	return (
 		<Stack {...rest} gap="s" direction="column">
 			<Link href={`/recipes/${slug}/`}>
@@ -97,6 +96,7 @@ export const allIngredientsFragment = graphql`
 			maxAmount
 			unit
 			modifier
+			comment
 		}
 	}
 `;

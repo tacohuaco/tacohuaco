@@ -15,6 +15,7 @@ const config: GatsbyConfig = {
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 	},
+	graphqlTypegen: true,
 	plugins: [
 		'gatsby-plugin-image',
 		'gatsby-plugin-react-helmet',
@@ -24,14 +25,6 @@ const config: GatsbyConfig = {
 			options: {
 				endpoint: `https://api-eu-central-1.graphcms.com/v2/${process.env.GRAPHCMS_TOKEN}/master`,
 				fragmentsPath: 'src/fragments',
-			},
-		},
-		{
-			resolve: 'gatsby-plugin-graphql-codegen',
-			options: {
-				fileName: 'src/graphql-types.d.ts',
-				documentPaths: ['src/**/!(*.d).{ts,tsx}', 'gatsby-*.ts'],
-				codegenDelay: 10000,
 			},
 		},
 		/*{

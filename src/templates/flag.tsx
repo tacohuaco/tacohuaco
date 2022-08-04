@@ -1,11 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { RecipeMetaFragment, RecipesPageQuery } from '../graphql-types';
 import FlagPage from '../layouts/FlagPage';
 import { FlagName } from '../types/Flags';
 
 type Props = {
-	data: RecipesPageQuery;
+	data: Queries.RecipesPageQuery;
 	location: {
 		pathname: string;
 	};
@@ -14,7 +13,10 @@ type Props = {
 	};
 };
 
-const filterRecipes = (recipes: RecipeMetaFragment[], flag: FlagName) => {
+const filterRecipes = (
+	recipes: readonly Queries.RecipeMetaFragment[],
+	flag: FlagName
+) => {
 	return recipes.filter(
 		// HACK: Use any, otherwise the could would be unnecessary complex
 		(recipe) => (recipe as any).flags[flag] || (recipe as any)[flag]

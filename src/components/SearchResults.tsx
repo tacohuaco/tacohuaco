@@ -1,12 +1,11 @@
 import React from 'react';
 import { Text } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
-import { RecipeMetaFragment } from '../graphql-types';
 import { RecipeListSection } from './RecipeListSection';
 
 interface SearchResultsProps {
 	searchQuery: string;
-	searchResults: RecipeMetaFragment[];
+	searchResults: readonly Queries.RecipeMetaFragment[];
 }
 
 export function SearchResults({

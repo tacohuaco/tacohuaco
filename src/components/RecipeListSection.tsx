@@ -1,11 +1,10 @@
 import React, { ReactNode } from 'react';
 import { Stack, Heading } from 'tamia';
 import RecipeList from './RecipeList';
-import { RecipeMetaFragment } from '../graphql-types';
 
 interface RecipeListSectionProps {
 	title: ReactNode;
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 }
 
 export function RecipeListSection({ title, recipes }: RecipeListSectionProps) {

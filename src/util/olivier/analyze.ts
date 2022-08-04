@@ -26,7 +26,7 @@ function getKind(name: string): IngredientKind {
 	return IngredientKind.Vegan;
 }
 
-function getSeasons(name: string): Month[] {
+function getSeasons(name: string): readonly Month[] {
 	return SEASONS[name] || [];
 }
 
@@ -47,6 +47,8 @@ function analyzeOption({ name }: Ingredient): IngredientInfo {
 /**
  * Return info about an ingredient: kind, gluten, dairy, sugar content
  */
-export function analyze(options: Ingredient[]): IngredientInfo[] {
+export function analyze(
+	options: readonly Ingredient[]
+): readonly IngredientInfo[] {
 	return options.map(analyzeOption);
 }

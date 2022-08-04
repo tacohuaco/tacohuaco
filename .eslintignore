@@ -1,4 +1,3 @@
 node_modules/
 public/
 .cache/
-src/graphql-types.d.ts

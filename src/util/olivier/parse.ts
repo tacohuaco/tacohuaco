@@ -103,6 +103,6 @@ function parseOption(text: string): Ingredient {
  * Parse a line of recipe ingredient, like
  * 30 g of hazelnut flour / 15 g coconut flour
  */
-export function parse(text: string): Ingredient[] {
+export function parse(text: string): readonly Ingredient[] {
 	return text.split(/\s+\/\s+/).map(parseOption);
 }

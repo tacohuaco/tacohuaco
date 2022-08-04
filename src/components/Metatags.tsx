@@ -8,7 +8,7 @@ type Props = {
 	slug: string;
 	title?: string;
 	description?: string;
-	images?: Asset[];
+	images?: readonly Asset[];
 	children?: React.ReactNode;
 };
 

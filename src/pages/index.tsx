@@ -1,10 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { IndexPageQuery } from '../graphql-types';
 import IndexPage from '../layouts/IndexPage';
 
 type Props = {
-	data: IndexPageQuery;
+	data: Queries.IndexPageQuery;
 	location: {
 		pathname: string;
 	};

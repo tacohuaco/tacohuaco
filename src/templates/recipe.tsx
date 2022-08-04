@@ -2,12 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Recipe from '../layouts/RecipePage';
 import {
-	IngredientsJson,
-	IngredientInfoJson,
-	RecipePageQuery,
-	GraphCms_Recipe,
-} from '../graphql-types';
-import {
 	normalizeAmount,
 	IngredientInfo,
 	IngredientKind,
@@ -17,15 +11,15 @@ import { Subrecipe } from '../types/Subrecipe';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 
 type Props = {
-	data: RecipePageQuery;
+	data: Queries.RecipePageQuery;
 	location: {
 		pathname: string;
 	};
 };
 
 const mapAllIngredients = (
-	allIngredients: IngredientsJson[]
-): IngredientsWithMeta[] =>
+	allIngredients: readonly Queries.IngredientsJson[]
+): readonly IngredientsWithMeta[] =>
 	allIngredients.map(({ slug, ingredients }) => ({
 		slug,
 		ingredients: ingredients.map(
@@ -40,8 +34,8 @@ const mapAllIngredients = (
 	}));
 
 const mapAllIngredientsInfo = (
-	allIngredientsInfo: IngredientInfoJson[]
-): IngredientInfo[] =>
+	allIngredientsInfo: readonly Queries.IngredientInfoJson[]
+): readonly IngredientInfo[] =>
 	allIngredientsInfo.map(
 		({ name, kind, hasGluten, hasDairy, hasSugar, seasons }) => ({
 			name,
@@ -54,11 +48,16 @@ const mapAllIngredientsInfo = (
 	);
 
 const mapSubrecipes = (
-	subrecipes: Pick<
-		GraphCms_Recipe,
-		'slug' | 'allIngredients' | 'ingredients' | 'ingredientsMdx' | 'stepsMdx'
+	subrecipes: readonly Pick<
+		Queries.GraphCMS_Recipe,
+		| 'slug'
+		| 'allIngredients'
+		| 'ingredients'
+		| 'ingredientsMdx'
+		| 'stepsMdx'
+		| 'title'
 	>[]
-): Subrecipe[] =>
+): readonly Subrecipe[] =>
 	subrecipes.map((subrecipe) => ({
 		...subrecipe,
 		allIngredients: mapAllIngredients(subrecipe.allIngredients),
@@ -135,6 +134,7 @@ export const pageQuery = graphql`
 			subrecipes {
 				slug
 				title
+				ingredients
 				allIngredients {
 					...AllIngredients
 				}

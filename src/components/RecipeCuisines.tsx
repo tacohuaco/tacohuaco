@@ -5,7 +5,7 @@ import { getEmojiByNationality } from '../util/emojis';
 import Tag from './Tag';
 
 type Props = {
-	cuisines: string[];
+	cuisines: readonly string[];
 };
 
 export function RecipeCuisines({ cuisines }: Props) {

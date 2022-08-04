@@ -1,17 +1,16 @@
 import React from 'react';
 import { Stack } from 'tamia';
-import { FlagsJson } from '../graphql-types';
 import RecipeFlags from './RecipeFlags';
 import RecipeTags from './RecipeTags';
 import RecipeTimes from './RecipeTimes';
 import { RecipeCuisines } from './RecipeCuisines';
 
 type Props = {
-	flags: FlagsJson;
+	flags: Queries.FlagsJson;
 	margaritasFavorite?: boolean;
 	artemsFavorite?: boolean;
-	cuisines: string[];
-	tags: string[];
+	cuisines: readonly string[];
+	tags: readonly string[];
 	time?: number;
 	overnight?: boolean;
 };

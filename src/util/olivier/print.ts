@@ -38,7 +38,9 @@ export function printOption(ingredient: Ingredient): PrintIngredient {
 	};
 }
 
-export function print(options: Ingredient[]): PrintIngredient[] {
+export function print(
+	options: readonly Ingredient[]
+): readonly PrintIngredient[] {
 	const areAmountsSame = options.every(
 		(option) =>
 			option.minAmount === options[0].minAmount &&

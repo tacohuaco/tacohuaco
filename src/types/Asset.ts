@@ -1,3 +1,4 @@
-import { GraphCms_Asset } from 'graphql-types';
-
-export type Asset = Pick<GraphCms_Asset, 'handle' | 'height' | 'url' | 'width'>;
+export type Asset = Pick<
+	Queries.GraphCMS_Asset,
+	'handle' | 'height' | 'url' | 'width'
+>;

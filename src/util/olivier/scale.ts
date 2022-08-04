@@ -39,6 +39,9 @@ function scaleOption(ingredient: Ingredient, ratio: number): Ingredient {
 /**
  * Scale ingredient objects list
  */
-export function scale(options: Ingredient[], ratio: number): Ingredient[] {
+export function scale(
+	options: readonly Ingredient[],
+	ratio: number
+): Ingredient[] {
 	return options.map((x) => scaleOption(x, ratio));
 }

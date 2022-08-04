@@ -4,11 +4,10 @@ import { Link } from 'tamia-gatsby-link';
 import { MDXRenderer } from '../components/MDXRenderer';
 import Metatags from '../components/Metatags';
 import TextContent from '../components/TextContent';
-import { GraphCms_Shop } from '../graphql-types';
 import Page from './Page';
 
 type Shop = Pick<
-	GraphCms_Shop,
+	Queries.GraphCMS_Shop,
 	| 'address'
 	| 'city'
 	| 'country'
@@ -20,7 +19,7 @@ type Shop = Pick<
 >;
 
 type Props = {
-	shops: Shop[];
+	shops: readonly Shop[];
 	url: string;
 };
 

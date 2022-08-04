@@ -1,10 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { ShopsPageQuery } from '../graphql-types';
 import AboutPage from '../layouts/ShopsPage';
 
 type Props = {
-	data: ShopsPageQuery;
+	data: Queries.ShopsPageQuery;
 	location: {
 		pathname: string;
 	};

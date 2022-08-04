@@ -3,7 +3,6 @@ import { orderBy } from 'lodash';
 import { Stack, VisuallyHidden } from 'tamia';
 import Page from './Page';
 import Metatags from '../components/Metatags';
-import { RecipeMetaFragment } from '../graphql-types';
 import { DynamicContainer } from '../components/DynamicContainer';
 import { SearchForm } from '../components/SearchForm';
 import { useSearch } from '../hooks/useSearch';
@@ -11,7 +10,7 @@ import { SearchResults } from '../components/SearchResults';
 import { RecipeListSection } from '../components/RecipeListSection';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	url: string;
 };
 
@@ -20,19 +19,22 @@ const NEW_RECIPES_TO_SHOW = 6;
 
 // Order recipies by the lengths of the seasons list: recipes with shorter season
 const getCurrentSeasonRecipes = (
-	recipes: RecipeMetaFragment[]
-): RecipeMetaFragment[] => {
+	recipes: readonly Queries.RecipeMetaFragment[]
+): readonly Queries.RecipeMetaFragment[] => {
 	return orderBy(
 		recipes.filter((x) => x.seasons.includes(CURRENT_SEASON)),
 		(x) => x.seasons.length
 	);
 };
 
-const getNewRecipes = (recipes: RecipeMetaFragment[]): RecipeMetaFragment[] => {
-	return orderBy(recipes, (x) => -Date.parse(x.createdAt)).slice(
-		0,
-		NEW_RECIPES_TO_SHOW
-	);
+const getNewRecipes = (
+	recipes: readonly Queries.RecipeMetaFragment[]
+): readonly Queries.RecipeMetaFragment[] => {
+	return orderBy(
+		recipes,
+		// HACK: Gatsby generates a wrong type for dates
+		(x) => -Date.parse(x.createdAt as unknown as string)
+	).slice(0, NEW_RECIPES_TO_SHOW);
 };
 
 export default function IndexPage({ recipes, url }: Props) {

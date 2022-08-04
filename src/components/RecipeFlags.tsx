@@ -1,10 +1,9 @@
 import React from 'react';
 import { Stack } from 'tamia';
-import { FlagsJson } from '../graphql-types';
 import { RecipeFlag } from './RecipeFlag';
 
 type Props = {
-	flags: FlagsJson;
+	flags: Queries.FlagsJson;
 	margaritasFavorite?: boolean;
 	artemsFavorite?: boolean;
 };

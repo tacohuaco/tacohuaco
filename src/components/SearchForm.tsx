@@ -8,7 +8,7 @@ import { Input } from './Input';
 const MAX_ITEMS_TO_SHOW = 12;
 
 type Props = {
-	items: string[];
+	items: readonly string[];
 	value: string;
 	onChange: (value?: string) => void;
 };
@@ -59,7 +59,7 @@ const SearchItem = styled.div<{ highlighted: boolean }>`
 		p.highlighted ? p.theme.colors.accent : 'transparent'};
 `;
 
-const getItemsToShow = (items: string[], value: string) => {
+const getItemsToShow = (items: readonly string[], value: string) => {
 	if (value === '') {
 		return [];
 	}

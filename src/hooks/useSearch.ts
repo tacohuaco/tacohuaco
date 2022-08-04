@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { uniq } from 'lodash';
 import { sentenceCase } from 'sentence-case';
-import { RecipeMetaFragment } from '../graphql-types';
 import { useSearchResults } from '../hooks/useSearchResults';
 import {
 	MONTH_TO_NAME,
@@ -32,7 +31,9 @@ const getIngredientAliases = (name: string) => {
 	return aliases.map((x) => (x.length > 1 ? x[1] : x[0]));
 };
 
-const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {
+const getAutocompleteItems = (
+	recipes: readonly Queries.RecipeMetaFragment[]
+): readonly string[] => {
 	const allTitles: string[] = [];
 	const allIngredients: string[] = [];
 	const allTags: string[] = [];
@@ -62,7 +63,7 @@ const getAutocompleteItems = (recipes: RecipeMetaFragment[]): string[] => {
 	]);
 };
 
-export function useSearch(recipes: RecipeMetaFragment[]) {
+export function useSearch(recipes: readonly Queries.RecipeMetaFragment[]) {
 	const [searchQuery, setSearchQuery] = useState('');
 	const searchQueryDebounced = useDebouncedValue(searchQuery);
 	const searchIndex = useSearchIndex(recipes);

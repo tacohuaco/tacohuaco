@@ -3,15 +3,16 @@ import { Subrecipe } from '../types/Subrecipe';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Ingredient, normalizeName } from '../util/olivier';
 
-type SubrecipesContextValue = Subrecipe[];
+type SubrecipesContextValue = readonly Subrecipe[];
 
 export const getIngredientsBySlug = (
-	ingredients: IngredientsWithMeta[],
+	ingredients: readonly IngredientsWithMeta[],
 	slug: string
-): Ingredient[] => ingredients.find((x) => x.slug === slug)?.ingredients || [];
+): readonly Ingredient[] =>
+	ingredients.find((x) => x.slug === slug)?.ingredients || [];
 
 export const findIngredientBySubrecipe = (
-	ingredients: Ingredient[],
+	ingredients: readonly Ingredient[],
 	subrecipe: Subrecipe
 ) => {
 	const normalizedName = normalizeName(subrecipe.title.toLocaleLowerCase());
@@ -24,7 +25,7 @@ export const findIngredientBySubrecipe = (
 };
 
 export const findSubrecipeIngredient = (
-	subrecipes: Subrecipe[],
+	subrecipes: readonly Subrecipe[],
 	ingredient: Ingredient
 ) => {
 	return subrecipes.find((subrecipe) => {

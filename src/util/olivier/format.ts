@@ -5,7 +5,7 @@ import { UNITS } from './langs/en/units';
 import { Amount, Ingredient } from './types';
 
 function pluralize(
-	dictionary: string[][],
+	dictionary: readonly string[][],
 	unit: string,
 	amount: Amount
 ): string {
@@ -71,6 +71,6 @@ export function formatOption(ingredient: Ingredient): Ingredient {
 /**
  * Format an ingredient for display
  */
-export function format(options: Ingredient[]): Ingredient[] {
+export function format(options: readonly Ingredient[]): readonly Ingredient[] {
 	return options.map(formatOption);
 }

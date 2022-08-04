@@ -1,10 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { RecipesPageQuery } from '../graphql-types';
 import RecipesPage from '../layouts/RecipesPage';
 
 type Props = {
-	data: RecipesPageQuery;
+	data: Queries.RecipesPageQuery;
 	location: {
 		pathname: string;
 	};

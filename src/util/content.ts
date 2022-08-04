@@ -12,7 +12,6 @@ import {
 	Month,
 } from './olivier';
 import { typo, typoLite } from '../util/typo';
-import { FlagsJson } from '../graphql-types';
 
 export const GRAPHCMS_MARKDOWN_FIELDS: Record<string, string[]> = {
 	[`GraphCMS_Ingredient`]: ['description', 'storage'],
@@ -91,7 +90,9 @@ const isLowGlutenRecipe = (
 /**
  * Return flags for a Markdown ingredients list
  */
-export const getRecipeFlags = (ingredientsMarkdown: string): FlagsJson => {
+export const getRecipeFlags = (
+	ingredientsMarkdown: string
+): Queries.FlagsJson => {
 	const ingredients = getIngredients(ingredientsMarkdown);
 	const infos = getIngredientsInfo(ingredientsMarkdown);
 	return {

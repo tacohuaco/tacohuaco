@@ -13,3 +13,4 @@ yarn.lock
 .eslintcache
 .cache/
 public/
+src/gatsby-types.d.ts

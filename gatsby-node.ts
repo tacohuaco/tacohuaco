@@ -1,12 +1,6 @@
 import path from 'path';
 import { kebabCase, uniq } from 'lodash';
 import type { GatsbyNode } from 'gatsby';
-import {
-	AllRecipesQuery,
-	GraphCms_Recipe,
-	GraphCms_Ingredient,
-	GraphCms_Tip,
-} from './src/graphql-types';
 import { getMdx } from './src/util/mdx';
 import {
 	GRAPHCMS_MARKDOWN_FIELDS,
@@ -33,14 +27,18 @@ interface IngredientsWithMetaRaw {
 }
 
 const getSubrecipeIngredients = async (
-	source: Pick<GraphCms_Recipe, 'ingredients' | 'subrecipes' | 'remoteId'>,
+	source: Pick<
+		Queries.GraphCMS_Recipe,
+		'ingredients' | 'subrecipes' | 'remoteId'
+	>,
 	context: GatsbyContext
 ): Promise<IngredientsWithMetaRaw[]> => {
 	if (source.subrecipes.length > 0) {
 		const remoteIds = source.subrecipes.map((x) => x.remoteId);
-		const allSubrecipes = await context.nodeModel.findAll<GraphCms_Recipe>({
-			type: 'GraphCMS_Recipe',
-		});
+		const allSubrecipes =
+			await context.nodeModel.findAll<Queries.GraphCMS_Recipe>({
+				type: 'GraphCMS_Recipe',
+			});
 		const subrecipes = allSubrecipes.entries.filter((x) =>
 			remoteIds.includes(x.remoteId)
 		);
@@ -55,7 +53,7 @@ const getSubrecipeIngredients = async (
 
 const getAllRecipeIngredients = async (
 	source: Pick<
-		GraphCms_Recipe,
+		Queries.GraphCMS_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
 	>,
 	context: GatsbyContext
@@ -72,7 +70,7 @@ const getAllRecipeIngredients = async (
 
 const getAllRecipeIngredientsFlattened = async (
 	source: Pick<
-		GraphCms_Recipe,
+		Queries.GraphCMS_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
 	>,
 	context: GatsbyContext
@@ -83,7 +81,7 @@ const getAllRecipeIngredientsFlattened = async (
 
 const getRecipeWarnings = async (
 	source: Pick<
-		GraphCms_Recipe,
+		Queries.GraphCMS_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId'
 	>,
 	context: GatsbyContext
@@ -91,9 +89,10 @@ const getRecipeWarnings = async (
 	const recipeIngredients = getIngredients(
 		await getAllRecipeIngredientsFlattened(source, context)
 	);
-	const allIngredients = await context.nodeModel.findAll<GraphCms_Ingredient>({
-		type: 'GraphCMS_Ingredient',
-	});
+	const allIngredients =
+		await context.nodeModel.findAll<Queries.GraphCMS_Ingredient>({
+			type: 'GraphCMS_Ingredient',
+		});
 	const promises = allIngredients.entries
 		.filter((ingredient) =>
 			recipeIngredients.some(
@@ -109,7 +108,7 @@ const getRecipeWarnings = async (
 
 const getRecipeTips = async (
 	source: Pick<
-		GraphCms_Recipe,
+		Queries.GraphCMS_Recipe,
 		'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
 	>,
 	context: GatsbyContext
@@ -117,7 +116,7 @@ const getRecipeTips = async (
 	const recipeIngredients = getIngredients(
 		await getAllRecipeIngredientsFlattened(source, context)
 	);
-	const allTips = await context.nodeModel.findAll<GraphCms_Tip>({
+	const allTips = await context.nodeModel.findAll<Queries.GraphCMS_Tip>({
 		type: 'GraphCMS_Tip',
 	});
 	const promises = allTips.entries
@@ -180,7 +179,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 	};
 
 type Source = Pick<
-	GraphCms_Recipe,
+	Queries.GraphCMS_Recipe,
 	'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
 >;
 
@@ -291,7 +290,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 	actions: { createPage },
 	reporter,
 }) => {
-	const { data, errors } = await graphql<AllRecipesQuery>(`
+	const { data, errors } = await graphql<Queries.AllRecipesQuery>(`
 		query AllRecipes {
 			allGraphCmsRecipe {
 				nodes {

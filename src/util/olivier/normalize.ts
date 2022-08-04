@@ -82,6 +82,8 @@ function normalizeOption({
 /**
  * Normalize ingredient objects list
  */
-export function normalize(options: Ingredient[]): Ingredient[] {
+export function normalize(
+	options: readonly Ingredient[]
+): readonly Ingredient[] {
 	return options.map(normalizeOption);
 }

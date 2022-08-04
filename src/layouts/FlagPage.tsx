@@ -3,11 +3,10 @@ import { Stack, Heading } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
 import Metatags from '../components/Metatags';
-import { RecipeMetaFragment } from '../graphql-types';
 import { FlagName } from '../types/Flags';
 
 type Props = {
-	recipes: RecipeMetaFragment[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	url: string;
 	flag: FlagName;
 };

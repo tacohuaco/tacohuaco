@@ -11,5 +11,5 @@
 		"resolveJsonModule": true,
 		"baseUrl": "src"
 	},
-	"include": ["src", "gatsby-*"]
+	"include": ["./src/**/*", "./gatsby-*", "./src/gatsby-types.d.ts"]
 }

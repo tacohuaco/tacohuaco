@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import lunr from 'lunr';
 import { deburr } from 'lodash';
 import { sentenceCase } from 'sentence-case';
-import { RecipeMetaFragment } from '../graphql-types';
 import { Month } from '../util/olivier';
 import { ALL_INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 
@@ -48,7 +47,7 @@ const getIngredientAliases = (name: string) => {
 };
 
 const getIngredients = (
-	allIngredients: RecipeMetaFragment['allIngredients']
+	allIngredients: Queries.RecipeMetaFragment['allIngredients']
 ) => {
 	return allIngredients.flatMap((x) =>
 		x.ingredients.flatMap((y) =>
@@ -57,7 +56,7 @@ const getIngredients = (
 	);
 };
 
-export function useSearchIndex(recipes: RecipeMetaFragment[]) {
+export function useSearchIndex(recipes: readonly Queries.RecipeMetaFragment[]) {
 	return useMemo(() => {
 		return lunr(function () {
 			this.ref('slug');

@@ -30,7 +30,9 @@ export const stripMarkdown = (md: string): string => {
 	);
 };
 
-export const asList = (list: (string | false | undefined | null)[]): string => {
+export const asList = (
+	list: readonly (string | false | undefined | null)[]
+): string => {
 	const filtered = list.filter((x) => typeof x === 'string').map(String);
 
 	if (filtered.length === 0) {

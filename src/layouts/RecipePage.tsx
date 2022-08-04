@@ -15,7 +15,6 @@ import {
 	SubrecipesContext,
 } from '../components/SubrecipesContext';
 import { RecipeContext } from '../components/RecipeContext';
-import { GraphCms_Recipe } from '../graphql-types';
 import {
 	scale,
 	IngredientInfo,
@@ -36,10 +35,9 @@ import { Asset } from '../types/Asset';
 import Page from './Page';
 
 type Props = Pick<
-	GraphCms_Recipe,
+	Queries.GraphCMS_Recipe,
 	| 'artemsFavorite'
 	| 'cuisines'
-	| 'description'
 	| 'descriptionMdx'
 	| 'flags'
 	| 'ingredients'
@@ -52,18 +50,16 @@ type Props = Pick<
 	| 'sourceMdx'
 	| 'stepsMdx'
 	| 'tags'
-	| 'time'
 	| 'title'
 	| 'tips'
 	| 'toolsMdx'
 	| 'warnings'
-	| 'yields'
 > & {
-	allIngredients: IngredientsWithMeta[];
-	allIngredientsInfo: IngredientInfo[];
+	allIngredients: readonly IngredientsWithMeta[];
+	allIngredientsInfo: readonly IngredientInfo[];
 	description?: string;
-	images: Asset[];
-	subrecipes: Subrecipe[];
+	images: readonly Asset[];
+	subrecipes: readonly Subrecipe[];
 	time?: number;
 	url: string;
 	yields?: string;
@@ -108,7 +104,7 @@ const getNextAmount = (amount: number) => {
 };
 
 const scaleAllIngredients = (
-	allIngredients: IngredientsWithMeta[],
+	allIngredients: readonly IngredientsWithMeta[],
 	amount: number,
 	currentAmout: number
 ) => {

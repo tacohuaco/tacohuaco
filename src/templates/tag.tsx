@@ -1,15 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import { GraphCms_Tag, RecipesPageQuery } from '../graphql-types';
 import TagPage from '../layouts/TagPage';
 
 type Props = {
-	data: RecipesPageQuery;
+	data: Queries.RecipesPageQuery;
 	location: {
 		pathname: string;
 	};
 	pageContext: {
-		tag: GraphCms_Tag;
+		tag: Queries.GraphCMS_Tag;
 	};
 };
 

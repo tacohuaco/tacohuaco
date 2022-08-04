@@ -16,12 +16,12 @@ export enum Month {
 }
 
 export interface Ingredient {
-	name: string;
-	minAmount?: Amount;
-	maxAmount?: Amount;
-	unit?: string;
-	modifier?: string;
-	comment?: string;
+	readonly name: string;
+	readonly minAmount?: Amount;
+	readonly maxAmount?: Amount;
+	readonly unit?: string;
+	readonly modifier?: string;
+	readonly comment?: string;
 }
 
 export enum IngredientKind {
@@ -34,16 +34,16 @@ export enum IngredientKind {
 }
 
 export interface IngredientInfo {
-	name: string;
-	kind: IngredientKind;
-	hasGluten: boolean;
-	hasDairy: boolean;
-	hasSugar: boolean;
-	seasons: Month[];
+	readonly name: string;
+	readonly kind: IngredientKind;
+	readonly hasGluten: boolean;
+	readonly hasDairy: boolean;
+	readonly hasSugar: boolean;
+	readonly seasons: readonly Month[];
 }
 
 export interface PrintIngredient
 	extends Omit<Ingredient, 'minAmount' | 'maxAmount' | 'unit'> {
-	amount?: string;
-	suffix?: string;
+	readonly amount?: string;
+	readonly suffix?: string;
 }

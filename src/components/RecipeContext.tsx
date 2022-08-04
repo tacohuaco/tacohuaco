@@ -4,11 +4,11 @@ import { Ingredient } from '../util/olivier';
 
 interface RecipeContextValue {
 	slug: string;
-	ingredients: Ingredient[];
+	ingredients: readonly Ingredient[];
 }
 
 export const findIngredient = (
-	ingredients: Ingredient[],
+	ingredients: readonly Ingredient[],
 	options: Partial<Ingredient>
 ) => find(ingredients, options);
 

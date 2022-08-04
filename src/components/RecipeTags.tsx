@@ -5,7 +5,7 @@ import { Stack } from 'tamia';
 import Tag from './Tag';
 
 type Props = {
-	tags?: string[];
+	tags?: readonly string[];
 };
 
 export default function RecipeTags({ tags = [] }: Props) {
