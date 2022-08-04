@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import FlagPage from '../layouts/FlagPage';
+import FlagPage, { TITLES } from '../layouts/FlagPage';
+import Metatags from '../components/Metatags';
 import { FlagName } from '../types/Flags';
 
 type Props = {
@@ -23,27 +24,47 @@ const filterRecipes = (
 	);
 };
 
-const FlagRecipes = ({
-	data: { allGraphCmsRecipe },
-	location: { pathname },
-	pageContext: { flag },
-}: Props) => {
-	if (!allGraphCmsRecipe) {
+export default function FlagRecipes({ data, location, pageContext }: Props) {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
 		return null;
 	}
 
-	const { nodes } = allGraphCmsRecipe;
-
-	const filteredRecipes = filterRecipes(nodes, flag);
+	const filteredRecipes = filterRecipes(recipes, pageContext.flag);
 
 	if (filteredRecipes.length === 0) {
 		return <h1>Not found</h1>;
 	}
 
-	return <FlagPage url={pathname} flag={flag} recipes={filteredRecipes} />;
-};
+	return (
+		<FlagPage
+			url={location.pathname}
+			flag={pageContext.flag}
+			recipes={filteredRecipes}
+		/>
+	);
+}
 
-export default FlagRecipes;
+export const Head = ({ data, location, pageContext }: Props) => {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
+		return null;
+	}
+
+	const filteredRecipes = filterRecipes(recipes, pageContext.flag);
+
+	if (filteredRecipes.length === 0) {
+		return null;
+	}
+
+	return (
+		<Metatags
+			slug={location.pathname}
+			title={TITLES[pageContext.flag]}
+			images={filteredRecipes?.[0].images}
+		/>
+	);
+};
 
 // HACK: We can't filter by flags so have to query all recipes and filter in render
 export const pageQuery = graphql`

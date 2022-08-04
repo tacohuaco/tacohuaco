@@ -18,7 +18,6 @@ const config: GatsbyConfig = {
 	graphqlTypegen: true,
 	plugins: [
 		'gatsby-plugin-image',
-		'gatsby-plugin-react-helmet',
 		'gatsby-plugin-styled-components',
 		{
 			resolve: 'gatsby-source-graphcms',

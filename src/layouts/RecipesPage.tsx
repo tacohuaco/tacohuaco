@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stack, Heading } from 'tamia';
 import RecipeList from '../components/RecipeList';
-import Metatags from '../components/Metatags';
 import { SearchResults } from '../components/SearchResults';
 import { SearchForm } from '../components/SearchForm';
 import { useSearch } from '../hooks/useSearch';
@@ -18,7 +17,6 @@ export default function RecipesPage({ recipes, url }: Props) {
 
 	return (
 		<Page url={url}>
-			<Metatags slug={url} images={recipes?.[0].images} />
 			<Stack gap="l">
 				<header>
 					<SearchForm {...getSearchFieldProps()} />

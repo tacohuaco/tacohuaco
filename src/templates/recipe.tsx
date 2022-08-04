@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Recipe from '../layouts/RecipePage';
+import Metatags from '../components/Metatags';
 import {
 	normalizeAmount,
 	IngredientInfo,
@@ -63,11 +64,9 @@ const mapSubrecipes = (
 		allIngredients: mapAllIngredients(subrecipe.allIngredients),
 	}));
 
-export default function RecipePage({
-	data: { graphCmsRecipe },
-	location: { pathname },
-}: Props) {
-	if (!graphCmsRecipe) {
+export default function RecipePage({ data, location }: Props) {
+	const recipe = data.graphCmsRecipe;
+	if (!recipe) {
 		return null;
 	}
 
@@ -79,20 +78,36 @@ export default function RecipePage({
 		allIngredientsInfo,
 		subrecipes,
 		...rest
-	} = graphCmsRecipe;
+	} = recipe;
 	return (
 		<Recipe
 			{...rest}
 			description={description || undefined}
 			time={time || undefined}
 			yields={yields || undefined}
-			url={pathname}
+			url={location.pathname}
 			allIngredients={mapAllIngredients(allIngredients)}
 			allIngredientsInfo={mapAllIngredientsInfo(allIngredientsInfo)}
 			subrecipes={mapSubrecipes(subrecipes)}
 		/>
 	);
 }
+
+export const Head = ({ data, location }: Props) => {
+	const recipe = data.graphCmsRecipe;
+	if (!recipe) {
+		return null;
+	}
+
+	return (
+		<Metatags
+			slug={location.pathname}
+			title={`${recipe.title} recipe`}
+			description={recipe.description || undefined}
+			images={recipe.images}
+		/>
+	);
+};
 
 export const pageQuery = graphql`
 	query RecipePage($slug: String!) {

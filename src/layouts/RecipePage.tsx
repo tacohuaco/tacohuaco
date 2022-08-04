@@ -7,7 +7,6 @@ import RecipeIngredients, {
 	IngredientListItem,
 } from '../components/RecipeIngredients';
 import RecipeDirections from '../components/RecipeDirections';
-import Metatags from '../components/Metatags';
 import RecipeMeta from '../components/RecipeMeta';
 import { IngredientsExplorer } from '../components/IngredientsExplorer';
 import {
@@ -170,12 +169,6 @@ export default function RecipePage({
 				value={{ slug, ingredients: scaledRecipeIngredients }}
 			>
 				<Page url={url}>
-					<Metatags
-						slug={url}
-						title={`${title} recipe`}
-						description={description}
-						images={images}
-					/>
 					<Stack as="main" gap="l">
 						<Stack gap="m">
 							<Heading level={1}>{title}</Heading>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import RecipesPage from '../layouts/RecipesPage';
+import Metatags from '../components/Metatags';
 
 type Props = {
 	data: Queries.RecipesPageQuery;
@@ -9,20 +10,23 @@ type Props = {
 	};
 };
 
-const Recipes = ({
-	data: { allGraphCmsRecipe },
-	location: { pathname },
-}: Props) => {
-	if (!allGraphCmsRecipe) {
+export default function Recipes({ data, location }: Props) {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
 		return null;
 	}
 
-	const { nodes } = allGraphCmsRecipe;
+	return <RecipesPage url={location.pathname} recipes={recipes} />;
+}
 
-	return <RecipesPage url={pathname} recipes={nodes} />;
+export const Head = ({ data, location }: Props) => {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
+		return null;
+	}
+
+	return <Metatags slug={location.pathname} images={recipes?.[0].images} />;
 };
-
-export default Recipes;
 
 export const pageQuery = graphql`
 	query RecipesPage {

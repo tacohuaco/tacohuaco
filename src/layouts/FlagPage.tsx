@@ -2,7 +2,6 @@ import React from 'react';
 import { Stack, Heading } from 'tamia';
 import Page from './Page';
 import RecipeList from '../components/RecipeList';
-import Metatags from '../components/Metatags';
 import { FlagName } from '../types/Flags';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 	flag: FlagName;
 };
 
-const TITLES: Record<FlagName, string> = {
+export const TITLES: Record<FlagName, string> = {
 	artemsFavorite: 'Artem’s favorite recipes',
 	margaritasFavorite: 'Margarita’s favorite recipes',
 	vegan: 'Vegan recipes',
@@ -23,12 +22,10 @@ const TITLES: Record<FlagName, string> = {
 };
 
 export default function FlagPage({ recipes, url, flag }: Props) {
-	const title = TITLES[flag];
 	return (
 		<Page url={url}>
-			<Metatags slug={url} title={title} images={recipes?.[0].images} />
 			<Stack as="main" gap="l">
-				<Heading level={1}>{title}</Heading>
+				<Heading level={1}>{TITLES[flag]}</Heading>
 				<RecipeList recipes={recipes} />
 			</Stack>
 		</Page>

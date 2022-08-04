@@ -2,7 +2,6 @@ import React from 'react';
 import { orderBy } from 'lodash';
 import { Stack, VisuallyHidden } from 'tamia';
 import Page from './Page';
-import Metatags from '../components/Metatags';
 import { DynamicContainer } from '../components/DynamicContainer';
 import { SearchForm } from '../components/SearchForm';
 import { useSearch } from '../hooks/useSearch';
@@ -46,7 +45,6 @@ export default function IndexPage({ recipes, url }: Props) {
 
 	return (
 		<Page url={url}>
-			<Metatags slug={url} images={recipes?.[0].images} />
 			<VisuallyHidden as="h1">Recipes</VisuallyHidden>
 			<Stack gap="l">
 				<header>

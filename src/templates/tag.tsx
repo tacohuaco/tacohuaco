@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import TagPage from '../layouts/TagPage';
+import TagPage, { tagToTitle } from '../layouts/TagPage';
+import Metatags from '../components/Metatags';
 
 type Props = {
 	data: Queries.RecipesPageQuery;
@@ -12,21 +13,31 @@ type Props = {
 	};
 };
 
-const Recipes = ({
-	data: { allGraphCmsRecipe },
-	location: { pathname },
-	pageContext: { tag },
-}: Props) => {
-	if (!allGraphCmsRecipe) {
+export default function Recipes({ data, location, pageContext }: Props) {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
 		return null;
 	}
 
-	const { nodes } = allGraphCmsRecipe;
+	return (
+		<TagPage url={location.pathname} tag={pageContext.tag} recipes={recipes} />
+	);
+}
 
-	return <TagPage url={pathname} tag={tag} recipes={nodes} />;
+export const Head = ({ data, location, pageContext }: Props) => {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
+		return null;
+	}
+
+	return (
+		<Metatags
+			slug={location.pathname}
+			title={tagToTitle(pageContext.tag)}
+			images={recipes?.[0].images}
+		/>
+	);
 };
-
-export default Recipes;
 
 export const pageQuery = graphql`
 	query TagsPage($tag: GraphCMS_Tag!) {

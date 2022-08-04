@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import IndexPage from '../layouts/IndexPage';
+import Metatags from '../components/Metatags';
 
 type Props = {
 	data: Queries.IndexPageQuery;
@@ -9,20 +10,23 @@ type Props = {
 	};
 };
 
-const Index = ({
-	data: { allGraphCmsRecipe },
-	location: { pathname },
-}: Props) => {
-	if (!allGraphCmsRecipe) {
+export default function Index({ data, location }: Props) {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
 		return null;
 	}
 
-	const { nodes } = allGraphCmsRecipe;
+	return <IndexPage url={location.pathname} recipes={recipes} />;
+}
 
-	return <IndexPage url={pathname} recipes={nodes} />;
+export const Head = ({ data, location }: Props) => {
+	const recipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipes) {
+		return null;
+	}
+
+	return <Metatags slug={location.pathname} images={recipes?.[0].images} />;
 };
-
-export default Index;
 
 export const pageQuery = graphql`
 	query IndexPage {

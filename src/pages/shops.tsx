@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import AboutPage from '../layouts/ShopsPage';
+import Metatags from '../components/Metatags';
 
 type Props = {
 	data: Queries.ShopsPageQuery;
@@ -9,20 +10,23 @@ type Props = {
 	};
 };
 
-const Shops = ({
-	data: { allGraphCmsShop },
-	location: { pathname },
-}: Props) => {
-	if (!allGraphCmsShop) {
+export default function Shops({ data, location }: Props) {
+	const shops = data.allGraphCmsShop?.nodes;
+	if (!shops) {
 		return null;
 	}
 
-	const { nodes } = allGraphCmsShop;
+	return <AboutPage url={location.pathname} shops={shops} />;
+}
 
-	return <AboutPage url={pathname} shops={nodes} />;
+export const Head = ({ data, location }: Props) => {
+	const shops = data.allGraphCmsShop?.nodes;
+	if (!shops) {
+		return null;
+	}
+
+	return <Metatags slug={location.pathname} title="Shops" />;
 };
-
-export default Shops;
 
 export const pageQuery = graphql`
 	query ShopsPage {

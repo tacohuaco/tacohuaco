@@ -1,8 +1,12 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import { getImageUrl, stripMarkdown } from '../util/client';
 import { Asset } from '../types/Asset';
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from '../shared';
+import {
+	SITE_DESCRIPTION,
+	SITE_TITLE,
+	SITE_INDEX_TITLE,
+	SITE_URL,
+} from '../shared';
 
 type Props = {
 	slug: string;
@@ -22,10 +26,10 @@ export default function Metatags({
 	const imageUrl =
 		images.length > 0 &&
 		getImageUrl(images[0].url, { width: 1500, height: 1000 });
-
 	const descriptionText = stripMarkdown(description || SITE_DESCRIPTION);
 	return (
-		<Helmet title={title ? `${title} — ${SITE_TITLE}` : SITE_TITLE}>
+		<>
+			<title>{title ? `${title} — ${SITE_TITLE}` : SITE_INDEX_TITLE}</title>
 			<meta name="description" content={descriptionText} />
 			{imageUrl && <meta property="og:image" content={imageUrl} />}
 			<meta property="og:type" content={slug === '/' ? 'website' : 'article'} />
@@ -37,6 +41,6 @@ export default function Metatags({
 			{imageUrl && <meta name="twitter:image" content={imageUrl} />}
 			<meta name="twitter:creator" content="@iamsapegin" />
 			{children}
-		</Helmet>
+		</>
 	);
 }
