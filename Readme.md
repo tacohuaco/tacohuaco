@@ -1,6 +1,7 @@
 # [Tacohuaco](https://tacohuaco.co/)
 
-[![Build Status](https://travis-ci.org/tacohuaco/tacohuaco.png)](https://travis-ci.org/tacohuaco/tacohuaco)
+[![Node.js CI status](https://github.com/tacohuaco/tacohuaco/workflows/Node.js%20CI/badge.svg)](https://github.com/tacohuaco/tacohuaco/actions)
+
 
 ## Running locally
 
