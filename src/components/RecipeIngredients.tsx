@@ -95,12 +95,16 @@ const IngredientItem: ComponentType<any> = ({ children }) => {
 						</>
 					}
 				>
-					{scaledIngredients.map((option) => {
+					{scaledIngredients.map((option, index) => {
 						const { name, amount, suffix } = printOption(formatOption(option));
+						const shouldShowAmount =
+							index === 0 ||
+							option.minAmount !== scaledIngredients[0].minAmount ||
+							option.maxAmount !== scaledIngredients[0].maxAmount;
 						return (
 							<Group key={name} separator=" ">
-								{amount && <b>{amount}</b>}
-								{suffix}
+								{shouldShowAmount && <b>{amount}</b>}
+								{shouldShowAmount && suffix}
 								<IngredientName ingredient={option} printName={name} />
 							</Group>
 						);
