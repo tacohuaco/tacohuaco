@@ -213,6 +213,8 @@ export const GROUPS = {
 		'chili flakes',
 		'paprika powder',
 		'curry powder',
+		'curcuma powder',
+		'turmeric powder',
 		'clove',
 		'peppercorn',
 	],

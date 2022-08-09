@@ -19,6 +19,8 @@ export const INGREDIENTS = [
 	[['chili flakes']],
 	[['paprika powder']],
 	[['curry powder']],
+	[['curcuma powder']],
+	[['turmeric powder']],
 	[['peppercorn', 'peppercorns']],
 	// FIXME: Doesn't recognise as an ingredient
 	[['clove', 'cloves']],
