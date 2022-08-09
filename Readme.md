@@ -2,7 +2,6 @@
 
 [![Node.js CI status](https://github.com/tacohuaco/tacohuaco/workflows/Node.js%20CI/badge.svg)](https://github.com/tacohuaco/tacohuaco/actions)
 
-
 ## Running locally
 
 First clone the repo, install dependencies and build the site:
