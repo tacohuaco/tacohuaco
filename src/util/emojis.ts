@@ -4,6 +4,7 @@ import nationalities from 'i18n-nationality/langs/en.json';
 const extendedNationalities = {
 	...nationalities.nationalities,
 	kr: 'Korean',
+	uz: 'Uzbek',
 };
 
 const getCountryCodeByNationality = (nationality: string): string =>
