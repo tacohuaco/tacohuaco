@@ -212,30 +212,39 @@ export default function RecipePage({
 								withWebp
 							/>
 						)}
-						<Grid gridGap="m" gridTemplateColumns={['1fr', '1fr', '1fr 3fr']}>
+						<Grid
+							gridGap="m"
+							gridTemplateColumns={['1fr', '1fr', '1.2fr 2.8fr', '1fr 3fr']}
+						>
 							<Stack gap="m">
-								<Stack direction="row" gap="m" alignItems="center">
+								<Stack direction="row" gap="s" alignItems="center">
 									<Heading level={2}>Ingredients</Heading>
 									{yields && (
-										<Stack
-											direction="row"
-											gap="s"
-											alignItems="center"
-											minWidth="auto"
-										>
-											<Button
-												onClick={() => setCurrentAmout((x) => getPrevAmount(x))}
-												aria-label="Less"
+										<div>
+											<Stack
+												direction="row"
+												gap="s"
+												alignItems="center"
+												minWidth="auto"
 											>
-												–
-											</Button>
-											<Button
-												onClick={() => setCurrentAmout((x) => getNextAmount(x))}
-												aria-label="More"
-											>
-												+
-											</Button>
-										</Stack>
+												<Button
+													onClick={() =>
+														setCurrentAmout((x) => getPrevAmount(x))
+													}
+													aria-label="Less"
+												>
+													–
+												</Button>
+												<Button
+													onClick={() =>
+														setCurrentAmout((x) => getNextAmount(x))
+													}
+													aria-label="More"
+												>
+													+
+												</Button>
+											</Stack>
+										</div>
 									)}
 								</Stack>
 								{yields && (
