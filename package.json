@@ -7,7 +7,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "pretest": "npm run lint",
-    "test": "npm run typecheck && jest",
+    "test": "jest",
     "posttest": "npm run format",
     "typecheck": "tsc",
     "lint": "eslint . --cache --fix --ext .js,.ts,.tsx",
