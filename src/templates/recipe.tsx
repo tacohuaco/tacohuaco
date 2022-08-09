@@ -4,6 +4,7 @@ import Recipe from '../layouts/RecipePage';
 import Metatags from '../components/Metatags';
 import {
 	normalizeAmount,
+	normalizeAmountValue,
 	IngredientInfo,
 	IngredientKind,
 	Month,
@@ -23,15 +24,24 @@ const mapAllIngredients = (
 ): readonly IngredientsWithMeta[] =>
 	allIngredients.map(({ slug, ingredients }) => ({
 		slug,
-		ingredients: ingredients.map(
-			({ name, minAmount, maxAmount, unit, modifier }) => ({
-				name,
-				minAmount: normalizeAmount(minAmount || ''),
-				maxAmount: normalizeAmount(maxAmount || ''),
+		ingredients: ingredients.map((ingredient) => {
+			const { amount: maxAmount, unit } = normalizeAmount(
+				ingredient.maxAmount || undefined,
+				ingredient.unit || undefined
+			);
+			const { amount: minAmount } = normalizeAmount(
+				ingredient.minAmount || undefined,
+				ingredient.unit || undefined,
+				unit
+			);
+			return {
+				name: ingredient.name,
+				minAmount: normalizeAmountValue(minAmount || ''),
+				maxAmount: normalizeAmountValue(maxAmount || ''),
 				unit: unit || undefined,
-				modifier: modifier || undefined,
-			})
-		),
+				modifier: ingredient.modifier || undefined,
+			};
+		}),
 	}));
 
 const mapAllIngredientsInfo = (
@@ -71,7 +81,6 @@ export default function RecipePage({ data, location }: Props) {
 	}
 
 	const {
-		description,
 		time,
 		yields,
 		allIngredients,
@@ -82,7 +91,6 @@ export default function RecipePage({ data, location }: Props) {
 	return (
 		<Recipe
 			{...rest}
-			description={description || undefined}
 			time={time || undefined}
 			yields={yields || undefined}
 			url={location.pathname}

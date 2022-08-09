@@ -1,11 +1,38 @@
 import numericQuantity from 'numeric-quantity';
-import { UNITS } from './langs/en/units';
+import {
+	GRAMS_IN_KILOGRAM,
+	MILLILITERS_IN_LITER,
+	TEASPOONS_IN_TABLESPOONS,
+	UNITS,
+} from './langs/en/units';
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
 import { orderBy } from 'lodash';
 
-export function normalizeAmount(amount?: Amount): Amount | undefined {
+const CONVERSIONS: {
+	from: string;
+	to: string;
+	convert: (x: number) => number;
+}[] = [
+	{
+		from: 'tablespoon',
+		to: 'teaspoon',
+		convert: (x) => x * TEASPOONS_IN_TABLESPOONS,
+	},
+	{
+		from: 'kg',
+		to: 'g',
+		convert: (x) => x * GRAMS_IN_KILOGRAM,
+	},
+	{
+		from: 'l',
+		to: 'ml',
+		convert: (x) => x * MILLILITERS_IN_LITER,
+	},
+];
+
+export function normalizeAmountValue(amount?: Amount): Amount | undefined {
 	if (!amount) {
 		return undefined;
 	}
@@ -20,6 +47,29 @@ export function normalizeAmount(amount?: Amount): Amount | undefined {
 	}
 
 	return amount in WORDS_TO_NUMBERS ? WORDS_TO_NUMBERS[amount] : amount;
+}
+
+export function normalizeAmount(
+	amount?: Amount,
+	unit?: string,
+	forceUnit?: string
+): { amount?: Amount; unit?: string } {
+	const value = normalizeAmountValue(amount);
+
+	if (typeof value !== 'number' || unit === undefined) {
+		return { amount: value, unit };
+	}
+
+	for (const conversion of CONVERSIONS) {
+		if (unit === conversion.from && conversion.from !== forceUnit) {
+			return {
+				amount: conversion.convert(value),
+				unit: conversion.to,
+			};
+		}
+	}
+
+	return { amount: value, unit };
 }
 
 function normalizeUnit(unit?: string): string | undefined {
@@ -63,20 +113,27 @@ export function normalizeName(
  * - find normal forms of ingredient names and units
  * - extract the ingredient modifier (5 _large_ apples)
  */
-function normalizeOption({
-	name,
-	minAmount,
-	maxAmount,
-	unit,
-	comment,
-}: Ingredient): Ingredient {
-	return {
-		...normalizeName(name),
-		minAmount: normalizeAmount(minAmount),
-		maxAmount: normalizeAmount(maxAmount),
-		unit: normalizeUnit(unit),
-		comment,
+function normalizeOption(ingredient: Ingredient): Ingredient {
+	const normalizedUnit = normalizeUnit(ingredient.unit);
+	const { amount: minAmount, unit } = normalizeAmount(
+		ingredient.minAmount,
+		normalizedUnit
+	);
+	const { amount: maxAmount } = normalizeAmount(
+		ingredient.maxAmount,
+		normalizedUnit,
+		unit
+	);
+	const x = {
+		...normalizeName(ingredient.name),
+		minAmount,
+		maxAmount,
+		unit,
+		comment: ingredient.comment,
 	};
+
+	// console.log('🦆', ingredient, '->', x);
+	return x;
 }
 
 /**

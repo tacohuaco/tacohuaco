@@ -1,8 +1,46 @@
 import formatQuantity from 'format-quantity';
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { UNITLESS } from './langs/en/translations';
-import { UNITS } from './langs/en/units';
+import {
+	GRAMS_IN_KILOGRAM,
+	MILLILITERS_IN_LITER,
+	TEASPOONS_IN_TABLESPOONS,
+	UNITS,
+} from './langs/en/units';
 import { Amount, Ingredient } from './types';
+
+const CONVERSIONS: {
+	from: string;
+	to: string;
+	condition: (x: number) => boolean;
+	convert: (x: number) => number;
+}[] = [
+	{
+		from: 'teaspoon',
+		to: 'tablespoon',
+		condition: (x) => x >= TEASPOONS_IN_TABLESPOONS,
+		convert: (x) => Math.round(x / TEASPOONS_IN_TABLESPOONS),
+	},
+	{
+		from: 'g',
+		to: 'kg',
+		condition: (x) => x >= GRAMS_IN_KILOGRAM,
+		convert: (x) => x / GRAMS_IN_KILOGRAM,
+	},
+	{
+		from: 'ml',
+		to: 'l',
+		condition: (x) => x >= MILLILITERS_IN_LITER,
+		convert: (x) => x / MILLILITERS_IN_LITER,
+	},
+];
+
+function asString(amount?: Amount) {
+	if (!amount) {
+		return amount;
+	}
+	return formatQuantity(amount, true) || String(amount);
+}
 
 function pluralize(
 	dictionary: readonly string[][],
@@ -39,18 +77,43 @@ function pluralizeName({
 	return pluralize(ALL_INGREDIENTS, name, Infinity);
 }
 
-function pluralizeUnit({ unit, maxAmount }: Ingredient): string | undefined {
-	if (unit && typeof maxAmount === 'number') {
-		return pluralize(UNITS, unit, maxAmount);
+function pluralizeUnit({
+	amount,
+	unit,
+}: {
+	amount?: Amount;
+	unit?: string;
+}): string | undefined {
+	if (unit && typeof amount === 'number') {
+		return pluralize(UNITS, unit, amount);
 	}
 
 	return undefined;
 }
 
-function formatAmount(amount?: Amount): string | undefined {
-	return amount !== undefined
-		? formatQuantity(amount, true) || String(amount)
-		: undefined;
+function prepareAmount(
+	amount?: Amount,
+	unit?: string,
+	forceUnit?: string
+): { amount?: Amount; unit?: string } {
+	if (typeof amount !== 'number') {
+		return { amount, unit };
+	}
+
+	for (const conversion of CONVERSIONS) {
+		if (
+			unit === conversion.from &&
+			(conversion.condition(amount) ||
+				(forceUnit && conversion.from !== forceUnit))
+		) {
+			return {
+				amount: conversion.convert(amount),
+				unit: conversion.to,
+			};
+		}
+	}
+
+	return { amount, unit };
 }
 
 /**
@@ -59,12 +122,21 @@ function formatAmount(amount?: Amount): string | undefined {
  * - format amounts as strings (1.5 → 1½)
  */
 export function formatOption(ingredient: Ingredient): Ingredient {
+	const { amount: maxAmount, unit } = prepareAmount(
+		ingredient.maxAmount,
+		ingredient.unit
+	);
+	const { amount: minAmount } = prepareAmount(
+		ingredient.minAmount,
+		ingredient.unit,
+		unit
+	);
 	return {
 		...ingredient,
-		name: pluralizeName(ingredient),
-		minAmount: formatAmount(ingredient.minAmount),
-		maxAmount: formatAmount(ingredient.maxAmount),
-		unit: pluralizeUnit(ingredient),
+		name: pluralizeName({ name: ingredient.name, minAmount, maxAmount, unit }),
+		minAmount: asString(minAmount),
+		maxAmount: asString(maxAmount),
+		unit: pluralizeUnit({ amount: maxAmount, unit }),
 	};
 }
 

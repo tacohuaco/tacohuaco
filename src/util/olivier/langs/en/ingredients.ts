@@ -1,21 +1,79 @@
 // WARNING: The second position is a plural, so if there's no plural but there are
 // alternatives, you should repeat the first array item twice
 export const INGREDIENTS = [
+	/*
+	 * Spices
+	 */
 	[['salt']],
-	// Spices
 	[['black pepper']],
-	[['star anise']],
+	[['star anise', 'star anise', 'star anis']],
 	[['bay leaf', 'bay leaves']],
-	[['rosemary seed', 'rosemary seeds']],
-	[['cumin seed', 'cumin seeds']],
-	[['sunflower seed', 'sunflower seeds']],
-	[['sesame seeds', 'sesame seeds']],
-	[
-		['pumpkin seed', 'pumpkin seeds'],
-		['pepita', 'pepitas'],
-	],
+	[['rosemary seeds']],
+	[['dried rosemary']],
+	[['cumin seeds'], ['cumin']],
+	[['sunflower seeds']],
+	[['sesame seeds']],
+	[['pumpkin seeds'], ['pepita', 'pepitas']],
 	[['cinnamon']],
-	// Vegetables
+	[['nutmeg']],
+	[['chili flakes']],
+	[['paprika powder']],
+	[['curry powder']],
+	[['peppercorn', 'peppercorns']],
+	// FIXME: Doesn't recognise as an ingredient
+	[['clove', 'cloves']],
+
+	/*
+	 * Oils and sauces
+	 */
+	[
+		[
+			'olive oil',
+			'olive oil',
+			'extra virgin olive oil',
+			'extra-virgin olive oil',
+		],
+	],
+	[['coconut oil']],
+	[['sunflower oil']],
+	[['oil']],
+	[['soy sauce']],
+	[['fish sauce']],
+	[['oyster sauce']],
+	[['vinegar']],
+	[['mustard']],
+	[['tomato paste']],
+	[['olive', 'olives']],
+	[['caper', 'capers']],
+
+	/*
+	 * Legumes and pasta
+	 */
+	[['bean', 'beans']],
+	[['chickpea', 'chickpeas']],
+	[['buckwheat']],
+	[['rice noodle', 'rice noodles']],
+	[['noodle', 'noodles']],
+	[['rice']],
+	[['pasta']],
+	[['couscous']],
+	[['oat', 'oats']],
+
+	/*
+	 * Dried fruits and nuts
+	 */
+	[['dried apricot', 'dried apricots']],
+	[['dried cranberry', 'dried cranberries']],
+	[['nut', 'nuts']],
+	[['peanut', 'peanuts']],
+	[['raisin', 'raisins']],
+	[['date', 'dates']],
+	[['almond', 'almonds']],
+	[['pecan', 'pecans']],
+
+	/*
+	 * Vegetables
+	 */
 	[
 		['beetroot', 'beetroots'],
 		['red beet', 'red beets'],
@@ -48,7 +106,6 @@ export const INGREDIENTS = [
 		['multiflora bean', 'multiflora beans'],
 		['butter bean', 'butter beans'],
 	],
-	[['bean', 'beans']],
 	[
 		['sweet corn', 'sweet corns'],
 		['sweetcorn', 'sweetcorns'],
@@ -70,9 +127,7 @@ export const INGREDIENTS = [
 	[['cucumber', 'cucumbers']],
 	[['bok choi'], ['pak choi'], ['pok choi'], ['pichay'], ['petsay']],
 	[['potato', 'potatoes']],
-	[['tomato paste']],
 	[['tomato', 'tomatoes']],
-	[['olive', 'olives']],
 	[
 		['eggplant', 'eggplants'],
 		['aubergine', 'aubergines'],
@@ -88,10 +143,8 @@ export const INGREDIENTS = [
 		['seakale beet', 'seakale beets'],
 		['leaf beet', 'leaf beets'],
 	],
-	[['chili flakes']],
 	[['chili', 'chilies']],
 	[['pea', 'peas']],
-	[['chickpea', 'chickpeas']],
 	[['pumpkin', 'pumpkins']],
 	[['squash', 'squashes']],
 	[
@@ -107,18 +160,22 @@ export const INGREDIENTS = [
 	],
 	[['asparagus', ' asparaguses', 'asparagusses', 'asparagi']],
 	[['mushroom', 'mushrooms']],
+	[['parsley root', 'parsley roots']],
 	[['parsley']],
 	[['basil']],
 	[['dill']],
+	[['rosemary']],
 	[['garlic']],
-	[['parsley root', 'parsley roots']],
 	[['kale', 'kales']],
 	[['iceberg salad', 'iceberg salad', 'iceberg']],
 	[['salsify', 'salsifies']],
 	[['jalapeño', 'jalapeños', 'jalapeno', 'jalapenos']],
-	[['rhubarb', 'rhubarbs']],
 	[['spinach', 'spinaches']],
 	[['broccoli', 'broccolis']],
+	[
+		['celeriac', 'celeriacs'],
+		['celery root', 'celery roots'],
+	],
 	[['celery', 'celeries']],
 	[['fennel', 'fennels']],
 	[
@@ -128,12 +185,14 @@ export const INGREDIENTS = [
 	],
 	[['cauliflower', 'cauliflowers']],
 	[['parsnip', 'parsnips']],
-	[
-		['celeriac', 'celeriacs'],
-		['celery root', 'celery roots'],
-	],
 	[['brussels sprout', 'brussels sprouts']],
-	// Fruits
+	[['ginger']],
+	[['horseradish']],
+	[['avocado', 'avocados']],
+
+	/*
+	 * Fruits
+	 */
 	[
 		['blackcurrant', 'blackcurrants', 'black currant', 'black currants'],
 		['cassis', 'cassises'],
@@ -146,14 +205,12 @@ export const INGREDIENTS = [
 		['clementine', 'clementines', 'clementines'],
 	],
 	[['apple', 'apples']],
-	[['dried apricot', 'dried apricots']],
 	[['apricot', 'apricots']],
 	[['banana', 'bananas']],
 	[['blueberry', 'blueberries']],
 	[['blackberry', 'blackberries']],
 	[['gooseberry', 'gooseberries']],
 	[['cherry', 'cherries']],
-	[['dried cranberry', 'dried cranberries']],
 	[['cranberry', 'cranberries']],
 	[['grapefruit', 'grapefruits']],
 	[['lemon', 'lemons']],
@@ -170,13 +227,12 @@ export const INGREDIENTS = [
 		['elderberry', 'elderberries'],
 		['elder', 'elders'],
 	],
-	[['nut', 'nuts']],
-	[['peanut', 'peanuts']],
-	[['raisin', 'raisins']],
-	[['almond', 'almonds']],
-	[['pecan', 'pecans']],
 	[['fruit', 'fruits']],
-	// Dairy
+	[['rhubarb', 'rhubarbs']],
+
+	/*
+	 * Dairy
+	 */
 	[
 		[
 			'parmesan cheese',
@@ -200,16 +256,25 @@ export const INGREDIENTS = [
 	[['crème fraîche', 'crème fraîche', 'creme fraiche']],
 	[['butter', 'butter', 'unsalted butter']],
 	[['milk chocolate']],
-	[['chocolate']],
 	[['whipping cream', 'whipping cream']],
-	// Meat and fish
+
+	/**
+	 * Meat and fish
+	 */
 	[['chicken stock', 'chicken stock', 'chicken broth']],
 	[['chicken leg', 'chicken legs']],
 	[['chicken thigh', 'chicken thighs']],
 	[['chicken breast', 'chicken breasts']],
 	[['chicken']],
+	[['pork']],
+	[['beef']],
 	[['salmon']],
-	// Flours
+	[['sausage', 'sausages']],
+	[['ham']],
+
+	/*
+	 * Flours
+	 */
 	[['buckwheat flour']],
 	[['teff flour']],
 	[['almond flour']],
@@ -225,38 +290,31 @@ export const INGREDIENTS = [
 		['all-purpose flour', 'all-purpose flour', 'all purpose flour'],
 		['wheat flour'],
 	],
+	[['corn starch', 'corn starch', 'cornstarch']],
 	[['flour']],
-	// Misc
-	[['sausage', 'sausages']],
-	[['ham']],
-	[['burger bun', 'burger buns']],
-	[['egg', 'eggs']],
+
+	/*
+	 * Baking and sweeteners
+	 */
+	[['baking powder']],
+	[['yeast']],
 	[['date sugar']],
 	[['coconut sugar']],
 	[['sugar']],
-	[['mustard']],
-	[['vinegar']],
+	[['maple syrup']],
+	[['chicory syrup']],
+	[['vanilla extract']],
+	[['honey']],
+
+	/*
+	 * Misc
+	 */
+	[['chocolate']],
+	[['burger bun', 'burger buns']],
+	[['egg', 'eggs']],
 	[['vodka']],
-	[['noodle', 'noodles']],
-	[['rice noodle', 'rice noodles']],
-	[
-		[
-			'olive oil',
-			'olive oil',
-			'extra virgin olive oil',
-			'extra-virgin olive oil',
-		],
-	],
-	[['coconut oil']],
-	[['sunflower oil']],
-	[['oil']],
-	[['soy sauce']],
-	[['fish sauce']],
-	[['kimchi paste']],
-	[['oyster sauce']],
-	[['buckwheat']],
 	[['marmalade']],
-	[['pasta']],
+	[['kimchi paste']],
 ];
 
 export const ALL_INGREDIENTS = INGREDIENTS.map((x) => x.flat());

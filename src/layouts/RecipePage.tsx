@@ -16,18 +16,19 @@ import {
 import { RecipeContext } from '../components/RecipeContext';
 import {
 	scale,
-	IngredientInfo,
 	parse,
 	normalize,
-	Ingredient,
 	formatOption,
-	Amount,
 	printOption,
+	Ingredient,
+	IngredientInfo,
+	Amount,
 } from '../util/olivier';
 import { asList } from '../util/client';
 import { Collapsible } from '../components/Collapsible';
 import { Button } from '../components/Button';
 import { SubrecipesToTry } from '../components/SubrecipesToTry';
+import { ShoppingList } from '../components/ShoppingList';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Subrecipe } from '../types/Subrecipe';
 import { Asset } from '../types/Asset';
@@ -56,7 +57,6 @@ type Props = Pick<
 > & {
 	allIngredients: readonly IngredientsWithMeta[];
 	allIngredientsInfo: readonly IngredientInfo[];
-	description?: string;
 	images: readonly Asset[];
 	subrecipes: readonly Subrecipe[];
 	time?: number;
@@ -120,7 +120,6 @@ const normalizeAmount = (amount?: Amount): number => {
 export default function RecipePage({
 	artemsFavorite,
 	cuisines,
-	description,
 	descriptionMdx,
 	flags,
 	images,
@@ -162,6 +161,23 @@ export default function RecipePage({
 			currentAmout
 		),
 	}));
+
+	const recipes: Subrecipe[] = [
+		{
+			slug,
+			title,
+			ingredients: '',
+			ingredientsMdx: '',
+			stepsMdx: '',
+			allIngredients: [
+				{
+					slug,
+					ingredients: scaledRecipeIngredients,
+				},
+			],
+		},
+		...scaledSubrecipes,
+	];
 
 	return (
 		<SubrecipesContext.Provider value={scaledSubrecipes}>
@@ -289,15 +305,21 @@ export default function RecipePage({
 											</>
 										)}
 									</Box>
-									<Collapsible
-										label="Explore ingredients"
-										id="ingredients-explorer"
-									>
-										<VisuallyHidden as="h2">
-											Ingredients explorer
-										</VisuallyHidden>
-										<IngredientsExplorer infos={allIngredientsInfo} />
-									</Collapsible>
+									<Stack gap="s">
+										<Collapsible
+											label="Explore ingredients"
+											id="ingredients-explorer"
+										>
+											<VisuallyHidden as="h2">
+												Ingredients explorer
+											</VisuallyHidden>
+											<IngredientsExplorer infos={allIngredientsInfo} />
+										</Collapsible>
+										<Collapsible label="Shopping list β" id="shopping-list">
+											<VisuallyHidden as="h2">Shopping list β</VisuallyHidden>
+											<ShoppingList recipes={recipes} />
+										</Collapsible>
+									</Stack>
 								</Stack>
 							</TextContent>
 						</Grid>

@@ -80,6 +80,62 @@ test.each([
 			unit: 'cloves',
 		},
 	],
+	[
+		{
+			name: 'milk',
+			minAmount: 100,
+			maxAmount: 200,
+			unit: 'ml',
+		},
+		{
+			name: 'milk',
+			minAmount: '100',
+			maxAmount: '200',
+			unit: 'ml',
+		},
+	],
+	[
+		{
+			name: 'milk',
+			minAmount: 1000,
+			maxAmount: 2000,
+			unit: 'ml',
+		},
+		{
+			name: 'milk',
+			minAmount: '1',
+			maxAmount: '2',
+			unit: 'l',
+		},
+	],
+	[
+		{
+			name: 'milk',
+			minAmount: 500,
+			maxAmount: 1000,
+			unit: 'ml',
+		},
+		{
+			name: 'milk',
+			minAmount: '½',
+			maxAmount: '1',
+			unit: 'l',
+		},
+	],
+	[
+		{
+			name: 'paprika',
+			minAmount: 5,
+			maxAmount: 7,
+			unit: 'teaspoon',
+		},
+		{
+			name: 'paprika',
+			minAmount: '2',
+			maxAmount: '2',
+			unit: 'tablespoons',
+		},
+	],
 ])('format ingredient: %s', (source, result) => {
 	expect(format(castArray(source))).toEqual(castArray(result));
 });

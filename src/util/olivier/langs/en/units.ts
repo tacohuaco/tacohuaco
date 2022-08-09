@@ -36,3 +36,8 @@ export const UNITS = [
 	['teaspoon', 'teaspoons', 'tsp', 'tsp.'],
 	['tray', 'trays'],
 ];
+
+// TODO: Move to language-independent module
+export const TEASPOONS_IN_TABLESPOONS = 3;
+export const GRAMS_IN_KILOGRAM = 1000;
+export const MILLILITERS_IN_LITER = 1000;

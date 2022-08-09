@@ -168,6 +168,34 @@ test.each([
 			unit: 'g',
 		},
 	],
+	[
+		{
+			name: 'milk',
+			minAmount: '2',
+			maxAmount: '3',
+			unit: 'l',
+		},
+		{
+			name: 'milk',
+			minAmount: 2000,
+			maxAmount: 3000,
+			unit: 'ml',
+		},
+	],
+	[
+		{
+			name: 'flour',
+			minAmount: '2',
+			maxAmount: '3',
+			unit: 'kg',
+		},
+		{
+			name: 'flour',
+			minAmount: 2000,
+			maxAmount: 3000,
+			unit: 'g',
+		},
+	],
 ])('normalize ingredient: %s', (source, result) => {
 	expect(normalize(castArray(source))).toEqual(castArray(result));
 });

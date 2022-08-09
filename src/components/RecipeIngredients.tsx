@@ -41,7 +41,7 @@ const Paragraph: ComponentType<any> = ({ children }) => {
 
 const splitOutComment = (ingredient = '') => ingredient.split(/\s*;\s*/);
 
-const parseMdxIngredint = (children: string | string[]) => {
+const parseMdxIngredient = (children: string | string[]) => {
 	if (Array.isArray(children)) {
 		const [ingredient, ...rest] = children;
 		return [...splitOutComment(ingredient), ...rest];
@@ -51,15 +51,16 @@ const parseMdxIngredint = (children: string | string[]) => {
 
 interface IngredientNameProps {
 	ingredient: Ingredient;
+	printName?: string;
 }
 
-const IngredientName = ({ ingredient }: IngredientNameProps) => {
+const IngredientName = ({ ingredient, printName }: IngredientNameProps) => {
 	const subrecipes = useSubrecipes();
 	const subrecipe = findSubrecipeIngredient(subrecipes, ingredient);
 
 	const name = (
 		<>
-			{ingredient.modifier} {ingredient.name}
+			{ingredient.modifier} {printName}
 		</>
 	);
 	if (subrecipe) {
@@ -72,7 +73,7 @@ const IngredientName = ({ ingredient }: IngredientNameProps) => {
 const IngredientItem: ComponentType<any> = ({ children }) => {
 	const { ingredients } = useRecipe();
 
-	const [rawIngredient, ...comments] = parseMdxIngredint(children);
+	const [rawIngredient, ...comments] = parseMdxIngredient(children);
 	const options = normalize(parse(rawIngredient));
 
 	const scaledIngredients = options.map(
@@ -95,12 +96,12 @@ const IngredientItem: ComponentType<any> = ({ children }) => {
 					}
 				>
 					{scaledIngredients.map((option) => {
-						const { amount, suffix } = printOption(formatOption(option));
+						const { name, amount, suffix } = printOption(formatOption(option));
 						return (
-							<Group key={option.name} separator=" ">
+							<Group key={name} separator=" ">
 								{amount && <b>{amount}</b>}
 								{suffix}
-								<IngredientName ingredient={option} />
+								<IngredientName ingredient={option} printName={name} />
 							</Group>
 						);
 					})}
