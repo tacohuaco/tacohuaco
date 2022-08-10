@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEventHandler } from 'react';
 import styled from 'styled-components';
 import { VisuallyHidden } from 'tamia';
 import { useCombobox } from 'downshift';
@@ -94,8 +94,11 @@ export function SearchForm({ items, value, onChange }: Props) {
 			onChange(x.inputValue);
 		},
 	});
+	const handleSubmit: FormEventHandler = (event) => {
+		event.preventDefault();
+	};
 	return (
-		<form role="search">
+		<form role="search" onSubmit={handleSubmit}>
 			<VisuallyHidden as="label" {...getLabelProps()}>
 				Search recipes
 			</VisuallyHidden>
