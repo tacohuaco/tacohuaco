@@ -336,10 +336,12 @@ export default function RecipePage({
 								</TextContent>
 							</Grid>
 						</Stack>
-						<Stack gap="m">
-							<Heading level={2}>Recipes with {title.toLowerCase()}</Heading>
-							<RecipeList recipes={recipes} />
-						</Stack>
+						{recipes.length > 0 && (
+							<Stack gap="m">
+								<Heading level={2}>Recipes with {title.toLowerCase()}</Heading>
+								<RecipeList recipes={recipes} />
+							</Stack>
+						)}
 					</Stack>
 				</Page>
 			</RecipeContext.Provider>
