@@ -7,7 +7,12 @@ type Props = {
 };
 
 export const RecipeList = ({ recipes }: Props) => (
-	<Grid as="ul" minColumnWidth={300} gridColumnGap="m" gridRowGap="l">
+	<Grid
+		as="ul"
+		gridTemplateColumns={['1fr', '1fr', '1fr 1fr', '1fr 1fr 1fr']}
+		gridColumnGap="m"
+		gridRowGap="l"
+	>
 		{recipes.map((recipe) => (
 			<RecipeCard key={recipe.slug} as="li" {...recipe} />
 		))}
