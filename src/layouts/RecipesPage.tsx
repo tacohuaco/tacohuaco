@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Heading } from 'tamia';
-import RecipeList from '../components/RecipeList';
+import { RecipeList } from '../components/RecipeList';
 import { SearchResults } from '../components/SearchResults';
 import { SearchForm } from '../components/SearchForm';
 import { useSearch } from '../hooks/useSearch';

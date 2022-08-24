@@ -29,6 +29,7 @@ import { Collapsible } from '../components/Collapsible';
 import { Button } from '../components/Button';
 import { SubrecipesToTry } from '../components/SubrecipesToTry';
 import { ShoppingList } from '../components/ShoppingList';
+import { RecipeList } from '../components/RecipeList';
 import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Subrecipe } from '../types/Subrecipe';
 import { Asset } from '../types/Asset';
@@ -59,6 +60,7 @@ type Props = Pick<
 	allIngredientsInfo: readonly IngredientInfo[];
 	images: readonly Asset[];
 	subrecipes: readonly Subrecipe[];
+	recipes: readonly Queries.RecipeMetaFragment[];
 	time?: number;
 	url: string;
 	yields?: string;
@@ -128,6 +130,7 @@ export default function RecipePage({
 	notesMdx,
 	overnight,
 	preconditions,
+	recipes,
 	slug,
 	sourceMdx,
 	stepsMdx,
@@ -162,7 +165,7 @@ export default function RecipePage({
 		),
 	}));
 
-	const recipes: Subrecipe[] = [
+	const allRecipes: Subrecipe[] = [
 		{
 			slug,
 			title,
@@ -185,152 +188,158 @@ export default function RecipePage({
 				value={{ slug, ingredients: scaledRecipeIngredients }}
 			>
 				<Page url={url}>
-					<Stack as="main" gap="l">
-						<Stack gap="m">
-							<Heading level={1}>{title}</Heading>
-							<RecipeMeta
-								flags={flags}
-								margaritasFavorite={margaritasFavorite}
-								artemsFavorite={artemsFavorite}
-								cuisines={cuisines}
-								tags={tags}
-								time={time}
-								overnight={overnight}
-							/>
-						</Stack>
-						{descriptionMdx && (
-							<TextContent fontSize="l" fontStyle="italic">
-								<MDXRenderer>{descriptionMdx}</MDXRenderer>
-							</TextContent>
-						)}
-						{images.length > 0 && (
-							<Image
-								image={images[0]}
-								alt=""
-								maxWidth={1026}
-								transforms={['quality=value:75']}
-								withWebp
-							/>
-						)}
-						<Grid
-							gridGap="m"
-							gridTemplateColumns={['1fr', '1fr', '1.2fr 2.8fr', '1fr 3fr']}
-						>
+					<Stack as="main" gap="xl">
+						<Stack gap="l">
 							<Stack gap="m">
-								<Stack direction="row" gap="s" alignItems="center">
-									<Heading level={2}>Ingredients</Heading>
-									{yields && (
-										<div>
-											<Stack
-												direction="row"
-												gap="s"
-												alignItems="center"
-												minWidth="auto"
-											>
-												<Button
-													onClick={() =>
-														setCurrentAmout((x) => getPrevAmount(x))
-													}
-													aria-label="Less"
-												>
-													–
-												</Button>
-												<Button
-													onClick={() =>
-														setCurrentAmout((x) => getNextAmount(x))
-													}
-													aria-label="More"
-												>
-													+
-												</Button>
-											</Stack>
-										</div>
-									)}
-								</Stack>
-								{yields && (
-									<Text variant="small">
-										{printYields({
-											...parsedYields,
-											minAmount: currentAmout,
-											maxAmount: currentAmout,
-										})}
-									</Text>
-								)}
-								<TextContent>
-									<RecipeIngredients>
-										<MDXRenderer>{ingredientsMdx}</MDXRenderer>
-										{warnings.length > 0 && (
-											<>
-												<Heading level={3}>Warnings</Heading>
-												<ul>
-													{warnings.map((warning) => (
-														<Text
-															key={warning}
-															as={IngredientListItem}
-															variant="small"
-														>
-															<MDXRenderer>{warning}</MDXRenderer>
-														</Text>
-													))}
-												</ul>
-											</>
-										)}
-										{toolsMdx && (
-											<>
-												<Heading level={3}>You will need</Heading>
-												<MDXRenderer>{toolsMdx}</MDXRenderer>
-											</>
-										)}
-									</RecipeIngredients>
-								</TextContent>
+								<Heading level={1}>{title}</Heading>
+								<RecipeMeta
+									flags={flags}
+									margaritasFavorite={margaritasFavorite}
+									artemsFavorite={artemsFavorite}
+									cuisines={cuisines}
+									tags={tags}
+									time={time}
+									overnight={overnight}
+								/>
 							</Stack>
-							<TextContent>
-								<Stack gap="l">
-									<Box>
-										<Heading level={2}>Directions</Heading>
-										{preconditions.length > 0 && (
-											<Text>
-												<strong>Before you start:</strong>{' '}
-												{asList(preconditions)}.
-											</Text>
+							{descriptionMdx && (
+								<TextContent fontSize="l" fontStyle="italic">
+									<MDXRenderer>{descriptionMdx}</MDXRenderer>
+								</TextContent>
+							)}
+							{images.length > 0 && (
+								<Image
+									image={images[0]}
+									alt=""
+									maxWidth={1026}
+									transforms={['quality=value:75']}
+									withWebp
+								/>
+							)}
+							<Grid
+								gridGap="m"
+								gridTemplateColumns={['1fr', '1fr', '1.2fr 2.8fr', '1fr 3fr']}
+							>
+								<Stack gap="m">
+									<Stack direction="row" gap="s" alignItems="center">
+										<Heading level={2}>Ingredients</Heading>
+										{yields && (
+											<div>
+												<Stack
+													direction="row"
+													gap="s"
+													alignItems="center"
+													minWidth="auto"
+												>
+													<Button
+														onClick={() =>
+															setCurrentAmout((x) => getPrevAmount(x))
+														}
+														aria-label="Less"
+													>
+														–
+													</Button>
+													<Button
+														onClick={() =>
+															setCurrentAmout((x) => getNextAmount(x))
+														}
+														aria-label="More"
+													>
+														+
+													</Button>
+												</Stack>
+											</div>
 										)}
-										<RecipeDirections>
-											<MDXRenderer>{stepsMdx}</MDXRenderer>
-										</RecipeDirections>
-										{(notesMdx || sourceMdx || tips.length > 0) && (
-											<>
-												<Heading level={2}>Notes &amp; tips</Heading>
-												<SubrecipesToTry />
-												{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
-												{tips.map((tip) => (
-													<MDXRenderer key={tip}>{tip}</MDXRenderer>
-												))}
-												{sourceMdx && (
-													<TextContent fontSize="s">
-														<MDXRenderer>{sourceMdx}</MDXRenderer>
-													</TextContent>
-												)}
-											</>
-										)}
-									</Box>
-									<Stack gap="s">
-										<Collapsible
-											label="Explore ingredients"
-											id="ingredients-explorer"
-										>
-											<VisuallyHidden as="h2">
-												Ingredients explorer
-											</VisuallyHidden>
-											<IngredientsExplorer infos={allIngredientsInfo} />
-										</Collapsible>
-										<Collapsible label="Shopping list β" id="shopping-list">
-											<VisuallyHidden as="h2">Shopping list β</VisuallyHidden>
-											<ShoppingList recipes={recipes} />
-										</Collapsible>
 									</Stack>
+									{yields && (
+										<Text variant="small">
+											{printYields({
+												...parsedYields,
+												minAmount: currentAmout,
+												maxAmount: currentAmout,
+											})}
+										</Text>
+									)}
+									<TextContent>
+										<RecipeIngredients>
+											<MDXRenderer>{ingredientsMdx}</MDXRenderer>
+											{warnings.length > 0 && (
+												<>
+													<Heading level={3}>Warnings</Heading>
+													<ul>
+														{warnings.map((warning) => (
+															<Text
+																key={warning}
+																as={IngredientListItem}
+																variant="small"
+															>
+																<MDXRenderer>{warning}</MDXRenderer>
+															</Text>
+														))}
+													</ul>
+												</>
+											)}
+											{toolsMdx && (
+												<>
+													<Heading level={3}>You will need</Heading>
+													<MDXRenderer>{toolsMdx}</MDXRenderer>
+												</>
+											)}
+										</RecipeIngredients>
+									</TextContent>
 								</Stack>
-							</TextContent>
-						</Grid>
+								<TextContent>
+									<Stack gap="l">
+										<Box>
+											<Heading level={2}>Directions</Heading>
+											{preconditions.length > 0 && (
+												<Text>
+													<strong>Before you start:</strong>{' '}
+													{asList(preconditions)}.
+												</Text>
+											)}
+											<RecipeDirections>
+												<MDXRenderer>{stepsMdx}</MDXRenderer>
+											</RecipeDirections>
+											{(notesMdx || sourceMdx || tips.length > 0) && (
+												<>
+													<Heading level={2}>Notes &amp; tips</Heading>
+													<SubrecipesToTry />
+													{notesMdx && <MDXRenderer>{notesMdx}</MDXRenderer>}
+													{tips.map((tip) => (
+														<MDXRenderer key={tip}>{tip}</MDXRenderer>
+													))}
+													{sourceMdx && (
+														<TextContent fontSize="s">
+															<MDXRenderer>{sourceMdx}</MDXRenderer>
+														</TextContent>
+													)}
+												</>
+											)}
+										</Box>
+										<Stack gap="s">
+											<Collapsible
+												label="Explore ingredients"
+												id="ingredients-explorer"
+											>
+												<VisuallyHidden as="h2">
+													Ingredients explorer
+												</VisuallyHidden>
+												<IngredientsExplorer infos={allIngredientsInfo} />
+											</Collapsible>
+											<Collapsible label="Shopping list β" id="shopping-list">
+												<VisuallyHidden as="h2">Shopping list β</VisuallyHidden>
+												<ShoppingList recipes={allRecipes} />
+											</Collapsible>
+										</Stack>
+									</Stack>
+								</TextContent>
+							</Grid>
+						</Stack>
+						<Stack gap="m">
+							<Heading level={2}>Recipes with {title.toLowerCase()}</Heading>
+							<RecipeList recipes={recipes} />
+						</Stack>
 					</Stack>
 				</Page>
 			</RecipeContext.Provider>

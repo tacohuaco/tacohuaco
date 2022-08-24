@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Stack, Heading } from 'tamia';
-import RecipeList from './RecipeList';
+import { RecipeList } from './RecipeList';
 
 interface RecipeListSectionProps {
 	title: ReactNode;

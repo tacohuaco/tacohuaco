@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack, Heading } from 'tamia';
-import Page from './Page';
-import RecipeList from '../components/RecipeList';
+import { RecipeList } from '../components/RecipeList';
 import { FlagName } from '../types/Flags';
+import Page from './Page';
 
 type Props = {
 	recipes: readonly Queries.RecipeMetaFragment[];

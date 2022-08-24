@@ -164,6 +164,9 @@ export const pageQuery = graphql`
 				ingredientsMdx
 				stepsMdx
 			}
+			recipes {
+				...RecipeMeta
+			}
 			allIngredients {
 				...AllIngredients
 			}
