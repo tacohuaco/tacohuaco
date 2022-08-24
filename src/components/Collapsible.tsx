@@ -34,7 +34,10 @@ export function Collapsible({ id, label, children }: CollapsibleProps) {
 			>
 				{label}
 			</Link>
-			<Collapse isOpened={isButtonCollapseOpen}>
+			<Collapse
+				isOpened={isButtonCollapseOpen}
+				initialStyle={{ overflow: 'hidden' }}
+			>
 				<Box id={id} mt="s">
 					{children}
 				</Box>

@@ -284,7 +284,6 @@ export default function RecipePage({
 									</RecipeIngredients>
 								</TextContent>
 							</Stack>
-
 							<TextContent>
 								<Stack gap="l">
 									<Box>
