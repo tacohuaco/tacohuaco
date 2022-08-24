@@ -67,7 +67,7 @@ export function ShoppingList({ recipes }: Props) {
 					? NO_AMOUNTS_GROUPS.includes(group) === false
 					: true;
 				return (
-					<form key={group}>
+					<form key={group || 'misc'}>
 						<Heading level={3}>{getGroupName(group)}</Heading>
 						<Stack as="fieldset" gap="s" direction="column" m={0} border="none">
 							{ingredients.map((ingredient) => {
