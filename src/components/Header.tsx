@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'tamia-gatsby-link';
 import { Stack, Text } from 'tamia';
-import Menu from './Menu';
+import { Menu } from './Menu';
 
 type Props = {
 	title?: string;
 	url: string;
 };
 
-export default function Header({ title = 'Tacohuaco', url }: Props) {
+export function Header({ title = 'Tacohuaco', url }: Props) {
 	return (
 		<Stack
 			as="header"

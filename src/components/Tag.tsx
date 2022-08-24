@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'tamia';
 
-export default styled(Link)`
+export const Tag = styled(Link)`
 	&,
 	&:link,
 	&:visited {

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text } from 'tamia';
 import { FlagName } from '../types/Flags';
-import Tooltip from './Tooltip';
+import { Tooltip } from './Tooltip';
 
 type Props = {
 	type: FlagName;

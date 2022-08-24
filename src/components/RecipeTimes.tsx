@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from 'tamia';
-import Icon from './Icon';
-import Tooltip from './Tooltip';
+import { Icon } from './Icon';
+import { Tooltip } from './Tooltip';
 
 type Props = {
 	time: number;

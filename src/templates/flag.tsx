@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import FlagPage, { TITLES } from '../layouts/FlagPage';
-import Metatags from '../components/Metatags';
+import { Metatags } from '../components/Metatags';
 import { FlagName } from '../types/Flags';
 
 type Props = {

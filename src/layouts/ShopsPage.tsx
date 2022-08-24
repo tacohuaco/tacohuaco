@@ -2,7 +2,7 @@ import React from 'react';
 import { Stack, Heading, Text } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 import { MDXRenderer } from '../components/MDXRenderer';
-import TextContent from '../components/TextContent';
+import { TextContent } from '../components/TextContent';
 import Page from './Page';
 
 type Shop = Pick<

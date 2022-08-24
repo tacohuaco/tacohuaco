@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Box, Stack, Grid, Heading, Text, VisuallyHidden } from 'tamia';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
-import TextContent from '../components/TextContent';
-import RecipeIngredients, {
+import { TextContent } from '../components/TextContent';
+import {
+	RecipeIngredients,
 	IngredientListItem,
 } from '../components/RecipeIngredients';
-import RecipeDirections from '../components/RecipeDirections';
-import RecipeMeta from '../components/RecipeMeta';
+import { RecipeDirections } from '../components/RecipeDirections';
+import { RecipeMeta } from '../components/RecipeMeta';
 import { IngredientsExplorer } from '../components/IngredientsExplorer';
 import {
 	getIngredientsBySlug,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import RecipesPage from '../layouts/RecipesPage';
-import Metatags from '../components/Metatags';
+import { Metatags } from '../components/Metatags';
 
 type Props = {
 	data: Queries.RecipesPageQuery;

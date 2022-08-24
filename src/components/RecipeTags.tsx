@@ -2,7 +2,7 @@ import React from 'react';
 import { sentenceCase } from 'sentence-case';
 import { paramCase } from 'param-case';
 import { Stack } from 'tamia';
-import Tag from './Tag';
+import { Tag } from './Tag';
 
 type Props = {
 	tags?: readonly string[];

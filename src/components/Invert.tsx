@@ -6,6 +6,6 @@ interface Props {
 	children: React.ReactNode;
 }
 
-export default function Invert({ children }: Props) {
+export function Invert({ children }: Props) {
 	return <ThemeProvider theme={inverted}>{children}</ThemeProvider>;
 }

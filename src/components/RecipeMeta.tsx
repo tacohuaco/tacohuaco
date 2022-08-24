@@ -15,7 +15,7 @@ type Props = {
 	overnight?: boolean;
 };
 
-export default function RecipeMeta({
+export function RecipeMeta({
 	flags,
 	margaritasFavorite,
 	artemsFavorite,

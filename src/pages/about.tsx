@@ -1,6 +1,6 @@
 import React from 'react';
 import AboutPage from '../layouts/AboutPage';
-import Metatags from '../components/Metatags';
+import { Metatags } from '../components/Metatags';
 
 type Props = {
 	location: {

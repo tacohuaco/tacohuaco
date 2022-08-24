@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 
-export default function Footer() {
+export function Footer() {
 	return (
 		<footer>
 			<Text variant="xsmall" mb="xs">

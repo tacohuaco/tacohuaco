@@ -38,7 +38,7 @@ const isCurrentItem = (
 ): boolean =>
 	item.isCurrent ? item.isCurrent(current) : current.startsWith(item.href);
 
-export default function Menu({ current }: Props) {
+export function Menu({ current }: Props) {
 	return (
 		<Stack as="ul" gap="m" direction={['column', 'row']}>
 			{ITEMS.map(({ title, hint, href, isCurrent }) => (

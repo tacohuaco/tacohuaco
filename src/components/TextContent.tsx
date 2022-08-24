@@ -29,7 +29,7 @@ const Container = styled(TextContentBase)<{ fontSize: string }>`
 	}
 `;
 
-export default function TextContent({ children, ...props }: Props) {
+export function TextContent({ children, ...props }: Props) {
 	return (
 		<Text as="div" {...props}>
 			<Container {...props}>{children}</Container>

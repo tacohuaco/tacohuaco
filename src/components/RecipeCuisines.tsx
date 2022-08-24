@@ -2,7 +2,7 @@ import React from 'react';
 import { paramCase } from 'param-case';
 import { Stack, Box } from 'tamia';
 import { getEmojiByNationality } from '../util/emojis';
-import Tag from './Tag';
+import { Tag } from './Tag';
 
 type Props = {
 	cuisines: readonly string[];

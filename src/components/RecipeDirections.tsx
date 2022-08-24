@@ -128,7 +128,7 @@ const components = {
 	em: Emphasis,
 } as const;
 
-export default function RecipeDirections({ children, ...props }: Props) {
+export function RecipeDirections({ children, ...props }: Props) {
 	return (
 		<Text as="div" fontSize={['l', 'l', 'l', 'm']} {...props}>
 			<MDXProvider components={components}>

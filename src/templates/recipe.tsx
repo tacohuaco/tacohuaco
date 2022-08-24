@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Recipe from '../layouts/RecipePage';
-import Metatags from '../components/Metatags';
+import { Metatags } from '../components/Metatags';
 import {
 	normalizeAmount,
 	normalizeAmountValue,

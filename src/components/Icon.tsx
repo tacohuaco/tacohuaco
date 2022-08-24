@@ -23,7 +23,7 @@ type Props = {
 	size: number | string;
 };
 
-export default function Icon({ icon, size }: Props) {
+export function Icon({ icon, size }: Props) {
 	const { path, children, width, height } = ICONS[icon];
 	return (
 		<IconBase

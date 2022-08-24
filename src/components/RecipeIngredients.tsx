@@ -125,7 +125,7 @@ const components = {
 	li: IngredientItem,
 } as const;
 
-export default function RecipeIngredients({ children, ...props }: Props) {
+export function RecipeIngredients({ children, ...props }: Props) {
 	return (
 		<Text
 			as="div"

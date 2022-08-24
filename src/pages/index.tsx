@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import IndexPage from '../layouts/IndexPage';
-import Metatags from '../components/Metatags';
+import { Metatags } from '../components/Metatags';
 
 type Props = {
 	data: Queries.IndexPageQuery;
