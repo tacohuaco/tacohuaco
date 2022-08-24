@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from 'tamia';
-import RecipeCard from './RecipeCard';
+import { RecipeCard } from './RecipeCard';
 
 type Props = {
 	recipes: readonly Queries.RecipeMetaFragment[];

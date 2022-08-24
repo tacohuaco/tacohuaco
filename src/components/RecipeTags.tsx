@@ -8,7 +8,7 @@ type Props = {
 	tags?: readonly string[];
 };
 
-export default function RecipeTags({ tags = [] }: Props) {
+export function RecipeTags({ tags = [] }: Props) {
 	return (
 		<Stack gap="s" direction="row">
 			{tags.map((tag) => (

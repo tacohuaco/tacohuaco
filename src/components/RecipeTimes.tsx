@@ -15,11 +15,7 @@ const MoonIcon = () => (
 	</Box>
 );
 
-export default function RecipeTimes({
-	time,
-	overnight,
-	size = 'medium',
-}: Props) {
+export function RecipeTimes({ time, overnight, size = 'medium' }: Props) {
 	if (size === 'small') {
 		return (
 			<Text variant="xsmall">

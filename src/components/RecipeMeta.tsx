@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack } from 'tamia';
-import RecipeFlags from './RecipeFlags';
-import RecipeTags from './RecipeTags';
-import RecipeTimes from './RecipeTimes';
+import { RecipeFlags } from './RecipeFlags';
+import { RecipeTags } from './RecipeTags';
+import { RecipeTimes } from './RecipeTimes';
 import { RecipeCuisines } from './RecipeCuisines';
 
 type Props = {

@@ -8,7 +8,7 @@ type Props = {
 	artemsFavorite?: boolean;
 };
 
-export default function RecipeFlags({
+export function RecipeFlags({
 	flags,
 	margaritasFavorite,
 	artemsFavorite,
