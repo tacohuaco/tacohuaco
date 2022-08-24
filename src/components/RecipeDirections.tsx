@@ -18,8 +18,12 @@ const isOvernightStep = (text: unknown) => {
 
 	if (
 		text.endsWith('overnight.') ||
+		text.endsWith('day.') ||
 		text.endsWith('days.') ||
-		text.endsWith('weeks.')
+		text.endsWith('week.') ||
+		text.endsWith('weeks.') ||
+		text.endsWith('hour.') ||
+		text.endsWith('hours.')
 	) {
 		return true;
 	}
