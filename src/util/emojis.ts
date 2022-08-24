@@ -2,7 +2,7 @@ const CUISINE_TO_EMOJI: Record<string, string> = {
 	_DEFAULT: '🏴',
 	Chinese: '🇨🇳',
 	French: '🥖',
-	Fusion: '🏴‍☠️',
+	Klatzlandian: '🏴‍☠️',
 	Greek: '🇬🇷',
 	Italian: '🍕',
 	Japanese: '🇯🇵',
