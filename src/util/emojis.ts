@@ -1,16 +1,21 @@
-import { countryCodeEmoji } from 'country-code-emoji';
-import nationalities from 'i18n-nationality/langs/en.json';
-
-const extendedNationalities = {
-	...nationalities.nationalities,
-	kr: 'Korean',
-	uz: 'Uzbek',
+const CUISINE_TO_EMOJI: Record<string, string> = {
+	_DEFAULT: '🏴',
+	Chinese: '🇨🇳',
+	French: '🥖',
+	Fusion: '🏴‍☠️',
+	Greek: '🇬🇷',
+	Italian: '🍕',
+	Japanese: '🇯🇵',
+	Korean: '🇰🇷',
+	Mexican: '🇲🇽',
+	MiddleEastern: '🥙',
+	Russian: '🪆',
+	Swedish: '🇸🇪',
+	UnitedStates: '🇺🇸',
+	Uzbek: '🇺🇿',
+	Vietnamese: '🇻🇳',
 };
 
-const getCountryCodeByNationality = (nationality: string): string =>
-	Object.entries(extendedNationalities).find(
-		([, n]) => n === nationality
-	)?.[0] || '';
-
-export const getEmojiByNationality = (nationality: string): string =>
-	countryCodeEmoji(getCountryCodeByNationality(nationality));
+export const getCuisineEmoji = (cuisine: string): string => {
+	return CUISINE_TO_EMOJI[cuisine] || CUISINE_TO_EMOJI._DEFAULT;
+};
