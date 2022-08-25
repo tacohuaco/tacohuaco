@@ -155,19 +155,20 @@ const getRelatedRecipes = (
 	// Calculate weights
 	const weightedRecipes: readonly [Queries.RecipeMetaFragment, number][] =
 		filteredRecipes.map((recipe) => {
-			const cuisineWeight =
-				intersection(filterGenericCuisines(recipe.cuisines), filteredCuisines)
-					.length * 10;
-			const tagsWeight = intersection(recipe.tags, tags).length;
-			return [recipe, cuisineWeight + tagsWeight];
+			const tagsWeight = intersection(recipe.tags, tags).length * 10;
+			const cuisineWeight = intersection(
+				filterGenericCuisines(recipe.cuisines),
+				filteredCuisines
+			).length;
+			return [recipe, tagsWeight + cuisineWeight];
 		});
 
 	// Sort by weight
 	const sortedRecipes = sortBy(weightedRecipes, (x) => -x[1]);
 
-	// Discard recipes with 0 or 1 weight and return 6 top recipes
+	// Discard recipes with 0 weight and return 6 top recipes
 	return sortedRecipes
-		.filter(([, weight]) => weight > 1)
+		.filter(([, weight]) => weight > 0)
 		.map(([recipe]) => recipe)
 		.slice(0, 6);
 };
