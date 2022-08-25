@@ -76,7 +76,8 @@ const mapSubrecipes = (
 
 export default function RecipePage({ data, location }: Props) {
 	const recipe = data.graphCmsRecipe;
-	if (!recipe) {
+	const allRecipes = data.allGraphCmsRecipe?.nodes;
+	if (!recipe || !allRecipes) {
 		return null;
 	}
 
@@ -97,6 +98,7 @@ export default function RecipePage({ data, location }: Props) {
 			allIngredients={mapAllIngredients(allIngredients)}
 			allIngredientsInfo={mapAllIngredientsInfo(allIngredientsInfo)}
 			subrecipes={mapSubrecipes(subrecipes)}
+			allRecipes={allRecipes}
 		/>
 	);
 }
@@ -119,6 +121,11 @@ export const Head = ({ data, location }: Props) => {
 
 export const pageQuery = graphql`
 	query RecipePage($slug: String!) {
+		allGraphCmsRecipe(sort: { fields: [title], order: ASC }) {
+			nodes {
+				...RecipeMeta
+			}
+		}
 		graphCmsRecipe(slug: { eq: $slug }) {
 			artemsFavorite
 			cuisines

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Stack, Grid, Heading, Text, VisuallyHidden } from 'tamia';
+import { intersection, sortBy } from 'lodash';
 import { MDXRenderer } from '../components/MDXRenderer';
 import { Image } from '../components/Image';
 import { TextContent } from '../components/TextContent';
@@ -65,6 +66,7 @@ type Props = Pick<
 	time?: number;
 	url: string;
 	yields?: string;
+	allRecipes: readonly Queries.RecipeMetaFragment[];
 };
 
 const parseYields = (yields = ''): Ingredient => {
@@ -120,6 +122,56 @@ const normalizeAmount = (amount?: Amount): number => {
 	return typeof amount === 'number' ? amount : 1;
 };
 
+const filterGenericCuisines = (cuisines: Queries.GraphCMS_Recipe['cuisines']) =>
+	cuisines.filter((x) => x !== 'Klatzlandian');
+
+const getRelatedRecipes = (
+	allRecipes: readonly Queries.RecipeMetaFragment[],
+	{
+		slug,
+		cuisines,
+		tags,
+	}: Pick<Queries.GraphCMS_Recipe, 'slug' | 'cuisines' | 'tags'>
+): readonly Queries.RecipeMetaFragment[] => {
+	const filteredRecipes = allRecipes.filter((recipe) => {
+		// Don't show the same recipe
+		if (recipe.slug === slug) {
+			return false;
+		}
+		// Show foundation recipes and all other recipes separately
+		if (
+			tags.includes('Foundation')
+				? !recipe.tags.includes('Foundation')
+				: recipe.tags.includes('Foundation')
+		) {
+			return false;
+		}
+		return true;
+	});
+
+	// Filter out Klatzlandian recipes
+	const filteredCuisines = filterGenericCuisines(cuisines);
+
+	// Calculate weights
+	const weightedRecipes: readonly [Queries.RecipeMetaFragment, number][] =
+		filteredRecipes.map((recipe) => {
+			const cuisineWeight =
+				intersection(filterGenericCuisines(recipe.cuisines), filteredCuisines)
+					.length * 10;
+			const tagsWeight = intersection(recipe.tags, tags).length;
+			return [recipe, cuisineWeight + tagsWeight];
+		});
+
+	// Sort by weight
+	const sortedRecipes = sortBy(weightedRecipes, (x) => -x[1]);
+
+	// Discard recipes with 0 or 1 weight and return 6 top recipes
+	return sortedRecipes
+		.filter(([, weight]) => weight > 1)
+		.map(([recipe]) => recipe)
+		.slice(0, 6);
+};
+
 export default function RecipePage({
 	artemsFavorite,
 	cuisines,
@@ -146,6 +198,7 @@ export default function RecipePage({
 	yields,
 	allIngredients,
 	allIngredientsInfo,
+	allRecipes,
 }: Props) {
 	const parsedYields = parseYields(yields);
 	const baseAmount = normalizeAmount(parsedYields.minAmount);
@@ -166,7 +219,7 @@ export default function RecipePage({
 		),
 	}));
 
-	const allRecipes: Subrecipe[] = [
+	const recipeWithSubrecipes: Subrecipe[] = [
 		{
 			slug,
 			title,
@@ -182,6 +235,12 @@ export default function RecipePage({
 		},
 		...scaledSubrecipes,
 	];
+
+	const relatedRecipes = getRelatedRecipes(allRecipes, {
+		slug,
+		cuisines,
+		tags,
+	});
 
 	return (
 		<SubrecipesContext.Provider value={scaledSubrecipes}>
@@ -330,7 +389,7 @@ export default function RecipePage({
 											</Collapsible>
 											<Collapsible label="Shopping list β" id="shopping-list">
 												<VisuallyHidden as="h2">Shopping list β</VisuallyHidden>
-												<ShoppingList recipes={allRecipes} />
+												<ShoppingList recipes={recipeWithSubrecipes} />
 											</Collapsible>
 										</Stack>
 									</Stack>
@@ -341,6 +400,14 @@ export default function RecipePage({
 							<Stack gap="m">
 								<Heading level={2}>Recipes with {title.toLowerCase()}</Heading>
 								<RecipeList recipes={recipes} />
+							</Stack>
+						)}
+						{relatedRecipes.length > 0 && (
+							<Stack gap="m">
+								<Heading level={2}>
+									More recipes like {title.toLowerCase()}
+								</Heading>
+								<RecipeList recipes={relatedRecipes} />
 							</Stack>
 						)}
 					</Stack>
