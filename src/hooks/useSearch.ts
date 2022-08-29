@@ -14,6 +14,7 @@ import {
 } from '../hooks/useSearchIndex';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
+import { useUrlState } from './useUrlState';
 
 const DEFAULT_AUTOCOMPLETE_ITEMS = [
 	...Object.values(MONTH_TO_NAME),
@@ -64,7 +65,10 @@ const getAutocompleteItems = (
 };
 
 export function useSearch(recipes: readonly Queries.RecipeMetaFragment[]) {
-	const [searchQuery, setSearchQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useUrlState({
+		name: 'q',
+		defaultValue: '',
+	});
 	const searchQueryDebounced = useDebouncedValue(searchQuery);
 	const searchIndex = useSearchIndex(recipes);
 	const searchResults = useSearchResults(
