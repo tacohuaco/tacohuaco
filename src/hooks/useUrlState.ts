@@ -8,6 +8,8 @@ interface UseUrlStateInterface<T> {
 
 type UseUrlStateReturnInterface<S> = [S, Dispatch<SetStateAction<S>>];
 
+const isBrowser = () => typeof window !== 'undefined';
+
 /**
  * Sync the state value with a given query parameter
  */
@@ -15,7 +17,11 @@ export function useUrlState<T>({
 	name,
 	defaultValue,
 }: UseUrlStateInterface<T>): UseUrlStateReturnInterface<T> {
-	const url = new URL(window.location.href);
+	if (!isBrowser()) {
+		return useState(defaultValue);
+	}
+
+	const url = new URL(window?.location.href);
 	const [value, setValue] = useState<T>(() => {
 		const urlValue = url.searchParams.get(name);
 		return urlValue === null ? defaultValue : (urlValue as unknown as T);
