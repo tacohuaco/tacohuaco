@@ -82,6 +82,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 		getMenuProps,
 		getItemProps,
 		highlightedIndex,
+		closeMenu,
 		isOpen,
 	} = useCombobox({
 		items: itemsToShow,
@@ -95,6 +96,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 		},
 	});
 	const handleSubmit: FormEventHandler = (event) => {
+		closeMenu();
 		event.preventDefault();
 	};
 	return (
