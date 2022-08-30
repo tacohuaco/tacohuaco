@@ -39,6 +39,7 @@ const getAutocompleteItems = (
 	const allIngredients: string[] = [];
 	const allTags: string[] = [];
 	const allCuisines: string[] = [];
+	const allKeywords: string[] = [];
 
 	recipes.forEach((recipe) => {
 		allTitles.push(recipe.title);
@@ -51,8 +52,9 @@ const getAutocompleteItems = (
 		const tagNames = recipe.tags.map((x) => sentenceCase(x).toLowerCase());
 		allTags.push(...tagNames);
 
-		const cuisineNames = recipe.cuisines;
-		allCuisines.push(...cuisineNames);
+		allCuisines.push(...recipe.cuisines);
+
+		allKeywords.push(...recipe.keywordsList);
 	});
 
 	return uniq([
@@ -61,6 +63,7 @@ const getAutocompleteItems = (
 		...allIngredients,
 		...allTags,
 		...allCuisines,
+		...allKeywords,
 	]);
 };
 

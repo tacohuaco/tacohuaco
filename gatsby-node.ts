@@ -180,7 +180,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
 type Source = Pick<
 	Queries.GraphCMS_Recipe,
-	'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags'
+	'slug' | 'ingredients' | 'subrecipes' | 'remoteId' | 'tags' | 'keywords'
 >;
 
 // Create Mdx fields for all Markdown type fields from GraphCMS
@@ -262,6 +262,12 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({
 				type: '[String!]!',
 				resolve: (source: Source, args: unknown, context: GatsbyContext) => {
 					return getRecipeTips(source, context);
+				},
+			},
+			[`keywordsList`]: {
+				type: '[String!]!',
+				resolve: (source: Source) => {
+					return (source.keywords || '').split(/\s*[,;]\s*/).filter(Boolean);
 				},
 			},
 		},

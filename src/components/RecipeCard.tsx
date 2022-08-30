@@ -77,6 +77,7 @@ export const recipeMetaFragment = graphql`
 			url
 			width
 		}
+		keywordsList
 		margaritasFavorite
 		overnight
 		seasons

@@ -65,9 +65,19 @@ export function useSearchIndex(recipes: readonly Queries.RecipeMetaFragment[]) {
 			this.field('ingredients');
 			this.field('tags');
 			this.field('seasons');
+			this.field('keywords');
 
 			recipes.forEach(
-				({ slug, title, cuisines, allIngredients, tags, flags, seasons }) => {
+				({
+					slug,
+					title,
+					cuisines,
+					allIngredients,
+					tags,
+					flags,
+					seasons,
+					keywordsList,
+				}) => {
 					this.add({
 						slug,
 						title: deburr(title),
@@ -84,6 +94,7 @@ export function useSearchIndex(recipes: readonly Queries.RecipeMetaFragment[]) {
 						seasons: seasons
 							.flatMap((x) => [MONTH_TO_NAME[x], MONTH_TO_SEASON[x]])
 							.flat(),
+						keywords: keywordsList,
 					});
 				}
 			);

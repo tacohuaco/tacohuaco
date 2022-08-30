@@ -19,6 +19,7 @@ fragment Recipe on Recipe {
   notes
   leftovers
   privateNotes
+  keywords
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -48,14 +49,14 @@ fragment Recipe on Recipe {
       stage
     }
   }
-  subrecipes {
+  recipes {
     ... on Recipe {
       remoteTypeName: __typename
       remoteId: id
       stage
     }
   }
-  recipes {
+  subrecipes {
     ... on Recipe {
       remoteTypeName: __typename
       remoteId: id

@@ -45,6 +45,7 @@ type Props = Pick<
 	| 'flags'
 	| 'ingredients'
 	| 'ingredientsMdx'
+	| 'keywordsList'
 	| 'margaritasFavorite'
 	| 'notesMdx'
 	| 'overnight'
@@ -180,6 +181,7 @@ export default function RecipePage({
 	flags,
 	images,
 	ingredientsMdx,
+	keywordsList,
 	margaritasFavorite,
 	notesMdx,
 	overnight,
@@ -268,6 +270,9 @@ export default function RecipePage({
 									<MDXRenderer>{descriptionMdx}</MDXRenderer>
 								</TextContent>
 							)}
+							<VisuallyHidden>
+								Keywords: {keywordsList.join(', ')}
+							</VisuallyHidden>
 							{images.length > 0 && (
 								<Image
 									image={images[0]}

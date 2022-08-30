@@ -147,6 +147,7 @@ export const pageQuery = graphql`
 			toolsMdx
 			warnings
 			yields
+			keywordsList
 			flags {
 				vegan
 				vegetarian
