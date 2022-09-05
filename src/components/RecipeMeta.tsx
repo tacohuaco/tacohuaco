@@ -26,17 +26,16 @@ export function RecipeMeta({
 }: Props) {
 	return (
 		<Stack gap="xs">
-			<Stack gap="m" direction={['column', 'row']}>
+			<Stack gap="m" direction={['column', 'column', 'row']}>
 				<RecipeFlags
 					flags={flags}
 					margaritasFavorite={margaritasFavorite}
 					artemsFavorite={artemsFavorite}
 				/>
-				{(cuisines || tags.length > 0) && (
-					<Stack gap="s" direction="row">
+				{(cuisines.length > 0 || tags.length > 0) && (
+					<RecipeTags tags={tags}>
 						{cuisines.length > 0 && <RecipeCuisines cuisines={cuisines} />}
-						<RecipeTags tags={tags} />
-					</Stack>
+					</RecipeTags>
 				)}
 			</Stack>
 			{time && <RecipeTimes time={time} overnight={overnight} />}

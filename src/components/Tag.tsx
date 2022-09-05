@@ -14,6 +14,7 @@ export const Tag = styled(Link)`
 		color: ${(p) => p.theme.colors.dim};
 		border-radius: ${(p) => p.theme.radii.base};
 		text-decoration: none;
+		white-space: nowrap;
 	}
 	&:hover,
 	&:active {
