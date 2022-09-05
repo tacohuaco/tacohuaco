@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useMemo, useCallback } from 'react';
 import { uniq } from 'lodash';
 import { sentenceCase } from 'sentence-case';
 import { useSearchResults } from '../hooks/useSearchResults';

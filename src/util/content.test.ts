@@ -22,17 +22,17 @@ describe('getIngredientLines', () => {
 - a bit of hot pepper
 		`;
 		expect(getIngredientLines(markdown)).toMatchInlineSnapshot(`
-Array [
-  "10 sausages",
-  "1 onion",
-  "1/2 sausage",
-  "13 g of cocaine",
-  "4 medium eggs",
-  "3-4 sprigs of marijuana",
-  "1 clove of garlic",
-  "a bit of hot pepper",
-]
-`);
+		[
+		  "10 sausages",
+		  "1 onion",
+		  "1/2 sausage",
+		  "13 g of cocaine",
+		  "4 medium eggs",
+		  "3-4 sprigs of marijuana",
+		  "1 clove of garlic",
+		  "a bit of hot pepper",
+		]
+	`);
 	});
 });
 
@@ -43,33 +43,33 @@ describe('getIngredients', () => {
 - 10 g of almond flour / 15 g of coconut flour
 		`;
 		expect(getIngredients(markdown)).toMatchInlineSnapshot(`
-Array [
-  Object {
-    "comment": undefined,
-    "maxAmount": 10,
-    "minAmount": 10,
-    "modifier": undefined,
-    "name": "sausage",
-    "unit": undefined,
-  },
-  Object {
-    "comment": undefined,
-    "maxAmount": 10,
-    "minAmount": 10,
-    "modifier": undefined,
-    "name": "almond flour",
-    "unit": "g",
-  },
-  Object {
-    "comment": undefined,
-    "maxAmount": 15,
-    "minAmount": 15,
-    "modifier": undefined,
-    "name": "coconut flour",
-    "unit": "g",
-  },
-]
-`);
+		[
+		  {
+		    "comment": undefined,
+		    "maxAmount": 10,
+		    "minAmount": 10,
+		    "modifier": undefined,
+		    "name": "sausage",
+		    "unit": undefined,
+		  },
+		  {
+		    "comment": undefined,
+		    "maxAmount": 10,
+		    "minAmount": 10,
+		    "modifier": undefined,
+		    "name": "almond flour",
+		    "unit": "g",
+		  },
+		  {
+		    "comment": undefined,
+		    "maxAmount": 15,
+		    "minAmount": 15,
+		    "modifier": undefined,
+		    "name": "coconut flour",
+		    "unit": "g",
+		  },
+		]
+	`);
 	});
 });
 
@@ -80,33 +80,33 @@ describe('getIngredientsInfo', () => {
 - 10 g of almond flour / 15 g of coconut flour
 		`;
 		expect(getIngredientsInfo(markdown)).toMatchInlineSnapshot(`
-Array [
-  Object {
-    "hasDairy": true,
-    "hasGluten": false,
-    "hasSugar": false,
-    "kind": 1,
-    "name": "milk",
-    "seasons": Array [],
-  },
-  Object {
-    "hasDairy": false,
-    "hasGluten": false,
-    "hasSugar": false,
-    "kind": 0,
-    "name": "almond flour",
-    "seasons": Array [],
-  },
-  Object {
-    "hasDairy": false,
-    "hasGluten": false,
-    "hasSugar": false,
-    "kind": 0,
-    "name": "coconut flour",
-    "seasons": Array [],
-  },
-]
-`);
+		[
+		  {
+		    "hasDairy": true,
+		    "hasGluten": false,
+		    "hasSugar": false,
+		    "kind": 1,
+		    "name": "milk",
+		    "seasons": [],
+		  },
+		  {
+		    "hasDairy": false,
+		    "hasGluten": false,
+		    "hasSugar": false,
+		    "kind": 0,
+		    "name": "almond flour",
+		    "seasons": [],
+		  },
+		  {
+		    "hasDairy": false,
+		    "hasGluten": false,
+		    "hasSugar": false,
+		    "kind": 0,
+		    "name": "coconut flour",
+		    "seasons": [],
+		  },
+		]
+	`);
 	});
 });
 
@@ -230,12 +230,12 @@ describe('getRecipeSeasons', () => {
 - freshly ground black pepper
 		`;
 		expect(getRecipeSeasons(markdown)).toMatchInlineSnapshot(`
-Array [
-  7,
-  8,
-  9,
-]
-`);
+		[
+		  7,
+		  8,
+		  9,
+		]
+	`);
 	});
 });
 
