@@ -273,6 +273,7 @@ export const INGREDIENTS = [
 	[['salmon']],
 	[['sausage', 'sausages']],
 	[['ham']],
+	[['meat']],
 
 	/*
 	 * Flours

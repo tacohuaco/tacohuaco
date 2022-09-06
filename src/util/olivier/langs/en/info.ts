@@ -30,7 +30,7 @@ export const DAIRIES = [
 ];
 export const POULTRIES = ['chicken', 'chicken stock'];
 export const FISHES = ['salmon', 'fish sauce', 'oyster sauce', 'kimchi paste'];
-export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage'];
+export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage', 'meat'];
 export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
 
 export const GROUPS = {
