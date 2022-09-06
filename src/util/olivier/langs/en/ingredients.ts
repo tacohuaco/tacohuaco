@@ -318,6 +318,8 @@ export const INGREDIENTS = [
 	[['vodka']],
 	[['marmalade']],
 	[['kimchi paste']],
+	[['wheat tortilla', 'wheat tortillas']],
+	[['tortilla', 'tortillas']],
 ];
 
 export const ALL_INGREDIENTS = INGREDIENTS.map((x) => x.flat());

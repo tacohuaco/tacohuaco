@@ -12,6 +12,7 @@ export const GLUTENS = [
 	'kimchi paste',
 	'spelt flour',
 	'rye flour',
+	'wheat tortilla',
 ];
 export const NON_VEGANS = ['honey', 'egg'];
 export const DAIRIES = [
