@@ -163,7 +163,8 @@ export const GRAPHCMS_FIELD_PREPROCESSING: Record<
 	Record<string, (text: string) => string>
 > = {
 	[`GraphCMS_Recipe`]: {
-		ingredients: flow([demoteHeadings, typoLite]),
+		ingredients: flow([demoteHeadings, typo]),
 		steps: flow([placeholdersToItalic, demoteHeadings, typo]),
+		tools: typo,
 	},
 };

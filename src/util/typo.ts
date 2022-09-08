@@ -21,6 +21,8 @@ const degreeSigns = (text: string) =>
 const numberRanges = (text: string) =>
 	text.replace(/\b(\d+)-(\d+)\b/g, '$1–$2');
 
+const dimensions = (text: string) => text.replace(/\b(\d+)x(\d+)\b/g, '$1×$2');
+
 const apostrophes = (text: string) => text.replace(/([a-z])'([a-z])/g, '$1’$2');
 
 export const typo = (text: string) =>
@@ -29,6 +31,7 @@ export const typo = (text: string) =>
 			...rules,
 			degreeSigns,
 			numberRanges,
+			dimensions,
 			numberOrdinals,
 			numberSeparators,
 			apostrophes,
