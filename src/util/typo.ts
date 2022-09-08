@@ -15,6 +15,8 @@ import rules, {
 
 const { hairspace } = definitions;
 
+type MaybeText = string | undefined | null;
+
 const degreeSigns = (text: string) =>
 	text.replace(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}˚C`);
 
@@ -25,7 +27,7 @@ const dimensions = (text: string) => text.replace(/\b(\d+)x(\d+)\b/g, '$1×$2');
 
 const apostrophes = (text: string) => text.replace(/([a-z])'([a-z])/g, '$1’$2');
 
-export const typo = (text: string) =>
+export const typo = (text: MaybeText) =>
 	richtypo(
 		[
 			...rules,
@@ -36,10 +38,10 @@ export const typo = (text: string) =>
 			numberSeparators,
 			apostrophes,
 		],
-		text
+		text || ''
 	);
 
-export const typoLite = (text: string) =>
+export const typoLite = (text: MaybeText) =>
 	richtypo(
 		[
 			// Common rules
@@ -55,10 +57,11 @@ export const typoLite = (text: string) =>
 			quotes,
 			// Custom rules
 			degreeSigns,
+			dimensions,
 			numberRanges,
 			numberOrdinals,
 			numberSeparators,
 			apostrophes,
 		],
-		text
+		text || ''
 	);

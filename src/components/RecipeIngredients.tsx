@@ -39,7 +39,8 @@ const Paragraph: ComponentType<any> = ({ children }) => {
 	return children;
 };
 
-const splitOutComment = (ingredient = '') => ingredient.split(/\s*;\s*/);
+const splitOutComment = (ingredient: string | undefined | null) =>
+	(ingredient || '').split(/\s*;\s*/);
 
 const parseMdxIngredient = (children: string | string[]) => {
 	if (Array.isArray(children)) {
