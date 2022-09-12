@@ -15,7 +15,7 @@ export const SEASONS: Record<string, Month[]> = {
 	[`elderberry`]: [Month.September, Month.October],
 	[`quince`]: [Month.September, Month.October, Month.November],
 	[`watermelon`]: [Month.September],
-	[`pumpkin`]: [Month.October, Month.November],
+	[`pumpkin`]: [Month.September, Month.October, Month.November],
 	[`grape`]: [Month.September, Month.October],
 	[`plum`]: [Month.July, Month.August, Month.September],
 	[`carrot`]: [
