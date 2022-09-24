@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'tamia-gatsby-link';
-import { Stack, Text } from 'tamia';
+import { Stack } from 'tamia';
+import { Logo } from './Logo';
 import { Menu } from './Menu';
 
 type Props = {
-	title?: string;
 	url: string;
 };
 
-export function Header({ title = 'Tacohuaco', url }: Props) {
+export function Header({ url }: Props) {
 	return (
 		<Stack
 			as="header"
@@ -16,9 +15,7 @@ export function Header({ title = 'Tacohuaco', url }: Props) {
 			justifyContent="space-between"
 			direction={['column', 'row']}
 		>
-			<Text variant="menu" fontWeight="bold">
-				<Link href="/">{title}</Link>
-			</Text>
+			<Logo />
 			<Menu current={url} />
 		</Stack>
 	);
