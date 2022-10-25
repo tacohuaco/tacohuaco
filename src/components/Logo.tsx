@@ -41,8 +41,8 @@ export function Logo() {
 	return (
 		<Text variant="menu" fontWeight="bold">
 			<Link href="/">
-				<Stack gap="s" direction="row">
-					<Box mt={-11}>
+				<Stack as="span" gap="s" direction="row">
+					<Box as="span" mt={-11}>
 						<Taco height={34} {...getTacoProps()} />
 					</Box>
 					Tacohuaco
