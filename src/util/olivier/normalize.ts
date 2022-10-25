@@ -6,7 +6,7 @@ import {
 	UNITS,
 } from './langs/en/units';
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
-import { WORDS_TO_NUMBERS } from './langs/en/translations';
+import { ARTICLES, WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
 import { orderBy } from 'lodash';
 
@@ -32,6 +32,8 @@ const CONVERSIONS: {
 	},
 ];
 
+const isArticle = (s: string) => ARTICLES.includes(s.toLowerCase());
+
 export function normalizeAmountValue(amount?: Amount): Amount | undefined {
 	if (!amount) {
 		return undefined;
@@ -39,6 +41,10 @@ export function normalizeAmountValue(amount?: Amount): Amount | undefined {
 
 	if (typeof amount === 'number') {
 		return amount;
+	}
+
+	if (isArticle(amount)) {
+		return 1;
 	}
 
 	const numberMaybe = numericQuantity(amount.replace(',', '.'));
@@ -132,7 +138,6 @@ function normalizeOption(ingredient: Ingredient): Ingredient {
 		comment: ingredient.comment,
 	};
 
-	// console.log('🦆', ingredient, '->', x);
 	return x;
 }
 

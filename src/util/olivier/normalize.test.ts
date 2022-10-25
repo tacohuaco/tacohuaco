@@ -196,6 +196,20 @@ test.each([
 			unit: 'g',
 		},
 	],
+	[
+		{
+			name: 'beans',
+			minAmount: 'a',
+			maxAmount: 'a',
+			unit: 'handful',
+		},
+		{
+			name: 'bean',
+			minAmount: 1,
+			maxAmount: 1,
+			unit: 'handful',
+		},
+	],
 ])('normalize ingredient: %s', (source, result) => {
 	expect(normalize(castArray(source))).toEqual(castArray(result));
 });
