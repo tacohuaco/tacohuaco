@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text, TextContent as TextContentBase } from 'tamia';
 
-type Props = React.ComponentProps<typeof Text> & {
-	children: React.ReactNode;
-};
+type TextProps = React.ComponentProps<typeof Text>;
+type Props = TextProps &
+	Pick<TextProps['sx'], 'fontsize' | 'fontStyle'> & {
+		children: React.ReactNode;
+	};
 
-const Container = styled(TextContentBase)<{ fontSize: string }>`
+const Container = styled(TextContentBase)<Props>`
 	${(p) =>
 		p.fontSize === 's' &&
 		`
@@ -29,10 +31,15 @@ const Container = styled(TextContentBase)<{ fontSize: string }>`
 	}
 `;
 
-export function TextContent({ children, ...props }: Props) {
+export function TextContent({
+	children,
+	fontSize,
+	fontStyle,
+	...props
+}: Props) {
 	return (
-		<Text as="div" {...props}>
-			<Container {...props}>{children}</Container>
+		<Text as="div" {...props} sx={{ fontSize, fontStyle }}>
+			<Container fontSize={fontSize}>{children}</Container>
 		</Text>
 	);
 }

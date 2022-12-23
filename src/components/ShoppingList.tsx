@@ -69,7 +69,13 @@ export function ShoppingList({ recipes }: Props) {
 				return (
 					<form key={group || 'misc'}>
 						<Heading level={3}>{getGroupName(group)}</Heading>
-						<Stack as="fieldset" gap="s" direction="column" m={0} border="none">
+						<Stack
+							as="fieldset"
+							gap="s"
+							direction="column"
+							m={0}
+							sx={{ border: 'none' }}
+						>
 							{ingredients.map((ingredient) => {
 								const { name, amount, suffix, modifier } = printOption(
 									formatOption(ingredient)

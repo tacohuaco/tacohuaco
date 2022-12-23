@@ -1,5 +1,4 @@
 import React, { forwardRef, ComponentProps, ReactElement } from 'react';
-import styled from 'styled-components';
 import Tippy from '@tippyjs/react/headless';
 import { Box, Text } from 'tamia';
 
@@ -11,14 +10,47 @@ type Props = {
 
 const ARROW_SIZE = '0.25rem';
 
-const Arrow = styled(Box)`
-	border-left: ${ARROW_SIZE} solid transparent;
-	border-right: ${ARROW_SIZE} solid transparent;
-	border-bottom: ${ARROW_SIZE} solid;
-`;
+const Container = (props: ComponentProps<typeof Text>) => (
+	<Text
+		tabIndex={-1}
+		textAlign="center"
+		sx={{
+			px: '0.3rem',
+			py: '0.1rem',
+			fontFamily: 'ui',
+			fontSize: 'xs',
+			fontWeight: 'base',
+			color: 'bg',
+			borderRadius: 'base',
+			bg: 'accent',
+		}}
+		{...props}
+	/>
+);
+
+const Arrow = () => (
+	<Box
+		as="span"
+		data-popper-arrow=""
+		sx={{
+			top: `-${ARROW_SIZE}`,
+			color: 'accent',
+			position: 'relative',
+			borderLeft: `${ARROW_SIZE} solid transparent`,
+			borderRight: `${ARROW_SIZE} solid transparent`,
+			borderBottom: `${ARROW_SIZE} solid`,
+		}}
+	/>
+);
 
 const DefaultTrigger = forwardRef((props: ComponentProps<typeof Box>, ref) => (
-	<Box ref={ref} as="button" border="none" bg="transparent" p={0} {...props} />
+	<Box
+		ref={ref}
+		as="button"
+		p={0}
+		sx={{ border: 'none', bg: 'transparent' }}
+		{...props}
+	/>
 ));
 
 export function Tooltip({ value, children, renderTrigger = true }: Props) {
@@ -26,28 +58,10 @@ export function Tooltip({ value, children, renderTrigger = true }: Props) {
 		<Tippy
 			placement="bottom"
 			render={(attrs) => (
-				<Text
-					tabIndex={-1}
-					px="0.3rem"
-					py="0.1rem"
-					textAlign="center"
-					fontFamily="ui"
-					fontSize="xs"
-					fontWeight="base"
-					color="bg"
-					borderRadius="base"
-					bg="accent"
-					{...attrs}
-				>
-					<Arrow
-						as="span"
-						color="accent"
-						position="relative"
-						top={`-${ARROW_SIZE}`}
-						data-popper-arrow=""
-					/>
+				<Container {...attrs}>
+					<Arrow />
 					{value}
-				</Text>
+				</Container>
 			)}
 		>
 			{renderTrigger ? <DefaultTrigger>{children}</DefaultTrigger> : children}

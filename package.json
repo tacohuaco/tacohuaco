@@ -30,7 +30,6 @@
     "@graphcms/react-image": "^1.1.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@styled-system/css": "^5.1.5",
     "@tippyjs/react": "^4.2.6",
     "downshift": "^6.1.9",
     "format-quantity": "^1.1.0",
@@ -45,7 +44,7 @@
     "react-group": "^3.0.2",
     "sentence-case": "^3.0.4",
     "styled-components": "^5.3.5",
-    "tamia": "^5.13.1",
+    "tamia": "^6.0.18",
     "tamia-gatsby-link": "^1.0.6"
   },
   "devDependencies": {

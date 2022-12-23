@@ -103,7 +103,6 @@ const theme = {
 	listMargin: '1.2rem',
 	focusOutlineOffset: '2px',
 	page: {
-		bodyMaxWidth: null,
 		bodyPaddingX: 0,
 		bodyPaddingY: 0,
 		contentMaxWidth: '59rem',

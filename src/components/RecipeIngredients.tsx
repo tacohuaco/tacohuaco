@@ -87,7 +87,7 @@ const IngredientItem: ComponentType<any> = ({ children }) => {
 
 	return (
 		<IngredientListItem>
-			<Text as="div" variant="small" lineHeight="small">
+			<Text as="div" variant="small" sx={{ lineHeight: 'small' }}>
 				<Group
 					separator={
 						<>

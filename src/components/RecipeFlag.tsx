@@ -50,17 +50,19 @@ const Circle = ({
 	<TooltipWithLink href={href} title={title}>
 		<Text
 			as="div"
-			width="2em"
-			height="2em"
-			p="0.3em"
-			textAlign="center"
-			fontFamily="ui"
-			fontSize="xs"
-			fontWeight="ui"
-			color="bg"
-			borderWidth="0.2em"
-			borderRadius="round"
-			backgroundColor={color}
+			sx={{
+				width: '2em',
+				height: '2em',
+				p: '0.3em',
+				textAlign: 'center',
+				fontFamily: 'ui',
+				fontSize: 'xs',
+				fontWeight: 'ui',
+				color: 'bg',
+				borderWidth: '0.2em',
+				borderRadius: 'round',
+				backgroundColor: color,
+			}}
 			{...props}
 		>
 			{children}
@@ -72,21 +74,25 @@ const Round = ({
 	children,
 	title,
 	href,
+	color,
 	...props
 }: React.ComponentProps<typeof Text> & HrefProp) => (
 	<TooltipWithLink href={href} title={title}>
 		<Text
 			as="div"
-			width="2em"
-			height="2em"
-			p="0.1em"
-			textAlign="center"
-			fontFamily="ui"
-			fontSize="xs"
-			fontWeight="ui"
-			borderStyle="solid"
-			borderWidth="0.2em"
-			borderRadius="round"
+			sx={{
+				width: '2em',
+				height: '2em',
+				p: '0.1em',
+				textAlign: 'center',
+				fontFamily: 'ui',
+				fontSize: 'xs',
+				fontWeight: 'ui',
+				borderStyle: 'solid',
+				borderWidth: '0.2em',
+				borderRadius: 'round',
+				color,
+			}}
 			{...props}
 		>
 			{children}

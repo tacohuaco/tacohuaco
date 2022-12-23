@@ -23,7 +23,7 @@ export function RecipeCard({
 				<Stack gap="s" direction="column">
 					<Box>
 						<Box mx={['-m', 0]}>
-							<Frame ratio={6 / 9} bg="light">
+							<Frame ratio={6 / 9} sx={{ bg: 'light' }}>
 								{images.length > 0 && (
 									<Image
 										src={getImageUrl(images[0].url, {
@@ -36,7 +36,10 @@ export function RecipeCard({
 							</Frame>
 						</Box>
 					</Box>
-					<Text fontSize="xl" fontFamily="heading" color="inherit" as="p">
+					<Text
+						as="p"
+						sx={{ fontSize: 'xl', fontFamily: 'heading', color: 'inherit' }}
+					>
 						{title}
 					</Text>
 				</Stack>

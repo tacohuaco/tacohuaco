@@ -24,5 +24,3 @@ Monochrome taco:
 ```tsx
 <Taco palette="mono" eyes="cross" mouth="squiggle" />
 ```
-
-

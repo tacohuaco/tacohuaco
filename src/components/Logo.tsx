@@ -42,7 +42,7 @@ export function Logo() {
 		<Text variant="menu" fontWeight="bold">
 			<Link href="/">
 				<Stack as="span" gap="s" direction="row">
-					<Box as="span" mt={-11}>
+					<Box as="span" sx={{ mt: -11 }}>
 						<Taco height={34} {...getTacoProps()} />
 					</Box>
 					Tacohuaco

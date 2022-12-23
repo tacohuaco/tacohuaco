@@ -7,15 +7,17 @@ export function Subscription() {
 		<Box
 			mx={['-m', 0]}
 			p="l"
-			backgroundColor="accent"
-			backgroundImage="url(/raspberries.jpg)"
-			backgroundPosition="center"
+			sx={{
+				backgroundColor: 'accent',
+				backgroundImage: 'url(/raspberries.jpg)',
+				backgroundPosition: 'center',
+			}}
 		>
 			<Stack
 				p="m"
 				gap="m"
-				backgroundColor="hsla(0,100%,100%,0.8)"
-				css={{
+				sx={{
+					backgroundColor: 'hsla(0,100%,100%,0.8)',
 					backdropFilter: 'blur(1px)',
 				}}
 			>

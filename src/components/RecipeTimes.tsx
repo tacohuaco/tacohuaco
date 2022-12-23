@@ -10,7 +10,7 @@ type Props = {
 };
 
 const MoonIcon = () => (
-	<Box as="span" color="moon" verticalAlign="0.15ex">
+	<Box as="span" sx={{ color: 'moon', verticalAlign: '0.15ex' }}>
 		<Icon icon="moon" size="1em" />
 	</Box>
 );
