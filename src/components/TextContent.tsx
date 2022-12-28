@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Text, TextContent as TextContentBase } from 'tamia';
 
 type TextProps = React.ComponentProps<typeof Text>;
-type Props = TextProps &
-	Pick<TextProps['sx'], 'fontsize' | 'fontStyle'> & {
-		children: React.ReactNode;
-	};
+type Props = TextProps & {
+	fontSize?: TextProps['sx']['fontSize'];
+	children?: React.ReactNode;
+};
 
 const Container = styled(TextContentBase)<Props>`
 	${(p) =>

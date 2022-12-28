@@ -1,24 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { ComponentProps, ReactNode } from 'react';
 import { Stack, Text } from 'tamia';
-import styled from 'styled-components';
 
 type Props = {
-	children: ReactNode;
+	children?: ReactNode;
 };
 
-const Checkbox = styled.input.attrs({ type: 'checkbox' })``;
-const Label = styled.label``;
-const LabelText = styled(Text)`
-	input:checked + & {
-		text-decoration: line-through;
-	}
-`;
+const LabelText = (props: ComponentProps<typeof Text>) => (
+	<Text
+		as="div"
+		sx={{
+			'input:checked + &': {
+				textDecoration: 'line-through',
+			},
+		}}
+		{...props}
+	/>
+);
 
 export function TodoItem({ children }: Props) {
 	return (
-		<Stack gap="xs" direction="row" as={Label}>
-			<Checkbox />
-			<LabelText as="div">{children}</LabelText>
+		<Stack as="label" gap="xs" direction="row">
+			<input type="checkbox" />
+			<LabelText>{children}</LabelText>
 		</Stack>
 	);
 }
