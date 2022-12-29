@@ -3,7 +3,6 @@ import { Container, Stack } from 'tamia';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { PageContainer } from '../components/PageContainer';
-import { Subscription } from '../components/Subscription';
 import Base from './Base';
 
 type Props = {
@@ -22,9 +21,6 @@ const Page = ({ children, url }: Props) => {
 							<Header url={url} />
 							{children}
 						</Stack>
-						<aside aria-label="Newsletter">
-							<Subscription />
-						</aside>
 						<Footer />
 					</Stack>
 				</Container>

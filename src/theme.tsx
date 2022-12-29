@@ -1,4 +1,4 @@
-const baseFont = 'LeMondeJournal, Georgia, serif';
+const baseFont = 'ProximaNova, Helvetica Neue, sans-serif';
 const headingFont = 'AzoSans, Helvetica Neue, sans-serif';
 const space = {
 	0: 0,
@@ -47,7 +47,7 @@ const colors = {
 	light: '#eee6dd',
 	hover: '#dc3737',
 	focus: '#dc3737',
-	accent: '#d05656',
+	accent: '#c94a4a',
 	moon: '#7277c0',
 	selection: 'rgb(255,237,117)',
 	selectionAlpha: 'rgba(255,237,117,0.25)',
@@ -58,12 +58,20 @@ const borders = {
 	thin: '1px solid',
 };
 const radii = {
-	base: '0.15rem',
-	button: '0.25rem',
+	base: '0',
+	button: '0',
 	round: '99999px',
 };
 const shadows = {
-	popover: '0 6px 15px -2px hsla(0,0%,0%,0.25)',
+	popover: '0 6px 20px -2px hsla(0,0%,0%,0.2)',
+	menu: `5px 5px 0 -2px ${colors.bg}, 5px 5px 0 ${colors.accent}`,
+	input: `5px 5px 0 ${colors.accent}`,
+	heading: `2px 2px 0 ${colors.light}`,
+};
+const transitions = {
+	expand: '300ms ease-in-out',
+	fade: '0.15s ease-out',
+	hover: '0.1s ease-in',
 };
 const fontWeights = {
 	base: 'normal',
@@ -120,6 +128,7 @@ const theme = {
 	borders,
 	radii,
 	shadows,
+	transitions,
 	breakpoints,
 	headingStyles: {
 		1: {
@@ -130,7 +139,11 @@ const theme = {
 		},
 		2: {
 			...headingBaseStyles,
+			color: 'dim',
 			fontSize: 'xl',
+			textTransform: 'uppercase',
+			letterSpacing: 'uppercase',
+			textShadow: 'heading',
 		},
 		3: {
 			...headingBaseStyles,

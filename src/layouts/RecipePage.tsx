@@ -36,6 +36,7 @@ import { IngredientsWithMeta } from '../types/IngredientsWithMeta';
 import { Subrecipe } from '../types/Subrecipe';
 import { Asset } from '../types/Asset';
 import Page from './Page';
+import { RecipeScale } from '../components/RecipeScale';
 
 type Props = Pick<
 	Queries.GraphCMS_Recipe,
@@ -291,29 +292,14 @@ export default function RecipePage({
 										<Heading level={2}>Ingredients</Heading>
 										{yields && (
 											<div>
-												<Stack
-													direction="row"
-													gap="s"
-													alignItems="center"
-													minWidth="auto"
-												>
-													<Button
-														onClick={() =>
-															setCurrentAmout((x) => getPrevAmount(x))
-														}
-														aria-label="Less"
-													>
-														–
-													</Button>
-													<Button
-														onClick={() =>
-															setCurrentAmout((x) => getNextAmount(x))
-														}
-														aria-label="More"
-													>
-														+
-													</Button>
-												</Stack>
+												<RecipeScale
+													onLess={() =>
+														setCurrentAmout((x) => getPrevAmount(x))
+													}
+													onMore={() =>
+														setCurrentAmout((x) => getNextAmount(x))
+													}
+												/>
 											</div>
 										)}
 									</Stack>

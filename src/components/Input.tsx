@@ -16,6 +16,7 @@ export const Input = styled.input`
 
 	&:focus {
 		outline: 0;
-		border-color: ${(p) => p.theme.colors.hover};
+		border-color: ${(p) => p.theme.colors.accent};
+		box-shadow: ${(p) => p.theme.shadows.input};
 	}
 `;

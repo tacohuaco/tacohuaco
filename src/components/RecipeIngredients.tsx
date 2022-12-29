@@ -1,7 +1,6 @@
-import React, { ComponentType } from 'react';
-import styled from 'styled-components';
+import React, { ComponentProps, ComponentType } from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { Text } from 'tamia';
+import { Box, Text } from 'tamia';
 import { Link } from 'tamia-gatsby-link';
 import { SubrecipeRenderer } from './SubrecipeRenderer';
 import { useRecipe, findIngredient } from './RecipeContext';
@@ -19,16 +18,22 @@ type Props = React.ComponentProps<typeof Text> & {
 	children: React.ReactNode;
 };
 
-export const IngredientListItem = styled.li`
-	&& {
-		margin-left: 0;
-		padding-left: 0;
-		margin-bottom: ${(p) => p.theme.space.m};
-	}
-	&::before {
-		display: none;
-	}
-`;
+export const IngredientListItem = (props: ComponentProps<typeof Box>) => (
+	<Box
+		as="li"
+		sx={{
+			'&&': {
+				marginLeft: 0,
+				paddingLeft: 0,
+				marginBottom: 'm',
+			},
+			'::before': {
+				display: 'none',
+			},
+		}}
+		{...props}
+	/>
+);
 
 const Paragraph: ComponentType<any> = ({ children }) => {
 	if (children?.props?.href && children?.props?.children === '#') {
@@ -130,8 +135,10 @@ export function RecipeIngredients({ children, ...props }: Props) {
 	return (
 		<Text
 			as="div"
-			fontSize={['m', 'm', 'm', 's']}
-			lineHeight="large"
+			sx={{
+				fontSize: ['m', 'm', 'm', 's'],
+				lineHeight: 'large',
+			}}
 			{...props}
 		>
 			<MDXProvider components={components}>{children}</MDXProvider>

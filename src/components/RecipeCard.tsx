@@ -6,6 +6,8 @@ import { getImageUrl } from '../util/client';
 import { RecipeFlags } from './RecipeFlags';
 import { RecipeTimes } from './RecipeTimes';
 
+export const GatsbyLink = Box.withComponent(Link);
+
 export function RecipeCard({
 	flags,
 	margaritasFavorite,
@@ -19,10 +21,22 @@ export function RecipeCard({
 }: Queries.RecipeMetaFragment & ComponentProps<typeof Stack>) {
 	return (
 		<Stack {...rest} gap="s" direction="column">
-			<Link href={`/recipes/${slug}/`}>
+			<GatsbyLink
+				href={`/recipes/${slug}/`}
+				sx={{
+					transition: 'hover',
+					transitionProperty: 'color',
+					':hover .RecipeCard__imageContainer': {
+						boxShadow: [null, 'input'],
+						transition: 'hover',
+						transitionProperty: 'box-shadow',
+						willChange: 'box-shadow',
+					},
+				}}
+			>
 				<Stack gap="s" direction="column">
 					<Box>
-						<Box mx={['-m', 0]}>
+						<Box mx={['-m', 0]} className="RecipeCard__imageContainer">
 							<Frame ratio={6 / 9} sx={{ bg: 'light' }}>
 								{images.length > 0 && (
 									<Image
@@ -43,7 +57,7 @@ export function RecipeCard({
 						{title}
 					</Text>
 				</Stack>
-			</Link>
+			</GatsbyLink>
 			<Stack gap="s" direction="row" alignItems="center">
 				<RecipeFlags
 					flags={flags}

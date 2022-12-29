@@ -17,6 +17,8 @@ const SearchInput = styled(Input)`
 	height: auto;
 	padding: ${(p) => p.theme.space.s};
 	font-size: ${(p) => p.theme.fontSizes.l};
+	transition: ${(p) => p.theme.transitions.hover};
+	transition-property: all;
 	&::-webkit-search-decoration,
 	&::-webkit-search-cancel-button,
 	&::-webkit-search-results-button,
@@ -34,14 +36,15 @@ const SearchMenu = styled.div`
 	z-index: 99;
 	left: 0;
 	right: 0;
-	margin-top: ${(p) => p.theme.space.xs};
+	margin-top: ${(p) => p.theme.space.s};
 	padding: ${(p) => p.theme.space.xs} 0;
 	background-color: ${(p) => p.theme.colors.bg};
-	border: ${(p) => p.theme.borders.thin};
-	border-color: ${(p) => p.theme.colors.light};
+	border: ${(p) => p.theme.borders.input};
+	border-color: ${(p) => p.theme.colors.accent};
 	border-radius: ${(p) => p.theme.radii.button};
 	box-shadow: ${(p) => p.theme.shadows.popover};
-	transition: all 0.15s ease-out;
+	transition: ${(p) => p.theme.transitions.fade};
+	transition-property: all;
 	will-change: opacity;
 
 	&:empty {
@@ -128,9 +131,6 @@ export function SearchForm({ items, value, onChange }: Props) {
 						))}
 				</SearchMenu>
 			</SearchCombobox>
-			<VisuallyHidden as="div">
-				<button type="submit">Search</button>
-			</VisuallyHidden>
 		</form>
 	);
 }

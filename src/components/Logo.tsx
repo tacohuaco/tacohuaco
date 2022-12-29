@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import { random, sample } from 'lodash';
+import { Link } from 'gatsby';
 import { Box, Stack, Text } from 'tamia';
-import { Link } from 'tamia-gatsby-link';
 import {
 	Taco,
 	TORTILLAS,
@@ -37,17 +37,45 @@ const getTacoProps = (): ComponentProps<typeof Taco> => {
 	};
 };
 
+export const GatsbyLink = Text.withComponent(Link);
+
 export function Logo() {
 	return (
-		<Text variant="menu" fontWeight="bold">
-			<Link href="/">
-				<Stack as="span" gap="s" direction="row">
-					<Box as="span" sx={{ mt: -11 }}>
-						<Taco height={34} {...getTacoProps()} />
-					</Box>
+		<GatsbyLink
+			to="/"
+			variant="menu"
+			sx={{
+				':link,:visited': {
+					transition: 'hover',
+					transitionProperty: 'all',
+					marginTop: '-s',
+					padding: 'xs',
+					color: 'accent',
+					bg: 'bg',
+					fontWeight: 'bold',
+					textDecoration: 'none',
+				},
+				':active .Logo__text, :hover .Logo__text': {
+					border: 'input',
+					borderWidth: '0 0 2px 0',
+				},
+				':focus': {
+					outline: 'input',
+					outlineColor: 'accent',
+				},
+			}}
+		>
+			<Stack as="span" gap="s" direction="row" mt="xs">
+				<Box as="span" sx={{ mt: -11 }}>
+					<Taco height={34} {...getTacoProps()} />
+				</Box>
+				<Box
+					sx={{ transition: 'hover', transitionProperty: 'all' }}
+					className="Logo__text"
+				>
 					Tacohuaco
-				</Stack>
-			</Link>
-		</Text>
+				</Box>
+			</Stack>
+		</GatsbyLink>
 	);
 }

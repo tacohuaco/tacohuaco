@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'tamia-gatsby-link';
+import { Link } from 'gatsby';
 import { Text, Stack } from 'tamia';
 
 type Props = {
@@ -18,10 +18,6 @@ const ITEMS: Item[] = [
 		title: 'Recipes',
 		href: '/recipes/',
 	},
-	// {
-	// 	title: 'Ingredients',
-	// 	href: '/ingredients/',
-	// },
 	{
 		title: 'Shops',
 		href: '/shops/',
@@ -32,28 +28,76 @@ const ITEMS: Item[] = [
 	},
 ];
 
-const isCurrentItem = (
-	current: string,
-	item: Pick<Item, 'href' | 'isCurrent'>
-): boolean =>
-	item.isCurrent ? item.isCurrent(current) : current.startsWith(item.href);
+export const GatsbyLink = Text.withComponent(Link);
+
+const MenuItem = ({
+	href,
+	title,
+	isCurrent,
+}: {
+	href: string;
+	title: string;
+	isCurrent: boolean;
+}) => (
+	<li>
+		<GatsbyLink
+			to={href}
+			variant="menu"
+			sx={{
+				':link,:visited': {
+					transition: 'hover',
+					transitionProperty: 'all',
+					padding: 'xs',
+					color: 'accent',
+					bg: 'bg',
+					textDecoration: 'none',
+					borderRadius: 'button',
+					...(isCurrent
+						? {
+								fontWeight: 'bold',
+								border: 'input',
+								borderColor: 'accent',
+								boxShadow: 'menu',
+						  }
+						: {
+								paddingBottom: 'xs',
+								margin: 'calc(0.25rem + 2px)',
+						  }),
+				},
+				':active,:hover,:focus': {
+					...(isCurrent
+						? { color: 'bg', bg: 'accent' }
+						: {
+								border: 'input',
+								borderWidth: '0 0 2px 0',
+						  }),
+				},
+				':focus': {
+					...(isCurrent
+						? { outline: 0 }
+						: {
+								border: 'none',
+								outline: 'input',
+								outlineColor: 'accent',
+						  }),
+				},
+			}}
+		>
+			{title}
+		</GatsbyLink>
+	</li>
+);
 
 export function Menu({ current }: Props) {
 	return (
 		<Stack as="ul" gap="m" direction={['column', 'row']}>
-			{ITEMS.map(({ title, hint, href, isCurrent }) => (
-				<Text
+			{ITEMS.map(({ title, href }) => (
+				<MenuItem
 					key={href}
-					as="li"
-					variant="menu"
-					fontWeight={
-						isCurrentItem(current, { href, isCurrent }) ? 'bold' : undefined
-					}
-				>
-					<Link href={href} title={hint} aria-label={hint}>
-						{title}
-					</Link>
-				</Text>
+					href={href}
+					title={title}
+					isCurrent={current.startsWith(href)}
+				/>
 			))}
 		</Stack>
 	);

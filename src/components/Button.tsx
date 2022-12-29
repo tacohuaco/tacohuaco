@@ -4,13 +4,15 @@ export const Button = styled.button`
 	display: inline-block;
 	width: 1.6rem;
 	height: 1.6rem;
-	padding: 0 ${(p) => p.theme.space.xs} 0.2rem;
-	border: 1px solid;
-	border-radius: ${(p) => p.theme.radii.button};
+	padding: 0;
+	border: ${(p) => p.theme.borders.input};
+	border-color: ${(p) => p.theme.colors.accent};
+	border-radius: ${(p) => p.theme.radii.round};
 	text-align: center;
 	font-family: ${(p) => p.theme.fonts.base};
 	font-size: ${(p) => p.theme.fontSizes.m};
-	color: ${(p) => p.theme.colors.base};
+	line-height: 1;
+	color: ${(p) => p.theme.colors.accent};
 	background: transparent;
 
 	@media (any-hover: hover) {
@@ -22,7 +24,8 @@ export const Button = styled.button`
 	&:hover,
 	&:active {
 		cursor: pointer;
-		color: ${(p) => p.theme.colors.hover};
+		color: ${(p) => p.theme.colors.bg};
+		background-color: ${(p) => p.theme.colors.accent};
 	}
 
 	&:focus {

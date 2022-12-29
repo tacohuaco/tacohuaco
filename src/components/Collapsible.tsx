@@ -11,35 +11,30 @@ interface CollapsibleProps {
 
 const Wrapper = styled.div`
 	.ReactCollapse--collapse {
-		transition: height 300ms ease-in-out;
+		transition: ${(p) => p.theme.transitions.expand};
+		transition-property: height;
 	}
 `;
 
 export function Collapsible({ id, label, children }: CollapsibleProps) {
-	const [isButtonCollapseOpen, setIsButtonCollapseOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-	const onClick = useCallback(
-		() => setIsButtonCollapseOpen(!isButtonCollapseOpen),
-		[isButtonCollapseOpen]
-	);
+	const onClick = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
 	return (
 		<Wrapper>
 			<Link
 				as="button"
 				aria-controls={id}
-				aria-expanded={isButtonCollapseOpen}
+				aria-expanded={isOpen}
 				onClick={onClick}
 				type="button"
 			>
 				{label}
 			</Link>
-			<Collapse
-				isOpened={isButtonCollapseOpen}
-				initialStyle={{ overflow: 'hidden' }}
-			>
+			<Collapse isOpened={isOpen} initialStyle={{ overflow: 'hidden' }}>
 				<Box id={id} mt="s">
-					{children}
+					{isOpen && children}
 				</Box>
 			</Collapse>
 		</Wrapper>

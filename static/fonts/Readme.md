@@ -1,4 +1,4 @@
 # Fonts
 
 - [Azo Sans by Rui Abreu](https://fonts.adobe.com/fonts/azo-sans)
-- [Le Monde Journal by Jean François Porchez](https://fonts.adobe.com/fonts/le-monde-journal)
+- [Proxima Nova by Mark Simonson](https://fonts.adobe.com/fonts/proxima-nova)
