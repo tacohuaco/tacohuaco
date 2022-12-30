@@ -53,7 +53,7 @@ const colors = {
 	selectionAlpha: 'rgba(255,237,117,0.25)',
 };
 const borders = {
-	focus: '3px solid',
+	focus: '2px solid',
 	input: '2px solid',
 	thin: '1px solid',
 };
