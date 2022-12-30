@@ -28,7 +28,6 @@ import {
 } from '../util/olivier';
 import { asList } from '../util/client';
 import { Collapsible } from '../components/Collapsible';
-import { Button } from '../components/Button';
 import { SubrecipesToTry } from '../components/SubrecipesToTry';
 import { ShoppingList } from '../components/ShoppingList';
 import { RecipeList } from '../components/RecipeList';
@@ -288,7 +287,7 @@ export default function RecipePage({
 								gridTemplateColumns={['1fr', '1fr', '1.2fr 2.8fr', '1fr 3fr']}
 							>
 								<Stack gap="m">
-									<Stack direction="row" gap="s" alignItems="center">
+									<Stack direction="row" gap={['m', 's']} alignItems="center">
 										<Heading level={2}>Ingredients</Heading>
 										{yields && (
 											<div>
