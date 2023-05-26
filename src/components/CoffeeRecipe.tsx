@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Heading, Text } from 'tamia';
-import prettyMilliseconds from 'pretty-ms';
+import parseMs from 'parse-ms';
 import { CoffeeRecipe as CoffeeRecipeType, Step, Action } from '../util/cafe';
 import Group from 'react-group';
 
@@ -8,8 +8,16 @@ type Props = {
 	recipe: CoffeeRecipeType;
 };
 
-const formatInterval = (seconds: number) =>
-	prettyMilliseconds(seconds * 1000, { verbose: true });
+const formatDuration = (durationSec: number) => {
+	const { minutes, seconds } = parseMs(durationSec * 1000);
+	if (minutes) {
+		return `${minutes} minutes`;
+	}
+	if (seconds) {
+		return `${seconds} seconds`;
+	}
+	return '';
+};
 
 const getCoffeAmount = (ratio: number, waterAmount: number) =>
 	Math.floor(waterAmount / ratio);
@@ -57,7 +65,7 @@ const getWaitText = (step: Step) => {
 	if (step.time) {
 		return (
 			<>
-				Wait <b>{formatInterval(step.time)}</b>.
+				Wait <b>{formatDuration(step.time)}</b>.
 			</>
 		);
 	}
