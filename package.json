@@ -31,7 +31,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@tippyjs/react": "^4.2.6",
-    "downshift": "^6.1.9",
+    "downshift": "^6.1.12",
     "format-quantity": "^1.1.0",
     "install": "^0.13.0",
     "lunr": "^2.3.9",
