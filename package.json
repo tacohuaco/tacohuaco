@@ -18,7 +18,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "browserslist": [
     ">1%",
@@ -65,14 +65,14 @@
     "eslint-config-tamia": "^8.0.1",
     "eslint-plugin-react": "^7.31.6",
     "fs-extra": "^10.1.0",
-    "gatsby": "^4.20.0",
-    "gatsby-plugin-canonical-urls": "^4.20.0",
-    "gatsby-plugin-feed": "^4.20.0",
+    "gatsby": "^4.25.7",
+    "gatsby-plugin-canonical-urls": "^4.25.0",
+    "gatsby-plugin-feed": "^4.25.0",
     "gatsby-plugin-goatcounter": "^0.4.0",
     "gatsby-plugin-image": "2.20.0",
-    "gatsby-plugin-netlify": "^5.0.1",
-    "gatsby-plugin-sitemap": "^5.20.0",
-    "gatsby-plugin-styled-components": "^5.20.0",
+    "gatsby-plugin-netlify": "^5.1.1",
+    "gatsby-plugin-sitemap": "^5.25.0",
+    "gatsby-plugin-styled-components": "^5.25.0",
     "gatsby-source-graphcms": "^2.8.0",
     "glob": "^8.0.3",
     "husky": "^8.0.1",
