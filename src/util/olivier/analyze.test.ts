@@ -43,6 +43,21 @@ test.each([
 	],
 	[
 		{
+			name: 'chicken breast',
+			minAmount: 1,
+			maxAmount: 2,
+		},
+		{
+			name: 'chicken breast',
+			kind: IngredientKind.Poultry,
+			hasDairy: false,
+			hasGluten: false,
+			hasSugar: false,
+			seasons: [],
+		},
+	],
+	[
+		{
 			name: 'egg',
 			minAmount: 2,
 			maxAmount: 3,

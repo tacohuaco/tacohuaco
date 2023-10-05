@@ -29,8 +29,20 @@ export const DAIRIES = [
 	'yogurt',
 	'milk chocolate',
 ];
-export const POULTRIES = ['chicken', 'chicken stock'];
-export const FISHES = ['salmon', 'fish sauce', 'oyster sauce', 'kimchi paste'];
+export const ACTUAL_FISHES = ['salmon'];
+export const FISHES = [
+	...ACTUAL_FISHES,
+	'fish sauce',
+	'oyster sauce',
+	'kimchi paste',
+];
+export const POULTRIES = [
+	'chicken',
+	'chicken stock',
+	'chicken leg',
+	'chicken thigh',
+	'chicken breast',
+];
 export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage', 'meat'];
 export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
 
@@ -161,17 +173,7 @@ export const GROUPS = {
 		'almond',
 		'pecan',
 	],
-	Meat: [
-		'chicken leg',
-		'chicken thigh',
-		'chicken breast',
-		'chicken',
-		'pork',
-		'beef',
-		'salmon',
-		'sausage',
-		'ham',
-	],
+	Meat: [...POULTRIES, ...ACTUAL_FISHES, ...MEATS],
 	Dairy: [...DAIRIES, 'egg'],
 	Baking: [
 		'buckwheat flour',
