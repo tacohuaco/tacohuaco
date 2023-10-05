@@ -1,9 +1,13 @@
 module.exports = {
 	preset: 'ts-jest',
 	testEnvironment: 'node',
-	globals: {
-		'ts-jest': {
-			isolatedModules: true,
-		},
+	transform: {
+		'^.+\\.tsx?$': [
+			'ts-jest',
+			{
+				// Disable type checking
+				isolatedModules: true,
+			},
+		],
 	},
 };
