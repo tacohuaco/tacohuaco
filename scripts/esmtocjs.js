@@ -45,7 +45,7 @@ async function transpileNodeModules() {
 					logLevel: 'info',
 					platform: 'node',
 					format: 'cjs',
-					target: 'node12',
+					target: 'node18',
 				});
 			} catch (err) {
 				console.error(`🙈 Cannot compile ${json.name}: ${err.message}`);
