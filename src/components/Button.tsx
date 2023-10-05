@@ -33,7 +33,8 @@ export const Button = styled.button`
 
 	&:focus {
 		outline: 0;
-		box-shadow: 0 0 0 2px ${(p) => p.theme.colors.bg},
+		box-shadow:
+			0 0 0 2px ${(p) => p.theme.colors.bg},
 			0 0 0 4px ${(p) => p.theme.colors.focus};
 	}
 

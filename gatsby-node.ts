@@ -185,7 +185,7 @@ type Source = Pick<
 
 // Create Mdx fields for all Markdown type fields from GraphCMS
 export const createResolvers: GatsbyNode['createResolvers'] = ({
-	// eslint-disable-next-line no-shadow
+	// eslint-disable-next-line @typescript-eslint/no-shadow
 	createResolvers,
 }) => {
 	createResolvers({

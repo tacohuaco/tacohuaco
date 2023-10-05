@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack } from 'tamia';
+import { Stack } from 'tamia';
 import { Button } from './Button';
 
 type Props = {
