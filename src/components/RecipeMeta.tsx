@@ -25,20 +25,24 @@ export function RecipeMeta({
 	overnight,
 }: Props) {
 	return (
-		<Stack gap="xs">
-			<Stack gap="m" direction={['column', 'column', 'row']}>
+		<Stack gap="s">
+			<Stack
+				gap="s"
+				direction={['column', 'column', 'row']}
+				alignItems={['flex-start', 'flex-start', 'center']}
+			>
 				<RecipeFlags
 					flags={flags}
 					margaritasFavorite={margaritasFavorite}
 					artemsFavorite={artemsFavorite}
 				/>
-				{(cuisines.length > 0 || tags.length > 0) && (
-					<RecipeTags tags={tags}>
-						{cuisines.length > 0 && <RecipeCuisines cuisines={cuisines} />}
-					</RecipeTags>
-				)}
+				{time && <RecipeTimes time={time} overnight={overnight} />}
 			</Stack>
-			{time && <RecipeTimes time={time} overnight={overnight} />}
+			{(cuisines.length > 0 || tags.length > 0) && (
+				<RecipeTags tags={tags}>
+					{cuisines.length > 0 && <RecipeCuisines cuisines={cuisines} />}
+				</RecipeTags>
+			)}
 		</Stack>
 	);
 }
