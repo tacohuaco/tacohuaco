@@ -15,6 +15,7 @@ const config: GatsbyConfig = {
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
 	},
+	trailingSlash: 'always',
 	graphqlTypegen: true,
 	plugins: [
 		'gatsby-plugin-image',
@@ -81,7 +82,12 @@ const config: GatsbyConfig = {
 				],
 			},
 		},*/
-		'gatsby-plugin-sitemap',
+		{
+			resolve: 'gatsby-plugin-sitemap',
+			options: {
+				output: '/sitemap',
+			},
+		},
 		{
 			resolve: 'gatsby-plugin-netlify',
 			options: {

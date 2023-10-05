@@ -30,7 +30,7 @@ export const Head = ({ data, location }: Props) => {
 
 export const pageQuery = graphql`
 	query RecipesPage {
-		allGraphCmsRecipe(sort: { fields: [title], order: ASC }) {
+		allGraphCmsRecipe(sort: { title: ASC }) {
 			nodes {
 				...RecipeMeta
 			}

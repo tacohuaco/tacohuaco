@@ -47,7 +47,7 @@ export const pageQuery = graphql`
 	query CuisinePage($cuisine: GraphCMS_Cuisine!) {
 		allGraphCmsRecipe(
 			filter: { cuisines: { in: [$cuisine] } }
-			sort: { fields: [title], order: ASC }
+			sort: { title: ASC }
 		) {
 			nodes {
 				...RecipeMeta

@@ -69,7 +69,7 @@ export const Head = ({ data, location, pageContext }: Props) => {
 // HACK: We can't filter by flags so have to query all recipes and filter in render
 export const pageQuery = graphql`
 	query FlagPage {
-		allGraphCmsRecipe(sort: { fields: [title], order: ASC }) {
+		allGraphCmsRecipe(sort: { title: ASC }) {
 			nodes {
 				...RecipeMeta
 			}

@@ -41,10 +41,7 @@ export const Head = ({ data, location, pageContext }: Props) => {
 
 export const pageQuery = graphql`
 	query TagsPage($tag: GraphCMS_Tag!) {
-		allGraphCmsRecipe(
-			filter: { tags: { in: [$tag] } }
-			sort: { fields: [title], order: ASC }
-		) {
+		allGraphCmsRecipe(filter: { tags: { in: [$tag] } }, sort: { title: ASC }) {
 			nodes {
 				...RecipeMeta
 			}
