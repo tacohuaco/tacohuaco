@@ -1,5 +1,12 @@
-// WARNING: The second position is a plural, so if there's no plural but there are
-// alternatives, you should repeat the first array item twice
+// WARNING: The even position is a plural (there may be more than one), so if
+// there's no plural but there are alternatives, you should repeat the first
+// array item twice. Each array is an alternative spelling. The first array is
+// the preferred spelling.
+//
+// Examples:
+//
+// [['boob', 'boobs'], ['tit', 'tits', 'tit', 'titties']]
+// [['kolbasa', 'kolbasa']]
 export const INGREDIENTS = [
 	/*
 	 * Spices
@@ -16,7 +23,11 @@ export const INGREDIENTS = [
 	[['pumpkin seeds'], ['pepita', 'pepitas']],
 	[['cinnamon']],
 	[['nutmeg']],
-	[['chili flakes']],
+	[
+		['chile flakes', 'chile flakes'],
+		['chili flakes', 'chili flakes'],
+		['chilli flakes', 'chilli flakes'],
+	],
 	[['paprika powder']],
 	[['curry powder']],
 	[['curcuma powder']],
@@ -29,12 +40,8 @@ export const INGREDIENTS = [
 	 * Oils and sauces
 	 */
 	[
-		[
-			'olive oil',
-			'olive oil',
-			'extra virgin olive oil',
-			'extra-virgin olive oil',
-		],
+		['olive oil', 'olive oil'],
+		['extra virgin olive oil', 'extra-virgin olive oil'],
 	],
 	[['coconut oil']],
 	[['sunflower oil']],
@@ -145,7 +152,12 @@ export const INGREDIENTS = [
 		['seakale beet', 'seakale beets'],
 		['leaf beet', 'leaf beets'],
 	],
-	[['chili', 'chilies']],
+	[
+		// https://www.thespruceeats.com/different-spellings-of-chile-2342844
+		['chile', 'chiles'],
+		['chili', 'chilies', 'chili', 'chilis'],
+		['chilli', 'chillies'],
+	],
 	[['pea', 'peas']],
 	[['pumpkin', 'pumpkins']],
 	[['squash', 'squashes']],
