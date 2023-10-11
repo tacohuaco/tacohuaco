@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { castArray } from 'lodash';
 import { IngredientKind, Month } from './types';
 import { analyze } from './analyze';

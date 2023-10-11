@@ -1,3 +1,4 @@
+import { describe, expect, test } from 'vitest';
 import { getImageUrl, stripMarkdown, asList } from './client';
 
 describe('getImageUrl', () => {

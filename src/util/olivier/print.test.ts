@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { print } from './print';
 
 test.each([

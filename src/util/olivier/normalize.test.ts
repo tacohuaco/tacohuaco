@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { castArray } from 'lodash';
 import { normalize } from './normalize';
 

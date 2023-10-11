@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { scale } from './scale';
 import { Ingredient } from './types';
 

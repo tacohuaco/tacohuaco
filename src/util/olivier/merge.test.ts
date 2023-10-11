@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest';
 import { merge } from './merge';
 import { Ingredient } from './types';
 
