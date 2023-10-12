@@ -1,4 +1,3 @@
-import { flatten } from 'lodash';
 import { UNITS } from './langs/en/units';
 import {
 	ARTICLES,
@@ -10,7 +9,7 @@ import { Ingredient } from './types';
 
 type State = 'BEGINNING' | 'NUMBER' | 'UNIT' | 'NAME' | 'COMMENT';
 
-const ALL_UNITS = flatten(UNITS);
+const ALL_UNITS = UNITS.flat(2);
 
 const isNumber = (s: string) => /^[\d,./—–-]+$/.test(s);
 const isRangeSeparator = (s: string) =>
@@ -27,7 +26,7 @@ const append = (text: string, s: string) => (text === '' ? s : `${text} ${s}`);
  * Parse an option of recipe ingredient, like
  * 1-3 g apples; in small dice
  */
-function parseOption(text: string): Ingredient {
+export function parseOption(text: string): Ingredient {
 	const tokens = text.split(/\s+/);
 	let state: State = 'BEGINNING';
 	let name = '';

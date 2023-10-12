@@ -47,3 +47,5 @@ export interface PrintIngredient
 	readonly amount?: string;
 	readonly suffix?: string;
 }
+
+export type IngredientWithInfo = Ingredient & IngredientInfo;

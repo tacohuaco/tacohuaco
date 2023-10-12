@@ -1,3 +1,4 @@
+import orderBy from 'lodash/orderBy';
 import numericQuantity from 'numeric-quantity';
 import {
 	GRAMS_IN_KILOGRAM,
@@ -8,7 +9,6 @@ import {
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { ARTICLES, WORDS_TO_NUMBERS } from './langs/en/translations';
 import { Amount, Ingredient } from './types';
-import { orderBy } from 'lodash';
 
 const CONVERSIONS: {
 	from: string;
@@ -119,7 +119,7 @@ export function normalizeName(
  * - find normal forms of ingredient names and units
  * - extract the ingredient modifier (5 _large_ apples)
  */
-function normalizeOption(ingredient: Ingredient): Ingredient {
+export function normalizeOption(ingredient: Ingredient): Ingredient {
 	const normalizedUnit = normalizeUnit(ingredient.unit);
 	const { amount: minAmount, unit } = normalizeAmount(
 		ingredient.minAmount,

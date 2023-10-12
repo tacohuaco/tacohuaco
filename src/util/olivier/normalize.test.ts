@@ -51,6 +51,23 @@ test.each([
 	],
 	[
 		{
+			name: 'floury potatoes',
+			minAmount: '1',
+			maxAmount: '1',
+			unit: 'kg',
+			comment: undefined,
+		},
+		{
+			name: 'potato',
+			minAmount: 1000,
+			maxAmount: 1000,
+			unit: 'g',
+			comment: undefined,
+			modifier: 'floury',
+		},
+	],
+	[
+		{
 			name: 'cocaine',
 			minAmount: '13',
 			maxAmount: '13',

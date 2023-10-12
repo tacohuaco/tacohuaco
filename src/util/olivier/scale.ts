@@ -1,4 +1,4 @@
-import { round } from 'lodash';
+import round from 'lodash/round';
 import { Amount, Ingredient } from './types';
 
 function roundAmount(amount: number) {
