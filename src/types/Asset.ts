@@ -1,4 +1,6 @@
-export type Asset = Pick<
-	Queries.GraphCMS_Asset,
-	'handle' | 'height' | 'url' | 'width'
->;
+export interface Asset {
+	url: string;
+	handle: string;
+	width: number;
+	height: number;
+}
