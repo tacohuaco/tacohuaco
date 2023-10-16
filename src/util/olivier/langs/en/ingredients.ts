@@ -17,10 +17,13 @@ export const INGREDIENTS = [
 	[['bay leaf', 'bay leaves']],
 	[['rosemary seeds']],
 	[['dried rosemary']],
-	[['cumin seeds'], ['cumin']],
+	[['cumin seeds', 'cumin seeds'], ['cumin']],
 	[['sunflower seeds']],
 	[['sesame seeds']],
-	[['pumpkin seeds'], ['pepita', 'pepitas']],
+	[
+		['pumpkin seeds', 'pumpkin seeds'],
+		['pepita', 'pepitas'],
+	],
 	[['cinnamon']],
 	[['nutmeg']],
 	[
@@ -134,7 +137,13 @@ export const INGREDIENTS = [
 	],
 	[['turnip', 'turnips']],
 	[['cucumber', 'cucumbers']],
-	[['bok choi'], ['pak choi'], ['pok choi'], ['pichay'], ['petsay']],
+	[
+		['bok choi', 'bok choi'],
+		['pak choi'],
+		['pok choi'],
+		['pichay'],
+		['petsay'],
+	],
 	[['potato', 'potatoes']],
 	[['tomato', 'tomatoes']],
 	[
