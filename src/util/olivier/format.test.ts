@@ -137,6 +137,20 @@ test.each([
 			unit: 'tablespoons',
 		},
 	],
+	[
+		{
+			name: 'cumin seeds',
+			minAmount: 2,
+			maxAmount: 2,
+			unit: 'pinch',
+		},
+		{
+			name: 'cumin seeds',
+			minAmount: '2',
+			maxAmount: '2',
+			unit: 'pinches',
+		},
+	],
 ])('format ingredient: %s', (source, result) => {
 	expect(format(castArray(source))).toEqual(castArray(result));
 });
