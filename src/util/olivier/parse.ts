@@ -5,7 +5,7 @@ import {
 	RANGE_SEPARATORS,
 	UNITLESS,
 } from './langs/en/translations';
-import { Ingredient } from './types';
+import { type Ingredient } from './types';
 
 type State = 'BEGINNING' | 'NUMBER' | 'UNIT' | 'NAME' | 'COMMENT';
 

@@ -8,7 +8,12 @@ import {
 	SUGARS,
 } from './langs/en/info';
 import { SEASONS } from './regions/germany';
-import { IngredientKind, Ingredient, Month, IngredientInfo } from './types';
+import {
+	IngredientKind,
+	Month,
+	type Ingredient,
+	type IngredientInfo,
+} from './types';
 
 function getKind(name: string): IngredientKind {
 	if (DAIRIES.includes(name) || NON_VEGANS.includes(name)) {

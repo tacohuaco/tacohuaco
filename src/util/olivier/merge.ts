@@ -1,4 +1,4 @@
-import { Ingredient } from './types';
+import { type Ingredient } from './types';
 
 function getKey(ingredient: Ingredient) {
 	return [ingredient.name, ingredient.unit].filter(Boolean).join('/');

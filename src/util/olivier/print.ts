@@ -1,5 +1,5 @@
 import { A_BIT, OF } from './langs/en/translations';
-import { Ingredient, PrintIngredient } from './types';
+import { type Ingredient, type PrintIngredient } from './types';
 
 function printAmount({
 	minAmount,

@@ -7,7 +7,7 @@ import {
 	TEASPOONS_IN_TABLESPOONS,
 	UNITS,
 } from './langs/en/units';
-import { Amount, Ingredient } from './types';
+import { type Amount, type Ingredient } from './types';
 
 const CONVERSIONS: {
 	from: string;
