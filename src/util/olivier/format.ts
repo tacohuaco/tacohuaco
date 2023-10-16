@@ -45,7 +45,7 @@ function asString(amount?: Amount) {
 function pluralize(
 	dictionary: readonly string[][],
 	unit: string,
-	amount: Amount
+	amount: number
 ): string {
 	if (amount > 1) {
 		const units = dictionary.find(([i]) => i === unit);
