@@ -2,7 +2,6 @@ import richtypo from 'richtypo';
 import rules, {
 	abbrs,
 	dashesBasic,
-	definitions,
 	ellipses,
 	numberOrdinals,
 	numberSeparators,
@@ -13,7 +12,7 @@ import rules, {
 	shortWords,
 } from 'richtypo-rules-en';
 
-const { hairspace } = definitions;
+const hairspace = ' ';
 
 type MaybeText = string | undefined | null;
 
@@ -38,7 +37,7 @@ export const typo = (text: MaybeText) =>
 			numberSeparators,
 			apostrophes,
 		],
-		text || ''
+		text ?? ''
 	);
 
 export const typoLite = (text: MaybeText) =>
@@ -63,5 +62,5 @@ export const typoLite = (text: MaybeText) =>
 			numberSeparators,
 			apostrophes,
 		],
-		text || ''
+		text ?? ''
 	);
