@@ -2,11 +2,11 @@ import { Asset } from '../src/types/Asset';
 
 export type Maybe<T> = T | null;
 
-export interface RecipeRaw {
+export interface RecipeModelRaw {
 	artemsFavorite: boolean;
 	cuisines: string[];
 	createdAt: string;
-	description: string;
+	description: Maybe<string>;
 	ingredients: string;
 	keywords: Maybe<string>;
 	margaritasFavorite: boolean;
@@ -15,18 +15,18 @@ export interface RecipeRaw {
 	source: Maybe<string>;
 	steps: string;
 	tags: string[];
-	time: number;
+	time: Maybe<number>;
 	title: string;
 	tools: Maybe<string>;
 	notes: Maybe<string>;
-	yields: string;
+	yields: Maybe<string>;
 	images: Asset[];
 	subrecipes: Pick<
-		RecipeRaw,
+		RecipeModelRaw,
 		'slug' | 'title' | 'ingredients' | 'steps' | 'tools'
 	>[];
 	recipes: Pick<
-		RecipeRaw,
+		RecipeModelRaw,
 		| 'artemsFavorite'
 		| 'createdAt'
 		| 'cuisines'
@@ -37,5 +37,29 @@ export interface RecipeRaw {
 		| 'time'
 		| 'title'
 		| 'tags'
+		| 'ingredients'
+		| 'subrecipes'
 	>[];
+}
+
+export interface TipModelRaw {
+	content: string;
+	tags: string[];
+	ingredient: Maybe<string>;
+}
+
+export interface IngredientModelRaw {
+	name: string;
+	warnings: Maybe<string>;
+}
+
+export interface TipModel {
+	content: string;
+	tags: string[];
+	ingredient?: string;
+}
+
+export interface IngredientModel {
+	name: string;
+	warnings: string[];
 }

@@ -11,9 +11,64 @@ test('map steps without sections', () => {
 		  {
 		    "name": "",
 		    "steps": [
-		      "Do one.",
-		      "Do two.",
-		      "Do three.",
+		      {
+		        "pause": false,
+		        "text": "Do one.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Do two.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Do three.",
+		      },
+		    ],
+		  },
+		]
+	`);
+});
+
+test('map steps with ingredients', () => {
+	const stepsWithoutSections = `
+1. In a medium bowl, combine _} all purpose flour_, _} black peppercorns_, _} cucumbers_, and _} salt_, using a whisk.`;
+	expect(mapSteps(stepsWithoutSections)).toMatchInlineSnapshot(`
+		[
+		  {
+		    "name": "",
+		    "steps": [
+		      {
+		        "pause": false,
+		        "text": "In a medium bowl, combine <Ingredient name=\\"all-purpose flour\\"  />, <Ingredient name=\\"peppercorn\\" modifier=\\"black\\" />, <Ingredient name=\\"cucumber\\"  />, and <Ingredient name=\\"salt\\"  />, using a whisk.",
+		      },
+		    ],
+		  },
+		]
+	`);
+});
+
+test('map steps with pause', () => {
+	const stepsWithPause = `
+1. Do one.
+2. Refrigerate covered for at least 4 hours or better overnight.
+3. Do three.`;
+	expect(mapSteps(stepsWithPause)).toMatchInlineSnapshot(`
+		[
+		  {
+		    "name": "",
+		    "steps": [
+		      {
+		        "pause": false,
+		        "text": "Do one.",
+		      },
+		      {
+		        "pause": true,
+		        "text": "Refrigerate covered for at least 4 hours or better overnight.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Do three.",
+		      },
 		    ],
 		  },
 		]
@@ -35,15 +90,27 @@ test('map steps with sections', () => {
 		  {
 		    "name": "To cook the sponge cake",
 		    "steps": [
-		      "Prepare this.",
-		      "Cook that.",
+		      {
+		        "pause": false,
+		        "text": "Prepare this.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Cook that.",
+		      },
 		    ],
 		  },
 		  {
 		    "name": "To cook the tres leches",
 		    "steps": [
-		      "Add all the vegetables",
-		      "Add salt",
+		      {
+		        "pause": false,
+		        "text": "Add all the vegetables",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Add salt",
+		      },
 		    ],
 		  },
 		]
@@ -73,15 +140,27 @@ test('map steps with subrecipe', () => {
 		  {
 		    "name": "To cook the sponge cake",
 		    "steps": [
-		      "Prepare this.",
-		      "Cook that.",
+		      {
+		        "pause": false,
+		        "text": "Prepare this.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "Cook that.",
+		      },
 		    ],
 		  },
 		  {
 		    "name": "To cook the gremolata",
 		    "steps": [
-		      "This.",
-		      "That.",
+		      {
+		        "pause": false,
+		        "text": "This.",
+		      },
+		      {
+		        "pause": false,
+		        "text": "That.",
+		      },
 		    ],
 		  },
 		]

@@ -1,10 +1,11 @@
 import intersection from 'lodash/intersection';
-import { IngredientWithInfo, Month } from '../../src/util/olivier';
+import { Month } from '../../src/util/olivier';
+import { RecipeIngredient } from '../../src/types/Recipe';
 
 /**
  * Recipe seasons: return months shared by all recipe ingredients
  */
-export const mapSeasons = (ingredients: IngredientWithInfo[]): Month[] => {
+export const mapSeasons = (ingredients: RecipeIngredient[]): Month[] => {
 	const allSeasons = ingredients
 		.map((x) => x.seasons)
 		.filter((x) => x.length > 0);

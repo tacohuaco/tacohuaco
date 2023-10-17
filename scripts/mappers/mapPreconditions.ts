@@ -1,11 +1,9 @@
-import { IngredientWithInfo } from '../../src/util/olivier';
+import { RecipeIngredient } from '../../src/types/Recipe';
 
 /**
  * Recipe precoditons: things to be done before starting cooking
  */
-export const mapPreconditions = (
-	ingredients: IngredientWithInfo[]
-): string[] => {
+export const mapPreconditions = (ingredients: RecipeIngredient[]): string[] => {
 	return ingredients
 		.map(({ name, comment }) => {
 			if (

@@ -1,9 +1,9 @@
 import { test, expect } from 'vitest';
 import { mapRecipe } from '../mapRecipe';
-import { RecipeRaw } from '../../types';
+import { type RecipeModelRaw } from '../../types';
 
 test('map recipe', () => {
-	const recipe: RecipeRaw = {
+	const recipe: RecipeModelRaw = {
 		artemsFavorite: true,
 		cuisines: ['Mexican', 'Klatzlandian'],
 		createdAt: '2023-09-18T12:12:59.151425+00:00',
@@ -25,7 +25,45 @@ test('map recipe', () => {
 		subrecipes: [],
 		recipes: [],
 	};
-	expect(mapRecipe(recipe)).toMatchInlineSnapshot(`
+	const allIngredients = [
+		{
+			name: 'salt',
+			warnings: ['Warning about salt 1', 'Warning about salt 2'],
+		},
+		{
+			name: 'pork',
+			warnings: [],
+		},
+		{
+			name: 'potatoes',
+			warnings: [],
+		},
+		{
+			name: 'pizza',
+			warnings: ['Warning about pizza'],
+		},
+		{
+			name: 'soy sauce',
+			warnings: ['Warning about soy sauce'],
+		},
+	];
+	const allTips = [
+		{
+			content: 'Tip about salt',
+			ingredient: 'salt',
+			tags: [],
+		},
+		{
+			content: 'Tip about pork',
+			ingredient: 'pork',
+			tags: [],
+		},
+		{
+			content: 'Tip about pizza',
+			tags: ['pizza'],
+		},
+	];
+	expect(mapRecipe(recipe, allIngredients, allTips)).toMatchInlineSnapshot(`
 		{
 		  "artemsFavorite": true,
 		  "createdAt": 2023-09-18T12:12:59.151Z,
@@ -47,45 +85,51 @@ test('map recipe', () => {
 		  "ingredients": [
 		    {
 		      "ingredients": [
-		        {
-		          "comment": undefined,
-		          "hasDairy": false,
-		          "hasGluten": false,
-		          "hasSugar": false,
-		          "kind": 0,
-		          "maxAmount": 2,
-		          "minAmount": 2,
-		          "modifier": "fresh",
-		          "name": "jalapeño",
-		          "seasons": [],
-		          "unit": undefined,
-		        },
-		        {
-		          "comment": "room temperature",
-		          "hasDairy": true,
-		          "hasGluten": false,
-		          "hasSugar": false,
-		          "kind": 1,
-		          "maxAmount": 1000,
-		          "minAmount": 1000,
-		          "modifier": "floury potatoes 100 g",
-		          "name": "butter",
-		          "seasons": [],
-		          "unit": "g",
-		        },
-		        {
-		          "comment": undefined,
-		          "hasDairy": false,
-		          "hasGluten": false,
-		          "hasSugar": false,
-		          "kind": 0,
-		          "maxAmount": undefined,
-		          "minAmount": undefined,
-		          "modifier": undefined,
-		          "name": "salt",
-		          "seasons": [],
-		          "unit": undefined,
-		        },
+		        [
+		          {
+		            "comment": undefined,
+		            "hasDairy": false,
+		            "hasGluten": false,
+		            "hasSugar": false,
+		            "kind": 0,
+		            "maxAmount": 2,
+		            "minAmount": 2,
+		            "modifier": "fresh",
+		            "name": "jalapeño",
+		            "seasons": [],
+		            "unit": undefined,
+		          },
+		        ],
+		        [
+		          {
+		            "comment": "room temperature",
+		            "hasDairy": true,
+		            "hasGluten": false,
+		            "hasSugar": false,
+		            "kind": 1,
+		            "maxAmount": 1000,
+		            "minAmount": 1000,
+		            "modifier": "floury potatoes 100 g",
+		            "name": "butter",
+		            "seasons": [],
+		            "unit": "g",
+		          },
+		        ],
+		        [
+		          {
+		            "comment": undefined,
+		            "hasDairy": false,
+		            "hasGluten": false,
+		            "hasSugar": false,
+		            "kind": 0,
+		            "maxAmount": undefined,
+		            "minAmount": undefined,
+		            "modifier": undefined,
+		            "name": "salt",
+		            "seasons": [],
+		            "unit": undefined,
+		          },
+		        ],
 		      ],
 		      "name": "",
 		    },
@@ -107,13 +151,19 @@ test('map recipe', () => {
 		  "recipes": [],
 		  "seasons": [],
 		  "slug": "salsa-verde-de",
-		  "source": "",
+		  "source": undefined,
 		  "steps": [
 		    {
 		      "name": "",
 		      "steps": [
-		        "Prepare",
-		        "Serve",
+		        {
+		          "pause": false,
+		          "text": "Prepare",
+		        },
+		        {
+		          "pause": false,
+		          "text": "Serve",
+		        },
 		      ],
 		    },
 		  ],
@@ -128,13 +178,23 @@ test('map recipe', () => {
 		    "Dip",
 		  ],
 		  "time": 40,
+		  "tips": [
+		    "Tip about salt",
+		  ],
 		  "title": "First world salsa verde",
 		  "tools": [
 		    "blender or food processor",
 		  ],
 		  "vegan": false,
 		  "vegetarian": true,
-		  "yields": "200 ml",
+		  "warnings": [
+		    "Warning about salt 1",
+		    "Warning about salt 2",
+		  ],
+		  "yields": {
+		    "amount": 200,
+		    "unit": "ml",
+		  },
 		}
 	`);
 });

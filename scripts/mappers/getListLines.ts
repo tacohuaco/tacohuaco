@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit';
 import { fromMarkdown } from 'mdast-util-from-markdown';
-import { toString } from 'mdast-util-to-string';
+import { toMarkdown } from 'mdast-util-to-markdown';
 
 /**
  * Return all list items from Markdown as an array
@@ -10,7 +10,8 @@ export const getListLines = (markdown: string): string[] => {
 	const tree = fromMarkdown(markdown);
 	const items: string[] = [];
 	visit(tree, 'listItem', (li) => {
-		items.push(toString(li));
+		const contents = li.children[0];
+		items.push(toMarkdown(contents).trim());
 	});
 	return items;
 };

@@ -1,44 +1,85 @@
-import { Recipe } from '../../src/types/Recipe';
-import { RecipeRaw } from '../types';
+import { normalizeOption, parseOption } from '../../src/util/olivier';
+import { type Recipe, type Yields } from '../../src/types/Recipe';
+import {
+	type IngredientModel,
+	type RecipeModelRaw,
+	type TipModel,
+} from '../types';
 import { getAllIngredients } from './getAllIngredients';
 import { mapFlags } from './mapFlags';
 import { mapIngredients } from './mapIngredients';
 import { mapPreconditions } from './mapPreconditions';
 import { mapSeasons } from './mapSeasons';
 import { mapSteps } from './mapSteps';
+import { mapTips } from './mapTips';
 import { mapTools } from './mapTools';
+import { mapWarnings } from './mapWarnings';
 
 function mapMaybeString(text: string | null) {
-	return text === null ? '' : text;
+	return text === null ? undefined : text;
+}
+
+function mapMaybeNumber(num: number | null) {
+	return num === null ? undefined : num;
 }
 
 function mapDate(date: string) {
 	return new Date(Date.parse(date));
 }
 
-function mapKeywords(keywords: RecipeRaw['keywords']) {
+function mapKeywords(keywords: RecipeModelRaw['keywords']) {
 	return keywords === null ? [] : keywords.split(/\s*;\s*/);
 }
 
-function mapNotes(notes: RecipeRaw['notes']) {
+function mapNotes(notes: RecipeModelRaw['notes']) {
 	return notes === null ? [] : notes.split(/\n+/);
 }
 
-// TODO: global notes
+// TODO: extract
+// TODO: add tests
+// TODO: in the future make it a required field in Hygraph
+function mapYields(yields: RecipeModelRaw['yields']): Yields {
+	const { minAmount, unit } = normalizeOption(
+		parseOption(`${yields === null ? '1 portion' : yields} yields`)
+	);
+	return {
+		amount: Number(minAmount ?? 1),
+		unit: unit ?? 'portion',
+	};
+}
 
-export function mapRecipe(recipe: RecipeRaw): Recipe {
+// TODO: related recipes
+
+// const relatedRecipes = getRelatedRecipes(allRecipes, {
+// 	slug,
+// 	cuisines,
+// 	tags,
+// });
+
+export function mapRecipe(
+	recipe: RecipeModelRaw,
+	allIngredients: IngredientModel[],
+	allTips: TipModel[]
+): Recipe {
 	const ingredientsSections = mapIngredients(
 		recipe.ingredients,
 		recipe.subrecipes
 	);
-	const ingredients = getAllIngredients(ingredientsSections);
 	const subrecipes = recipe.subrecipes.map(({ slug, title }) => ({
 		slug,
 		title,
 	}));
+	const ingredients = getAllIngredients(ingredientsSections);
 	const recipes = recipe.recipes.map((uberrecipe) => ({
 		...uberrecipe,
 		createdAt: mapDate(uberrecipe.createdAt),
+		time: mapMaybeNumber(uberrecipe.time),
+		seasons: mapSeasons(ingredients),
+		...mapFlags(
+			getAllIngredients(
+				mapIngredients(uberrecipe.ingredients, uberrecipe.subrecipes)
+			)
+		),
 	}));
 
 	return {
@@ -49,11 +90,16 @@ export function mapRecipe(recipe: RecipeRaw): Recipe {
 		createdAt: mapDate(recipe.createdAt),
 		steps: mapSteps(recipe.steps, recipe.subrecipes),
 		keywords: mapKeywords(recipe.keywords),
-		source: mapMaybeString(recipe.source),
-		tools: mapTools(recipe.tools, recipe.subrecipes),
+		tools: mapTools(recipe.tools, recipe.subrecipes, ingredientsSections),
 		notes: mapNotes(recipe.notes),
 		seasons: mapSeasons(ingredients),
 		preconditions: mapPreconditions(ingredients),
+		description: mapMaybeString(recipe.description),
+		source: mapMaybeString(recipe.source),
+		yields: mapYields(recipe.yields),
+		time: mapMaybeNumber(recipe.time),
+		tips: mapTips(ingredients, recipe.tags, allTips),
+		warnings: mapWarnings(ingredients, allIngredients),
 		...mapFlags(ingredients),
 	};
 }

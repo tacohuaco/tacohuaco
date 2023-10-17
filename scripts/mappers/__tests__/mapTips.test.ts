@@ -1,8 +1,8 @@
 import { test, expect } from 'vitest';
-import { mapSeasons } from '../mapSeasons';
+import { mapTips } from '../mapTips';
 import { Month } from '../../../src/util/olivier';
 
-test('map seasons', () => {
+test('map tips', () => {
 	const ingredients = [
 		{
 			comment: undefined,
@@ -44,9 +44,27 @@ test('map seasons', () => {
 			unit: undefined,
 		},
 	];
-	expect(mapSeasons(ingredients)).toMatchInlineSnapshot(`
+	const tags = ['pizza', 'pasta'];
+	const allTips = [
+		{
+			content: 'Tip about salt',
+			ingredient: 'salt',
+			tags: [],
+		},
+		{
+			content: 'Tip about pork',
+			ingredient: 'pork',
+			tags: [],
+		},
+		{
+			content: 'Tip about pizza',
+			tags: ['pizza'],
+		},
+	];
+	expect(mapTips(ingredients, tags, allTips)).toMatchInlineSnapshot(`
 		[
-		  1,
+		  "Tip about salt",
+		  "Tip about pizza",
 		]
 	`);
 });

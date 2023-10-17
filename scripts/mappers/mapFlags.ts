@@ -1,10 +1,10 @@
-import { Recipe } from '../../src/types/Recipe';
-import { IngredientKind, IngredientWithInfo } from '../../src/util/olivier';
+import { Recipe, RecipeIngredient } from '../../src/types/Recipe';
+import { IngredientKind } from '../../src/util/olivier';
 
 /**
  * Gluten free recipe: less than 30% of the flour amount has gluten
  */
-function isLowGlutenRecipe(ingredients: IngredientWithInfo[]) {
+function isLowGlutenRecipe(ingredients: RecipeIngredient[]) {
 	let glutenFloursAmount = 0;
 	let glutenlessFloursAmount = 0;
 
@@ -28,7 +28,7 @@ function isLowGlutenRecipe(ingredients: IngredientWithInfo[]) {
  * Return recipe flags based on ingredients list
  */
 export const mapFlags = (
-	ingredients: IngredientWithInfo[]
+	ingredients: RecipeIngredient[]
 ): Pick<
 	Recipe,
 	| 'vegan'
