@@ -329,6 +329,7 @@ export const INGREDIENTS = [
 	[['chicory syrup']],
 	[['vanilla extract']],
 	[['honey']],
+	[['cocoa powder', 'cocoa powder', 'cacao powder']],
 
 	/*
 	 * Misc
