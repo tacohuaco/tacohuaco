@@ -22,6 +22,8 @@ export const DAIRIES = [
 	'crème fraîche',
 	'heavy cream',
 	'milk',
+	'condensed milk',
+	'evaporated milk',
 	'parmesan cheese',
 	'smetana',
 	'sour cream',
