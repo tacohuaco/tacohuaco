@@ -3,7 +3,7 @@ import { type Amount, type Ingredient } from './types';
 
 function roundAmount(amount: number) {
 	if (amount > 50) {
-		return round(amount, -1);
+		return round(amount, -0.5);
 	}
 	if (amount < 0.5) {
 		return 0.25;

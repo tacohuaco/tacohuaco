@@ -1,8 +1,27 @@
 import { expect, test } from 'vitest';
 import { scale } from './scale';
-import { Ingredient } from './types';
+import { type Ingredient } from './types';
 
 test.each<[[Ingredient[], number], Ingredient[]]>([
+	[
+		[
+			[
+				{
+					name: 'butter',
+					minAmount: 115,
+					maxAmount: 115,
+				},
+			],
+			1,
+		],
+		[
+			{
+				name: 'butter',
+				minAmount: 115,
+				maxAmount: 115,
+			},
+		],
+	],
 	[
 		[
 			[
@@ -93,8 +112,8 @@ test.each<[[Ingredient[], number], Ingredient[]]>([
 		[
 			{
 				name: 'cucumber',
-				minAmount: 70,
-				maxAmount: 80,
+				minAmount: 65,
+				maxAmount: 75,
 			},
 		],
 	],
