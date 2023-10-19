@@ -5,7 +5,7 @@ import { IngredientsSection } from '../../src/types/Recipe';
 
 export function mapTools(
 	tools: RecipeModelRaw['tools'],
-	subrecipes: RecipeModelRaw['subrecipes'],
+	subrecipes: Pick<RecipeModelRaw, 'slug' | 'tools'>[],
 	ingredientsSections: IngredientsSection[]
 ) {
 	const recipeTools = tools === null ? [] : getListLines(tools);

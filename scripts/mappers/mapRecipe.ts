@@ -5,7 +5,7 @@ import {
 	type RecipeModelRaw,
 	type TipModel,
 } from '../types';
-import { getAllIngredients } from './getAllIngredients';
+import { getAllIngredients } from '../../src/util/getAllIngredients';
 import { mapFlags } from './mapFlags';
 import { mapIngredients } from './mapIngredients';
 import { mapPreconditions } from './mapPreconditions';
@@ -14,14 +14,8 @@ import { mapSteps } from './mapSteps';
 import { mapTips } from './mapTips';
 import { mapTools } from './mapTools';
 import { mapWarnings } from './mapWarnings';
-
-function mapMaybeString(text: string | null) {
-	return text === null ? undefined : text;
-}
-
-function mapMaybeNumber(num: number | null) {
-	return num === null ? undefined : num;
-}
+import { mapMaybeString } from './mapMaybeString';
+import { mapMaybeNumber } from './mapMaybeNumber';
 
 function mapDate(date: string) {
 	return new Date(Date.parse(date));
@@ -48,14 +42,6 @@ function mapYields(yields: RecipeModelRaw['yields']): Yields {
 	};
 }
 
-// TODO: related recipes
-
-// const relatedRecipes = getRelatedRecipes(allRecipes, {
-// 	slug,
-// 	cuisines,
-// 	tags,
-// });
-
 export function mapRecipe(
 	recipe: RecipeModelRaw,
 	allIngredients: IngredientModel[],
@@ -70,25 +56,27 @@ export function mapRecipe(
 		title,
 	}));
 	const ingredients = getAllIngredients(ingredientsSections);
-	const recipes = recipe.recipes.map((uberrecipe) => ({
-		...uberrecipe,
-		createdAt: mapDate(uberrecipe.createdAt),
-		time: mapMaybeNumber(uberrecipe.time),
-		seasons: mapSeasons(ingredients),
-		...mapFlags(
-			getAllIngredients(
-				mapIngredients(uberrecipe.ingredients, uberrecipe.subrecipes)
-			)
-		),
+	const recipes = recipe.recipes.map(({ slug, title }) => ({
+		slug,
+		title,
 	}));
+	const stepsSecions = mapSteps(recipe.steps, recipe.subrecipes);
+
+	if (stepsSecions.length !== ingredientsSections.length) {
+		console.error();
+		console.error(
+			`Number of sections of ingredients and steps don’t match: ${stepsSecions.length} vs. ${ingredientsSections.length}.`
+		);
+		console.error();
+	}
 
 	return {
 		...recipe,
 		subrecipes,
 		recipes,
+		steps: stepsSecions,
 		ingredients: ingredientsSections,
 		createdAt: mapDate(recipe.createdAt),
-		steps: mapSteps(recipe.steps, recipe.subrecipes),
 		keywords: mapKeywords(recipe.keywords),
 		tools: mapTools(recipe.tools, recipe.subrecipes, ingredientsSections),
 		notes: mapNotes(recipe.notes),

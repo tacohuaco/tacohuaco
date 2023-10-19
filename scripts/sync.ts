@@ -1,12 +1,24 @@
 import fs from 'fs-extra';
 import { request, gql } from 'graphql-request';
-import { IngredientModelRaw, RecipeModelRaw, TipModelRaw } from './types';
+import {
+	IngredientModelRaw,
+	RecipeModelRaw,
+	ShopModelRaw,
+	TipModelRaw,
+} from './types';
 import { mapRecipe } from './mappers/mapRecipe';
 import { mapIngredientsModel } from './mappers/mapIngredientsModel';
 import { mapTipsModel } from './mappers/mapTipsModel';
+import { mapShopModel } from './mappers/mapShopModel';
 
 // Fetch _all_ the data from Hygraph and convert it to JSON files that could
 // be used in Astro
+
+// TODO: Make warnings more prominent
+// TODO: Count warnings
+// TODO: Show warnings summary
+// TODO: Fail the build
+// TODO: Check for missing items (but some text) in ingredients, steps and tools
 
 if (!process.env.GRAPHCMS_TOKEN) {
 	console.error('GRAPHCMS_TOKEN environmental variable is required');
@@ -83,18 +95,32 @@ const query = gql`
 			tags
 			ingredient
 		}
+		shops {
+			address
+			city
+			country
+			description
+			name
+			neighbourhood
+			url
+			zip
+		}
 	}
 `;
 
 console.log('🌮 Syncing content...');
+
+console.log();
 console.log('🌭 Fetching data from Hygraph...');
 
 const results = await request<{
 	recipes: RecipeModelRaw[];
 	ingredients: IngredientModelRaw[];
 	tips: TipModelRaw[];
+	shops: ShopModelRaw[];
 }>(endpoint, query);
 
+console.log();
 console.log('🌭 Parsing recipes...');
 
 fs.ensureDirSync('src/content/recipes');
@@ -108,4 +134,13 @@ results.recipes.forEach((recipeRaw) => {
 	fs.writeJSONSync(`src/content/recipes/${recipe.slug}.json`, recipe);
 });
 
+console.log();
+console.log('🌭 Parsing shops...');
+
+fs.ensureDirSync('src/data');
+
+const shops = mapShopModel(results.shops);
+fs.writeJSONSync(`src/data/shops.json`, shops);
+
+console.log();
 console.log(`🍆 ${results.recipes.length} recipes done`);
