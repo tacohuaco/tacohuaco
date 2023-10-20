@@ -10,6 +10,7 @@
     "pretest": "npm run lint",
     "test": "astro check && vitest run",
     "test:watch": "vitest watch",
+    "test:ci": "npm run lint && vitest run",
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix --ext .js,.ts,.tsx,.astro",
     "format": "prettier --log-level warn --write \"**/*.{js,ts,tsx,astro,md}\"",
