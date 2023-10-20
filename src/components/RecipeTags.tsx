@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { sentenceCase } from 'sentence-case';
 import { paramCase } from 'param-case';
-import { Stack } from 'tamia';
+import { Stack } from '.';
 import { Tag } from './Tag';
 
 type Props = {

@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CoffeePage } from '../templates/CoffeePage';
+import { COFFEE_RECIPES } from '../util/cafe';
+---
+
+<Layout
+	url="/coffee/"
+	title="Coffee recipes"
+	description="How we brew coffee using different brewers: Chemex, V6, Aeropress..."
+	component={CoffeePage}
+	props={{ coffeeRecipes: COFFEE_RECIPES }}
+/>

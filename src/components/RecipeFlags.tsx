@@ -1,26 +1,24 @@
-import React from 'react';
-import { Stack } from 'tamia';
-import { RecipeFlag } from './RecipeFlag';
-
-type Props = {
-	flags: Queries.FlagsJson;
-	margaritasFavorite?: boolean;
-	artemsFavorite?: boolean;
-};
+import { Stack, RecipeFlag } from '.';
+import type { Flags } from '../types/Recipe';
 
 export function RecipeFlags({
-	flags,
+	vegan,
+	vegetarian,
+	glutenFree,
+	lowGluten,
+	dairyFree,
+	noAddedSugar,
 	margaritasFavorite,
 	artemsFavorite,
-}: Props) {
+}: Flags) {
 	return (
 		<Stack gap="s" direction="row">
-			{flags.vegan && <RecipeFlag type="vegan" />}
-			{flags.vegetarian && <RecipeFlag type="vegetarian" />}
-			{flags.glutenFree && <RecipeFlag type="glutenFree" />}
-			{flags.lowGluten && <RecipeFlag type="lowGluten" />}
-			{flags.dairyFree && <RecipeFlag type="dairyFree" />}
-			{flags.noAddedSugar && <RecipeFlag type="noAddedSugar" />}
+			{vegan && <RecipeFlag type="vegan" />}
+			{vegetarian && <RecipeFlag type="vegetarian" />}
+			{glutenFree && <RecipeFlag type="glutenFree" />}
+			{lowGluten && <RecipeFlag type="lowGluten" />}
+			{dairyFree && <RecipeFlag type="dairyFree" />}
+			{noAddedSugar && <RecipeFlag type="noAddedSugar" />}
 			{margaritasFavorite && <RecipeFlag type="margaritasFavorite" />}
 			{artemsFavorite && <RecipeFlag type="artemsFavorite" />}
 		</Stack>

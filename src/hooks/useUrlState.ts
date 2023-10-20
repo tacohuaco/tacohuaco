@@ -1,5 +1,10 @@
-import { isFunction } from 'lodash';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import isFunction from 'lodash/isFunction';
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useState,
+} from 'react';
 
 interface UseUrlStateInterface<T> {
 	name: string;

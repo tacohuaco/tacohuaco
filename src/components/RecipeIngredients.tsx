@@ -1,147 +1,107 @@
-import React, { ComponentProps, ComponentType } from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import { Box, Text } from 'tamia';
-import { Link } from 'tamia-gatsby-link';
-import { SubrecipeRenderer } from './SubrecipeRenderer';
-import { useRecipe, findIngredient } from './RecipeContext';
-import {
-	normalize,
-	parse,
-	formatOption,
-	printOption,
-	Ingredient,
-} from '../util/olivier';
+import { Text, Link, Stack, Heading, List, ListItem, Markdown } from '.';
+import { formatOption, printOption } from '../util/olivier';
 import Group from 'react-group';
-import { findSubrecipeIngredient, useSubrecipes } from './SubrecipesContext';
+import type { IngredientsSection, RecipeIngredient } from '../types/Recipe';
 
-type Props = React.ComponentProps<typeof Text> & {
-	children: React.ReactNode;
-};
-
-export const IngredientListItem = (props: ComponentProps<typeof Box>) => (
-	<Box
-		as="li"
-		sx={{
-			'&&': {
-				marginLeft: 0,
-				paddingLeft: 0,
-				marginBottom: 'm',
-			},
-			'::before': {
-				display: 'none',
-			},
-		}}
-		{...props}
-	/>
-);
-
-const Paragraph: ComponentType<any> = ({ children }) => {
-	if (children?.props?.href && children?.props?.children === '#') {
-		return (
-			<SubrecipeRenderer slug={children?.props?.href} value="ingredients" />
-		);
-	}
-	return children;
-};
-
-const splitOutComment = (ingredient: string | undefined | null) =>
-	(ingredient || '').split(/\s*;\s*/);
-
-const parseMdxIngredient = (children: string | string[]) => {
-	if (Array.isArray(children)) {
-		const [ingredient, ...rest] = children;
-		return [...splitOutComment(ingredient), ...rest];
-	}
-	return splitOutComment(children);
-};
-
-interface IngredientNameProps {
-	ingredient: Ingredient;
-	printName?: string;
+export interface ExtraSection {
+	name: string;
+	items: string[];
 }
 
-const IngredientName = ({ ingredient, printName }: IngredientNameProps) => {
-	const subrecipes = useSubrecipes();
-	const subrecipe = findSubrecipeIngredient(subrecipes, ingredient);
+type Props = {
+	ingredients: IngredientsSection[];
+	extras: ExtraSection[];
+};
 
+const IngredientName = ({
+	ingredient,
+	printName,
+}: {
+	ingredient: RecipeIngredient;
+	printName?: string;
+}) => {
 	const name = (
 		<>
 			{ingredient.modifier} {printName}
 		</>
 	);
-	if (subrecipe) {
-		return <Link href={`/recipes/${subrecipe.slug}/`}>{name}</Link>;
+	if (ingredient.subrecipeSlug) {
+		return <Link href={`/recipes/${ingredient.subrecipeSlug}/`}>{name}</Link>;
 	} else {
 		return <>{name}</>;
 	}
 };
 
-const IngredientItem: ComponentType<any> = ({ children }) => {
-	const { ingredients } = useRecipe();
-
-	const [rawIngredient, ...comments] = parseMdxIngredient(children);
-	const options = normalize(parse(rawIngredient));
-
-	const scaledIngredients = options.map(
-		(option) =>
-			findIngredient(ingredients, {
-				name: option.name,
-				modifier: option.modifier,
-			}) || option
-	);
-
+function IngredientItem({ options }: { options: RecipeIngredient[] }) {
+	const comments = options.map((x) => x.comment);
 	return (
-		<IngredientListItem>
-			<Text as="div" variant="small" sx={{ lineHeight: 'small' }}>
-				<Group
-					separator={
-						<>
-							{' '}
-							<i>or</i>{' '}
-						</>
-					}
-				>
-					{scaledIngredients.map((option, index) => {
-						const { name, amount, suffix } = printOption(formatOption(option));
-						const shouldShowAmount =
-							index === 0 ||
-							option.minAmount !== scaledIngredients[0].minAmount ||
-							option.maxAmount !== scaledIngredients[0].maxAmount;
-						return (
-							<Group key={name} separator=" ">
-								{shouldShowAmount && <b>{amount}</b>}
-								{shouldShowAmount && suffix}
-								<IngredientName ingredient={option} printName={name} />
-							</Group>
-						);
-					})}
-				</Group>
-				{comments.length > 0 && (
-					<Text as="div" variant="italic">
-						{comments}
-					</Text>
-				)}
-			</Text>
-		</IngredientListItem>
+		<ListItem>
+			<Group
+				separator={
+					<>
+						{' '}
+						<i>or</i>{' '}
+					</>
+				}
+			>
+				{options.map((option, index) => {
+					const { name, amount, suffix } = printOption(formatOption(option));
+					const shouldShowAmount =
+						index === 0 ||
+						option.minAmount !== options[0].minAmount ||
+						option.maxAmount !== options[0].maxAmount;
+					return (
+						<Group key={name} separator=" ">
+							{shouldShowAmount && <b>{amount}</b>}
+							{shouldShowAmount && suffix}
+							<IngredientName ingredient={option} printName={name} />
+						</Group>
+					);
+				})}
+			</Group>
+			{comments.length > 0 && (
+				<Text as="div" variant="italic">
+					{comments}
+				</Text>
+			)}
+		</ListItem>
 	);
-};
+}
 
-const components = {
-	p: Paragraph,
-	li: IngredientItem,
-} as const;
-
-export function RecipeIngredients({ children, ...props }: Props) {
+export function RecipeIngredients({ ingredients, extras }: Props) {
 	return (
-		<Text
-			as="div"
-			sx={{
-				fontSize: ['m', 'm', 'm', 's'],
-				lineHeight: 'large',
-			}}
-			{...props}
-		>
-			<MDXProvider components={components}>{children}</MDXProvider>
-		</Text>
+		<Stack gap="l">
+			{ingredients.map((section) => {
+				if (section.ingredients.length === 0) {
+					return null;
+				}
+
+				return (
+					<Stack key={section.name} gap="m">
+						{section.name && <Heading level={3}>{section.name}</Heading>}
+						<List>
+							{section.ingredients.map((options) => (
+								<IngredientItem key={options[0].name} options={options} />
+							))}
+						</List>
+					</Stack>
+				);
+			})}
+			{extras.map(
+				(section) =>
+					section.items.length > 0 && (
+						<Stack key={section.name} gap="m">
+							<Heading level={3}>{section.name}</Heading>
+							<List>
+								{section.items.map((item) => (
+									<ListItem key={item}>
+										<Markdown text={item} />
+									</ListItem>
+								))}
+							</List>
+						</Stack>
+					)
+			)}
+		</Stack>
 	);
 }

@@ -1,15 +1,54 @@
-import { IngredientWithInfo, Month } from '../util/olivier';
-import { Asset } from './Asset';
+import { Month, type Ingredient, type IngredientInfo } from '../util/olivier';
+import { type Asset } from './Asset';
+
+export type RecipeIngredient = Ingredient &
+	IngredientInfo & {
+		subrecipeSlug?: string;
+	};
 
 export interface IngredientsSection {
 	name: string;
-	ingredients: IngredientWithInfo[];
+	ingredients: RecipeIngredient[][];
+}
+
+export interface Step {
+	text: string;
+	pause: boolean;
 }
 
 export interface StepsSection {
 	name: string;
-	steps: string[];
+	steps: Step[];
 }
+
+export interface Yields {
+	amount: number;
+	unit: string;
+}
+
+// Just enough data to render a recipe card and search
+export type RecipeFragment = Pick<
+	Recipe,
+	| 'artemsFavorite'
+	| 'createdAt'
+	| 'cuisines'
+	| 'dairyFree'
+	| 'glutenFree'
+	| 'images'
+	| 'ingredients'
+	| 'keywords'
+	| 'lowGluten'
+	| 'margaritasFavorite'
+	| 'noAddedSugar'
+	| 'overnight'
+	| 'seasons'
+	| 'slug'
+	| 'tags'
+	| 'time'
+	| 'title'
+	| 'vegan'
+	| 'vegetarian'
+>;
 
 export interface Recipe {
 	vegan: boolean;
@@ -21,7 +60,7 @@ export interface Recipe {
 	seasons: Month[];
 	createdAt: Date;
 	title: string;
-	description: string;
+	description?: string;
 	artemsFavorite: boolean;
 	margaritasFavorite: boolean;
 	overnight: boolean;
@@ -31,25 +70,15 @@ export interface Recipe {
 	steps: StepsSection[];
 	keywords: string[];
 	slug: string;
-	source: string;
-	time: number;
+	source?: string;
+	time?: number;
 	tools: string[];
 	notes: string[];
 	preconditions: string[];
-	yields: string;
+	tips: string[];
+	warnings: string[];
+	yields: Yields;
 	images: Asset[];
 	subrecipes: Pick<Recipe, 'slug' | 'title'>[];
-	recipes: Pick<
-		Recipe,
-		| 'artemsFavorite'
-		| 'createdAt'
-		| 'cuisines'
-		| 'images'
-		| 'margaritasFavorite'
-		| 'overnight'
-		| 'slug'
-		| 'time'
-		| 'title'
-		| 'tags'
-	>[];
+	recipes: Pick<Recipe, 'slug' | 'title'>[];
 }

@@ -1,7 +1,4 @@
-import React from 'react';
-import { Stack } from 'tamia';
-import { Logo } from './Logo';
-import { Menu } from './Menu';
+import { Stack, Logo, Menu } from '.';
 
 type Props = {
 	url: string;
@@ -13,7 +10,7 @@ export function Header({ url }: Props) {
 			as="header"
 			gap="l"
 			justifyContent="space-between"
-			direction={['column', 'row']}
+			direction={{ mobile: 'column', tablet: 'row' }}
 		>
 			<Logo />
 			<Menu current={url} />

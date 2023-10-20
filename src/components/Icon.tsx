@@ -1,5 +1,4 @@
-import React from 'react';
-import { Icon as IconBase } from 'tamia';
+import { Icon as IconBase } from '../tamia';
 
 type IconInfo = {
 	width?: number;
@@ -20,7 +19,7 @@ export type IconName = keyof typeof ICONS;
 
 type Props = {
 	icon: IconName;
-	size: number | string;
+	size: string | number;
 };
 
 export function Icon({ icon, size }: Props) {

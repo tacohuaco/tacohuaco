@@ -1,7 +1,7 @@
-import React, { ComponentProps } from 'react';
-import { random, sample } from 'lodash';
-import { Link } from 'gatsby';
-import { Box, Stack, Text } from 'tamia';
+import { type ComponentProps } from 'react';
+import random from 'lodash/random';
+import sample from 'lodash/sample';
+import { Box, Stack, QuotedLink } from '.';
 import {
 	Taco,
 	TORTILLAS,
@@ -11,6 +11,7 @@ import {
 	MOUTHES,
 	GLASSES,
 } from './Taco';
+import { logo, text } from './Logo.css';
 
 const TORTILLA_NAMES = Object.keys(TORTILLAS) as (keyof typeof TORTILLAS)[];
 const FILLING_NAMES = Object.keys(FILLINGS) as (keyof typeof FILLINGS)[];
@@ -37,45 +38,17 @@ const getTacoProps = (): ComponentProps<typeof Taco> => {
 	};
 };
 
-export const GatsbyLink = Text.withComponent(Link);
-
 export function Logo() {
 	return (
-		<GatsbyLink
-			to="/"
-			variant="menu"
-			sx={{
-				':link,:visited': {
-					transition: 'hover',
-					transitionProperty: 'all',
-					marginTop: '-s',
-					padding: 'xs',
-					color: 'accent',
-					bg: 'bg',
-					fontWeight: 'bold',
-					textDecoration: 'none',
-				},
-				':active .Logo__text, :hover .Logo__text': {
-					border: 'input',
-					borderWidth: '0 0 2px 0',
-				},
-				':focus': {
-					outline: 'input',
-					outlineColor: 'accent',
-				},
-			}}
-		>
+		<QuotedLink href="/">
 			<Stack as="span" gap="s" direction="row" mt="xs">
-				<Box as="span" sx={{ mt: -11 }}>
+				<Box as="span" className={logo}>
 					<Taco height={34} {...getTacoProps()} />
 				</Box>
-				<Box
-					sx={{ transition: 'hover', transitionProperty: 'all' }}
-					className="Logo__text"
-				>
+				<Box as="span" className={text}>
 					Tacohuaco
 				</Box>
 			</Stack>
-		</GatsbyLink>
+		</QuotedLink>
 	);
 }

@@ -1,7 +1,5 @@
-import React from 'react';
-import { Box, Text } from 'tamia';
-import { Icon } from './Icon';
-import { Tooltip } from './Tooltip';
+import { Box, Text, Icon, Tooltip, TooltipTrigger } from '.';
+import { moonIcon } from './RecipeTimes.css';
 
 type Props = {
 	time: number;
@@ -10,7 +8,7 @@ type Props = {
 };
 
 const MoonIcon = () => (
-	<Box as="span" sx={{ color: 'moon', verticalAlign: '0.15ex' }}>
+	<Box as="span" className={moonIcon}>
 		<Icon icon="moon" size="1em" />
 	</Box>
 );
@@ -24,7 +22,12 @@ export function RecipeTimes({ time, overnight, size = 'medium' }: Props) {
 					<>
 						{' '}
 						<Tooltip value="Requires preparation the day before">
-							<MoonIcon />
+							{({ tooltipNode }) => (
+								<TooltipTrigger>
+									{tooltipNode}
+									<MoonIcon />
+								</TooltipTrigger>
+							)}
 						</Tooltip>
 					</>
 				)}

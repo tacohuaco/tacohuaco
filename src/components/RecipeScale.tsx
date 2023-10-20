@@ -1,5 +1,4 @@
-import React from 'react';
-import { Stack } from 'tamia';
+import { Stack } from '.';
 import { Button } from './Button';
 
 type Props = {
@@ -11,7 +10,7 @@ export function RecipeScale({ onLess, onMore }: Props) {
 	return (
 		<Stack
 			direction="row"
-			gap={['s', 'xs']}
+			gap={{ mobile: 's', tablet: 'xs' }}
 			alignItems="center"
 			minWidth="auto"
 		>

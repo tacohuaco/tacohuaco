@@ -1,5 +1,5 @@
-import React, { ComponentProps, ReactNode } from 'react';
-import { Stack, Text } from 'tamia';
+import { type ComponentProps, type ReactNode } from 'react';
+import { Stack, Text } from '.';
 
 type Props = {
 	children?: ReactNode;

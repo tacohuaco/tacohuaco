@@ -1,6 +1,4 @@
-import React from 'react';
-import { Text } from 'tamia';
-import { Link } from 'tamia-gatsby-link';
+import { Text, Link } from '.';
 
 export function Footer() {
 	return (

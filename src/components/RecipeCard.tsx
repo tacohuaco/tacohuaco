@@ -1,15 +1,24 @@
-import React, { ComponentProps } from 'react';
-import { graphql } from 'gatsby';
-import { Box, Stack, Text, Image, Frame } from 'tamia';
-import { Link } from 'tamia-gatsby-link';
-import { getImageUrl } from '../util/client';
-import { RecipeFlags } from './RecipeFlags';
-import { RecipeTimes } from './RecipeTimes';
-
-export const GatsbyLink = Box.withComponent(Link);
+import { type ComponentProps } from 'react';
+import {
+	Stack,
+	Text,
+	Link,
+	Frame,
+	RecipeFlags,
+	RecipeTimes,
+	HygraphImage,
+	Expander,
+} from '.';
+import type { RecipeFragment } from '../types/Recipe';
+import { frame, imageContainer, link } from './RecipeCard.css';
 
 export function RecipeCard({
-	flags,
+	vegan,
+	vegetarian,
+	glutenFree,
+	lowGluten,
+	dairyFree,
+	noAddedSugar,
 	margaritasFavorite,
 	artemsFavorite,
 	images,
@@ -17,50 +26,36 @@ export function RecipeCard({
 	slug,
 	time,
 	overnight,
-	...rest
-}: Queries.RecipeMetaFragment & ComponentProps<typeof Stack>) {
+}: RecipeFragment & ComponentProps<typeof Stack>) {
 	return (
-		<Stack {...rest} gap="s" direction="column">
-			<GatsbyLink
-				href={`/recipes/${slug}/`}
-				sx={{
-					transition: 'hover',
-					transitionProperty: 'color',
-					':hover .RecipeCard__imageContainer': {
-						boxShadow: [null, 'input'],
-						transition: 'hover',
-						transitionProperty: 'box-shadow',
-						willChange: 'box-shadow',
-					},
-				}}
-			>
+		<Stack gap="s" direction="column">
+			<Link href={`/recipes/${slug}/`} className={link}>
 				<Stack gap="s" direction="column">
-					<Box>
-						<Box mx={['-m', 0]} className="RecipeCard__imageContainer">
-							<Frame ratio={6 / 9} sx={{ bg: 'light' }}>
-								{images.length > 0 && (
-									<Image
-										src={getImageUrl(images[0].url, {
-											width: 700,
-											height: 700,
-										})}
-										alt=""
-									/>
-								)}
-							</Frame>
-						</Box>
-					</Box>
-					<Text
-						as="p"
-						sx={{ fontSize: 'xl', fontFamily: 'heading', color: 'inherit' }}
-					>
+					<Expander className={imageContainer}>
+						<Frame ratio={6 / 9} className={frame}>
+							{images.length > 0 && (
+								<HygraphImage
+									handle={images[0].handle}
+									width={700}
+									height={700}
+									alt=""
+								/>
+							)}
+						</Frame>
+					</Expander>
+					<Text as="span" variant="card">
 						{title}
 					</Text>
 				</Stack>
-			</GatsbyLink>
+			</Link>
 			<Stack gap="s" direction="row" alignItems="center">
 				<RecipeFlags
-					flags={flags}
+					vegan={vegan}
+					vegetarian={vegetarian}
+					glutenFree={glutenFree}
+					lowGluten={lowGluten}
+					dairyFree={dairyFree}
+					noAddedSugar={noAddedSugar}
 					margaritasFavorite={margaritasFavorite}
 					artemsFavorite={artemsFavorite}
 				/>
@@ -69,52 +64,3 @@ export function RecipeCard({
 		</Stack>
 	);
 }
-
-export const recipeMetaFragment = graphql`
-	fragment RecipeMeta on GraphCMS_Recipe {
-		allIngredients {
-			ingredients {
-				name
-			}
-		}
-		artemsFavorite
-		createdAt
-		cuisines
-		flags {
-			vegan
-			vegetarian
-			glutenFree
-			lowGluten
-			dairyFree
-			noAddedSugar
-		}
-		images {
-			handle
-			height
-			url
-			width
-		}
-		keywordsList
-		margaritasFavorite
-		overnight
-		seasons
-		slug
-		time
-		title
-		tags
-	}
-`;
-
-export const allIngredientsFragment = graphql`
-	fragment AllIngredients on IngredientsJson {
-		slug
-		ingredients {
-			name
-			minAmount
-			maxAmount
-			unit
-			modifier
-			comment
-		}
-	}
-`;

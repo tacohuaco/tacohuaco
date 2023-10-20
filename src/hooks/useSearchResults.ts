@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
-import { Index } from 'lunr';
-import { deburr } from 'lodash';
+import deburr from 'lodash/deburr';
+import type { Index } from 'lunr';
+import type { RecipeFragment } from '../types/Recipe';
 
 export function useSearchResults(
 	rawIndex: Index,
-	rawStore: readonly Queries.RecipeMetaFragment[],
+	rawStore: RecipeFragment[],
 	query?: string
 ) {
 	const index = useMemo(() => {

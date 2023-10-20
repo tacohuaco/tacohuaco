@@ -1,22 +1,11 @@
-import styled from 'styled-components';
+import clsx from 'clsx';
+import { Box, type BoxProps } from '../tamia/components/Box';
+import { input } from './Input.css';
+import type { ElementType } from 'react';
 
-export const Input = styled.input`
-	width: 100%;
-	height: 2em;
-	padding: ${(p) => p.theme.space.xxs} ${(p) => p.theme.space.s};
-	font-family: ${(p) => p.theme.fonts.ui};
-	font-size: ${(p) => p.theme.fontSizes.m};
-	font-weight: ${(p) => p.theme.fontWeights.ui};
-	background-color: ${(p) => p.theme.colors.bg};
-	color: ${(p) => p.theme.colors.base};
-	border: ${(p) => p.theme.borders.input};
-	border-color: ${(p) => p.theme.colors.base};
-	border-radius: ${(p) => p.theme.radii.button};
-	appearance: none;
-
-	&:focus {
-		outline: 0;
-		border-color: ${(p) => p.theme.colors.accent};
-		box-shadow: ${(p) => p.theme.shadows.input};
-	}
-`;
+export function Input<C extends ElementType = 'input'>({
+	className,
+	...props
+}: Omit<BoxProps<C>, 'as'>) {
+	return <Box as="input" className={clsx(className, input)} {...props} />;
+}

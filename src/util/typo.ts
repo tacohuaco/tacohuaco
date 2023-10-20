@@ -3,6 +3,7 @@ import rules, {
 	abbrs,
 	dashesBasic,
 	ellipses,
+	definitions,
 	numberOrdinals,
 	numberSeparators,
 	numberUnits,
@@ -12,7 +13,7 @@ import rules, {
 	shortWords,
 } from 'richtypo-rules-en';
 
-const hairspace = ' ';
+const { hairspace } = definitions;
 
 type MaybeText = string | undefined | null;
 

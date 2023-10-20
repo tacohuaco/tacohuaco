@@ -1,9 +1,16 @@
-import React, { FormEventHandler } from 'react';
-import styled from 'styled-components';
-import { VisuallyHidden } from 'tamia';
+import clsx from 'clsx';
+import { type FormEventHandler } from 'react';
+import { VisuallyHidden } from '.';
 import { useCombobox } from 'downshift';
 import { matchSorter } from 'match-sorter';
 import { Input } from './Input';
+import {
+	combobox,
+	input,
+	menu,
+	searchItem,
+	searchItemHighlighted,
+} from './SearchForm.css';
 
 const MAX_ITEMS_TO_SHOW = 12;
 
@@ -12,55 +19,6 @@ type Props = {
 	value: string;
 	onChange: (value?: string) => void;
 };
-
-const SearchInput = styled(Input)`
-	height: auto;
-	padding: ${(p) => p.theme.space.s};
-	font-size: ${(p) => p.theme.fontSizes.l};
-	transition: ${(p) => p.theme.transitions.hover};
-	transition-property: all;
-	&::-webkit-search-decoration,
-	&::-webkit-search-cancel-button,
-	&::-webkit-search-results-button,
-	&::-webkit-search-results-decoration {
-		display: none;
-	}
-`;
-
-const SearchCombobox = styled.div`
-	position: relative;
-`;
-
-const SearchMenu = styled.div`
-	position: absolute;
-	z-index: 99;
-	left: 0;
-	right: 0;
-	margin-top: ${(p) => p.theme.space.s};
-	padding: ${(p) => p.theme.space.xs} 0;
-	background-color: ${(p) => p.theme.colors.bg};
-	border: ${(p) => p.theme.borders.input};
-	border-color: ${(p) => p.theme.colors.accent};
-	border-radius: ${(p) => p.theme.radii.button};
-	box-shadow: ${(p) => p.theme.shadows.popover};
-	transition: ${(p) => p.theme.transitions.fade};
-	transition-property: all;
-	will-change: opacity;
-
-	&:empty {
-		opacity: 0;
-	}
-`;
-
-const SearchItem = styled.div<{ highlighted: boolean }>`
-	padding: ${(p) => p.theme.space.xxs} ${(p) => p.theme.space.s};
-	font-family: ${(p) => p.theme.fonts.ui};
-	font-size: ${(p) => p.theme.fontSizes.m};
-	font-weight: ${(p) => p.theme.fontWeights.ui};
-	color: ${(p) => (p.highlighted ? p.theme.colors.bg : p.theme.colors.base)};
-	background-color: ${(p) =>
-		p.highlighted ? p.theme.colors.accent : 'transparent'};
-`;
 
 const getItemsToShow = (items: readonly string[], value: string) => {
 	if (value === '') {
@@ -107,19 +65,23 @@ export function SearchForm({ items, value, onChange }: Props) {
 			<VisuallyHidden as="label" {...getLabelProps()}>
 				Search recipes
 			</VisuallyHidden>
-			<SearchCombobox {...getComboboxProps()}>
-				<SearchInput
+			<div className={combobox} {...getComboboxProps()}>
+				<Input
+					className={input}
 					{...getInputProps({
 						type: 'search',
 						placeholder: 'Search recipes',
 					})}
 				/>
-				<SearchMenu {...getMenuProps()}>
+				<div className={menu} {...getMenuProps()}>
 					{isOpen &&
 						itemsToShow.map((item, index) => (
-							<SearchItem
+							<div
+								className={clsx(
+									searchItem,
+									highlightedIndex === index && searchItemHighlighted
+								)}
 								key={item}
-								highlighted={highlightedIndex === index}
 								{...getItemProps({
 									item,
 									index,
@@ -127,10 +89,10 @@ export function SearchForm({ items, value, onChange }: Props) {
 								})}
 							>
 								{item}
-							</SearchItem>
+							</div>
 						))}
-				</SearchMenu>
-			</SearchCombobox>
+				</div>
+			</div>
 		</form>
 	);
 }

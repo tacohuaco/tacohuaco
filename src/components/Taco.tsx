@@ -1,5 +1,3 @@
-import React from 'react';
-
 type PaletteName = 'color' | 'mono';
 
 type Palette = {

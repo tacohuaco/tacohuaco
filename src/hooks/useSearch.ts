@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 import { sentenceCase } from 'sentence-case';
 import { useSearchResults } from '../hooks/useSearchResults';
 import {
@@ -15,6 +15,8 @@ import {
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 import { useUrlState } from './useUrlState';
+import type { RecipeFragment } from '../types/Recipe';
+import { getAllIngredients } from '../util/getAllIngredients';
 
 const DEFAULT_AUTOCOMPLETE_ITEMS = [
 	...Object.values(MONTH_TO_NAME),
@@ -27,14 +29,12 @@ const DEFAULT_AUTOCOMPLETE_ITEMS = [
 ];
 
 const getIngredientAliases = (name: string) => {
-	const aliases = INGREDIENTS.find((x) => x[0][0] === name) || [];
+	const aliases = INGREDIENTS.find((x) => x[0][0] === name) ?? [];
 	// Return a plural of each alias
 	return aliases.map((x) => (x.length > 1 ? x[1] : x[0]));
 };
 
-const getAutocompleteItems = (
-	recipes: readonly Queries.RecipeMetaFragment[]
-): readonly string[] => {
+const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 	const allTitles: string[] = [];
 	const allIngredients: string[] = [];
 	const allTags: string[] = [];
@@ -44,9 +44,12 @@ const getAutocompleteItems = (
 	recipes.forEach((recipe) => {
 		allTitles.push(recipe.title);
 
-		const ingredientNames = recipe.allIngredients.flatMap(({ ingredients }) =>
-			ingredients.flatMap(({ name }) => getIngredientAliases(name))
+		const ingredients = getAllIngredients(recipe.ingredients);
+
+		const ingredientNames = ingredients.flatMap(({ name }) =>
+			getIngredientAliases(name)
 		);
+
 		allIngredients.push(...ingredientNames);
 
 		const tagNames = recipe.tags.map((x) => sentenceCase(x).toLowerCase());
@@ -54,7 +57,7 @@ const getAutocompleteItems = (
 
 		allCuisines.push(...recipe.cuisines);
 
-		allKeywords.push(...recipe.keywordsList);
+		allKeywords.push(...recipe.keywords);
 	});
 
 	return uniq([
@@ -67,7 +70,7 @@ const getAutocompleteItems = (
 	]);
 };
 
-export function useSearch(recipes: readonly Queries.RecipeMetaFragment[]) {
+export function useSearch(recipes: RecipeFragment[]) {
 	const [searchQuery, setSearchQuery] = useUrlState({
 		name: 'q',
 		defaultValue: '',

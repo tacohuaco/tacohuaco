@@ -1,5 +1,12 @@
-import { ALL_FLAGS, CONTENTS_FLAGS, FAVORITES_FLAGS } from '../consts';
+export const ALL_FLAGS = [
+	'vegan',
+	'vegetarian',
+	'glutenFree',
+	'lowGluten',
+	'dairyFree',
+	'noAddedSugar',
+	'margaritasFavorite',
+	'artemsFavorite',
+] as const;
 
 export type FlagName = (typeof ALL_FLAGS)[number];
-export type ContentsFlagName = (typeof CONTENTS_FLAGS)[number];
-export type FavoriteFlagName = (typeof FAVORITES_FLAGS)[number];

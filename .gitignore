@@ -11,6 +11,8 @@ node_modules/
 .vscode/
 yarn.lock
 .eslintcache
-.cache/
+.astro/
 public/
-src/gatsby-types.d.ts
+dist/
+src/content/recipes/
+src/data/*.json

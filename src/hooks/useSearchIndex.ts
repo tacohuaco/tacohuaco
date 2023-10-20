@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
 import lunr from 'lunr';
-import { deburr } from 'lodash';
+import deburr from 'lodash/deburr';
 import { sentenceCase } from 'sentence-case';
 import { Month } from '../util/olivier';
 import { ALL_INGREDIENTS } from '../util/olivier/langs/en/ingredients';
+import { getAllIngredients } from '../util/getAllIngredients';
+import type { RecipeFragment } from '../types/Recipe';
 
 export const MONTH_TO_NAME: Record<string, string> = {
 	[Month.January]: 'January',
@@ -43,20 +45,17 @@ export const FLAG_VEGAN = 'vegan';
 export const FLAG_VEGETARIAN = 'vegetarian';
 
 const getIngredientAliases = (name: string) => {
-	return ALL_INGREDIENTS.find((x) => x[0] === name) || [];
+	return ALL_INGREDIENTS.find((x) => x[0] === name) ?? [];
 };
 
-const getIngredients = (
-	allIngredients: Queries.RecipeMetaFragment['allIngredients']
-) => {
-	return allIngredients.flatMap((x) =>
-		x.ingredients.flatMap((y) =>
-			getIngredientAliases(y.name).flatMap((z) => deburr(z).split(' '))
-		)
+const getIngredients = (ingredients: RecipeFragment['ingredients']) => {
+	const allIngredients = getAllIngredients(ingredients);
+	return allIngredients.flatMap((y) =>
+		getIngredientAliases(y.name).flatMap((z) => deburr(z).split(' '))
 	);
 };
 
-export function useSearchIndex(recipes: readonly Queries.RecipeMetaFragment[]) {
+export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 	return useMemo(() => {
 		return lunr(function () {
 			this.ref('slug');
@@ -72,29 +71,30 @@ export function useSearchIndex(recipes: readonly Queries.RecipeMetaFragment[]) {
 					slug,
 					title,
 					cuisines,
-					allIngredients,
+					ingredients,
 					tags,
-					flags,
+					vegan,
+					vegetarian,
 					seasons,
-					keywordsList,
+					keywords,
 				}) => {
 					this.add({
 						slug,
 						title: deburr(title),
 						cuisines,
-						ingredients: getIngredients(allIngredients),
+						ingredients: getIngredients(ingredients),
 						// Tags come like `awesomePizza`, we need to convert them
 						// to words and then split into an array so Lurn indexes
 						// them as separate words
 						tags: [
 							...tags.map((x) => sentenceCase(x).split(' ')),
-							flags.vegan ? FLAG_VEGAN : [],
-							flags.vegetarian ? FLAG_VEGETARIAN : [],
+							vegan ? FLAG_VEGAN : [],
+							vegetarian ? FLAG_VEGETARIAN : [],
 						].flat(),
 						seasons: seasons
 							.flatMap((x) => [MONTH_TO_NAME[x], MONTH_TO_SEASON[x]])
 							.flat(),
-						keywords: keywordsList,
+						keywords,
 					});
 				}
 			);

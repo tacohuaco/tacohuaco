@@ -1,2 +1,5 @@
 public/
-.cache/
+.astro/
+dist/
+src/content/recipes/
+src/data/*.json

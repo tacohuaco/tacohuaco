@@ -1,27 +1,16 @@
-import React from 'react';
-import { sortBy, upperFirst } from 'lodash';
-import { Box, Text, VisuallyHidden } from 'tamia';
-import { asList } from '../util/client';
-import { IngredientInfo, IngredientKind, Month } from '../util/olivier';
+import sortBy from 'lodash/sortBy';
+import upperFirst from 'lodash/upperFirst';
+import { TextContent } from '.';
+import { asList } from '../util/asList';
+import { IngredientKind } from '../util/olivier';
+import type { IngredientsSection, RecipeIngredient } from '../types/Recipe';
+import { Season } from './Season';
+
+// TODO: Remove duplicates
 
 type Props = {
-	infos: readonly IngredientInfo[];
+	ingredients: readonly IngredientsSection[];
 };
-
-const ALL_MONTHS = [
-	Month.January,
-	Month.February,
-	Month.March,
-	Month.April,
-	Month.May,
-	Month.June,
-	Month.July,
-	Month.August,
-	Month.September,
-	Month.October,
-	Month.November,
-	Month.December,
-];
 
 const KINDS: Record<IngredientKind, string> = {
 	[IngredientKind.Vegan]: 'Vegan',
@@ -32,22 +21,7 @@ const KINDS: Record<IngredientKind, string> = {
 	[IngredientKind.Unknown]: 'Unknown',
 };
 
-const MONTH_NAMES: Record<Month, string> = {
-	[Month.January]: 'January',
-	[Month.February]: 'February',
-	[Month.March]: 'March',
-	[Month.April]: 'April',
-	[Month.May]: 'May',
-	[Month.June]: 'June',
-	[Month.July]: 'July',
-	[Month.August]: 'August',
-	[Month.September]: 'September',
-	[Month.October]: 'October',
-	[Month.November]: 'November',
-	[Month.December]: 'December',
-};
-
-const printContents = (ingredient: IngredientInfo): string =>
+const printContents = (ingredient: RecipeIngredient): string =>
 	upperFirst(
 		asList([
 			ingredient.hasGluten && 'gluten',
@@ -56,30 +30,11 @@ const printContents = (ingredient: IngredientInfo): string =>
 		])
 	);
 
-const Season = ({ ingredient }: { ingredient: IngredientInfo }) => (
-	<>
-		{ALL_MONTHS.map((month) => {
-			const inSeason = ingredient.seasons.includes(month);
-			return (
-				<Text
-					key={month}
-					as="span"
-					variant="small"
-					color={inSeason ? undefined : 'light'}
-				>
-					{inSeason && <VisuallyHidden>{MONTH_NAMES[month]}</VisuallyHidden>}
-					<span aria-hidden="true">{MONTH_NAMES[month][0]}</span>
-				</Text>
-			);
-		})}
-	</>
-);
-
-export function IngredientsExplorer({ infos }: Props) {
-	const sorted = sortBy(infos, (x) => x.name);
+export function IngredientsExplorer({ ingredients }: Props) {
+	const allIngredients = ingredients.map((x) => x.ingredients).flat(2);
+	const sorted = sortBy(allIngredients, (x) => x.name);
 	return (
-		// HACK: Can't make a table scrollable inside a collapsible section
-		<Box overflowX="scroll" width={[320, 1]}>
+		<TextContent>
 			<table>
 				<thead>
 					<tr>
@@ -104,6 +59,6 @@ export function IngredientsExplorer({ infos }: Props) {
 					})}
 				</tbody>
 			</table>
-		</Box>
+		</TextContent>
 	);
 }

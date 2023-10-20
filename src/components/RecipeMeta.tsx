@@ -1,41 +1,25 @@
-import React from 'react';
-import { Stack } from 'tamia';
-import { RecipeFlags } from './RecipeFlags';
+import { Stack, RecipeFlags, RecipeTimes } from '.';
 import { RecipeTags } from './RecipeTags';
-import { RecipeTimes } from './RecipeTimes';
 import { RecipeCuisines } from './RecipeCuisines';
+import type { RecipeFragment } from '../types/Recipe';
 
-type Props = {
-	flags: Queries.FlagsJson;
-	margaritasFavorite?: boolean;
-	artemsFavorite?: boolean;
-	cuisines: readonly string[];
-	tags: readonly string[];
-	time?: number;
-	overnight?: boolean;
-};
+type Props = RecipeFragment;
 
 export function RecipeMeta({
-	flags,
-	margaritasFavorite,
-	artemsFavorite,
 	cuisines,
 	tags,
 	time,
 	overnight,
+	...flags
 }: Props) {
 	return (
 		<Stack gap="s">
 			<Stack
 				gap="s"
-				direction={['column', 'column', 'row']}
-				alignItems={['flex-start', 'flex-start', 'center']}
+				direction={{ mobile: 'column', desktop: 'row' }}
+				alignItems={{ mobile: 'flex-start', desktop: 'center' }}
 			>
-				<RecipeFlags
-					flags={flags}
-					margaritasFavorite={margaritasFavorite}
-					artemsFavorite={artemsFavorite}
-				/>
+				<RecipeFlags {...flags} />
 				{time && <RecipeTimes time={time} overnight={overnight} />}
 			</Stack>
 			{(cuisines.length > 0 || tags.length > 0) && (

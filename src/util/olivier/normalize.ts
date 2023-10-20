@@ -1,5 +1,5 @@
 import orderBy from 'lodash/orderBy';
-import numericQuantity from 'numeric-quantity';
+import { numericQuantity } from 'numeric-quantity';
 import {
 	GRAMS_IN_KILOGRAM,
 	MILLILITERS_IN_LITER,

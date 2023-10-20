@@ -1,4 +1,4 @@
-import formatQuantity from 'format-quantity';
+import { formatQuantity } from 'format-quantity';
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { UNITLESS } from './langs/en/translations';
 import {

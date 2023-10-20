@@ -1,7 +1,14 @@
-import React, { ComponentProps, ComponentType } from 'react';
-import { Text, Box } from 'tamia';
-import { FlagName } from '../types/Flags';
-import { Tooltip } from './Tooltip';
+import clsx from 'clsx';
+import { type ComponentProps, type ComponentType, type ReactNode } from 'react';
+import { Text, Box, Tooltip } from '.';
+import {
+	circle,
+	flagCircleLink,
+	flagLinkBase,
+	flagRoundLink,
+	round,
+} from './RecipeFlag.css';
+import type { FlagName } from '../types/Flags';
 
 type Props = {
 	type: FlagName;
@@ -11,46 +18,28 @@ type HrefProp = {
 	href?: string;
 };
 
-const FlagLinkBase = ({ sx, ...props }: ComponentProps<typeof Box>) => (
-	<Box
-		as="a"
-		sx={{
-			color: 'inherit',
-			textDecoration: 'none',
-			borderRadius: 'round',
-			':focus': {
-				outline: 'focus',
-				outlineColor: 'accent',
-				outlineOffset: '2px',
-			},
-			...sx,
-		}}
-		{...props}
-	/>
-);
+type ColorProp = {
+	color?: string;
+};
+
+type FlagProps = {
+	title?: string;
+	children?: ReactNode;
+};
 
 const FlagCircleLink = (props: ComponentProps<typeof Box>) => (
-	<FlagLinkBase
-		sx={{
-			':hover': {
-				filter: 'saturate(1.2) brightness(1.1)',
-				cursor: 'pointer',
-			},
-		}}
+	<Box
+		as="a"
 		{...props}
+		className={clsx(flagLinkBase, flagCircleLink, props.className)}
 	/>
 );
 
 const FlagRoundLink = (props: ComponentProps<typeof Box>) => (
-	<FlagLinkBase
-		sx={{
-			color: 'accent',
-			':hover': {
-				bg: 'accent',
-				color: 'bg',
-			},
-		}}
+	<Box
+		as="a"
 		{...props}
+		className={clsx(flagLinkBase, flagRoundLink, props.className)}
 	/>
 );
 
@@ -58,11 +47,17 @@ const TooltipWithLink = ({
 	children,
 	title,
 	href,
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	linkComponent: Link,
 }: React.ComponentProps<typeof Text> &
 	HrefProp & { linkComponent: ComponentType<any> }) => (
-	<Tooltip renderTrigger={!href} value={title}>
-		{href ? <Link href={href}>{children}</Link> : children}
+	<Tooltip value={title}>
+		{({ triggerProps, tooltipNode }) => (
+			<Link href={href} {...triggerProps}>
+				{tooltipNode}
+				{children}
+			</Link>
+		)}
 	</Tooltip>
 );
 
@@ -72,23 +67,13 @@ const Circle = ({
 	color,
 	href,
 	...props
-}: React.ComponentProps<typeof Text> & HrefProp) => (
+}: FlagProps & HrefProp & ColorProp) => (
 	<TooltipWithLink href={href} title={title} linkComponent={FlagCircleLink}>
 		<Text
-			as="div"
-			sx={{
-				width: '2em',
-				height: '2em',
-				p: '0.3em',
-				textAlign: 'center',
-				fontFamily: 'ui',
-				fontSize: 'xs',
-				fontWeight: 'ui',
-				color: 'bg',
-				borderWidth: '0.2em',
-				borderRadius: 'round',
-				backgroundColor: color,
-			}}
+			as="span"
+			aria-hidden="true"
+			className={circle}
+			style={{ backgroundColor: color }}
 			{...props}
 		>
 			{children}
@@ -96,29 +81,12 @@ const Circle = ({
 	</TooltipWithLink>
 );
 
-const Round = ({
-	children,
-	title,
-	href,
-	...props
-}: React.ComponentProps<typeof Text> & HrefProp) => (
+const Round = ({ children, title, href, ...props }: FlagProps & HrefProp) => (
 	<TooltipWithLink href={href} title={title} linkComponent={FlagRoundLink}>
 		<Text
-			as="div"
-			sx={{
-				width: '2em',
-				height: '2em',
-				p: '0.1em',
-				textAlign: 'center',
-				fontFamily: 'ui',
-				fontSize: 'xs',
-				fontWeight: 'ui',
-				borderStyle: 'solid',
-				borderWidth: '0.2em',
-				borderRadius: 'round',
-				borderColor: 'accent',
-				color: 'inherit',
-			}}
+			as="span"
+			aria-hidden="true"
+			className={clsx(circle, round)}
 			{...props}
 		>
 			{children}

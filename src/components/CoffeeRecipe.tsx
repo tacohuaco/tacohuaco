@@ -1,7 +1,10 @@
-import React from 'react';
-import { Stack, Heading, Text } from 'tamia';
+import { Stack, Heading, Text } from '.';
 import parseMs from 'parse-ms';
-import { CoffeeRecipe as CoffeeRecipeType, Step, Action } from '../util/cafe';
+import {
+	type CoffeeRecipe as CoffeeRecipeType,
+	type Step,
+	Action,
+} from '../util/cafe';
 import Group from 'react-group';
 
 type Props = {
@@ -72,7 +75,7 @@ const getWaitText = (step: Step) => {
 	return null;
 };
 
-export default function CoffeeRecipe({ recipe }: Props) {
+export function CoffeeRecipe({ recipe }: Props) {
 	return (
 		<Stack key={recipe.name} gap="m">
 			<Stack gap="s">
