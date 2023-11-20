@@ -28,7 +28,7 @@
     "not dead"
   ],
   "dependencies": {
-    "@astrojs/check": "^0.2.1",
+    "@astrojs/check": "^0.3.0",
     "@astrojs/react": "^3.0.4",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.3",
