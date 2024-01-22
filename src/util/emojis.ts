@@ -1,6 +1,7 @@
 const CUISINE_TO_EMOJI: Record<string, string> = {
 	_DEFAULT: '🏴',
 	Chinese: '🇨🇳',
+	English: '🇬🇧',
 	French: '🥖',
 	Klatzlandian: '🏴‍☠️',
 	Greek: '🇬🇷',
@@ -10,6 +11,7 @@ const CUISINE_TO_EMOJI: Record<string, string> = {
 	Mexican: '🇲🇽',
 	MiddleEastern: '🥙',
 	Russian: '🪆',
+	Spanish: '🇪🇸',
 	Swedish: '🇸🇪',
 	UnitedStates: '🇺🇸',
 	Uzbek: '🇺🇿',
