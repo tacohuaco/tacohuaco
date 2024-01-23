@@ -17,6 +17,7 @@ export interface RecipeModelRaw {
 	tags: string[];
 	time: Maybe<number>;
 	title: string;
+	titleEnglish: Maybe<string>;
 	tools: Maybe<string>;
 	notes: Maybe<string>;
 	yields: Maybe<string>;

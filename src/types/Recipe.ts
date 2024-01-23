@@ -60,6 +60,7 @@ export interface Recipe {
 	seasons: Month[];
 	createdAt: Date;
 	title: string;
+	titleEnglish?: string;
 	description?: string;
 	artemsFavorite: boolean;
 	margaritasFavorite: boolean;

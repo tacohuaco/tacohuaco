@@ -44,6 +44,7 @@ const query = gql`
 			tags
 			time
 			title
+			titleEnglish
 			tools
 			notes
 			yields
