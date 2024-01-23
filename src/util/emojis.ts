@@ -8,6 +8,7 @@ const CUISINE_TO_EMOJI: Record<string, string> = {
 	Italian: '🍕',
 	Japanese: '🇯🇵',
 	Korean: '🇰🇷',
+	Lebanese: '🇱🇧',
 	Mediterranean: '🫒',
 	Mexican: '🇲🇽',
 	MiddleEastern: '🥙',
