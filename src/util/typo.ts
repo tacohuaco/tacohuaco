@@ -5,7 +5,6 @@ import rules, {
 	ellipses,
 	definitions,
 	numberOrdinals,
-	numberSeparators,
 	numberUnits,
 	orphans,
 	prepositions,
@@ -35,7 +34,6 @@ export const typo = (text: MaybeText) =>
 			numberRanges,
 			dimensions,
 			numberOrdinals,
-			numberSeparators,
 			apostrophes,
 		],
 		text ?? ''
@@ -60,7 +58,6 @@ export const typoLite = (text: MaybeText) =>
 			dimensions,
 			numberRanges,
 			numberOrdinals,
-			numberSeparators,
 			apostrophes,
 		],
 		text ?? ''
