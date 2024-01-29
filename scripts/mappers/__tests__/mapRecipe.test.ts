@@ -18,6 +18,7 @@ test('map recipe', () => {
 		tags: ['Sauce', 'Salsa', 'Spicy', 'Foundation', 'Charring', 'Cold', 'Dip'],
 		time: 40,
 		title: 'First world salsa verde',
+		titleEnglish: 'Hello world',
 		tools: '- blender or food processor',
 		notes: 'Do it good!\n\nDo it gooder',
 		yields: '200 ml',
@@ -182,6 +183,7 @@ test('map recipe', () => {
 		    "Tip about salt",
 		  ],
 		  "title": "First world salsa verde",
+		  "titleEnglish": "Hello world",
 		  "tools": [
 		    "blender or food processor",
 		  ],
