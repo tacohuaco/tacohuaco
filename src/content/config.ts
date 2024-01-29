@@ -88,6 +88,7 @@ const recipes = defineCollection({
 	type: 'data',
 	schema: fragment.extend({
 		description: z.string().optional(),
+		titleEnglish: z.string().optional(),
 		notes: z.array(z.string()),
 		preconditions: z.array(z.string()),
 		recipes: z.array(subrecipe),

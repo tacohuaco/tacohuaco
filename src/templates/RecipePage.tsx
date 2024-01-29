@@ -1,6 +1,7 @@
 import { type ReactNode } from 'react';
 import {
 	Stack,
+	Text,
 	Heading,
 	VisuallyHidden,
 	RecipeMeta,
@@ -28,6 +29,7 @@ export function RecipePage(props: Props) {
 		images,
 		keywords,
 		title,
+		titleEnglish,
 		description,
 		madeWithRecipes,
 		relatedRecipes,
@@ -39,7 +41,10 @@ export function RecipePage(props: Props) {
 			<Stack as="main" gap="xl">
 				<Stack gap="l">
 					<Stack gap="m">
-						<Heading level={1}>{title}</Heading>
+						<Stack gap="xxs">
+							<Heading level={1}>{title}</Heading>
+							{titleEnglish && <Text variant="italic">{titleEnglish}</Text>}
+						</Stack>
 						<RecipeMeta {...props} />
 					</Stack>
 

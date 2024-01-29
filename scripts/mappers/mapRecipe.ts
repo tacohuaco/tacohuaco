@@ -76,6 +76,7 @@ export function mapRecipe(
 		recipes,
 		steps: stepsSecions,
 		ingredients: ingredientsSections,
+		titleEnglish: mapMaybeString(recipe.titleEnglish),
 		createdAt: mapDate(recipe.createdAt),
 		keywords: mapKeywords(recipe.keywords),
 		tools: mapTools(recipe.tools, recipe.subrecipes, ingredientsSections),
