@@ -34,6 +34,10 @@ const getIngredientAliases = (name: string) => {
 	return aliases.map((x) => (x.length > 1 ? x[1] : x[0]));
 };
 
+const getTitle = (title: string, titleEnglish?: string) => {
+	return titleEnglish ? `${title} (${titleEnglish})` : title;
+};
+
 const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 	const allTitles: string[] = [];
 	const allIngredients: string[] = [];
@@ -42,7 +46,7 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 	const allKeywords: string[] = [];
 
 	recipes.forEach((recipe) => {
-		allTitles.push(recipe.title);
+		allTitles.push(getTitle(recipe.title, recipe.titleEnglish));
 
 		const ingredients = getAllIngredients(recipe.ingredients);
 
@@ -91,7 +95,7 @@ export function useSearch(recipes: RecipeFragment[]) {
 		return {
 			items: autocompleteItems,
 			value: searchQuery,
-			onChange: (value?: string) => setSearchQuery(value || ''),
+			onChange: (value?: string) => setSearchQuery(value ?? ''),
 		};
 	}, [autocompleteItems, searchQuery]);
 

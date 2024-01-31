@@ -46,6 +46,7 @@ export type RecipeFragment = Pick<
 	| 'tags'
 	| 'time'
 	| 'title'
+	| 'titleEnglish'
 	| 'vegan'
 	| 'vegetarian'
 >;

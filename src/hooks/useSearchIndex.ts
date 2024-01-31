@@ -60,6 +60,7 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 		return lunr(function () {
 			this.ref('slug');
 			this.field('title', { boost: 3 });
+			this.field('titleEnglish', { boost: 3 });
 			this.field('cuisines');
 			this.field('ingredients');
 			this.field('tags');
@@ -70,6 +71,7 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 				({
 					slug,
 					title,
+					titleEnglish,
 					cuisines,
 					ingredients,
 					tags,
@@ -81,6 +83,7 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 					this.add({
 						slug,
 						title: deburr(title),
+						titleEnglish: deburr(titleEnglish),
 						cuisines,
 						ingredients: getIngredients(ingredients),
 						// Tags come like `awesomePizza`, we need to convert them

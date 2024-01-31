@@ -80,6 +80,7 @@ const fragment = z.object({
 	tags: z.array(z.string()),
 	time: z.number().optional(),
 	title: z.string(),
+	titleEnglish: z.string().optional(),
 	vegan: z.boolean(),
 	vegetarian: z.boolean(),
 }) satisfies z.ZodType<RecipeFragment>;
@@ -88,7 +89,6 @@ const recipes = defineCollection({
 	type: 'data',
 	schema: fragment.extend({
 		description: z.string().optional(),
-		titleEnglish: z.string().optional(),
 		notes: z.array(z.string()),
 		preconditions: z.array(z.string()),
 		recipes: z.array(subrecipe),
