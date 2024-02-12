@@ -10,7 +10,7 @@ interface Props {
 
 export function RecipeListSection({ title, recipes }: Props) {
 	return (
-		<Stack as="main" gap="l">
+		<Stack as="section" gap="l">
 			<Heading as="h2" level={1}>
 				{title}
 			</Heading>

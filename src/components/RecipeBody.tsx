@@ -49,7 +49,7 @@ export function RecipeBody(recipe: Recipe) {
 	} = useScale(recipe);
 	return (
 		<Grid gap="m" className={grid}>
-			<Stack gap="m">
+			<Stack as="section" gap="m">
 				<Stack
 					direction="row"
 					gap={{ mobile: 'm', tablet: 's' }}
@@ -79,7 +79,7 @@ export function RecipeBody(recipe: Recipe) {
 					]}
 				/>
 			</Stack>
-			<Stack gap="l">
+			<Stack as="section" gap="l">
 				<Stack gap="m">
 					<Heading level={2}>Directions</Heading>
 					{preconditions.length > 0 && (
