@@ -7,7 +7,7 @@ test('has title', async ({ page }) => {
 	await expect(page).toHaveTitle('Search recipes on Tacohuaco');
 });
 
-test('has all the recipe details', async ({ page }) => {
+test('search for a recipe', async ({ page }) => {
 	await page.goto('http://localhost:4321/search/');
 
 	const input = page.getByPlaceholder('Search recipes');
