@@ -10,7 +10,8 @@
     "pretest": "npm run lint",
     "test": "astro check && vitest run",
     "test:watch": "vitest watch",
-    "test:ci": "npm run lint && vitest run",
+    "test:ci": "npm run lint && vitest run && npx playwright test",
+    "test:e2e": "npx playwright test --ui",
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix --ext .js,.ts,.tsx,.astro",
     "format": "prettier --log-level warn --write \"**/*.{js,ts,tsx,astro,md}\"",
@@ -53,9 +54,11 @@
     "sentence-case": "^3.0.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.41.1",
     "@types/fs-extra": "^11.0.2",
     "@types/lodash": "^4.14.200",
     "@types/lunr": "^2.3.6",
+    "@types/node": "^20.11.15",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
     "@types/remove-markdown": "^0.3.2",

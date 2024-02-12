@@ -15,3 +15,7 @@ yarn.lock
 dist/
 src/content/recipes/
 src/data/*.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
