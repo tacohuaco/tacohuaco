@@ -12,6 +12,7 @@ export function Button<C extends ElementType = 'button'>({
 		<Box
 			{...(props as BoxProps<C>)}
 			as={as ?? 'button'}
+			type="button"
 			className={clsx(className, button)}
 		/>
 	);
