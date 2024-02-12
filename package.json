@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "pretest": "npm run lint",
-    "test": "astro check && vitest run",
+    "test": "astro check && vitest run && npx playwright test",
     "test:watch": "vitest watch",
     "test:ci": "npm run lint && vitest run && npx playwright test",
     "test:e2e": "npx playwright test --ui",
