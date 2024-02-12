@@ -29,7 +29,7 @@ const recipes = entries.map(({ data }) => ({
 }));
 ---
 
-<Layout url="/search/" title="Search">
+<Layout url="/search/" pageTitle="Search recipes on Tacohuaco">
 	<PageWithTitle url="/search/" title="Search">
 		<SearchPage recipes={recipes} client:load />
 	</PageWithTitle>
