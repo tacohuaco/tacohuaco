@@ -12,26 +12,27 @@ export {
 	Typo,
 	VisuallyHidden,
 } from '../tamia';
-export { HygraphImage } from './HygraphImage';
+export { Collapsible } from './Collapsible';
 export { Footer } from './Footer';
 export { Header } from './Header';
 export { Heading } from './Heading';
+export { HygraphImage } from './HygraphImage';
 export { Icon } from './Icon';
+export { Input } from './Input';
+export { List, ListItem } from './List';
 export { Logo } from './Logo';
+export { Markdown } from './Markdown';
 export { Menu } from './Menu';
 export { MenuLink } from './MenuLink';
-export { Text } from './Text';
-export { TextTypo } from './TextTypo';
-export { TextContent } from './TextContent';
+export { OrderedList, OrderedListItem } from './OrderedList';
 export { RecipeCard } from './RecipeCard';
+export { RecipeFlag } from './RecipeFlag';
+export { RecipeFlags } from './RecipeFlags';
 export { RecipeList } from './RecipeList';
 export { RecipeListSection } from './RecipeListSection';
-export { RecipeTimes } from './RecipeTimes';
-export { RecipeFlag } from './RecipeFlag';
 export { RecipeMeta } from './RecipeMeta';
-export { RecipeFlags } from './RecipeFlags';
+export { RecipeTimes } from './RecipeTimes';
+export { Text } from './Text';
+export { TextContent } from './TextContent';
+export { TextTypo } from './TextTypo';
 export { Tooltip, TooltipTrigger } from './Tooltip';
-export { Collapsible } from './Collapsible';
-export { Markdown } from './Markdown';
-export { List, ListItem } from './List';
-export { OrderedList, OrderedListItem } from './OrderedList';

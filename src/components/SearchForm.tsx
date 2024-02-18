@@ -1,9 +1,8 @@
 import clsx from 'clsx';
 import { type FormEventHandler } from 'react';
-import { VisuallyHidden } from '.';
 import { useCombobox } from 'downshift';
 import { matchSorter } from 'match-sorter';
-import { Input } from './Input';
+import { VisuallyHidden, Input } from '.';
 import {
 	combobox,
 	input,
@@ -11,7 +10,7 @@ import {
 	searchItem,
 	searchItemHighlighted,
 } from './SearchForm.css';
-import { useIsMounted } from '../hooks/useIsMounted';
+import { useIsBrowser } from '../hooks/useIsBrowser';
 
 const MAX_ITEMS_TO_SHOW = 12;
 
@@ -36,7 +35,7 @@ const getItemsToShow = (items: readonly string[], value: string) => {
 };
 
 export function SearchForm({ items, value, onChange }: Props) {
-	const isMounted = useIsMounted();
+	const isBrowser = useIsBrowser();
 	const itemsToShow = getItemsToShow(items, value);
 	const {
 		getComboboxProps,
@@ -70,7 +69,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 			<div className={combobox} {...getComboboxProps()}>
 				<Input
 					className={input}
-					disabled={!isMounted}
+					disabled={!isBrowser}
 					{...getInputProps({
 						type: 'search',
 						placeholder: 'Search recipes',
