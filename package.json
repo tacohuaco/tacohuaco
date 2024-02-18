@@ -16,8 +16,7 @@
     "lint": "eslint . --cache --fix --ext .js,.ts,.tsx,.astro",
     "format": "prettier --log-level warn --write \"**/*.{js,ts,tsx,astro,md}\"",
     "prepare": "husky install",
-    "sync": "tsx -r dotenv/config scripts/sync.ts",
-    "sync:ci": "tsx -r dotenv/config scripts/syncCi.ts"
+    "sync": "if [ $CI ]; then tsx -r dotenv/config scripts/syncCi.ts; else tsx -r dotenv/config scripts/sync.ts; fi"
   },
   "type": "module",
   "engines": {
