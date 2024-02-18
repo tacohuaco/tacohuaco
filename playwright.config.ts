@@ -72,8 +72,7 @@ export default defineConfig({
 
 	/* Run your local dev server before starting the tests */
 	webServer: {
-		// TODO: try preview
-		command: 'npm run start',
+		command: 'npm run preview',
 		url: baseUrl,
 		reuseExistingServer: !process.env.CI,
 	},
