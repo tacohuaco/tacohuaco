@@ -12,10 +12,9 @@ test('search for a recipe', async ({ page }) => {
 
 	const input = page.getByPlaceholder('Search recipes');
 
-	// HACK: Trigger input to init UI (there might be a beter way to do it)
-	await input.pressSequentially('', { delay: 500 });
+	expect(input).toBeEnabled();
 
-	await input.pressSequentially('birria', { delay: 200 });
+	await input.fill('birria');
 	await input.press('ArrowDown', { delay: 500 });
 	await input.press('Enter', { delay: 500 });
 
