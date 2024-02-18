@@ -54,7 +54,7 @@
     "sentence-case": "^3.0.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.41.1",
+    "@playwright/test": "^1.41.2",
     "@types/fs-extra": "^11.0.2",
     "@types/lodash": "^4.14.200",
     "@types/lunr": "^2.3.6",
