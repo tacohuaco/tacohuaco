@@ -1,14 +1,14 @@
 import { test, expect } from '@playwright/test';
 
 test('has title', async ({ page }) => {
-	await page.goto('http://localhost:4321/recipes/cerdo-en-salsa-roja/');
+	await page.goto('/recipes/cerdo-en-salsa-roja/');
 
 	// Correct recipe page title
 	await expect(page).toHaveTitle('Cerdo en salsa roja recipe by Tacohuaco');
 });
 
 test('has all the recipe details', async ({ page }) => {
-	await page.goto('http://localhost:4321/recipes/cerdo-en-salsa-roja/');
+	await page.goto('/recipes/cerdo-en-salsa-roja/');
 
 	// Has recipe title
 	await expect(
@@ -47,7 +47,7 @@ test('has all the recipe details', async ({ page }) => {
 });
 
 test('plus button adds one portion', async ({ page }) => {
-	await page.goto('http://localhost:4321/recipes/cochinita-pibil/');
+	await page.goto('/recipes/cochinita-pibil/');
 
 	// Scroll to the ingredients section to init UI
 	await page

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 // TODO: How to fetch all recipe links withou links to gluten free, vegan, etc. recipes? We cannot fetch them by name without mocking the date somehow
 
 test('has title', async ({ page }) => {
-	await page.goto('http://localhost:4321');
+	await page.goto('/');
 
 	// Expect a title "to contain" a substring.
 	await expect(page).toHaveTitle(
@@ -12,7 +12,7 @@ test('has title', async ({ page }) => {
 });
 
 test('has recently added recipes', async ({ page }) => {
-	await page.goto('http://localhost:4321');
+	await page.goto('/');
 
 	// Check that we have some recently added recipes
 	const recentRecipes = page.locator('section').filter({
