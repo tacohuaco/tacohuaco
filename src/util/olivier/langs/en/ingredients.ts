@@ -288,7 +288,7 @@ export const INGREDIENTS = [
 	/**
 	 * Meat and fish
 	 */
-	[['chicken broth', 'chicken broth', 'chicken stock'],
+	[['chicken broth', 'chicken broth', 'chicken stock']],
 	[['chicken leg', 'chicken legs']],
 	[['chicken thigh', 'chicken thighs']],
 	[['chicken breast', 'chicken breasts']],
