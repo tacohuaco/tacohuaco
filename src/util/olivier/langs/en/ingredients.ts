@@ -25,6 +25,10 @@ export const INGREDIENTS = [
 		['pepita', 'pepitas'],
 	],
 	[['cinnamon']],
+	[
+		['cardamom pod', 'cardamom pods'],
+		['cardamon pod', 'cardamon pods'],
+	],
 	[['nutmeg']],
 	[
 		['chile flakes', 'chile flakes'],
