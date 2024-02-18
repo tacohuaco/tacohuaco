@@ -4,7 +4,6 @@
   "license": "See license in <Readme.md>",
   "scripts": {
     "start": "astro dev",
-    "prebuild": "npm run sync",
     "build": "astro build",
     "preview": "astro preview",
     "pretest": "npm run lint",
@@ -16,7 +15,8 @@
     "lint": "eslint . --cache --fix --ext .js,.ts,.tsx,.astro",
     "format": "prettier --log-level warn --write \"**/*.{js,ts,tsx,astro,md}\"",
     "prepare": "husky install",
-    "sync": "if [ $CI ]; then tsx -r dotenv/config scripts/syncCi.ts; else tsx -r dotenv/config scripts/sync.ts; fi"
+    "sync": "tsx -r dotenv/config scripts/sync.ts",
+    "sync:ci": "tsx -r dotenv/config scripts/syncCi.ts"
   },
   "type": "module",
   "engines": {
