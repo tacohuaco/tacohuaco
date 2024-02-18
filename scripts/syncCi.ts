@@ -13,7 +13,7 @@ const recipeMocks = globSync('e2e/mocks/recipes/*.json');
 
 recipeMocks.forEach((file) => {
 	console.log('👉', file);
-	fs.copyFileSync(`e2e/mocks/recipes/${file}`, `src/content/recipes/${file}`);
+	fs.copyFileSync(file, `src/content/recipes/${file}`);
 });
 
 console.log();
