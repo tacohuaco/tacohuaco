@@ -76,22 +76,25 @@ export function SearchForm({ items, value, onChange }: Props) {
 				/>
 				<div className={menu} {...getMenuProps()}>
 					{isOpen &&
-						itemsToShow.map((item, index) => (
-							<div
-								className={clsx(
-									searchItem,
-									highlightedIndex === index && searchItemHighlighted
-								)}
-								key={item}
-								{...getItemProps({
-									item,
-									index,
-									key: item,
-								})}
-							>
-								{item}
-							</div>
-						))}
+						itemsToShow.map((item, index) => {
+							return (
+								// getItemProps returns key
+								// eslint-disable-next-line react/jsx-key
+								<div
+									className={clsx(
+										searchItem,
+										highlightedIndex === index && searchItemHighlighted
+									)}
+									{...getItemProps({
+										item,
+										index,
+										key: item,
+									})}
+								>
+									{item}
+								</div>
+							);
+						})}
 				</div>
 			</div>
 		</form>
