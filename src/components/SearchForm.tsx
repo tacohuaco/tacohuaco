@@ -38,7 +38,6 @@ export function SearchForm({ items, value, onChange }: Props) {
 	const isBrowser = useIsBrowser();
 	const itemsToShow = getItemsToShow(items, value);
 	const {
-		getComboboxProps,
 		getLabelProps,
 		getInputProps,
 		getMenuProps,
@@ -66,7 +65,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 			<VisuallyHidden as="label" {...getLabelProps()}>
 				Search recipes
 			</VisuallyHidden>
-			<div className={combobox} {...getComboboxProps()}>
+			<div className={combobox}>
 				<Input
 					className={input}
 					disabled={!isBrowser}

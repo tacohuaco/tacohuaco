@@ -39,7 +39,7 @@
     "@vanilla-extract/vite-plugin": "^3.9.0",
     "astro": "^3.4.3",
     "clsx": "^2.0.0",
-    "downshift": "^6.1.9",
+    "downshift": "^7.0.0",
     "format-quantity": "^2.1.0",
     "lunr": "^2.3.9",
     "markdown-to-jsx": "^7.3.2",
