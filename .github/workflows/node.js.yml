@@ -16,4 +16,5 @@ jobs:
           node-version-file: .nvmrc
           cache: 'npm'
       - run: npm ci
+      - run: npm run sync:ci
       - run: npm run test:ci
