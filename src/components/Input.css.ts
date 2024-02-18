@@ -20,4 +20,7 @@ export const input = style({
 		borderColor: vars.colors.accent,
 		boxShadow: vars.shadows.input,
 	},
+	':disabled': {
+		opacity: 0.25,
+	},
 });

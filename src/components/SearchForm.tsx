@@ -11,6 +11,7 @@ import {
 	searchItem,
 	searchItemHighlighted,
 } from './SearchForm.css';
+import { useIsMounted } from '../hooks/useIsMounted';
 
 const MAX_ITEMS_TO_SHOW = 12;
 
@@ -35,6 +36,7 @@ const getItemsToShow = (items: readonly string[], value: string) => {
 };
 
 export function SearchForm({ items, value, onChange }: Props) {
+	const isMounted = useIsMounted();
 	const itemsToShow = getItemsToShow(items, value);
 	const {
 		getComboboxProps,
@@ -68,6 +70,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 			<div className={combobox} {...getComboboxProps()}>
 				<Input
 					className={input}
+					disabled={!isMounted}
 					{...getInputProps({
 						type: 'search',
 						placeholder: 'Search recipes',
