@@ -40,8 +40,9 @@ export const FISHES = [
 ];
 export const POULTRIES = [
 	'chicken',
-	'chicken stock',
+	'chicken broth',
 	'chicken leg',
+	'chicken wing',
 	'chicken thigh',
 	'chicken breast',
 ];
