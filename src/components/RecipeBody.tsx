@@ -10,7 +10,6 @@ import {
 } from '../components';
 import { formatOption } from '../util/olivier';
 import type { Recipe, Yields } from '../types/Recipe';
-import { grid } from './RecipeBody.css';
 import { asList } from '../util/asList';
 import { RecipeIngredients } from './RecipeIngredients';
 import { RecipeSteps } from './RecipeSteps';
@@ -48,11 +47,18 @@ export function RecipeBody(recipe: Recipe) {
 		handleMore,
 	} = useScale(recipe);
 	return (
-		<Grid gap="m" className={grid}>
+		<Grid
+			gap="m"
+			gridTemplateColumns={{
+				base: '1fr',
+				tablet: '1.2fr 2.8fr',
+				desktop: '1fr 3fr',
+			}}
+		>
 			<Stack as="section" gap="m">
 				<Stack
 					direction="row"
-					gap={{ mobile: 'm', tablet: 's' }}
+					gap={{ base: 'm', tablet: 's' }}
 					alignItems="center"
 				>
 					<Heading level={2}>Ingredients</Heading>

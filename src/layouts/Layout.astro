@@ -1,10 +1,8 @@
 ---
 import type { ComponentType } from 'react';
-import clsx from 'clsx';
-import { themeClass } from '../styles/theme.css';
-import { body } from '../styles/body.css';
-import { SITE_TITLE, SITE_GOAT_COUNTER } from '../constants';
 import Metatags from '../components/Metatags.astro';
+import { SITE_GOAT_COUNTER, SITE_TITLE } from '../constants';
+import '../index.css';
 
 export interface Props<P> {
 	url?: string;
@@ -40,7 +38,7 @@ const getTitle = ({
 		<title>{getTitle(Astro.props)}</title>
 		<Metatags {...Astro.props} />
 	</head>
-	<body class={clsx(themeClass, body)}>
+	<body>
 		{
 			Page ? (
 				<Page {...Astro.props.props} {...Astro.props}>
@@ -53,6 +51,7 @@ const getTitle = ({
 		{
 			import.meta.env.PROD && (
 				<script
+					is:inline
 					data-goatcounter={`https://${SITE_GOAT_COUNTER}.goatcounter.com/count`}
 					async
 					src="//gc.zgo.at/count.js"

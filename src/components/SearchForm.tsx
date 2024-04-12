@@ -1,15 +1,7 @@
-import clsx from 'clsx';
-import { type FormEventHandler } from 'react';
 import { useCombobox } from 'downshift';
 import { matchSorter } from 'match-sorter';
-import { VisuallyHidden, Input } from '.';
-import {
-	combobox,
-	input,
-	menu,
-	searchItem,
-	searchItemHighlighted,
-} from './SearchForm.css';
+import { type FormEventHandler } from 'react';
+import { Box, Input, VisuallyHidden } from '.';
 import { useIsBrowser } from '../hooks/useIsBrowser';
 
 const MAX_ITEMS_TO_SHOW = 12;
@@ -36,6 +28,7 @@ const getItemsToShow = (items: readonly string[], value: string) => {
 
 export function SearchForm({ items, value, onChange }: Props) {
 	const isBrowser = useIsBrowser();
+
 	const itemsToShow = getItemsToShow(items, value);
 	const {
 		getLabelProps,
@@ -60,43 +53,86 @@ export function SearchForm({ items, value, onChange }: Props) {
 		closeMenu();
 		event.preventDefault();
 	};
+
 	return (
 		<form role="search" onSubmit={handleSubmit}>
 			<VisuallyHidden as="label" {...getLabelProps()}>
 				Search recipes
 			</VisuallyHidden>
-			<div className={combobox}>
+			<Box position="relative">
 				<Input
-					className={input}
+					css={{
+						height: 'auto',
+						padding: 's',
+						fontSize: 'l',
+						transitionDuration: 'hover',
+						transitionTimingFunction: 'hover',
+						transitionProperty: 'all',
+						'&::-webkit-search-decoration': { display: 'none' },
+						'&::-webkit-search-cancel-button': { display: 'none' },
+						'&::-webkit-search-results-button': { display: 'none' },
+						'&::-webkit-search-results-decoration': { display: 'none' },
+					}}
 					disabled={!isBrowser}
 					{...getInputProps({
+						refKey: 'innerRef',
 						type: 'search',
 						placeholder: 'Search recipes',
 					})}
 				/>
-				<div className={menu} {...getMenuProps()}>
+				<Box
+					{...getMenuProps({ refKey: 'innerRef' })}
+					css={{
+						position: 'absolute',
+						zIndex: 99,
+						left: 0,
+						right: 0,
+						marginTop: 's',
+						padding: 'xs',
+						backgroundColor: 'bg',
+						border: 'input',
+						borderColor: 'accent',
+						borderRadius: 'button',
+						boxShadow: 'popover',
+						transitionDuration: 'fade',
+						transitionTimingFunction: 'fade',
+						transitionProperty: 'all',
+						willChange: 'opacity',
+						_empty: {
+							opacity: 0,
+						},
+					}}
+				>
 					{isOpen &&
 						itemsToShow.map((item, index) => {
+							const isHighlighted = highlightedIndex === index;
 							return (
 								// getItemProps returns key
 								// eslint-disable-next-line react/jsx-key
-								<div
-									className={clsx(
-										searchItem,
-										highlightedIndex === index && searchItemHighlighted
-									)}
+								<Box
+									css={{
+										paddingBlock: 'xxs',
+										paddingInline: 's',
+										fontFamily: 'ui',
+										fontSize: 'm',
+										fontWeight: 'ui',
+										color: isHighlighted ? 'bg' : 'base',
+										backgroundColor: isHighlighted ? 'accent' : 'transparent',
+										cursor: 'pointer',
+									}}
 									{...getItemProps({
+										refKey: 'innerRef',
+										key: item,
 										item,
 										index,
-										key: item,
 									})}
 								>
 									{item}
-								</div>
+								</Box>
 							);
 						})}
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</form>
 	);
 }

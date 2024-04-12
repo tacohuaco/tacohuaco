@@ -1,4 +1,4 @@
-import { Icon as IconBase } from '../tamia';
+import { IconBase } from './IconBase';
 
 type IconInfo = {
 	width?: number;
@@ -19,19 +19,19 @@ export type IconName = keyof typeof ICONS;
 
 type Props = {
 	icon: IconName;
-	size: string | number;
+	width: number | string;
+	height: number | string;
 };
 
-export function Icon({ icon, size }: Props) {
+export function Icon({ icon, ...props }: Props) {
 	const { path, children, width, height } = ICONS[icon];
 	return (
 		<IconBase
+			{...props}
 			viewBox={{
-				width: width || 512,
-				height: height || 512,
+				width: width ?? 512,
+				height: height ?? 512,
 			}}
-			width={size}
-			height={size}
 		>
 			{children}
 			{path && <path d={path} />}

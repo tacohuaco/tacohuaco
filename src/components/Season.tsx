@@ -1,7 +1,6 @@
 import { Text, VisuallyHidden } from '.';
 import type { RecipeIngredient } from '../types/Recipe';
 import { Month } from '../util/olivier';
-import { notInSeason } from './Season.css';
 
 const ALL_MONTHS = [
 	Month.January,
@@ -43,7 +42,8 @@ export function Season({ ingredient }: { ingredient: RecipeIngredient }) {
 						key={month}
 						as="span"
 						variant="small"
-						className={inSeason ? undefined : notInSeason}
+						// TODO: This may not override `small` styles
+						color={inSeason ? undefined : 'light'}
 					>
 						{inSeason && <VisuallyHidden>{MONTH_NAMES[month]}</VisuallyHidden>}
 						<span aria-hidden="true">{MONTH_NAMES[month][0]}</span>

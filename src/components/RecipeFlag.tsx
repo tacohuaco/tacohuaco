@@ -1,13 +1,5 @@
-import clsx from 'clsx';
 import { type ComponentProps, type ComponentType, type ReactNode } from 'react';
 import { Text, Box, Tooltip } from '.';
-import {
-	circle,
-	flagCircleLink,
-	flagLinkBase,
-	flagRoundLink,
-	round,
-} from './RecipeFlag.css';
 import type { FlagName } from '../types/Flags';
 
 type Props = {
@@ -27,19 +19,20 @@ type FlagProps = {
 	children?: ReactNode;
 };
 
-const FlagCircleLink = (props: ComponentProps<typeof Box>) => (
+const FlagLink = (props: ComponentProps<typeof Box>) => (
 	<Box
 		as="a"
 		{...props}
-		className={clsx(flagLinkBase, flagCircleLink, props.className)}
-	/>
-);
-
-const FlagRoundLink = (props: ComponentProps<typeof Box>) => (
-	<Box
-		as="a"
-		{...props}
-		className={clsx(flagLinkBase, flagRoundLink, props.className)}
+		css={{
+			color: 'inherit',
+			textDecoration: 'none',
+			borderRadius: 'round',
+			_focus: {
+				outline: 'focus',
+				outlineColor: 'accent',
+				outlineOffset: 'token(borderWidths.focusOutlineOffset)',
+			},
+		}}
 	/>
 );
 
@@ -68,29 +61,64 @@ const Circle = ({
 	href,
 	...props
 }: FlagProps & HrefProp & ColorProp) => (
-	<TooltipWithLink href={href} title={title} linkComponent={FlagCircleLink}>
-		<Text
+	<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+		<Box
 			as="span"
 			aria-hidden="true"
-			className={circle}
+			css={{
+				display: 'block',
+				width: '2em',
+				height: '2em',
+				padding: '0.3em',
+				textAlign: 'center',
+				fontFamily: 'ui',
+				fontSize: 'xs',
+				fontWeight: 'ui',
+				color: 'bg',
+				borderWidth: '0.2em',
+				borderRadius: 'round',
+				'a:hover &': {
+					filter: 'saturate(1.2) brightness(1.1)',
+					cursor: 'pointer',
+				},
+			}}
 			style={{ backgroundColor: color }}
 			{...props}
 		>
 			{children}
-		</Text>
+		</Box>
 	</TooltipWithLink>
 );
 
 const Round = ({ children, title, href, ...props }: FlagProps & HrefProp) => (
-	<TooltipWithLink href={href} title={title} linkComponent={FlagRoundLink}>
-		<Text
+	<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+		<Box
 			as="span"
 			aria-hidden="true"
-			className={clsx(circle, round)}
+			css={{
+				display: 'block',
+				width: '2em',
+				height: '2em',
+				padding: '0.1em',
+				textAlign: 'center',
+				fontFamily: 'ui',
+				fontSize: 'xs',
+				fontWeight: 'ui',
+				color: 'accent',
+				borderWidth: '0.2em',
+				borderRadius: 'round',
+				borderStyle: 'solid',
+				borderColor: 'accent',
+				'a:hover &': {
+					backgroundColor: 'accent',
+					color: 'bg',
+					cursor: 'pointer',
+				},
+			}}
 			{...props}
 		>
 			{children}
-		</Text>
+		</Box>
 	</TooltipWithLink>
 );
 

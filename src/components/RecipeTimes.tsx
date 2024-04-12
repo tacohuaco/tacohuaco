@@ -1,5 +1,4 @@
 import { Box, Text, Icon, Tooltip, TooltipTrigger } from '.';
-import { moonIcon } from './RecipeTimes.css';
 
 type Props = {
 	time: number;
@@ -8,8 +7,8 @@ type Props = {
 };
 
 const MoonIcon = () => (
-	<Box as="span" className={moonIcon}>
-		<Icon icon="moon" size="1em" />
+	<Box as="span" color="moon" verticalAlign="0.15ex">
+		<Icon icon="moon" width="1em" height="1em" />
 	</Box>
 );
 

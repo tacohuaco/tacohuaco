@@ -1,12 +1,10 @@
-import type { BoxProps } from '../tamia/components/Box';
-import { Stack } from '../tamia/components/Stack';
+import { Stack, type StackProps } from './Stack';
 import { Text, type TextProps } from './Text';
-import { list } from './List.css';
 
-export function List(props: BoxProps<'ul'>) {
-	return <Stack as="ol" gap="m" className={list} {...props} />;
+export function List(props: Omit<StackProps<'ol'>, 'as' | 'css'>) {
+	return <Stack gap="m" {...props} as="ol" css={{ listStyle: 'none' }} />;
 }
 
-export function ListItem(props: TextProps<'li'>) {
-	return <Text as="li" {...props} />;
+export function ListItem(props: Omit<TextProps<'li'>, 'as'>) {
+	return <Text {...props} as="li" />;
 }

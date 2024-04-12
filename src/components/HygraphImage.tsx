@@ -1,6 +1,5 @@
 import type { ComponentProps } from 'react';
 import { Image } from '.';
-import { image } from './HygraphImage.css';
 import { getHygraphImageUrl } from '../util/getHygraphImageUrl';
 
 type Props = ComponentProps<typeof Image> & {
@@ -24,7 +23,7 @@ export function HygraphImage({
 	const src = getHygraphImageUrl(handle, { width, height, quality });
 	return (
 		<Image
-			className={image}
+			bg="light"
 			src={src}
 			width={intrinsicWidth}
 			height={intrinsicHeight}

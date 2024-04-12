@@ -1,22 +1,35 @@
-import React from 'react';
-import clsx from 'clsx';
-import { TextContent as TextContentBase } from '../tamia';
-import { container, containerSmall, containerIntro } from './TextContent.css';
+import { cva, cx, type RecipeVariantProps } from '../../styled-system/css';
+import { textContent } from '../../styled-system/patterns/text-content';
+import { createBox, type BoxProps } from './Box';
 
-const variants = {
-	small: containerSmall,
-	intro: containerIntro,
-};
+const textContentCustom = cva({
+	base: {},
+	variants: {
+		variant: {
+			small: {
+				'& p': {
+					fontSize: 's',
+				},
+			},
+			intro: {
+				'& p': {
+					fontSize: 'l',
+					fontStyle: 'italic',
+				},
+			},
+		},
+	},
+});
 
-type Props = {
-	children?: React.ReactNode;
-	variant?: keyof typeof variants;
-};
+type TextContentProps = Omit<BoxProps<'div'>, 'className'> &
+	RecipeVariantProps<typeof textContentCustom>;
 
-export function TextContent({ children, variant }: Props) {
-	return (
-		<TextContentBase className={clsx(container, variant && variants[variant])}>
-			{children}
-		</TextContentBase>
-	);
+/**
+ * Container for user generated content with styles for all common HTML elements.
+ */
+export function TextContent({ variant, ...props }: TextContentProps) {
+	return createBox({
+		...props,
+		className: cx(textContent(), textContentCustom({ variant })),
+	});
 }

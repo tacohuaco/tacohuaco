@@ -1,19 +1,48 @@
-import clsx from 'clsx';
-import { Box, type BoxProps } from '../tamia/components/Box';
-import { heading, type HeadingVariants } from './Heading.css';
-import type { ElementType } from 'react';
+import { type ElementType } from 'react';
+import { cva, type RecipeVariantProps } from '../../styled-system/css';
+import { createBox, type BoxProps } from './Box';
 
-export function Heading<C extends ElementType>({
+const heading = cva({
+	base: {
+		fontFamily: 'heading',
+		lineHeight: 'heading',
+	},
+	variants: {
+		level: {
+			1: {
+				color: 'base',
+				fontWeight: 'normal',
+				fontSize: 'xxl',
+				letterSpacing: 'base',
+			},
+			2: {
+				color: 'dim',
+				fontSize: 'xl',
+				textShadow: 'heading',
+				textTransform: 'uppercase',
+				letterSpacing: 'uppercase',
+			},
+			3: {
+				color: 'base',
+				fontSize: 'l',
+				letterSpacing: 'heading',
+			},
+		},
+	},
+});
+
+type HeadingProps<C extends ElementType> = Omit<BoxProps<C>, 'className'> &
+	RecipeVariantProps<typeof heading>;
+
+export function Heading<C extends ElementType = 'h1'>({
 	level = 1,
-	as,
-	className,
 	...props
-}: BoxProps<C> & HeadingVariants) {
-	return (
-		<Box
-			as={(as as any) ?? `h${level}`}
-			className={clsx(className, heading({ level }))}
-			{...props}
-		/>
+}: HeadingProps<C>) {
+	return createBox(
+		{
+			...props,
+			className: heading({ level }),
+		},
+		level ? `h${level}` : 'h1'
 	);
 }

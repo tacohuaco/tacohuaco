@@ -16,8 +16,8 @@ export function RecipeMeta({
 		<Stack gap="s">
 			<Stack
 				gap="s"
-				direction={{ mobile: 'column', desktop: 'row' }}
-				alignItems={{ mobile: 'flex-start', desktop: 'center' }}
+				direction={{ base: 'column', desktop: 'row' }}
+				alignItems={{ base: 'flex-start', desktop: 'center' }}
 			>
 				<RecipeFlags {...flags} />
 				{time && <RecipeTimes time={time} overnight={overnight} />}

@@ -1,9 +1,35 @@
 import type { ComponentProps } from 'react';
 import { Box, Link } from '.';
-import { link } from './Tag.css';
 
 // TODO: New year -> New Year
 
 export function Tag(props: ComponentProps<typeof Link>) {
-	return <Box as="a" {...props} className={link} />;
+	return (
+		<Box
+			as="a"
+			{...props}
+			css={{
+				display: 'inline-block',
+				paddingTop: '0.1ex',
+				paddingInline: 'xs',
+				backgroundColor: 'light',
+				border: 0,
+				fontFamily: 'ui',
+				fontSize: 's',
+				lineHeight: 'base',
+				textDecoration: 'none',
+				color: 'dim',
+				borderRadius: 'base',
+				whiteSpace: 'nowrap',
+				_hover: {
+					color: 'hover',
+					cursor: 'pointer',
+				},
+				_focus: {
+					outline: 'focus',
+					outlineOffset: 'token(borderWidths.focusOutlineOffset)',
+				},
+			}}
+		/>
+	);
 }

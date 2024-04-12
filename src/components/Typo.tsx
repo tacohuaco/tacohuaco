@@ -1,8 +1,5 @@
 import { Children, type ReactNode } from 'react';
-import { typo } from '../../util/typo';
-
-// TODO: It's using a custom typography function which makes it impossible to
-// extract Tamia as it is. Possibly we should inject typography function as a prop
+import { typo } from '../util/typo';
 
 type TypoProps = {
 	children: ReactNode;

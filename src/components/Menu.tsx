@@ -1,4 +1,4 @@
-import { Stack, MenuLink } from '.';
+import { MenuLink, Stack } from '.';
 
 type Props = {
 	current: string;
@@ -32,7 +32,7 @@ const ITEMS: Item[] = [
 
 export function Menu({ current }: Props) {
 	return (
-		<Stack as="ul" gap="m" direction={{ mobile: 'column', tablet: 'row' }}>
+		<Stack as="ul" gap="m" direction={{ base: 'column', tablet: 'row' }}>
 			{ITEMS.map(({ title, href }) => (
 				<li key={href}>
 					<MenuLink href={href} isCurrent={current.startsWith(href)}>

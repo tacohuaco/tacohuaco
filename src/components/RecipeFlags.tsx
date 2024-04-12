@@ -1,5 +1,9 @@
-import { Stack, RecipeFlag } from '.';
-import type { Flags } from '../types/Recipe';
+import { RecipeFlag, Stack } from '.';
+import type { FlagName } from '../types/Flags';
+
+type RecipeFlagsProps = {
+	[flag in FlagName]: boolean;
+};
 
 export function RecipeFlags({
 	vegan,
@@ -10,7 +14,7 @@ export function RecipeFlags({
 	noAddedSugar,
 	margaritasFavorite,
 	artemsFavorite,
-}: Flags) {
+}: RecipeFlagsProps) {
 	return (
 		<Stack gap="s" direction="row">
 			{vegan && <RecipeFlag type="vegan" />}

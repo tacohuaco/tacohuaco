@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Container, Stack, Header, Footer } from '../components';
+import { Box, Stack, Header, Footer } from '../components';
 
 type Props = {
 	children: ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 
 export function Page({ children, url }: Props) {
 	return (
-		<Container py="l">
+		<Box mx="auto" py="l" px="contentPaddingX" maxWidth="59rem">
 			<Stack gap="xl">
 				<Stack gap="l">
 					<Header url={url} />
@@ -16,6 +16,6 @@ export function Page({ children, url }: Props) {
 				</Stack>
 				<Footer />
 			</Stack>
-		</Container>
+		</Box>
 	);
 }

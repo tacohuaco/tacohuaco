@@ -4,7 +4,6 @@ import { Page } from './Page';
 
 type Props = {
 	url: string;
-	title: string;
 	newRecipes: Recipe[];
 	recipesInSeason: Recipe[];
 };

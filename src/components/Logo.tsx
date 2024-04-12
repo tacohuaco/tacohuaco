@@ -11,7 +11,6 @@ import {
 	MOUTHES,
 	GLASSES,
 } from './Taco';
-import { logo, text } from './Logo.css';
 
 const TORTILLA_NAMES = Object.keys(TORTILLAS) as (keyof typeof TORTILLAS)[];
 const FILLING_NAMES = Object.keys(FILLINGS) as (keyof typeof FILLINGS)[];
@@ -40,12 +39,36 @@ const getTacoProps = (): ComponentProps<typeof Taco> => {
 
 export function Logo() {
 	return (
-		<QuotedLink href="/">
+		<QuotedLink href="/" mb="-xxs">
 			<Stack as="span" gap="s" direction="row" mt="xs">
-				<Box as="span" className={logo}>
+				<Box as="span" mt={-11} pb="s">
 					<Taco height={34} {...getTacoProps()} />
 				</Box>
-				<Box as="span" className={text}>
+				<Box
+					as="span"
+					css={{
+						marginBottom: 'xs',
+						color: 'accent',
+						backgroundColor: 'bg',
+						fontFamily: 'ui',
+						fontWeight: 'bold',
+						fontSize: 'm',
+						lineHeight: 'heading',
+						textDecoration: 'none',
+						textTransform: 'uppercase',
+						letterSpacing: 'uppercase',
+						transitionDuration: 'hover',
+						transitionTimingFunction: 'hover',
+						transitionProperty: 'all',
+						borderStyle: 'solid',
+						borderColor: 'accent',
+						borderWidth: 0,
+						borderRadius: 'button',
+						'a:hover &': {
+							borderBottomWidth: 2,
+						},
+					}}
+				>
 					Tacohuaco
 				</Box>
 			</Stack>

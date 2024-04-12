@@ -1,17 +1,44 @@
 import { type ReactNode } from 'react';
-import { Box } from '.';
-import { button } from './Collapsible.css';
+import { Box, Stack } from '.';
 
 interface CollapsibleProps {
 	label: ReactNode;
 	children: ReactNode;
 }
 
+function CollapsibleButton({ children }: { children: ReactNode }) {
+	return (
+		<Box
+			as="summary"
+			css={{
+				fontFamily: 'ui',
+				fontSize: 's',
+				lineHeight: 'base',
+				textDecoration: 'underline',
+				color: 'base',
+				_hover: {
+					color: 'hover',
+					cursor: 'pointer',
+				},
+				_active: {
+					color: 'hover',
+				},
+				_focus: {
+					outline: 'focus',
+					outlineOffset: 'token(borderWidths.focusOutlineOffset)',
+				},
+			}}
+		>
+			{children}
+		</Box>
+	);
+}
+
 export function Collapsible({ label, children }: CollapsibleProps) {
 	return (
-		<details>
-			<summary className={button}>{label}</summary>
-			<Box mt="s">{children}</Box>
-		</details>
+		<Stack as="details" gap="s">
+			<CollapsibleButton>{label}</CollapsibleButton>
+			<Box>{children}</Box>
+		</Stack>
 	);
 }

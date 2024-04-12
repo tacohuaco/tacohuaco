@@ -10,7 +10,7 @@ export function RecipeScale({ onLess, onMore }: Props) {
 	return (
 		<Stack
 			direction="row"
-			gap={{ mobile: 's', tablet: 'xs' }}
+			gap={{ base: 's', tablet: 'xs' }}
 			alignItems="center"
 			minWidth="auto"
 		>

@@ -1,21 +1,68 @@
-import type { ElementType } from 'react';
-import clsx from 'clsx';
-import { Box, type BoxProps } from '../tamia/components/Box';
-import { text, type TextVariants } from './Text.css';
+import { type ElementType } from 'react';
+import { cva, type RecipeVariantProps } from '../../styled-system/css';
+import { createBox, type BoxProps } from './Box';
 
-export type TextProps<C extends ElementType> = BoxProps<C> & TextVariants;
+const text = cva({
+	base: {
+		color: 'base',
+		fontWeight: 'normal',
+		letterSpacing: 'base',
+	},
+	variants: {
+		variant: {
+			body: {
+				lineHeight: 'base',
+				fontFamily: 'body',
+				fontSize: 'm',
+			},
+			italic: {
+				lineHeight: 'base',
+				fontFamily: 'body',
+				fontStyle: 'italic',
+			},
+			small: {
+				lineHeight: 'small',
+				fontFamily: 'body',
+				fontSize: 's',
+			},
+			ui: {
+				lineHeight: 'base',
+				fontFamily: 'ui',
+				fontSize: 'm',
+			},
+			intro: {
+				lineHeight: 'base',
+				fontFamily: 'body',
+				fontSize: 'l',
+				fontStyle: 'italic',
+			},
+			xsmall: {
+				lineHeight: 'base',
+				fontFamily: 'ui',
+				fontSize: 'xs',
+			},
+			card: {
+				lineHeight: 'base',
+				fontFamily: 'heading',
+				fontSize: 'xl',
+				color: 'inherit',
+			},
+		},
+	},
+});
+
+export type TextProps<C extends ElementType> = Omit<BoxProps<C>, 'className'> &
+	RecipeVariantProps<typeof text>;
 
 export function Text<C extends ElementType = 'p'>({
-	as,
-	variant = 'base',
-	className,
+	variant = 'body',
 	...props
 }: TextProps<C>) {
-	return (
-		<Box
-			{...(props as TextProps<C>)}
-			as={as ?? 'p'}
-			className={clsx(className, text({ variant }))}
-		/>
+	return createBox(
+		{
+			...props,
+			className: text({ variant }),
+		},
+		'p'
 	);
 }

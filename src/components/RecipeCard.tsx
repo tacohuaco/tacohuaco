@@ -1,6 +1,5 @@
-import { type ComponentProps } from 'react';
+import { type ElementType } from 'react';
 import {
-	Stack,
 	Text,
 	Link,
 	Frame,
@@ -9,10 +8,11 @@ import {
 	HygraphImage,
 	Expander,
 } from '.';
+import { Stack, type StackProps } from './Stack';
 import type { RecipeFragment } from '../types/Recipe';
-import { frame, imageContainer, link } from './RecipeCard.css';
 
-export function RecipeCard({
+export function RecipeCard<C extends ElementType = 'div'>({
+	as,
 	vegan,
 	vegetarian,
 	glutenFree,
@@ -26,13 +26,32 @@ export function RecipeCard({
 	slug,
 	time,
 	overnight,
-}: RecipeFragment & ComponentProps<typeof Stack>) {
+}: RecipeFragment & StackProps<C>) {
 	return (
-		<Stack gap="s" direction="column">
-			<Link href={`/recipes/${slug}/`} className={link}>
+		<Stack as={as ?? 'div'} gap="s" direction="column">
+			<Link
+				href={`/recipes/${slug}/`}
+				css={{
+					transitionDuration: 'hover',
+					transitionTimingFunction: 'hover',
+					transitionProperty: 'color',
+				}}
+			>
 				<Stack gap="s" direction="column">
-					<Expander className={imageContainer}>
-						<Frame ratio={6 / 9} className={frame}>
+					<Expander
+						css={{
+							tablet: {
+								'a:hover &': {
+									boxShadow: 'input',
+									transitionDuration: 'hover',
+									transitionTimingFunction: 'hover',
+									transitionProperty: 'box-shadow',
+									willChange: 'box-shadow',
+								},
+							},
+						}}
+					>
+						<Frame aspectRatio="9/6" bg="light">
 							{images.length > 0 && (
 								<HygraphImage
 									handle={images[0].handle}

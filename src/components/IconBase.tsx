@@ -1,11 +1,17 @@
+import type { PropsWithoutRef } from 'react';
 import { Box, type BoxProps } from './Box';
 
-export type IconProps = Omit<
-	BoxProps<'svg'>,
-	'width' | 'height' | 'viewBox'
+export type BaseIconProps = Omit<
+	PropsWithoutRef<BoxProps<'svg'>>,
+	| 'aria-hidden'
+	| 'fill'
+	| 'height'
+	| 'preserveAspectRatio'
+	| 'viewBox'
+	| 'width'
 > & {
-	width: string | number;
-	height: string | number;
+	width: number | string;
+	height: number | string;
 	viewBox: {
 		width: number;
 		height: number;
@@ -14,25 +20,26 @@ export type IconProps = Omit<
 };
 
 /**
- * Generic SVG icon component.
+ * Base for SVG icons:
+ *
+ * <IconBase viewBox={{ width: 128, height: 128 }} width={24} height={24}>
+ *   <path d="..." />
+ * </IconBase>
  */
-export function Icon({
+export function IconBase({
 	viewBox,
 	display = 'inline-block',
 	verticalAlign = 'middle',
-	width,
-	height,
 	fill = 'currentColor',
 	children,
 	...props
-}: IconProps) {
+}: BaseIconProps) {
 	return (
 		<Box
 			as="svg"
 			{...props}
 			display={display}
 			verticalAlign={verticalAlign}
-			props={{ width, height }}
 			viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
 			fill={fill}
 			preserveAspectRatio="xMidYMid meet"
