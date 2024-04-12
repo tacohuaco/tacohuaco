@@ -31,6 +31,6 @@ const recipes = entries.map(({ data }) => ({
 
 <Layout url="/search/" pageTitle="Search recipes on Tacohuaco">
 	<PageWithTitle url="/search/" title="Search">
-		<SearchPage recipes={recipes} client:load />
+		<SearchPage recipes={recipes} client:idle />
 	</PageWithTitle>
 </Layout>
