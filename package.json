@@ -48,7 +48,7 @@
     "react-group": "^3.0.2",
     "remove-markdown": "^0.5.0",
     "sentence-case": "^3.0.4",
-    "tamia": "^7.0.2"
+    "tamia": "^7.0.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.2",
