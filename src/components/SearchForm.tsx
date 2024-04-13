@@ -1,6 +1,6 @@
 import { useCombobox } from 'downshift';
 import { matchSorter } from 'match-sorter';
-import { type FormEventHandler } from 'react';
+import { useEffect, useState, type FormEventHandler } from 'react';
 import { Box, Input, VisuallyHidden } from '.';
 import { useIsBrowser } from '../hooks/useIsBrowser';
 
@@ -27,7 +27,13 @@ const getItemsToShow = (items: readonly string[], value: string) => {
 };
 
 export function SearchForm({ items, value, onChange }: Props) {
+	const [isEnabled, setIsEnabled] = useState(false);
 	const isBrowser = useIsBrowser();
+
+	useEffect(() => {
+		// Enable the input in two steps to avoid hydration warning
+		setIsEnabled(isBrowser);
+	}, [isBrowser]);
 
 	const itemsToShow = getItemsToShow(items, value);
 	const {
@@ -73,7 +79,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 						'&::-webkit-search-results-button': { display: 'none' },
 						'&::-webkit-search-results-decoration': { display: 'none' },
 					}}
-					disabled={!isBrowser}
+					disabled={!isEnabled}
 					{...getInputProps({
 						refKey: 'innerRef',
 						type: 'search',
