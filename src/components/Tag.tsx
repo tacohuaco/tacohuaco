@@ -22,7 +22,7 @@ export function Tag(props: ComponentProps<typeof Link>) {
 				borderRadius: 'base',
 				whiteSpace: 'nowrap',
 				_hover: {
-					color: 'hover',
+					color: 'accent',
 					cursor: 'pointer',
 				},
 				_focus: {

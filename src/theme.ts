@@ -30,11 +30,6 @@ export const theme = {
 					light: { value: colors.light },
 					accent: { value: colors.accent },
 					moon: { value: colors.moon },
-
-					/** @deprecated */
-					hover: { value: colors.accent },
-					/** @deprecated */
-					focus: { value: colors.accent },
 				},
 				fonts: {
 					body: { value: "ProximaNova, 'Helvetica Neue', Arial, sans-serif" },
@@ -42,8 +37,6 @@ export const theme = {
 					ui: { value: "AzoSans, 'Helvetica Neue', Arial, sans-serif" },
 				},
 				fontSizes: {
-					/** @deprecated */
-					base: { value: '1rem' },
 					xxl: { value: '2.1rem' },
 					xl: { value: '1.3rem' },
 					l: { value: '1.1rem' },

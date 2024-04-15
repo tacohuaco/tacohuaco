@@ -17,11 +17,11 @@ function CollapsibleButton({ children }: { children: ReactNode }) {
 				textDecoration: 'underline',
 				color: 'base',
 				_hover: {
-					color: 'hover',
+					color: 'accent',
 					cursor: 'pointer',
 				},
 				_active: {
-					color: 'hover',
+					color: 'accent',
 				},
 				_focus: {
 					outline: 'focus',
