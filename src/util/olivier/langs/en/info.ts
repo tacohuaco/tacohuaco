@@ -46,7 +46,15 @@ export const POULTRIES = [
 	'chicken thigh',
 	'chicken breast',
 ];
-export const MEATS = ['pork', 'beef', 'lamb', 'ham', 'sausage', 'meat'];
+export const MEATS = [
+	'pork',
+	'beef',
+	'lamb',
+	'ham',
+	'sausage',
+	'bacon',
+	'meat',
+];
 export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
 
 export const GROUPS = {
