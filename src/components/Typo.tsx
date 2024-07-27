@@ -14,7 +14,7 @@ export function Typo({ children }: TypoProps) {
 			const result = typo(child);
 			if (result.includes('<')) {
 				// Use dangerouslySetInnerHTML when the result contains HTML
-				// (for example, <nobr>
+				// (for example, <nobr>)
 				return <span dangerouslySetInnerHTML={{ __html: result }} />;
 			} else {
 				return result;

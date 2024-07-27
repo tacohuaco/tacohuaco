@@ -4,9 +4,8 @@
 // the preferred spelling.
 //
 // Examples:
-//
 // [['boob', 'boobs'], ['tit', 'tits', 'tit', 'titties']]
-// [['kolbasa', 'kolbasa']]
+// [['chorizo', 'chorizo']]
 export const INGREDIENTS = [
 	/*
 	 * Spices
