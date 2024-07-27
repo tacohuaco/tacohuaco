@@ -32,7 +32,7 @@ export type Step = PourStep | ShakeStep | CustomStep;
 export interface CoffeeRecipe {
 	name: string;
 	brewer: string;
-	ratio: number; // 15 -> 1:15
+	ratio: number; // 15 → 1:15
 	defaultAmount: number;
 	grind: string;
 	temperature: number;

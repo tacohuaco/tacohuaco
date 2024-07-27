@@ -3,7 +3,7 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 
 /**
  * Returns a slug from a Markdown link:
- * [#](spicy-gremolata) -> spicy-gremolata
+ * [#](tres-leches-cake) → tres-leches-cake
  */
 export function getSubrecipeSlug(markdown: string): string | undefined {
 	const tree = fromMarkdown(markdown);

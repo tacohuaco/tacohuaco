@@ -22,7 +22,7 @@ function hasPause(text: string) {
 }
 
 // Normalize ingredient placeholders:
-// *} large cucumbers* -> <Ingredient name="cucumber" modifier="large"/>
+// *} large cucumbers* → <Ingredient name="cucumber" modifier="large"/>
 function normalizePlaceholders(text: string) {
 	return text.replace(/\*\}\s*([^*]+)\*/g, (_, $1) => {
 		const { name, modifier } = normalizeOption(parseOption($1));

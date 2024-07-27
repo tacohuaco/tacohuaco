@@ -87,7 +87,7 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 						cuisines,
 						ingredients: getIngredients(ingredients),
 						// Tags come like `awesomePizza`, we need to convert them
-						// to words and then split into an array so Lurn indexes
+						// to words and then split into an array so Lunr indexes
 						// them as separate words
 						tags: [
 							...tags.map((x) => sentenceCase(x).split(' ')),
