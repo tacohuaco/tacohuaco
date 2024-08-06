@@ -1,4 +1,11 @@
-import { OrderedList, OrderedListItem, Stack, Heading, Markdown } from '.';
+import {
+	OrderedList,
+	OrderedListItem,
+	Stack,
+	Heading,
+	Markdown,
+	Link,
+} from '.';
 import { formatOption, printOption } from '../util/olivier';
 import type {
 	IngredientsSection,
@@ -61,6 +68,9 @@ function StepItem({
 	ingredients,
 }: Step & { ingredients: RecipeIngredient[] }) {
 	const markdownOverrides = {
+		a: {
+			component: Link,
+		},
 		Ingredient: {
 			component: IngredientAmount,
 			props: { ingredients },
