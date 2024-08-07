@@ -15,8 +15,16 @@ type Props = {
 	shops: Shop[];
 };
 
-function FormattedAddress({ address, city, country, neighbourhood, zip }: Shop) {
-	return [address, zip, neighbourhood, city, country].filter(Boolean).join(', ');
+function FormattedAddress({
+	address,
+	city,
+	country,
+	neighbourhood,
+	zip,
+}: Shop) {
+	return [address, zip, neighbourhood, city, country]
+		.filter(Boolean)
+		.join(', ');
 }
 
 function getMapLink({ name, address, city, country, zip }: Shop) {
@@ -29,39 +37,37 @@ export function ShopsPage({ url, title, shops }: Props) {
 	return (
 		<PageWithTitle url={url} title={title}>
 			<Stack as="ul" gap="l">
-				{shops.map((shop) => {
-					return (
-						<Stack key={shop.name} as="li" gap="m">
-							<TextContent>
-								<Heading level={2}>
-									{shop.url ? (
-										<Link href={shop.url}>{shop.name}</Link>
-									) : (
-										shop.name
-									)}
-								</Heading>
-								<Stack gap="m">
-									{shop.description && (
-										<TextContent variant="small">
-											<Markdown text={shop.description} />
-										</TextContent>
-									)}
-									{shop.address && (
-										<Text variant="small">
-											<Link
-												href={getMapLink(shop)}
-												target="_blank"
-												rel="noopener"
-											>
-												<FormattedAddress {...shop} />
-											</Link>
-										</Text>
-									)}
-								</Stack>
-							</TextContent>
-						</Stack>
-					);
-				})}
+				{shops.map((shop) => (
+					<Stack key={shop.name} as="li" gap="m">
+						<TextContent>
+							<Heading level={2}>
+								{shop.url ? (
+									<Link href={shop.url}>{shop.name}</Link>
+								) : (
+									shop.name
+								)}
+							</Heading>
+							<Stack gap="m">
+								{shop.description && (
+									<TextContent variant="small">
+										<Markdown text={shop.description} />
+									</TextContent>
+								)}
+								{shop.address && (
+									<Text variant="small">
+										<Link
+											href={getMapLink(shop)}
+											target="_blank"
+											rel="noopener"
+										>
+											<FormattedAddress {...shop} />
+										</Link>
+									</Text>
+								)}
+							</Stack>
+						</TextContent>
+					</Stack>
+				))}
 			</Stack>
 		</PageWithTitle>
 	);
