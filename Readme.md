@@ -20,8 +20,8 @@ npm start
 
 ## Authors
 
-- [Artem Batman Sapegin](https://sapegin.me)
-- [Margarita Borat Diaz](https://github.com/margaritadiaz)
+- [Artem Raccoon Sapegin](https://sapegin.me)
+- [Margarita Possum Diaz](https://drtaco.net)
 
 ## License
 
