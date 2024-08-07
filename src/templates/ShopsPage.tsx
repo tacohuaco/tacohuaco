@@ -15,13 +15,15 @@ type Props = {
 	shops: Shop[];
 };
 
-const formatAddress = ({ address, city, country, neighbourhood, zip }: Shop) =>
-	[address, zip, neighbourhood, city, country].filter(Boolean).join(', ');
+function FormattedAddress({ address, city, country, neighbourhood, zip }: Shop) {
+	return [address, zip, neighbourhood, city, country].filter(Boolean).join(', ');
+}
 
-const getMapLink = ({ name, address, city, country, zip }: Shop) =>
-	`https://www.google.com/maps/?q=${encodeURIComponent(
+function getMapLink({ name, address, city, country, zip }: Shop) {
+	return `https://www.google.com/maps/?q=${encodeURIComponent(
 		[name, address, zip, city, country].filter(Boolean).join(', ')
 	)}`;
+}
 
 export function ShopsPage({ url, title, shops }: Props) {
 	return (
@@ -51,7 +53,7 @@ export function ShopsPage({ url, title, shops }: Props) {
 												target="_blank"
 												rel="noopener"
 											>
-												{formatAddress(shop)}
+												<FormattedAddress {...shop} />
 											</Link>
 										</Text>
 									)}
