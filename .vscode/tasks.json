@@ -1,0 +1,15 @@
+{
+  // https://code.visualstudio.com/docs/editor/tasks
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "presentation": {
+        "reveal": "never",
+        "revealProblems": "onProblem"
+      }
+    }
+  ]
+}
