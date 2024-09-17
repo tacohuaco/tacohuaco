@@ -10,14 +10,14 @@ import rules, {
 	prepositions,
 	quotes,
 	shortWords,
-} from 'richtypo-rules-en';
+} from 'richtypo/rules/en';
 
-const { hairspace } = definitions;
+const { thinspace } = definitions;
 
 type MaybeText = string | undefined | null;
 
 const degreeSigns = (text: string) =>
-	text.replaceAll(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}˚C`);
+	text.replaceAll(/\b(\d+)\s?[°˚]?\s?C/g, `$1${thinspace}˚C`);
 
 const numberRanges = (text: string) =>
 	text.replaceAll(/\b(\d+)-(\d+)\b/g, '$1–$2');
