@@ -1,7 +1,7 @@
 import uniq from 'lodash/uniq';
-import { RecipeModelRaw } from '../types';
+import type { RecipeModelRaw } from '../types';
 import { getListLines } from './getListLines';
-import { IngredientsSection } from '../../src/types/Recipe';
+import type { IngredientsSection } from '../../src/types/Recipe';
 
 export function mapTools(
 	tools: RecipeModelRaw['tools'],

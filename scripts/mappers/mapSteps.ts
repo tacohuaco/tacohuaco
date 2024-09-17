@@ -1,6 +1,6 @@
-import { Step, StepsSection } from '../../src/types/Recipe';
+import type { Step, StepsSection } from '../../src/types/Recipe';
 import { normalizeOption, parseOption } from '../../src/util/olivier';
-import { RecipeModelRaw } from '../types';
+import type { RecipeModelRaw } from '../types';
 import { getListLines } from './getListLines';
 import { getSubrecipeSlug } from './getSubrecipeSlug';
 import { splitBySection } from './splitBySection';

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { scale } from './scale';
-import { type Ingredient } from './types';
+import type { Ingredient } from './types';
 
 test.each<[[Ingredient[], number], Ingredient[]]>([
 	[

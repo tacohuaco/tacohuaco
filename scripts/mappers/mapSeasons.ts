@@ -1,6 +1,6 @@
 import intersection from 'lodash/intersection';
 import { Month } from '../../src/util/olivier';
-import { RecipeIngredient } from '../../src/types/Recipe';
+import type { RecipeIngredient } from '../../src/types/Recipe';
 
 /**
  * Recipe seasons: return months shared by all recipe ingredients

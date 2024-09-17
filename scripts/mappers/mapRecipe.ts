@@ -1,10 +1,6 @@
 import { normalizeOption, parseOption } from '../../src/util/olivier';
-import { type Recipe, type Yields } from '../../src/types/Recipe';
-import {
-	type IngredientModel,
-	type RecipeModelRaw,
-	type TipModel,
-} from '../types';
+import type { Recipe, Yields } from '../../src/types/Recipe';
+import type { IngredientModel, RecipeModelRaw, TipModel } from '../types';
 import { getAllIngredients } from '../../src/util/getAllIngredients';
 import { mapFlags } from './mapFlags';
 import { mapIngredients } from './mapIngredients';

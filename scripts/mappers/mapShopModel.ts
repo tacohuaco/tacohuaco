@@ -1,5 +1,5 @@
-import { ShopModelRaw } from '../types';
-import { Shop } from '../../src/types/Shop';
+import type { ShopModelRaw } from '../types';
+import type { Shop } from '../../src/types/Shop';
 import { mapMaybeNumber } from './mapMaybeNumber';
 import { mapMaybeString } from './mapMaybeString';
 

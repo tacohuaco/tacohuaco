@@ -1,7 +1,7 @@
-import { RecipeIngredient } from '../../src/types/Recipe';
+import type { RecipeIngredient } from '../../src/types/Recipe';
 
 /**
- * Recipe precoditons: things to be done before starting cooking
+ * Recipe preconditions: things to be done before starting cooking
  */
 export const mapPreconditions = (ingredients: RecipeIngredient[]): string[] => {
 	return ingredients

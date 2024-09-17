@@ -1,14 +1,14 @@
 import { z, defineCollection } from 'astro:content';
 import { IngredientKind, Month, type Amount } from '../util/olivier';
 import { type Asset } from '../types/Asset';
-import {
-	type IngredientsSection,
-	type Recipe,
-	type RecipeFragment,
-	type RecipeIngredient,
-	type Step,
-	type StepsSection,
-	type Yields,
+import type {
+	IngredientsSection,
+	Recipe,
+	RecipeFragment,
+	RecipeIngredient,
+	Step,
+	StepsSection,
+	Yields,
 } from '../types/Recipe';
 
 // TODO: Find a better way to sync TypeScript interface and Zod scheme

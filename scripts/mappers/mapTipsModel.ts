@@ -1,4 +1,4 @@
-import { TipModel, TipModelRaw } from '../types';
+import type { TipModel, TipModelRaw } from '../types';
 import { mapMaybeString } from './mapMaybeString';
 
 export function mapTipsModel(ingredients: TipModelRaw[]): TipModel[] {

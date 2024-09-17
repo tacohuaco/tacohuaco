@@ -39,7 +39,7 @@ test('map steps with ingredients', () => {
 		    "steps": [
 		      {
 		        "pause": false,
-		        "text": "In a medium bowl, combine <Ingredient name=\\"all-purpose flour\\"  />, <Ingredient name=\\"peppercorn\\" modifier=\\"black\\" />, <Ingredient name=\\"cucumber\\"  />, and <Ingredient name=\\"salt\\"  />, using a whisk.",
+		        "text": "In a medium bowl, combine <Ingredient name="all-purpose flour"  />, <Ingredient name="peppercorn" modifier="black" />, <Ingredient name="cucumber"  />, and <Ingredient name="salt"  />, using a whisk.",
 		      },
 		    ],
 		  },

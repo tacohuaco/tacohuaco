@@ -8,7 +8,7 @@ import {
 } from './langs/en/units';
 import { ALL_INGREDIENTS } from './langs/en/ingredients';
 import { ARTICLES, WORDS_TO_NUMBERS } from './langs/en/translations';
-import { type Amount, type Ingredient } from './types';
+import type { Amount, Ingredient } from './types';
 
 const CONVERSIONS: {
 	from: string;

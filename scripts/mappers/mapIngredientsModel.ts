@@ -1,4 +1,4 @@
-import { IngredientModel, IngredientModelRaw } from '../types';
+import type { IngredientModel, IngredientModelRaw } from '../types';
 
 export function mapIngredientsModel(
 	ingredients: IngredientModelRaw[]

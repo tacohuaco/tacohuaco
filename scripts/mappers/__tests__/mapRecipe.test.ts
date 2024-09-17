@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 import { mapRecipe } from '../mapRecipe';
-import { type RecipeModelRaw } from '../../types';
+import type { RecipeModelRaw } from '../../types';
 
 test('map recipe', () => {
 	const recipe: RecipeModelRaw = {

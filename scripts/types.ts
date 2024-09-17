@@ -1,4 +1,4 @@
-import { Asset } from '../src/types/Asset';
+import type { Asset } from '../src/types/Asset';
 
 export type Maybe<T> = T | null;
 

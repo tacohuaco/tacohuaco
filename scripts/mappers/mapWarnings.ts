@@ -1,6 +1,6 @@
 import uniq from 'lodash/uniq';
-import { type IngredientModel } from '../types';
-import { type RecipeIngredient } from '../../src/types/Recipe';
+import type { IngredientModel } from '../types';
+import type { RecipeIngredient } from '../../src/types/Recipe';
 
 export function mapWarnings(
 	ingredients: RecipeIngredient[],

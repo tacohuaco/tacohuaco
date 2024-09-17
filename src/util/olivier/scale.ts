@@ -1,5 +1,5 @@
 import round from 'lodash/round';
-import { type Amount, type Ingredient } from './types';
+import type { Amount, Ingredient } from './types';
 
 function roundAmount(amount: number) {
 	if (amount > 50) {

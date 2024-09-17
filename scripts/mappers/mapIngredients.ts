@@ -1,5 +1,5 @@
-import { type IngredientsSection } from '../../src/types/Recipe';
-import { type RecipeModelRaw } from '../types';
+import type { IngredientsSection } from '../../src/types/Recipe';
+import type { RecipeModelRaw } from '../types';
 import { getListLines } from './getListLines';
 import { splitBySection } from './splitBySection';
 import {

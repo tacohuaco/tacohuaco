@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { request, gql } from 'graphql-request';
-import {
+import type {
 	IngredientModelRaw,
 	RecipeModelRaw,
 	ShopModelRaw,

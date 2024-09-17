@@ -1,4 +1,4 @@
-import { Recipe, RecipeIngredient } from '../../src/types/Recipe';
+import type { Recipe, RecipeIngredient } from '../../src/types/Recipe';
 import { IngredientKind } from '../../src/util/olivier';
 
 /**

@@ -1,5 +1,5 @@
-import { RecipeIngredient } from '../../src/types/Recipe';
-import { TipModel } from '../types';
+import type { RecipeIngredient } from '../../src/types/Recipe';
+import type { TipModel } from '../types';
 
 export function mapTips(
 	ingredients: RecipeIngredient[],

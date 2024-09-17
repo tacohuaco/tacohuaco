@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 import { mapTools } from '../mapTools';
-import { IngredientsSection } from '../../../src/types/Recipe';
+import type { IngredientsSection } from '../../../src/types/Recipe';
 
 test('map tools', () => {
 	const tools = `
