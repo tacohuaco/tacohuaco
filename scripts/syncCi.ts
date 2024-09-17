@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { globSync } from 'glob';
-import { basename } from 'path';
+import path from 'node:path';
 
 // Copy mock recipes and shops for tests on CI
 
@@ -13,11 +13,11 @@ console.log('🍕 Writing mock recipes...');
 
 const recipeMocks = globSync('e2e/mocks/recipes/*.json');
 
-recipeMocks.forEach((file) => {
+for (const file of recipeMocks) {
 	console.log('👉', file);
-	const filename = basename(file);
+	const filename = path.basename(file);
 	fs.copyFileSync(file, `src/content/recipes/${filename}`);
-});
+}
 
 console.log();
 console.log('🌭 Writing mock shops...');

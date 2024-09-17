@@ -67,40 +67,38 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 			this.field('seasons');
 			this.field('keywords');
 
-			recipes.forEach(
-				({
+			for (const {
+				slug,
+				title,
+				titleEnglish,
+				cuisines,
+				ingredients,
+				tags,
+				vegan,
+				vegetarian,
+				seasons,
+				keywords,
+			} of recipes) {
+				this.add({
 					slug,
-					title,
-					titleEnglish,
+					title: deburr(title),
+					titleEnglish: deburr(titleEnglish),
 					cuisines,
-					ingredients,
-					tags,
-					vegan,
-					vegetarian,
-					seasons,
+					ingredients: getIngredients(ingredients),
+					// Tags come like `awesomePizza`, we need to convert them
+					// to words and then split into an array so Lunr indexes
+					// them as separate words
+					tags: [
+						...tags.map((x) => sentenceCase(x).split(' ')),
+						vegan ? FLAG_VEGAN : [],
+						vegetarian ? FLAG_VEGETARIAN : [],
+					].flat(),
+					seasons: seasons
+						.flatMap((x) => [MONTH_TO_NAME[x], MONTH_TO_SEASON[x]])
+						.flat(),
 					keywords,
-				}) => {
-					this.add({
-						slug,
-						title: deburr(title),
-						titleEnglish: deburr(titleEnglish),
-						cuisines,
-						ingredients: getIngredients(ingredients),
-						// Tags come like `awesomePizza`, we need to convert them
-						// to words and then split into an array so Lunr indexes
-						// them as separate words
-						tags: [
-							...tags.map((x) => sentenceCase(x).split(' ')),
-							vegan ? FLAG_VEGAN : [],
-							vegetarian ? FLAG_VEGETARIAN : [],
-						].flat(),
-						seasons: seasons
-							.flatMap((x) => [MONTH_TO_NAME[x], MONTH_TO_SEASON[x]])
-							.flat(),
-						keywords,
-					});
-				}
-			);
+				});
+			}
 		});
 	}, [recipes]);
 }

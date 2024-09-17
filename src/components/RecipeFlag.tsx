@@ -40,9 +40,9 @@ const TooltipWithLink = ({
 	children,
 	title,
 	href,
-	// eslint-disable-next-line @typescript-eslint/naming-convention
 	linkComponent: Link,
 }: React.ComponentProps<typeof Text> &
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	HrefProp & { linkComponent: ComponentType<any> }) => (
 	<Tooltip value={title}>
 		{({ triggerProps, tooltipNode }) => (
@@ -124,13 +124,14 @@ const Round = ({ children, title, href, ...props }: FlagProps & HrefProp) => (
 
 export function RecipeFlag({ type, ...props }: Props) {
 	switch (type) {
-		case 'vegan':
+		case 'vegan': {
 			return (
 				<Circle href="/flags/vegan/" title="Vegan" {...props} color="#6fa565">
 					VG
 				</Circle>
 			);
-		case 'vegetarian':
+		}
+		case 'vegetarian': {
 			return (
 				<Circle
 					href="/flags/vegetarian/"
@@ -141,7 +142,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					V
 				</Circle>
 			);
-		case 'glutenFree':
+		}
+		case 'glutenFree': {
 			return (
 				<Circle
 					href="/flags/gluten-free/"
@@ -152,7 +154,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					GF
 				</Circle>
 			);
-		case 'lowGluten':
+		}
+		case 'lowGluten': {
 			return (
 				<Circle
 					href="/flags/low-gluten/"
@@ -163,7 +166,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					LG
 				</Circle>
 			);
-		case 'dairyFree':
+		}
+		case 'dairyFree': {
 			return (
 				<Circle
 					href="/flags/dairy-free/"
@@ -174,7 +178,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					DF
 				</Circle>
 			);
-		case 'noAddedSugar':
+		}
+		case 'noAddedSugar': {
 			return (
 				<Circle
 					href="/flags/no-added-sugar/"
@@ -185,7 +190,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					NS
 				</Circle>
 			);
-		case 'margaritasFavorite':
+		}
+		case 'margaritasFavorite': {
 			return (
 				<Round
 					href="/flags/margaritas-favorite/"
@@ -195,7 +201,8 @@ export function RecipeFlag({ type, ...props }: Props) {
 					M
 				</Round>
 			);
-		case 'artemsFavorite':
+		}
+		case 'artemsFavorite': {
 			return (
 				<Round
 					href="/flags/artems-favorite/"
@@ -205,5 +212,6 @@ export function RecipeFlag({ type, ...props }: Props) {
 					A
 				</Round>
 			);
+		}
 	}
 }

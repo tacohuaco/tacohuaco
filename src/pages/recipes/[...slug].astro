@@ -82,7 +82,7 @@ const recipe = recipeEntryToRecipe(entry);
 const url = `/recipes/${recipe.slug}/`;
 
 const entries = await getCollection('recipes');
-const allRecipes = entries.map(recipeEntryToRecipe);
+const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
 const madeWithRecipes = getMadeWithRecipes(allRecipes, recipe.recipes);
 const relatedRecipes = getRelatedRecipes(allRecipes, recipe);
 ---

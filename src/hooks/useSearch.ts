@@ -45,7 +45,7 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 	const allCuisines: string[] = [];
 	const allKeywords: string[] = [];
 
-	recipes.forEach((recipe) => {
+	for (const recipe of recipes) {
 		allTitles.push(getTitle(recipe.title, recipe.titleEnglish));
 
 		const ingredients = getAllIngredients(recipe.ingredients);
@@ -62,7 +62,7 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 		allCuisines.push(...recipe.cuisines);
 
 		allKeywords.push(...recipe.keywords);
-	});
+	}
 
 	return uniq([
 		...DEFAULT_AUTOCOMPLETE_ITEMS,

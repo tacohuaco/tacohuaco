@@ -28,85 +28,85 @@ if (!process.env.GRAPHCMS_TOKEN) {
 const endpoint = `https://api-eu-central-1.graphcms.com/v2/${process.env.GRAPHCMS_TOKEN}/master`;
 
 const query = gql`
-	{
-		recipes {
-			artemsFavorite
-			cuisines
-			createdAt
-			description
-			ingredients
-			keywords
-			margaritasFavorite
-			overnight
-			slug
-			source
-			steps
-			tags
-			time
-			title
-			titleEnglish
-			tools
-			notes
-			yields
-			images {
-				url
-				handle
-				width
-				height
-			}
-			subrecipes {
-				slug
-				title
-				ingredients
-				steps
-				tools
-			}
-			recipes {
-				artemsFavorite
-				createdAt
-				cuisines
-				images {
-					handle
-					height
-					url
-					width
-				}
-				ingredients
-				margaritasFavorite
-				overnight
-				slug
-				subrecipes {
-					slug
-					title
-					ingredients
-					steps
-					tools
-				}
-				time
-				title
-				tags
-			}
-		}
-		ingredients {
-			name
-			warnings
-		}
-		tips {
-			content
-			tags
-			ingredient
-		}
-		shops {
-			address
-			city
-			country
-			description
-			name
-			neighbourhood
-			url
-			zip
-		}
-	}
+  {
+  	recipes {
+  		artemsFavorite
+  		cuisines
+  		createdAt
+  		description
+  		ingredients
+  		keywords
+  		margaritasFavorite
+  		overnight
+  		slug
+  		source
+  		steps
+  		tags
+  		time
+  		title
+  		titleEnglish
+  		tools
+  		notes
+  		yields
+  		images {
+  			url
+  			handle
+  			width
+  			height
+  		}
+  		subrecipes {
+  			slug
+  			title
+  			ingredients
+  			steps
+  			tools
+  		}
+  		recipes {
+  			artemsFavorite
+  			createdAt
+  			cuisines
+  			images {
+  				handle
+  				height
+  				url
+  				width
+  			}
+  			ingredients
+  			margaritasFavorite
+  			overnight
+  			slug
+  			subrecipes {
+  				slug
+  				title
+  				ingredients
+  				steps
+  				tools
+  			}
+  			time
+  			title
+  			tags
+  		}
+  	}
+  	ingredients {
+  		name
+  		warnings
+  	}
+  	tips {
+  		content
+  		tags
+  		ingredient
+  	}
+  	shops {
+  		address
+  		city
+  		country
+  		description
+  		name
+  		neighbourhood
+  		url
+  		zip
+  	}
+  }
 `;
 
 console.log('🌮 Syncing content...');
@@ -129,11 +129,11 @@ fs.ensureDirSync('src/content/recipes');
 const ingredients = mapIngredientsModel(results.ingredients);
 const tips = mapTipsModel(results.tips);
 
-results.recipes.forEach((recipeRaw) => {
+for (const recipeRaw of results.recipes) {
 	console.log('👉', recipeRaw.title);
 	const recipe = mapRecipe(recipeRaw, ingredients, tips);
 	fs.writeJSONSync(`src/content/recipes/${recipe.slug}.json`, recipe);
-});
+}
 
 console.log();
 console.log('🌭 Parsing shops...');

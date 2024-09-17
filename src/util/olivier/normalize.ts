@@ -48,7 +48,7 @@ export function normalizeAmountValue(amount?: Amount): Amount | undefined {
 	}
 
 	const numberMaybe = numericQuantity(amount.replace(',', '.'));
-	if (!isNaN(numberMaybe)) {
+	if (!Number.isNaN(numberMaybe)) {
 		return numberMaybe;
 	}
 
@@ -147,5 +147,5 @@ export function normalizeOption(ingredient: Ingredient): Ingredient {
 export function normalize(
 	options: readonly Ingredient[]
 ): readonly Ingredient[] {
-	return options.map(normalizeOption);
+	return options.map((x) => normalizeOption(x));
 }

@@ -8,7 +8,7 @@ function isLowGlutenRecipe(ingredients: RecipeIngredient[]) {
 	let glutenFloursAmount = 0;
 	let glutenlessFloursAmount = 0;
 
-	ingredients.forEach((ingredient) => {
+	for (const ingredient of ingredients) {
 		if (
 			typeof ingredient.minAmount === 'number' &&
 			(ingredient.name.endsWith(' flour') || ingredient.name.endsWith('starch'))
@@ -19,7 +19,7 @@ function isLowGlutenRecipe(ingredients: RecipeIngredient[]) {
 				glutenlessFloursAmount += ingredient.minAmount;
 			}
 		}
-	});
+	}
 	const glutennes = glutenFloursAmount / glutenlessFloursAmount;
 	return glutennes < 0.33;
 }

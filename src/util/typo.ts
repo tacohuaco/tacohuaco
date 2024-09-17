@@ -17,14 +17,16 @@ const { hairspace } = definitions;
 type MaybeText = string | undefined | null;
 
 const degreeSigns = (text: string) =>
-	text.replace(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}˚C`);
+	text.replaceAll(/\b(\d+)\s?[°˚]?\s?C/g, `$1${hairspace}˚C`);
 
 const numberRanges = (text: string) =>
-	text.replace(/\b(\d+)-(\d+)\b/g, '$1–$2');
+	text.replaceAll(/\b(\d+)-(\d+)\b/g, '$1–$2');
 
-const dimensions = (text: string) => text.replace(/\b(\d+)x(\d+)\b/g, '$1×$2');
+const dimensions = (text: string) =>
+	text.replaceAll(/\b(\d+)x(\d+)\b/g, '$1×$2');
 
-const apostrophes = (text: string) => text.replace(/([a-z])'([a-z])/g, '$1’$2');
+const apostrophes = (text: string) =>
+	text.replaceAll(/([a-z])'([a-z])/g, '$1’$2');
 
 export const typo = (text: MaybeText) =>
 	richtypo(

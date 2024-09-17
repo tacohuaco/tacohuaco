@@ -7,12 +7,12 @@ import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
 import type { Recipe } from '../types/Recipe';
 
 const entries = await getCollection('recipes');
-const allRecipes = entries.map(recipeEntryToRecipe);
+const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
 
 const CURRENT_SEASON = new Date().getMonth() + 1;
 const NEW_RECIPES_TO_SHOW = 6;
 
-// Order recipies by the lengths of the seasons list:
+// Order recipes by the lengths of the seasons list:
 // recipes with shorter season first
 function getCurrentSeasonRecipes(recipes: Recipe[]): Recipe[] {
 	return orderBy(

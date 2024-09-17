@@ -33,7 +33,9 @@ export async function getStaticPaths() {
 			props: {
 				slug,
 				flag,
-				recipes: entries.filter((x) => x.data[flag]).map(recipeEntryToRecipe),
+				recipes: entries
+					.filter((x) => x.data[flag])
+					.map((x) => recipeEntryToRecipe(x)),
 			},
 		};
 	});

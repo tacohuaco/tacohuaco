@@ -10,9 +10,9 @@ import Group from 'react-group';
 // https://github.com/sindresorhus/parse-ms
 function parseMilliseconds(milliseconds: number) {
 	return {
-		days: Math.trunc(milliseconds / 86400000),
-		hours: Math.trunc(milliseconds / 3600000) % 24,
-		minutes: Math.trunc(milliseconds / 60000) % 60,
+		days: Math.trunc(milliseconds / 86_400_000),
+		hours: Math.trunc(milliseconds / 3_600_000) % 24,
+		minutes: Math.trunc(milliseconds / 60_000) % 60,
 		seconds: Math.trunc(milliseconds / 1000) % 60,
 		milliseconds: Math.trunc(milliseconds) % 1000,
 		microseconds: Math.trunc(milliseconds * 1000) % 1000,
@@ -62,19 +62,20 @@ const getWaterAmount = (step: Step, recipe: CoffeeRecipeType) => {
 
 const getStepText = (step: Step, recipe: CoffeeRecipeType) => {
 	switch (step.action) {
-		case Action.Pour:
+		case Action.Pour: {
 			return (
 				<>
 					Pour <b>{getWaterAmount(step, recipe)}</b> of the water.
 				</>
 			);
-		case Action.Shake:
+		}
+		case Action.Shake: {
 			return <>Shake the thing.</>;
-		case Action.Custom:
+		}
+		case Action.Custom: {
 			return step.message;
+		}
 	}
-
-	return '';
 };
 
 const getWaitText = (step: Step) => {

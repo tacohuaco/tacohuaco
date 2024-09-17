@@ -16,7 +16,7 @@ export function merge(
 	allIngredients: readonly Ingredient[]
 ): readonly Ingredient[] {
 	const ingredients: Record<string, Ingredient> = {};
-	allIngredients.forEach((ingredient) => {
+	for (const ingredient of allIngredients) {
 		const key = getKey(ingredient);
 
 		if (key in ingredients === false) {
@@ -28,6 +28,6 @@ export function merge(
 		}
 
 		ingredients[key] = add(ingredients[key], ingredient);
-	});
+	}
 	return Object.values(ingredients);
 }

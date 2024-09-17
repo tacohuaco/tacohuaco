@@ -16,10 +16,10 @@ export interface Props<P> {
 
 const { component: Page } = Astro.props;
 
-const getTitle = ({
+function getTitle<P>({
 	title,
 	pageTitle,
-}: Pick<Props<any>, 'title' | 'pageTitle'>) => {
+}: Pick<Props<P>, 'title' | 'pageTitle'>) {
 	if (pageTitle) {
 		return pageTitle;
 	}
@@ -29,7 +29,7 @@ const getTitle = ({
 	}
 
 	return SITE_TITLE;
-};
+}
 ---
 
 <!doctype html>

@@ -12,11 +12,11 @@
     "test:ci": "npm run lint && vitest run && astro build && npx playwright test",
     "test:e2e": "npx playwright test --ui",
     "posttest": "npm run format",
-    "lint": "eslint . --cache --fix --ext .js,.ts,.tsx,.astro",
-    "format": "prettier --log-level warn --write \"**/*.{js,ts,tsx,astro,md}\"",
+    "lint": "eslint . --cache --fix",
+    "format": "prettier --log-level warn --write \"**/*.{js,cjs,mjs,ts,tsx,astro,md}\"",
     "sync": "tsx -r dotenv/config scripts/sync.ts",
     "sync:ci": "tsx -r dotenv/config scripts/syncCi.ts",
-    "prepare": "husky install; panda codegen"
+    "prepare": "husky; panda codegen"
   },
   "type": "module",
   "engines": {
@@ -59,34 +59,31 @@
     "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
     "@types/remove-markdown": "^0.3.4",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
     "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-config-tamia": "^8.1.3",
-    "eslint-plugin-astro": "^0.34.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.34.1",
+    "eslint": "^9.10.0",
+    "eslint-config-tamia": "^9.1.21",
+    "eslint-plugin-astro": "^1.2.4",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "graphql": "^16.9.0",
     "graphql-request": "^6.1.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.0.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
     "mdast-util-from-markdown": "^2.0.1",
     "mdast-util-to-markdown": "^2.1.0",
-    "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
     "richtypo": "^5.1.3",
     "richtypo-rules-en": "^5.1.3",
     "tsx": "^4.19.1",
     "typescript": "5.6.2",
     "unist-util-visit": "^5.0.0",
-    "vitest": "^0.34.6"
+    "vitest": "^2.1.1"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,astro,md}": "prettier --write",
-    "*.{js,ts,tsx,astro}": "eslint --cache --fix"
+    "*.{js,cjs,mjs,ts,tsx,astro,md}": "prettier --write",
+    "*.{js,cjs,mjs,ts,tsx,astro}": "eslint --cache --fix"
   }
 }

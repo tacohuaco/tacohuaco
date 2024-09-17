@@ -144,5 +144,5 @@ export function formatOption(ingredient: Ingredient): Ingredient {
  * Format an ingredient for display
  */
 export function format(options: readonly Ingredient[]): readonly Ingredient[] {
-	return options.map(formatOption);
+	return options.map((x) => formatOption(x));
 }

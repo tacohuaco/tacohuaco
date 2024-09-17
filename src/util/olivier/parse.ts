@@ -11,14 +11,14 @@ type State = 'BEGINNING' | 'NUMBER' | 'UNIT' | 'NAME' | 'COMMENT';
 
 const ALL_UNITS = UNITS.flat(2);
 
-const isNumber = (s: string) => /^[\d,./—–-]+$/.test(s);
+const isNumber = (s: string) => /^[\d,./–—-]+$/.test(s);
 const isRangeSeparator = (s: string) =>
 	RANGE_SEPARATORS.includes(s.toLocaleLowerCase());
 const isUnit = (s: string) => ALL_UNITS.includes(s.toLowerCase());
 const isUnitless = (s: string) => UNITLESS.includes(s.toLowerCase());
 const isArticle = (s: string) => ARTICLES.includes(s.toLowerCase());
 const isConnector = (s: string) => CONNECTORS.includes(s.toLowerCase());
-const isLastWordOfName = (s: string) => /;$/.test(s);
+const isLastWordOfName = (s: string) => s.endsWith(';');
 const trimSemicolon = (s: string) => s.replace(/;$/, '');
 const append = (text: string, s: string) => (text === '' ? s : `${text} ${s}`);
 
@@ -36,7 +36,7 @@ export function parseOption(text: string): Ingredient {
 	let token = tokens.shift();
 	while (token) {
 		switch (state) {
-			case 'BEGINNING':
+			case 'BEGINNING': {
 				if (isNumber(token) || isArticle(token) || isUnitless(token)) {
 					amount = token;
 					state = 'NUMBER';
@@ -45,7 +45,8 @@ export function parseOption(text: string): Ingredient {
 					continue;
 				}
 				break;
-			case 'NUMBER':
+			}
+			case 'NUMBER': {
 				if (isConnector(token)) {
 					// Ignore
 				} else if (isRangeSeparator(token)) {
@@ -60,10 +61,12 @@ export function parseOption(text: string): Ingredient {
 					continue;
 				}
 				break;
-			case 'UNIT':
+			}
+			case 'UNIT': {
 				state = 'NAME';
 				continue;
-			case 'NAME':
+			}
+			case 'NAME': {
 				if (isConnector(token)) {
 					// Ignore
 				} else if (isLastWordOfName(token)) {
@@ -73,9 +76,11 @@ export function parseOption(text: string): Ingredient {
 					name = append(name, token);
 				}
 				break;
-			case 'COMMENT':
+			}
+			case 'COMMENT': {
 				comment = append(comment, token);
 				break;
+			}
 		}
 
 		token = tokens.shift();
@@ -103,5 +108,5 @@ export function parseOption(text: string): Ingredient {
  * 30 g of hazelnut flour / 15 g coconut flour
  */
 export function parse(text: string): readonly Ingredient[] {
-	return text.split(/\s+\/\s+/).map(parseOption);
+	return text.split(/\s+\/\s+/).map((x) => parseOption(x));
 }

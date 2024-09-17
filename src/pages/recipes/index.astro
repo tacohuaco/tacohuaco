@@ -6,7 +6,10 @@ import { RecipesPage } from '../../templates/RecipesPage';
 import { recipeEntryToRecipe } from '../../util/recipeEntryToRecipe';
 
 const entries = await getCollection('recipes');
-const recipes = sortBy(entries.map(recipeEntryToRecipe), 'title');
+const recipes = sortBy(
+	entries.map((x) => recipeEntryToRecipe(x)),
+	'title'
+);
 ---
 
 <Layout

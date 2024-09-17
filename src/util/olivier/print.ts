@@ -13,7 +13,7 @@ function printAmount({
 	return (
 		[
 			minAmount,
-			minAmount !== maxAmount ? `–${maxAmount}` : '',
+			minAmount === maxAmount ? '' : `–${maxAmount}`,
 			unit ? ` ${unit}` : '',
 		].join('') || undefined
 	);
@@ -59,5 +59,5 @@ export function print(
 		return option;
 	});
 
-	return optionsToPrint.map(printOption);
+	return optionsToPrint.map((x) => printOption(x));
 }

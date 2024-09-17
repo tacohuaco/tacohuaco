@@ -24,7 +24,7 @@ function hasPause(text: string) {
 // Normalize ingredient placeholders:
 // *} large cucumbers* → <Ingredient name="cucumber" modifier="large"/>
 function normalizePlaceholders(text: string) {
-	return text.replace(/\*\}\s*([^*]+)\*/g, (_, $1) => {
+	return text.replaceAll(/\*}\s*([^*]+)\*/g, (_, $1) => {
 		const { name, modifier } = normalizeOption(parseOption($1));
 		const modifierProp = modifier ? `modifier="${modifier}"` : '';
 		return `<Ingredient name="${name}" ${modifierProp} />`;
@@ -82,7 +82,7 @@ export function mapSteps(
 			const lines = getListLines(body);
 			return {
 				name,
-				steps: lines.map(mapStep),
+				steps: lines.map((x) => mapStep(x)),
 			};
 		}
 	});

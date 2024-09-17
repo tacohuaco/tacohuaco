@@ -55,5 +55,5 @@ export function analyzeOption({ name }: Ingredient): IngredientInfo {
 export function analyze(
 	options: readonly Ingredient[]
 ): readonly IngredientInfo[] {
-	return options.map(analyzeOption);
+	return options.map((x) => analyzeOption(x));
 }
