@@ -51,7 +51,8 @@ export function createBox(
 		ref: innerRef,
 		...elementProps,
 		...normalizeHTMLProps(htmlProps),
-		className: cx(cssFn(styleProps, css), className),
+		// Using any here for the same reason as above
+		className: cx(cssFn(styleProps as any, css), className),
 	});
 }
 
