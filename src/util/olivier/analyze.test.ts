@@ -17,13 +17,7 @@ test.each([
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			seasons: [
-				Month.May,
-				Month.June,
-				Month.July,
-				Month.August,
-				Month.September,
-			],
+			seasons: [Month.June, Month.July, Month.August, Month.September],
 		},
 	],
 	[
