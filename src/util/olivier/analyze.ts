@@ -7,7 +7,7 @@ import {
 	POULTRIES,
 	SUGARS,
 } from './langs/en/info';
-import { SEASONS } from './regions/germany';
+import { SEASONS } from './regions/valencia';
 import {
 	IngredientKind,
 	Month,

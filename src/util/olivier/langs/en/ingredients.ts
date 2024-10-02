@@ -73,6 +73,11 @@ export const INGREDIENTS = [
 	[['pasta']],
 	[['couscous']],
 	[['oat', 'oats']],
+	[
+		['garrofó bean', 'garrofó beans'],
+		['garrofo bean', 'garrofo beans'],
+		['garrofo', 'garrofos'],
+	],
 
 	/*
 	 * Dried fruits and nuts
