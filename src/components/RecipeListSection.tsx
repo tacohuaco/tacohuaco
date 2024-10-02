@@ -6,14 +6,18 @@ import type { RecipeFragment } from '../types/Recipe';
 interface Props {
 	title: ReactNode;
 	recipes: RecipeFragment[];
+	children?: ReactNode;
 }
 
-export function RecipeListSection({ title, recipes }: Props) {
+export function RecipeListSection({ title, recipes, children }: Props) {
 	return (
 		<Stack as="section" gap="l">
-			<Heading as="h2" level={1}>
-				{title}
-			</Heading>
+			<Stack as="section" gap="s">
+				<Heading as="h2" level={1}>
+					{title}
+				</Heading>
+				{children}
+			</Stack>
 			<RecipeList recipes={recipes} />
 		</Stack>
 	);
