@@ -54,17 +54,6 @@ export interface IngredientModelRaw {
 	warnings: Maybe<string>;
 }
 
-export interface ShopModelRaw {
-	address: Maybe<string>;
-	city: Maybe<string>;
-	country: Maybe<string>;
-	description: Maybe<string>;
-	name: string;
-	neighbourhood: Maybe<string>;
-	url: Maybe<string>;
-	zip: Maybe<number>;
-}
-
 export interface TipModel {
 	content: string;
 	tags: string[];

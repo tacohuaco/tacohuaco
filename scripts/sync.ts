@@ -1,15 +1,9 @@
 import fs from 'fs-extra';
 import { request, gql } from 'graphql-request';
-import type {
-	IngredientModelRaw,
-	RecipeModelRaw,
-	ShopModelRaw,
-	TipModelRaw,
-} from './types';
+import type { IngredientModelRaw, RecipeModelRaw, TipModelRaw } from './types';
 import { mapRecipe } from './mappers/mapRecipe';
 import { mapIngredientsModel } from './mappers/mapIngredientsModel';
 import { mapTipsModel } from './mappers/mapTipsModel';
-import { mapShopModel } from './mappers/mapShopModel';
 
 // Fetch _all_ the data from Hygraph and convert it to JSON files that could
 // be used in Astro
@@ -96,16 +90,6 @@ const query = gql`
   		tags
   		ingredient
   	}
-  	shops {
-  		address
-  		city
-  		country
-  		description
-  		name
-  		neighbourhood
-  		url
-  		zip
-  	}
   }
 `;
 
@@ -118,7 +102,6 @@ const results = await request<{
 	recipes: RecipeModelRaw[];
 	ingredients: IngredientModelRaw[];
 	tips: TipModelRaw[];
-	shops: ShopModelRaw[];
 }>(endpoint, query);
 
 console.log();
@@ -134,14 +117,6 @@ for (const recipeRaw of results.recipes) {
 	const recipe = mapRecipe(recipeRaw, ingredients, tips);
 	fs.writeJSONSync(`src/content/recipes/${recipe.slug}.json`, recipe);
 }
-
-console.log();
-console.log('🌭 Parsing shops...');
-
-fs.ensureDirSync('src/data');
-
-const shops = mapShopModel(results.shops);
-fs.writeJSONSync(`src/data/shops.json`, shops);
 
 console.log();
 console.log(`🍆 ${results.recipes.length} recipes done`);
