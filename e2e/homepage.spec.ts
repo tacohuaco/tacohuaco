@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// TODO: How to fetch all recipe links withou links to gluten free, vegan, etc. recipes? We cannot fetch them by name without mocking the date somehow
+// TODO: How to fetch all recipe links without links to gluten free, vegan, etc. recipes? We cannot fetch them by name without mocking the date somehow
 
 test('has title', async ({ page }) => {
 	await page.goto('/');
@@ -16,7 +16,7 @@ test('has recently added recipes', async ({ page }) => {
 
 	// Check that we have some recently added recipes
 	const recentRecipes = page.locator('section').filter({
-		has: page.getByRole('heading', { name: 'Recently added recipes' }),
+		has: page.getByRole('heading', { name: 'New recipes' }),
 	});
 
 	expect(await recentRecipes.getByRole('link').count()).toBeGreaterThan(0);
@@ -24,7 +24,7 @@ test('has recently added recipes', async ({ page }) => {
 	// Check that we have some recipes in season
 	const inSeasonRecipes = page.locator('section').filter({
 		has: page.getByRole('heading', {
-			name: 'Recipes with ingredients in season',
+			name: 'Cook seasonal',
 		}),
 	});
 
