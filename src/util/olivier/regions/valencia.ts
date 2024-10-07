@@ -1,4 +1,7 @@
 // Data from https://www.visitvalencia.com/en/what-to-do-valencia/gastronomy/seasonal-products
+// Changes:
+// - list "potato" and "carrot" as "young potato" and "young carrot"
+// - remove some common ingredients such as "bell pepper"
 
 import { Month } from '../types';
 
@@ -23,7 +26,6 @@ export const SEASONS: Record<string, Month[]> = {
 	[`asparagus`]:    [           Mar, Apr, May                                    ],
 	[`avocado`]:      [ Jan, Feb, Mar, Apr,                               Nov, Dec ],
 	[`beetroot`]:     [                               Jul, Aug, Sep, Oct, Nov      ],
-	[`bell pepper`]:  [                          Jun, Jul, Aug, Sep                ],
 	[`blackberry`]:   [                                    Aug                     ],
 	[`broccoli`]:     [                                             Oct, Nov, Dec  ],
 	[`cabbage`]:      [ Jan, Feb, Mar,                               Oct, Nov      ],

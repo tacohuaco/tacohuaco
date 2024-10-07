@@ -2,6 +2,8 @@ import { Text, VisuallyHidden } from '.';
 import type { RecipeIngredient } from '../types/Recipe';
 import { Month } from '../util/olivier';
 
+const CURRENT_SEASON = new Date().getMonth() + 1;
+
 const ALL_MONTHS = [
 	Month.January,
 	Month.February,
@@ -42,8 +44,8 @@ export function Season({ ingredient }: { ingredient: RecipeIngredient }) {
 						key={month}
 						as="span"
 						variant="small"
-						// TODO: This may not override `small` styles
 						color={inSeason ? undefined : 'light'}
+						fontWeight={month === CURRENT_SEASON ? 'bold' : undefined}
 					>
 						{inSeason && <VisuallyHidden>{MONTH_NAMES[month]}</VisuallyHidden>}
 						<span aria-hidden="true">{MONTH_NAMES[month][0]}</span>
