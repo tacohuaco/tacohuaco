@@ -3,7 +3,7 @@ import type { FlagName } from '../types/Flags';
 
 type RecipeFlagsProps = {
 	[flag in FlagName]: boolean;
-} & { hasLinks: boolean };
+} & { hasLinks?: boolean };
 
 export function RecipeFlags({
 	vegan,
