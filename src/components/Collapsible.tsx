@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
-import { Box, Stack } from '.';
+import { Box } from './Box';
+import { Stack } from './Stack';
 
 interface CollapsibleProps {
 	label: ReactNode;

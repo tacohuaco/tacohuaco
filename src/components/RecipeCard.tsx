@@ -1,13 +1,11 @@
 import { type ElementType } from 'react';
-import {
-	Text,
-	Link,
-	Frame,
-	RecipeFlags,
-	RecipeTimes,
-	HygraphImage,
-	Expander,
-} from '.';
+import { Text } from './Text';
+import { Link } from './Link';
+import { Frame } from './Frame';
+import { RecipeFlags } from './RecipeFlags';
+import { RecipeTimes } from './RecipeTimes';
+import { HygraphImage } from './HygraphImage';
+import { Expander } from './Expander';
 import { Stack, type StackProps } from './Stack';
 import type { RecipeFragment } from '../types/Recipe';
 

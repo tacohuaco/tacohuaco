@@ -1,4 +1,6 @@
-import { Stack, Logo, Menu } from '.';
+import { Stack } from './Stack';
+import { Logo } from './Logo';
+import { Menu } from './Menu';
 
 type Props = {
 	url: string;

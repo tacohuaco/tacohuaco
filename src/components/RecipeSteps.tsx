@@ -1,11 +1,8 @@
-import {
-	OrderedList,
-	OrderedListItem,
-	Stack,
-	Heading,
-	Markdown,
-	Link,
-} from '.';
+import { OrderedList, OrderedListItem } from './OrderedList';
+import { Stack } from './Stack';
+import { Heading } from './Heading';
+import { Markdown } from './Markdown';
+import { Link } from './Link';
 import { formatOption, printOption } from '../util/olivier';
 import type {
 	IngredientsSection,

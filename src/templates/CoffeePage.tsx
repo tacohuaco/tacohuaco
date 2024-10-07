@@ -1,4 +1,4 @@
-import { Stack } from '../components';
+import { Stack } from '../components/Stack';
 import { CoffeeRecipe } from '../components/CoffeeRecipe';
 import { PageWithTitle } from './PageWithTitle';
 import { type CoffeeRecipe as CoffeeRecipeType } from '../util/cafe';

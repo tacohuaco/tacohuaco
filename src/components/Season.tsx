@@ -1,4 +1,5 @@
-import { Text, VisuallyHidden } from '.';
+import { Text } from './Text';
+import { VisuallyHidden } from './VisuallyHidden';
 import type { RecipeIngredient } from '../types/Recipe';
 import { Month } from '../util/olivier';
 

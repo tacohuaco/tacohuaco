@@ -1,13 +1,11 @@
-import {
-	Stack,
-	Grid,
-	Heading,
-	Text,
-	TextContent,
-	Markdown,
-	Collapsible,
-	VisuallyHidden,
-} from '../components';
+import { Stack } from '../components/Stack';
+import { Grid } from '../components/Grid';
+import { Heading } from '../components/Heading';
+import { Text } from '../components/Text';
+import { TextContent } from '../components/TextContent';
+import { Markdown } from '../components/Markdown';
+import { Collapsible } from '../components/Collapsible';
+import { VisuallyHidden } from '../components/VisuallyHidden';
 import { formatOption } from '../util/olivier';
 import type { Recipe, Yields } from '../types/Recipe';
 import { asList } from '../util/asList';
@@ -18,13 +16,13 @@ import { useScale } from '../hooks/useScale';
 import { RecipeScale } from './RecipeScale';
 
 const YieldsText = ({ amount, unit }: Yields) => {
-	const { minAmount: printedAmout, unit: printedUnit } = formatOption({
+	const { minAmount: printedAmount, unit: printedUnit } = formatOption({
 		minAmount: amount,
 		maxAmount: amount,
 		unit,
 		name: '',
 	});
-	return `Yields ${printedAmout} ${printedUnit}`;
+	return `Yields ${printedAmount} ${printedUnit}`;
 };
 
 export function RecipeBody(recipe: Recipe) {

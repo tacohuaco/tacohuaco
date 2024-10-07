@@ -1,16 +1,14 @@
 import { type ReactNode } from 'react';
-import {
-	Stack,
-	Text,
-	Heading,
-	VisuallyHidden,
-	RecipeMeta,
-	TextContent,
-	HygraphImage,
-	Markdown,
-	RecipeList,
-	Expander,
-} from '../components';
+import { Stack } from '../components/Stack';
+import { Text } from '../components/Text';
+import { Heading } from '../components/Heading';
+import { VisuallyHidden } from '../components/VisuallyHidden';
+import { RecipeMeta } from '../components/RecipeMeta';
+import { TextContent } from '../components/TextContent';
+import { HygraphImage } from '../components/HygraphImage';
+import { Markdown } from '../components/Markdown';
+import { RecipeList } from '../components/RecipeList';
+import { Expander } from '../components/Expander';
 import type { Recipe, RecipeFragment } from '../types/Recipe';
 import { Page } from './Page';
 
@@ -18,8 +16,8 @@ type Props = Recipe & {
 	url: string;
 	madeWithRecipes: RecipeFragment[];
 	relatedRecipes: RecipeFragment[];
-	// Recipe body as a children to allow rendering with client:* Astro
-	// derectives for scaling on the client
+	// Recipe body as a children to allow rendering with `client:*` Astro
+	// directives for scaling on the client
 	children: ReactNode;
 };
 

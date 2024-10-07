@@ -1,5 +1,7 @@
 import { type ComponentProps, type ComponentType, type ReactNode } from 'react';
-import { Text, Box, Tooltip } from '.';
+import { Text } from './Text';
+import { Box } from './Box';
+import { Tooltip } from './Tooltip';
 import type { FlagName } from '../types/Flags';
 
 type Props = {

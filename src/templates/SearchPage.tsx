@@ -1,4 +1,5 @@
-import { Stack, Text } from '../components';
+import { Stack } from '../components/Stack';
+import { Text } from '../components/Text';
 import { SearchForm } from '../components/SearchForm';
 import { SearchResults } from '../components/SearchResults';
 import { useSearch } from '../hooks/useSearch';

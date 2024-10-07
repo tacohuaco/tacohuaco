@@ -1,4 +1,5 @@
-import { Text, Link } from '.';
+import { Text } from './Text';
+import { Link } from './Link';
 
 export function Footer() {
 	return (

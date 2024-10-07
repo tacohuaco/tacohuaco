@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
-import { Stack, Heading } from '.';
+import { Stack } from './Stack';
+import { Heading } from './Heading';
 import { RecipeList } from './RecipeList';
 import type { RecipeFragment } from '../types/Recipe';
 

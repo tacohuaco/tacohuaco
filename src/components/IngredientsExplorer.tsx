@@ -1,6 +1,6 @@
 import sortBy from 'lodash/sortBy';
 import upperFirst from 'lodash/upperFirst';
-import { TextContent } from '.';
+import { TextContent } from './TextContent';
 import { asList } from '../util/asList';
 import { IngredientKind } from '../util/olivier';
 import type { IngredientsSection, RecipeIngredient } from '../types/Recipe';

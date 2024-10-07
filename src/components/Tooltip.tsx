@@ -1,6 +1,6 @@
 import { type ReactElement, type ReactNode } from 'react';
 import { css } from '../../styled-system/css';
-import { Box } from '.';
+import { Box } from './Box';
 
 const ARROW_SIZE = 'token(spacing.xs)';
 

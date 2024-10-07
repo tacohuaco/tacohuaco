@@ -1,4 +1,5 @@
-import { MenuLink, Stack } from '.';
+import { MenuLink } from './MenuLink';
+import { Stack } from './Stack';
 
 type Props = {
 	current: string;

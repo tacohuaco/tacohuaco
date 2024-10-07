@@ -1,4 +1,7 @@
-import { Box, Text, Icon, Tooltip, TooltipTrigger } from '.';
+import { Box } from './Box';
+import { Text } from './Text';
+import { Icon } from './Icon';
+import { Tooltip, TooltipTrigger } from './Tooltip';
 
 type Props = {
 	time: number;

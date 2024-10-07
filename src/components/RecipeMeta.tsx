@@ -1,4 +1,6 @@
-import { Stack, RecipeFlags, RecipeTimes } from '.';
+import { Stack } from './Stack';
+import { RecipeFlags } from './RecipeFlags';
+import { RecipeTimes } from './RecipeTimes';
 import { RecipeTags } from './RecipeTags';
 import { RecipeCuisines } from './RecipeCuisines';
 import type { RecipeFragment } from '../types/Recipe';

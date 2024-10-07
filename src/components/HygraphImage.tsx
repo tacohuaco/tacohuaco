@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { Image } from '.';
+import { Image } from './Image';
 import { getHygraphImageUrl } from '../util/getHygraphImageUrl';
 
 type Props = ComponentProps<typeof Image> & {

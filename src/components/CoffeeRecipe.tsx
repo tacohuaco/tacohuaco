@@ -1,4 +1,6 @@
-import { Stack, Heading, Text } from '.';
+import { Stack } from './Stack';
+import { Heading } from './Heading';
+import { Text } from './Text';
 import {
 	type CoffeeRecipe as CoffeeRecipeType,
 	type Step,

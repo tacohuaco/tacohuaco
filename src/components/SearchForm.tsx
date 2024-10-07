@@ -1,7 +1,9 @@
 import { useCombobox } from 'downshift';
 import { matchSorter } from 'match-sorter';
 import { useEffect, useState, type FormEventHandler } from 'react';
-import { Box, Input, VisuallyHidden } from '.';
+import { Box } from './Box';
+import { Input } from './Input';
+import { VisuallyHidden } from './VisuallyHidden';
 import { useIsBrowser } from '../hooks/useIsBrowser';
 
 const MAX_ITEMS_TO_SHOW = 12;

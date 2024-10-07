@@ -1,5 +1,6 @@
 import { type ComponentProps, type ReactNode } from 'react';
-import { Stack, Text } from '.';
+import { Stack } from './Stack';
+import { Text } from './Text';
 
 type Props = {
 	children?: ReactNode;

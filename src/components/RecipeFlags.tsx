@@ -1,4 +1,5 @@
-import { RecipeFlag, Stack } from '.';
+import { RecipeFlag } from './RecipeFlag';
+import { Stack } from './Stack';
 import type { FlagName } from '../types/Flags';
 
 type RecipeFlagsProps = {

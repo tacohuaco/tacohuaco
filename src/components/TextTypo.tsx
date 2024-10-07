@@ -1,6 +1,6 @@
 import type { ElementType } from 'react';
 import { Text, type TextProps } from './Text';
-import { Typo } from '.';
+import { Typo } from './Typo';
 
 /**
  * Text with enhanced typography

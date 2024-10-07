@@ -1,7 +1,9 @@
 import startCase from 'lodash/startCase';
 import { paramCase } from 'param-case';
 import { getCuisineEmoji } from '../util/emojis';
-import { Stack, Box, VisuallyHidden } from '.';
+import { Stack } from './Stack';
+import { Box } from './Box';
+import { VisuallyHidden } from './VisuallyHidden';
 import { Tag } from './Tag';
 
 type Props = {

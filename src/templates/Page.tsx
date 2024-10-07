@@ -1,5 +1,8 @@
 import type { ReactNode } from 'react';
-import { Box, Stack, Header, Footer } from '../components';
+import { Box } from '../components/Box';
+import { Stack } from '../components/Stack';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 
 type Props = {
 	children: ReactNode;

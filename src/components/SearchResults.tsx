@@ -1,4 +1,5 @@
-import { Text, Link } from '.';
+import { Text } from './Text';
+import { Link } from './Link';
 import type { RecipeFragment } from '../types/Recipe';
 import { RecipeListSection } from './RecipeListSection';
 
@@ -15,7 +16,7 @@ export function SearchResults({
 		<RecipeListSection title="Search results" recipes={searchResults} />
 	) : (
 		<Text>
-			We couldnʼt find any food matching “{searchQuery}”.
+			We couldn’t find any food matching “{searchQuery}”.
 			<br /> (Maybe youʼll find what youʼre looking for at{' '}
 			<Link href="/recipes/">the recipes page</Link>?)
 		</Text>

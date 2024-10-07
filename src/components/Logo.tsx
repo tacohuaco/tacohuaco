@@ -1,7 +1,9 @@
 import { type ComponentProps } from 'react';
 import random from 'lodash/random';
 import sample from 'lodash/sample';
-import { Box, Stack, QuotedLink } from '.';
+import { Box } from './Box';
+import { Stack } from './Stack';
+import { QuotedLink } from './QuotedLink';
 import {
 	Taco,
 	TORTILLAS,

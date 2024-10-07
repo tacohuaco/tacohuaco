@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
-import { Box, Link } from '.';
+import { Box } from './Box';
+import { Link } from './Link';
 
 // TODO: New year → New Year
 

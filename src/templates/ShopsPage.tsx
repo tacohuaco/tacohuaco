@@ -1,11 +1,9 @@
-import {
-	Heading,
-	Link,
-	Markdown,
-	Stack,
-	Text,
-	TextContent,
-} from '../components';
+import { Heading } from '../components/Heading';
+import { Link } from '../components/Link';
+import { Text } from '../components/Text';
+import { Stack } from '../components/Stack';
+import { TextContent } from '../components/TextContent';
+import { Markdown } from '../components/Markdown';
 import type { Shop } from '../types/Shop';
 import { PageWithTitle } from './PageWithTitle';
 

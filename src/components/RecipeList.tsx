@@ -1,4 +1,4 @@
-import { Grid } from '.';
+import { Grid } from './Grid';
 import type { RecipeFragment } from '../types/Recipe';
 import { RecipeCard } from './RecipeCard';
 

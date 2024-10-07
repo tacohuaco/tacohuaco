@@ -1,4 +1,9 @@
-import { Text, Link, Stack, Heading, List, ListItem, Markdown } from '.';
+import { Text } from './Text';
+import { Link } from './Link';
+import { Stack } from './Stack';
+import { Heading } from './Heading';
+import { List, ListItem } from './List';
+import { Markdown } from './Markdown';
 import { formatOption, printOption } from '../util/olivier';
 import Group from 'react-group';
 import type { IngredientsSection, RecipeIngredient } from '../types/Recipe';

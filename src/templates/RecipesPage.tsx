@@ -1,4 +1,4 @@
-import { RecipeList } from '../components';
+import { RecipeList } from '../components/RecipeList';
 import type { Recipe } from '../types/Recipe';
 import { PageWithTitle } from './PageWithTitle';
 

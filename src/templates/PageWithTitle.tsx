@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
-import { Box, Stack, Heading } from '../components';
+import { Box } from '../components/Box';
+import { Stack } from '../components/Stack';
+import { Heading } from '../components/Heading';
 import { Page } from './Page';
 
 type Props = {

@@ -1,4 +1,4 @@
-import { Stack } from '.';
+import { Stack } from './Stack';
 import { Button } from './Button';
 
 type Props = {

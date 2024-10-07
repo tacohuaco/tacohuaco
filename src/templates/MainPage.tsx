@@ -1,4 +1,7 @@
-import { RecipeListSection, Stack, VisuallyHidden, Text } from '../components';
+import { RecipeListSection } from '../components/RecipeListSection';
+import { Stack } from '../components/Stack';
+import { VisuallyHidden } from '../components/VisuallyHidden';
+import { Text } from '../components/Text';
 import type { Recipe } from '../types/Recipe';
 import { Page } from './Page';
 
