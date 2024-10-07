@@ -11,24 +11,27 @@ const entries = await getCollection('recipes');
 const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
 
 const CURRENT_SEASON = new Date().getMonth() + 1;
+const NEXT_SEASON = CURRENT_SEASON === 12 ? 1 : CURRENT_SEASON + 1;
 const NEW_RECIPES_TO_SHOW = 6;
-
-// Order recipes by the lengths of the seasons list:
-// recipes with shorter season first
-function getCurrentSeasonRecipes(recipes: Recipe[]): Recipe[] {
-	return orderBy(
-		recipes.filter((x) => x.seasons.includes(CURRENT_SEASON)),
-		(x) => x.seasons.length
-	);
-}
 
 function getNewRecipes(recipes: Recipe[]): Recipe[] {
 	return orderBy(recipes, (x) => -x.createdAt).slice(0, NEW_RECIPES_TO_SHOW);
 }
 
-function getSeasonalIngredients() {
+// Order recipes by the lengths of the seasons list:
+// recipes with shorter season first, and discard fondational recipes
+function getRecipesInSeason(recipes: Recipe[], seasonMonth: number): Recipe[] {
+	return orderBy(
+		recipes
+			.filter((x) => x.seasons.includes(seasonMonth))
+			.filter((x) => x.tags.includes('Foundation') === false),
+		(x) => x.seasons.length
+	);
+}
+
+function getIngredientsInSeason(seasonMonth: number) {
 	const inSeason = Object.entries(SEASONS).filter(([, months]) =>
-		months.includes(CURRENT_SEASON)
+		months.includes(seasonMonth)
 	);
 	return inSeason.map(([ingredient]) => ingredient);
 }
@@ -40,7 +43,9 @@ function getSeasonalIngredients() {
 	component={MainPage}
 	props={{
 		newRecipes: getNewRecipes(allRecipes),
-		recipesInSeason: getCurrentSeasonRecipes(allRecipes),
-		ingredientsInSeason: getSeasonalIngredients(),
+		recipesInSeason: getRecipesInSeason(allRecipes, CURRENT_SEASON),
+		recipesNextSeason: getRecipesInSeason(allRecipes, NEXT_SEASON),
+		ingredientsInSeason: getIngredientsInSeason(CURRENT_SEASON),
+		ingredientsNextSeason: getIngredientsInSeason(NEXT_SEASON),
 	}}
 />

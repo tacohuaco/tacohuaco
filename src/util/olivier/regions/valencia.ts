@@ -1,7 +1,7 @@
 // Data from https://www.visitvalencia.com/en/what-to-do-valencia/gastronomy/seasonal-products
 // Changes:
 // - list "potato" and "carrot" as "young potato" and "young carrot"
-// - remove some common ingredients such as "bell pepper"
+// - remove some common ingredients such as "bell pepper" or "lime"
 
 import { Month } from '../types';
 
@@ -40,8 +40,6 @@ export const SEASONS: Record<string, Month[]> = {
 	[`grapefruit`]:   [                                                        Dec ],
 	[`kiwi`]:         [ Jan, Feb, Mar,                               Oct, Nov, Dec ],
 	[`leek`]:         [      Feb,                               Sep, Oct, Nov, Dec ],
-	[`lemon`]:        [ Jan, Feb, Mar,                                    Nov, Dec ],
-	[`lime`]:         [                                                   Nov      ],
 	[`mandarin`]:     [                                                   Nov      ],
 	[`melon`]:        [                               Jul, Aug, Sep                ],
 	[`nectarine`]:    [                               Jul, Aug                     ],
