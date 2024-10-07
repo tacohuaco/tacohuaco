@@ -153,12 +153,15 @@ export const INGREDIENTS = [
 		['petsay'],
 	],
 	[['potato', 'potatoes']],
+	[['young potato', 'young potatoes']],
+	[['sweet potato', 'sweet potatoes']],
 	[['tomato', 'tomatoes']],
 	[
 		['eggplant', 'eggplants'],
 		['aubergine', 'aubergines'],
 	],
 	[['carrot', 'carrots']],
+	[['young carrot', 'young carrots']],
 	[
 		['mangold', 'mangolds'],
 		['chard', 'chards'],
