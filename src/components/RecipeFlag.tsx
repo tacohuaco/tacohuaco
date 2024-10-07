@@ -4,6 +4,7 @@ import type { FlagName } from '../types/Flags';
 
 type Props = {
 	type: FlagName;
+	hasLinks: boolean;
 };
 
 type HrefProp = {
@@ -17,6 +18,7 @@ type ColorProp = {
 type FlagProps = {
 	title?: string;
 	children?: ReactNode;
+	hasLinks: boolean;
 };
 
 const FlagLink = (props: ComponentProps<typeof Box>) => (
@@ -59,9 +61,10 @@ const Circle = ({
 	title,
 	color,
 	href,
+	hasLinks,
 	...props
-}: FlagProps & HrefProp & ColorProp) => (
-	<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+}: FlagProps & HrefProp & ColorProp) => {
+	const body = (
 		<Box
 			as="span"
 			aria-hidden="true"
@@ -87,11 +90,26 @@ const Circle = ({
 		>
 			{children}
 		</Box>
-	</TooltipWithLink>
-);
+	);
+	return hasLinks ? (
+		<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+			{body}
+		</TooltipWithLink>
+	) : (
+		<Box aria-label={title} title={title}>
+			{body}
+		</Box>
+	);
+};
 
-const Round = ({ children, title, href, ...props }: FlagProps & HrefProp) => (
-	<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+const Round = ({
+	children,
+	title,
+	href,
+	hasLinks,
+	...props
+}: FlagProps & HrefProp) => {
+	const body = (
 		<Box
 			as="span"
 			aria-hidden="true"
@@ -119,8 +137,17 @@ const Round = ({ children, title, href, ...props }: FlagProps & HrefProp) => (
 		>
 			{children}
 		</Box>
-	</TooltipWithLink>
-);
+	);
+	return hasLinks ? (
+		<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
+			{body}
+		</TooltipWithLink>
+	) : (
+		<Box aria-label={title} title={title}>
+			{body}
+		</Box>
+	);
+};
 
 export function RecipeFlag({ type, ...props }: Props) {
 	switch (type) {

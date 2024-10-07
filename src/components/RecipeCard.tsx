@@ -77,6 +77,7 @@ export function RecipeCard<C extends ElementType = 'div'>({
 					noAddedSugar={noAddedSugar}
 					margaritasFavorite={margaritasFavorite}
 					artemsFavorite={artemsFavorite}
+					hasLinks={false}
 				/>
 				{time && <RecipeTimes time={time} overnight={overnight} size="small" />}
 			</Stack>

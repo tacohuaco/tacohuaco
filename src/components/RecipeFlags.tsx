@@ -3,7 +3,7 @@ import type { FlagName } from '../types/Flags';
 
 type RecipeFlagsProps = {
 	[flag in FlagName]: boolean;
-};
+} & { hasLinks: boolean };
 
 export function RecipeFlags({
 	vegan,
@@ -14,17 +14,22 @@ export function RecipeFlags({
 	noAddedSugar,
 	margaritasFavorite,
 	artemsFavorite,
+	hasLinks = true,
 }: RecipeFlagsProps) {
 	return (
 		<Stack gap="s" direction="row">
-			{vegan && <RecipeFlag type="vegan" />}
-			{vegetarian && <RecipeFlag type="vegetarian" />}
-			{glutenFree && <RecipeFlag type="glutenFree" />}
-			{lowGluten && <RecipeFlag type="lowGluten" />}
-			{dairyFree && <RecipeFlag type="dairyFree" />}
-			{noAddedSugar && <RecipeFlag type="noAddedSugar" />}
-			{margaritasFavorite && <RecipeFlag type="margaritasFavorite" />}
-			{artemsFavorite && <RecipeFlag type="artemsFavorite" />}
+			{vegan && <RecipeFlag type="vegan" hasLinks={hasLinks} />}
+			{vegetarian && <RecipeFlag type="vegetarian" hasLinks={hasLinks} />}
+			{glutenFree && <RecipeFlag type="glutenFree" hasLinks={hasLinks} />}
+			{lowGluten && <RecipeFlag type="lowGluten" hasLinks={hasLinks} />}
+			{dairyFree && <RecipeFlag type="dairyFree" hasLinks={hasLinks} />}
+			{noAddedSugar && <RecipeFlag type="noAddedSugar" hasLinks={hasLinks} />}
+			{margaritasFavorite && (
+				<RecipeFlag type="margaritasFavorite" hasLinks={hasLinks} />
+			)}
+			{artemsFavorite && (
+				<RecipeFlag type="artemsFavorite" hasLinks={hasLinks} />
+			)}
 		</Stack>
 	);
 }
