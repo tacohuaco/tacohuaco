@@ -10,6 +10,7 @@ type Props = {
 	newRecipes: Recipe[];
 	recipesInSeason: Recipe[];
 	recipesNextSeason: Recipe[];
+	favoriteRecipes: Recipe[];
 	ingredientsInSeason: string[];
 	ingredientsNextSeason: string[];
 };
@@ -19,6 +20,7 @@ export function MainPage({
 	newRecipes,
 	recipesInSeason,
 	recipesNextSeason,
+	favoriteRecipes,
 	ingredientsInSeason,
 	ingredientsNextSeason,
 }: Props) {
@@ -44,6 +46,12 @@ export function MainPage({
 							In season next month: {ingredientsNextSeason.join(', ')}.
 						</Text>
 					</RecipeListSection>
+				)}
+				{favoriteRecipes.length > 0 && (
+					<RecipeListSection
+						title="Our favorite recipes"
+						recipes={favoriteRecipes}
+					/>
 				)}
 			</Stack>
 		</Page>

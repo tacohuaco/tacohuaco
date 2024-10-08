@@ -35,6 +35,13 @@ function getIngredientsInSeason(seasonMonth: number) {
 	);
 	return inSeason.map(([ingredient]) => ingredient);
 }
+
+function getFavoriteRecipes(recipes: Recipe[]) {
+	return orderBy(
+		recipes.filter((x) => x.favorite),
+		(x) => x.seasons.length
+	);
+}
 ---
 
 <Layout
@@ -45,6 +52,7 @@ function getIngredientsInSeason(seasonMonth: number) {
 		newRecipes: getNewRecipes(allRecipes),
 		recipesInSeason: getRecipesInSeason(allRecipes, CURRENT_SEASON),
 		recipesNextSeason: getRecipesInSeason(allRecipes, NEXT_SEASON),
+		favoriteRecipes: getFavoriteRecipes(allRecipes),
 		ingredientsInSeason: getIngredientsInSeason(CURRENT_SEASON),
 		ingredientsNextSeason: getIngredientsInSeason(NEXT_SEASON),
 	}}
