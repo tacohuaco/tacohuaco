@@ -5,8 +5,7 @@ export const ALL_FLAGS = [
 	'lowGluten',
 	'dairyFree',
 	'noAddedSugar',
-	'margaritasFavorite',
-	'artemsFavorite',
+	'favorite',
 ] as const;
 
 export type FlagName = (typeof ALL_FLAGS)[number];

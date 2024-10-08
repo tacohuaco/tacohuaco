@@ -3,13 +3,14 @@ import type { Asset } from '../src/types/Asset';
 export type Maybe<T> = T | null;
 
 export interface RecipeModelRaw {
-	artemsFavorite: boolean;
-	cuisines: string[];
 	createdAt: string;
+	cuisines: string[];
 	description: Maybe<string>;
+	favorite: boolean;
+	images: Asset[];
 	ingredients: string;
 	keywords: Maybe<string>;
-	margaritasFavorite: boolean;
+	notes: Maybe<string>;
 	overnight: boolean;
 	slug: string;
 	source: Maybe<string>;
@@ -19,27 +20,24 @@ export interface RecipeModelRaw {
 	title: string;
 	titleEnglish: Maybe<string>;
 	tools: Maybe<string>;
-	notes: Maybe<string>;
 	yields: Maybe<string>;
-	images: Asset[];
 	subrecipes: Pick<
 		RecipeModelRaw,
 		'slug' | 'title' | 'ingredients' | 'steps' | 'tools'
 	>[];
 	recipes: Pick<
 		RecipeModelRaw,
-		| 'artemsFavorite'
 		| 'createdAt'
 		| 'cuisines'
+		| 'favorite'
 		| 'images'
-		| 'margaritasFavorite'
+		| 'ingredients'
 		| 'overnight'
 		| 'slug'
+		| 'subrecipes'
+		| 'tags'
 		| 'time'
 		| 'title'
-		| 'tags'
-		| 'ingredients'
-		| 'subrecipes'
 	>[];
 }
 

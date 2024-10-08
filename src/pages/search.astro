@@ -6,7 +6,6 @@ import { PageWithTitle } from '../templates/PageWithTitle';
 
 const entries = await getCollection('recipes');
 const recipes = entries.map(({ data }) => ({
-	artemsFavorite: data.artemsFavorite,
 	createdAt: data.createdAt,
 	cuisines: data.cuisines,
 	dairyFree: data.dairyFree,
@@ -15,7 +14,7 @@ const recipes = entries.map(({ data }) => ({
 	ingredients: data.ingredients,
 	keywords: data.keywords,
 	lowGluten: data.lowGluten,
-	margaritasFavorite: data.margaritasFavorite,
+	favorite: data.favorite,
 	noAddedSugar: data.noAddedSugar,
 	overnight: data.overnight,
 	seasons: data.seasons,

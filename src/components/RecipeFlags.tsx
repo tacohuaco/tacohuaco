@@ -13,8 +13,6 @@ export function RecipeFlags({
 	lowGluten,
 	dairyFree,
 	noAddedSugar,
-	margaritasFavorite,
-	artemsFavorite,
 	hasLinks = true,
 }: RecipeFlagsProps) {
 	return (
@@ -25,12 +23,6 @@ export function RecipeFlags({
 			{lowGluten && <RecipeFlag type="lowGluten" hasLinks={hasLinks} />}
 			{dairyFree && <RecipeFlag type="dairyFree" hasLinks={hasLinks} />}
 			{noAddedSugar && <RecipeFlag type="noAddedSugar" hasLinks={hasLinks} />}
-			{margaritasFavorite && (
-				<RecipeFlag type="margaritasFavorite" hasLinks={hasLinks} />
-			)}
-			{artemsFavorite && (
-				<RecipeFlag type="artemsFavorite" hasLinks={hasLinks} />
-			)}
 		</Stack>
 	);
 }

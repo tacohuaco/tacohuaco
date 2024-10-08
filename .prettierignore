@@ -1,5 +1,6 @@
 public/
 .astro/
 dist/
+playwright-report/
 src/content/recipes/
 src/data/*.json

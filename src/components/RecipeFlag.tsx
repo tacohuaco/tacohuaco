@@ -104,53 +104,6 @@ const Circle = ({
 	);
 };
 
-const Round = ({
-	children,
-	title,
-	href,
-	hasLinks,
-	...props
-}: FlagProps & HrefProp) => {
-	const body = (
-		<Box
-			as="span"
-			aria-hidden="true"
-			css={{
-				display: 'block',
-				width: '2em',
-				height: '2em',
-				padding: '0.1em',
-				textAlign: 'center',
-				fontFamily: 'ui',
-				fontSize: 'xs',
-				fontWeight: 'ui',
-				color: 'accent',
-				borderWidth: '0.2em',
-				borderRadius: 'round',
-				borderStyle: 'solid',
-				borderColor: 'accent',
-				'a:hover &': {
-					backgroundColor: 'accent',
-					color: 'bg',
-					cursor: 'pointer',
-				},
-			}}
-			{...props}
-		>
-			{children}
-		</Box>
-	);
-	return hasLinks ? (
-		<TooltipWithLink href={href} title={title} linkComponent={FlagLink}>
-			{body}
-		</TooltipWithLink>
-	) : (
-		<Box aria-label={title} title={title}>
-			{body}
-		</Box>
-	);
-};
-
 export function RecipeFlag({ type, ...props }: Props) {
 	switch (type) {
 		case 'vegan': {
@@ -218,28 +171,6 @@ export function RecipeFlag({ type, ...props }: Props) {
 				>
 					NS
 				</Circle>
-			);
-		}
-		case 'margaritasFavorite': {
-			return (
-				<Round
-					href="/flags/margaritas-favorite/"
-					title="Margarita’s favorite"
-					{...props}
-				>
-					M
-				</Round>
-			);
-		}
-		case 'artemsFavorite': {
-			return (
-				<Round
-					href="/flags/artems-favorite/"
-					title="Artem’s favorite"
-					{...props}
-				>
-					A
-				</Round>
 			);
 		}
 	}

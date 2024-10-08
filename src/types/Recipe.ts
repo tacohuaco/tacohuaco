@@ -29,16 +29,15 @@ export interface Yields {
 // Just enough data to render a recipe card and search
 export type RecipeFragment = Pick<
 	Recipe,
-	| 'artemsFavorite'
 	| 'createdAt'
 	| 'cuisines'
 	| 'dairyFree'
+	| 'favorite'
 	| 'glutenFree'
 	| 'images'
 	| 'ingredients'
 	| 'keywords'
 	| 'lowGluten'
-	| 'margaritasFavorite'
 	| 'noAddedSugar'
 	| 'overnight'
 	| 'seasons'
@@ -63,8 +62,7 @@ export interface Recipe {
 	title: string;
 	titleEnglish?: string;
 	description?: string;
-	artemsFavorite: boolean;
-	margaritasFavorite: boolean;
+	favorite: boolean;
 	overnight: boolean;
 	cuisines: string[];
 	tags: string[];

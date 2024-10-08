@@ -4,13 +4,12 @@ import type { RecipeModelRaw } from '../../types';
 
 test('map recipe', () => {
 	const recipe: RecipeModelRaw = {
-		artemsFavorite: true,
 		cuisines: ['Mexican', 'Klatzlandian'],
 		createdAt: '2023-09-18T12:12:59.151425+00:00',
 		description: 'Good stuff!',
 		ingredients: `- 2 fresh jalapeños\n- 1 kg floury potatoes\n100 g butter; room temperature\n- salt`,
 		keywords: 'green sauce',
-		margaritasFavorite: true,
+		favorite: true,
 		overnight: false,
 		slug: 'salsa-verde-de',
 		source: null,
@@ -66,7 +65,6 @@ test('map recipe', () => {
 	];
 	expect(mapRecipe(recipe, allIngredients, allTips)).toMatchInlineSnapshot(`
 		{
-		  "artemsFavorite": true,
 		  "createdAt": 2023-09-18T12:12:59.151Z,
 		  "cuisines": [
 		    "Mexican",
@@ -74,6 +72,7 @@ test('map recipe', () => {
 		  ],
 		  "dairyFree": false,
 		  "description": "Good stuff!",
+		  "favorite": true,
 		  "glutenFree": true,
 		  "images": [
 		    {
@@ -139,7 +138,6 @@ test('map recipe', () => {
 		    "green sauce",
 		  ],
 		  "lowGluten": false,
-		  "margaritasFavorite": true,
 		  "noAddedSugar": true,
 		  "notes": [
 		    "Do it good!",

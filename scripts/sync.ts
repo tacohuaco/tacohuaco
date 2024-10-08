@@ -24,13 +24,13 @@ const endpoint = `https://api-eu-central-1.graphcms.com/v2/${process.env.GRAPHCM
 const query = gql`
   {
   	recipes {
-  		artemsFavorite
-  		cuisines
   		createdAt
+  		cuisines
   		description
+  		favorite
   		ingredients
   		keywords
-  		margaritasFavorite
+  		notes
   		overnight
   		slug
   		source
@@ -40,7 +40,6 @@ const query = gql`
   		title
   		titleEnglish
   		tools
-  		notes
   		yields
   		images {
   			url
@@ -56,7 +55,6 @@ const query = gql`
   			tools
   		}
   		recipes {
-  			artemsFavorite
   			createdAt
   			cuisines
   			images {
@@ -66,7 +64,7 @@ const query = gql`
   				width
   			}
   			ingredients
-  			margaritasFavorite
+  			favorite
   			overnight
   			slug
   			subrecipes {

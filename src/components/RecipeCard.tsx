@@ -17,8 +17,7 @@ export function RecipeCard<C extends ElementType = 'div'>({
 	lowGluten,
 	dairyFree,
 	noAddedSugar,
-	margaritasFavorite,
-	artemsFavorite,
+	favorite,
 	images,
 	title,
 	slug,
@@ -73,8 +72,7 @@ export function RecipeCard<C extends ElementType = 'div'>({
 					lowGluten={lowGluten}
 					dairyFree={dairyFree}
 					noAddedSugar={noAddedSugar}
-					margaritasFavorite={margaritasFavorite}
-					artemsFavorite={artemsFavorite}
+					favorite={favorite}
 					hasLinks={false}
 				/>
 				{time && <RecipeTimes time={time} overnight={overnight} size="small" />}

@@ -20,6 +20,12 @@ export default [
 		},
 	},
 	{
-		ignores: ['.astro/', 'dist/', 'public/counter/', 'styled-system/'],
+		ignores: [
+			'.astro/',
+			'dist/',
+			'playwright-report/',
+			'public/counter/',
+			'styled-system/',
+		],
 	},
 ];

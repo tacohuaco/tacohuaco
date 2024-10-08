@@ -63,16 +63,15 @@ const subrecipe = z.object({
 }) satisfies z.ZodType<Pick<Recipe, 'slug' | 'title'>>;
 
 const fragment = z.object({
-	artemsFavorite: z.boolean(),
 	createdAt: z.coerce.date(),
 	cuisines: z.array(z.string()),
 	dairyFree: z.boolean(),
+	favorite: z.boolean(),
 	glutenFree: z.boolean(),
 	images: z.array(asset),
 	ingredients: z.array(ingredientsSection),
 	keywords: z.array(z.string()),
 	lowGluten: z.boolean(),
-	margaritasFavorite: z.boolean(),
 	noAddedSugar: z.boolean(),
 	overnight: z.boolean(),
 	seasons: z.array(z.nativeEnum(Month)),
