@@ -18,7 +18,7 @@ function mapDate(date: string) {
 }
 
 function mapKeywords(keywords: RecipeModelRaw['keywords']) {
-	return keywords === null ? [] : keywords.split(/\s*;\s*/);
+	return keywords === null ? [] : keywords.split(/\s*[,;]\s*/);
 }
 
 function mapNotes(notes: RecipeModelRaw['notes']) {
