@@ -24,7 +24,7 @@ test('has recently added recipes', async ({ page }) => {
 	// Check that we have some recipes in season
 	const inSeasonRecipes = page.locator('section').filter({
 		has: page.getByRole('heading', {
-			name: 'Cook seasonal',
+			name: 'In season now',
 		}),
 	});
 

@@ -30,7 +30,7 @@ export function MainPage({
 			<Stack as="main" gap="xl">
 				<RecipeListSection title="New recipes" recipes={newRecipes} />
 				{recipesInSeason.length > 0 && (
-					<RecipeListSection title="Cook seasonal" recipes={recipesInSeason}>
+					<RecipeListSection title="In season now" recipes={recipesInSeason}>
 						<Text>
 							In season now in Valencia, Spain: {ingredientsInSeason.join(', ')}
 							.
@@ -39,7 +39,7 @@ export function MainPage({
 				)}
 				{recipesNextSeason.length > 0 && (
 					<RecipeListSection
-						title="Get excited for the next month"
+						title="In season next month"
 						recipes={recipesNextSeason}
 					>
 						<Text>
