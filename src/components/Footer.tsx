@@ -10,7 +10,10 @@ export function Footer() {
 				and&nbsp;<Link href="https://sapegin.me/">Artem Sapegin</Link>
 				{', '}
 				{new Date().getFullYear()}
-				{' • '}Made with The&nbsp;Secret Ingredient™ in&nbsp;Berlin
+			</Text>
+			<Text variant="xsmall" mb="xs">
+				Made with The&nbsp;Secret Ingredient™ in&nbsp;Berlin
+				&amp;&nbsp;Valencia
 				{' • '}Follow&nbsp;us on&nbsp;
 				<Link href="https://twitter.com/tacohuaco">Twitter</Link> and&nbsp;
 				<Link href="https://www.instagram.com/tacohuaco.co/">Instagram</Link>!
