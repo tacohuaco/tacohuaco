@@ -114,9 +114,13 @@ export function SearchForm({ items, value, onChange }: Props) {
 					{isOpen &&
 						itemsToShow.map((item, index) => {
 							const isHighlighted = highlightedIndex === index;
+							const { key, ...itemProps } = getItemProps({
+								refKey: 'innerRef',
+								key: item,
+								item,
+								index,
+							});
 							return (
-								// getItemProps returns key
-								// eslint-disable-next-line react/jsx-key
 								<Box
 									css={{
 										paddingBlock: 'xxs',
@@ -128,12 +132,8 @@ export function SearchForm({ items, value, onChange }: Props) {
 										backgroundColor: isHighlighted ? 'accent' : 'transparent',
 										cursor: 'pointer',
 									}}
-									{...getItemProps({
-										refKey: 'innerRef',
-										key: item,
-										item,
-										index,
-									})}
+									key={key}
+									{...itemProps}
 								>
 									{item}
 								</Box>
