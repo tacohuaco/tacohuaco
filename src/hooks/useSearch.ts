@@ -34,8 +34,14 @@ const getIngredientAliases = (name: string) => {
 	return aliases.map((x) => (x.length > 1 ? x[1] : x[0]));
 };
 
-const getTitle = (title: string, titleEnglish?: string) => {
-	return titleEnglish ? `${title} (${titleEnglish})` : title;
+const getTitle = ({
+	title,
+	titleEnglish,
+	slug,
+}: Pick<RecipeFragment, 'title' | 'titleEnglish' | 'slug'>) => {
+	return titleEnglish
+		? `${title} (${titleEnglish}) [${slug}]`
+		: `${title} [${slug}]`;
 };
 
 const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
@@ -46,7 +52,7 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 	const allKeywords: string[] = [];
 
 	for (const recipe of recipes) {
-		allTitles.push(getTitle(recipe.title, recipe.titleEnglish));
+		allTitles.push(getTitle(recipe));
 
 		const ingredients = getAllIngredients(recipe.ingredients);
 

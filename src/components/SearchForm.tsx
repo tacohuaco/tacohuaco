@@ -14,6 +14,13 @@ type Props = {
 	onChange: (value?: string) => void;
 };
 
+const splitItemToTitleAndSlug = (item: string) => {
+	const match = item.match(/^(.*) +\[([^\]]+)]$/);
+	return match
+		? { title: match[1], slug: match[2] }
+		: { title: item, slug: undefined };
+};
+
 const getItemsToShow = (items: readonly string[], value: string) => {
 	if (value === '') {
 		return [];
@@ -38,6 +45,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 	}, [isBrowser]);
 
 	const itemsToShow = getItemsToShow(items, value);
+
 	const {
 		getLabelProps,
 		getInputProps,
@@ -50,11 +58,23 @@ export function SearchForm({ items, value, onChange }: Props) {
 		items: itemsToShow,
 		inputValue: value,
 		selectedItem: value,
-		onInputValueChange: (x) => {
-			onChange(x.inputValue);
+		onInputValueChange: ({ inputValue }) => {
+			const { title } = splitItemToTitleAndSlug(inputValue);
+			onChange(title);
 		},
-		onSelectedItemChange: (x) => {
-			onChange(x.inputValue);
+		onSelectedItemChange: ({ inputValue }) => {
+			if (inputValue === undefined) {
+				return;
+			}
+
+			const { title, slug } = splitItemToTitleAndSlug(inputValue);
+
+			if (slug) {
+				window.location.href = `${window.location.origin}/recipes/${slug}/`;
+				return;
+			}
+
+			onChange(title);
 		},
 	});
 	const handleSubmit: FormEventHandler = (event) => {
@@ -120,6 +140,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 								item,
 								index,
 							});
+							const { title, slug } = splitItemToTitleAndSlug(item);
 							return (
 								<Box
 									css={{
@@ -135,7 +156,12 @@ export function SearchForm({ items, value, onChange }: Props) {
 									key={key}
 									{...itemProps}
 								>
-									{item}
+									{title}{' '}
+									{slug && (
+										<Box as="span" css={{ fontSize: 's' }}>
+											(open recipe)
+										</Box>
+									)}
 								</Box>
 							);
 						})}
