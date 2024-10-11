@@ -1,13 +1,13 @@
-We’ve started Tacohuaco as a better way of keeping notes about foodses we cook, and it evolves together with our cooking needs, with features like scaling and using one recipe as a part of another recipe.
+We started Tacohuaco as a better way of keeping notes about the foodses we cook, and it evolves together with our cooking needs, with features like scaling and using one recipe as a part of another recipe.
 
-We try to create something like a cooking system, where we use the same ingredients, techniques or even whole recipes for many dishes, to minimize time to cook and waste, and to simplify shopping for the ingredients. We also want to cook more using local and seasonal ingredients.
+We are trying to create a cooking system where we use the same ingredients, techniques, or even whole recipes for multiple dishes to minimize cooking time and waste, while simplifying ingredient shopping. We also want to cook more using local and seasonal ingredients.
 
-Some recipes are [foundation recipes](/tags/foundation/) and used throughout the site, some we cook only for [special occasions](/tags/celebration/).
+Some recipes are [foundational](/tags/foundation/) and used throughout the site, while others we cook only for [special occasions](/tags/celebration/).
 
-Many recipes here are inspired by our cuisines — Mexican and Russian, cookbooks, travels, or just a random photo we’ve seen somewhere. We like to combine, adjust, and never cook the recipes precisely, even our own. And we recommend you do the same!
+Many recipes here are inspired by our own cuisines (Mexican and Russian), cookbooks, travels, or even a random photo we’ve come across. We like to combine and adjust recipes, and we never follow them precisely, not even our own. We recommend you do the same!
 
-Don’t be afraid to exchange ingredients for what you have at home or what’s available on the market. You could surprise yourself with amazing unexpected results!
+Don’t be afraid to swap ingredients for what you have at home or what’s available at the market. You may surprise yourself with amazing, unexpected results!
 
-We often cook without a recipe at all — axe tacos (or [stone tacos](https://en.wikipedia.org/wiki/Stone_Soup)) is one of our favorite recipes and you’ll never find it on the site because it’s different every day — we just cook everything that’s left in the fridge. This is the best way to avoid food waste and get a delicious meal quickly.
+We often cook without a recipe at all — axe tacos (or [stone tacos](https://en.wikipedia.org/wiki/Stone_Soup)) is one of our favorites, and you won’t find it on the site because it’s different every day — we just cook whatever is left in the fridge. It’s the best way to avoid food waste and quickly prepare a delicious meal.
 
 _<span aria-hidden="true">🦀</span> Margarita (Dr. Taco) and Artem. May the klatz (and food) be with you! <span aria-hidden="true">🦀</span>_
