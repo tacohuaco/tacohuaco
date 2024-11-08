@@ -310,9 +310,11 @@ function Value({ value }: { value: string }) {
 	const isOvernight = value.includes('overnight');
 	return (
 		<Stack alignItems="center">
-			<TextTypo variant="small">{valueToPrint}</TextTypo>
+			<TextTypo variant="small" my="-0.1rem">
+				{valueToPrint}
+			</TextTypo>
 			{isOvernight && (
-				<TextTypo variant="small" mt="-xs">
+				<TextTypo variant="small" my="-0.1rem">
 					night
 				</TextTypo>
 			)}
