@@ -57,13 +57,13 @@ export const mapChart = (
 			}
 
 			if (
-				/\b(cook|bake|fry|roast|boil) ?(covered|uncovered)? for/.test(
+				/\b(cook|bake|fry|roast|boil) ?(?: the.*)?(covered|uncovered)? for/.test(
 					lowCaseText
 				)
 			) {
 				const [, action, cover, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|boil)\s*(covered|uncovered)? for ?(?:about|another)? ([\d-]+) ?(?:more)? (minutes|hours?)/
+						/(cook|bake|fry|roast|boil) ?(?: the.*)?(covered|uncovered)? for ?(?:about|another)? ([\d-]+) ?(?:more)? (minutes|hours?)/
 					) ?? [];
 
 				if (!action) {
