@@ -95,6 +95,7 @@ export function RecipeBody(recipe: Recipe) {
 							<strong>Before you start:</strong> {asList(preconditions)}.
 						</Text>
 					)}
+					<RecipeChart chart={chart} />
 					<RecipeSteps steps={steps} ingredients={scaledIngredients} />
 				</Stack>
 				<Stack gap="m">
@@ -122,10 +123,6 @@ export function RecipeBody(recipe: Recipe) {
 				<Collapsible label="Explore ingredients">
 					<VisuallyHidden as="h2">Ingredients explorer</VisuallyHidden>
 					<IngredientsExplorer ingredients={ingredients} />
-				</Collapsible>
-				<Collapsible label="Recipe chart β">
-					<VisuallyHidden as="h2">Recipe chart β</VisuallyHidden>
-					<RecipeChart chart={chart} />
 				</Collapsible>
 			</Stack>
 		</Grid>

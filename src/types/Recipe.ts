@@ -28,12 +28,11 @@ export interface Yields {
 
 export enum ChartStepType {
 	PreheatOven = 'PreheatOven',
-	// TODO: Merge with Unfreeze?
 	WarmToRoomTemp = 'WarmToRoomTemp',
-	Unfreeze = 'Unfreeze',
 	Refrigerate = 'Refrigerate',
 	CookCovered = 'CookCovered',
 	CookUncovered = 'CookUncovered',
+	Rest = 'Rest',
 }
 
 export interface ChartStep {

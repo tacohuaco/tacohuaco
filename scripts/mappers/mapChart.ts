@@ -7,7 +7,6 @@ import {
 
 // TODO: Do something with oven/air fryer recipes:
 // arrange the tacos on a baking sheet (or in the air fryer basket) and bake for about 25 minutes in the oven (or for about 12 minutes in the air fryer at 200c), until very crispy.
-// if using an oven, preheat it to 210c
 
 /**
  * Recipe chart steps: to show important steps of the recipe at a glance, things
@@ -32,7 +31,7 @@ export const mapChart = (
 
 		if (name.endsWith('broth')) {
 			chartSteps.push({
-				type: ChartStepType.Unfreeze,
+				type: ChartStepType.WarmToRoomTemp,
 				subtype: name,
 			});
 		}
@@ -44,8 +43,11 @@ export const mapChart = (
 				.toLowerCase()
 				.replaceAll('–', '-') // N-dash
 				.replaceAll(' ', ' '); // Non-breaking space
-			if (lowCaseText.startsWith('preheat oven')) {
-				const [, value] = text.match(/preheat oven to (\d+c)/i) ?? [];
+			if (/\bpreheat/.test(lowCaseText)) {
+				const [, value] =
+					text.match(
+						/(?:preheat oven to|if using an oven, preheat it to) (\d+c)/i
+					) ?? [];
 				if (!value) {
 					continue;
 				}
@@ -56,20 +58,36 @@ export const mapChart = (
 				continue;
 			}
 
+			if (/\b(leave|soak).*(for|overnight)/.test(lowCaseText)) {
+				const [, action, value, unit] =
+					lowCaseText.match(
+						/(leave|soak).*for\D+([\d-]+).*(minutes|hours?|days?)/
+					) ??
+					lowCaseText.match(/(leave|soak).*(overnight)/) ??
+					[];
+				if (!action) {
+					continue;
+				}
+				chartSteps.push({
+					type: ChartStepType.Rest,
+					value: `${value} ${unit ?? ''}`.trim(),
+				});
+			}
+
 			if (
-				/\b(cook|bake|fry|roast|boil) ?(?: the.*)?(covered|uncovered)? for/.test(
+				/\b(cook|bake|fry|roast|braise|boil|simmer|poach).*(covered|uncovered)? for/.test(
 					lowCaseText
 				)
 			) {
 				const [, action, cover, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|boil) ?(?: the.*)?(covered|uncovered)? for ?(?:about|another)? ([\d-]+) ?(?:more)? (minutes|hours?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach).*(covered|uncovered)?.*for\D+([\d-]+).*(minutes|hours?|days?)/
 					) ?? [];
-
 				if (!action) {
 					continue;
 				}
 				const [firstAmount] = value.split('-');
+
 				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
 					chartSteps.push({
 						type:
