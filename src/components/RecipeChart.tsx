@@ -306,13 +306,16 @@ function Value({ value }: { value: string }) {
 		.replaceAll(/hours?/g, 'h')
 		.replaceAll(/days?/g, 'd')
 		.replaceAll('or overnight', '')
-		.replaceAll('overnight', '');
+		.replaceAll('overnight', '')
+		.trim();
 	const isOvernight = value.includes('overnight');
 	return (
 		<Stack alignItems="center">
-			<TextTypo variant="small" my="-0.1rem">
-				{valueToPrint}
-			</TextTypo>
+			{valueToPrint && (
+				<TextTypo variant="small" my="-0.1rem">
+					{valueToPrint}
+				</TextTypo>
+			)}
 			{isOvernight && (
 				<TextTypo variant="small" my="-0.1rem">
 					night

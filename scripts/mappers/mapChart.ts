@@ -79,21 +79,21 @@ export const mapChart = (
 					lowCaseText
 				)
 			) {
-				const [, action, cover, value, unit] =
+				const [, action, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|braise|boil|simmer|poach).*(covered|uncovered)?.*for\D+([\d-]+).*(minutes|hours?|days?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?|days?)/
 					) ?? [];
 				if (!action) {
 					continue;
 				}
 				const [firstAmount] = value.split('-');
+				const isCovered = /\bcover(ed)?\b/.test(lowCaseText);
 
 				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
 					chartSteps.push({
-						type:
-							cover === 'covered'
-								? ChartStepType.CookCovered
-								: ChartStepType.CookUncovered,
+						type: isCovered
+							? ChartStepType.CookCovered
+							: ChartStepType.CookUncovered,
 						subtype: action,
 						value: `${value} ${unit}`,
 					});
@@ -106,9 +106,10 @@ export const mapChart = (
 				const isOvernight = lowCaseText.includes('overnight');
 				chartSteps.push({
 					type: ChartStepType.Refrigerate,
-					value: [`${value} ${unit}`, isOvernight ? 'overnight' : ''].join(
-						' or '
-					),
+					value: [
+						value && unit && `${value} ${unit}`,
+						isOvernight ? 'overnight' : '',
+					].join(' or '),
 				});
 			}
 		}
