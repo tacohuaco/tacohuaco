@@ -56,12 +56,12 @@ export function mapRecipe(
 		slug,
 		title,
 	}));
-	const stepsSecions = mapSteps(recipe.steps, recipe.subrecipes);
+	const stepsSections = mapSteps(recipe.steps, recipe.subrecipes);
 
-	if (stepsSecions.length !== ingredientsSections.length) {
+	if (stepsSections.length !== ingredientsSections.length) {
 		console.error();
 		console.error(
-			`Number of sections of ingredients and steps don’t match: ${stepsSecions.length} vs. ${ingredientsSections.length}.`
+			`Number of sections of ingredients and steps don’t match: ${stepsSections.length} vs. ${ingredientsSections.length}.`
 		);
 		console.error();
 	}
@@ -70,7 +70,7 @@ export function mapRecipe(
 		...recipe,
 		subrecipes,
 		recipes,
-		steps: stepsSecions,
+		steps: stepsSections,
 		ingredients: ingredientsSections,
 		titleEnglish: mapMaybeString(recipe.titleEnglish),
 		createdAt: mapDate(recipe.createdAt),
