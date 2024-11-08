@@ -12,6 +12,7 @@ import { mapTools } from './mapTools';
 import { mapWarnings } from './mapWarnings';
 import { mapMaybeString } from './mapMaybeString';
 import { mapMaybeNumber } from './mapMaybeNumber';
+import { mapChart } from './mapChart';
 
 function mapDate(date: string) {
 	return new Date(Date.parse(date));
@@ -79,6 +80,7 @@ export function mapRecipe(
 		notes: mapNotes(recipe.notes),
 		seasons: mapSeasons(ingredients),
 		preconditions: mapPreconditions(ingredients),
+		chart: mapChart(ingredients, stepsSections),
 		description: mapMaybeString(recipe.description),
 		source: mapMaybeString(recipe.source),
 		yields: mapYields(recipe.yields),

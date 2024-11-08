@@ -26,6 +26,22 @@ export interface Yields {
 	unit: string;
 }
 
+export enum ChartStepType {
+	PreheatOven = 'PreheatOven',
+	// TODO: Merge with Unfreeze?
+	WarmToRoomTemp = 'WarmToRoomTemp',
+	Unfreeze = 'Unfreeze',
+	Refrigerate = 'Refrigerate',
+	CookCovered = 'CookCovered',
+	CookUncovered = 'CookUncovered',
+}
+
+export interface ChartStep {
+	type: ChartStepType;
+	subtype?: string;
+	value?: string;
+}
+
 // Just enough data to render a recipe card and search
 export type RecipeFragment = Pick<
 	Recipe,
@@ -75,6 +91,7 @@ export interface Recipe {
 	tools: string[];
 	notes: string[];
 	preconditions: string[];
+	chart: ChartStep[];
 	tips: string[];
 	warnings: string[];
 	yields: Yields;

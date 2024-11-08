@@ -1,14 +1,16 @@
 import { z, defineCollection } from 'astro:content';
 import { IngredientKind, Month, type Amount } from '../util/olivier';
 import { type Asset } from '../types/Asset';
-import type {
-	IngredientsSection,
-	Recipe,
-	RecipeFragment,
-	RecipeIngredient,
-	Step,
-	StepsSection,
-	Yields,
+import {
+	ChartStepType,
+	type ChartStep,
+	type IngredientsSection,
+	type Recipe,
+	type RecipeFragment,
+	type RecipeIngredient,
+	type Step,
+	type StepsSection,
+	type Yields,
 } from '../types/Recipe';
 
 // TODO: Find a better way to sync TypeScript interface and Zod scheme
@@ -62,6 +64,12 @@ const subrecipe = z.object({
 	title: z.string(),
 }) satisfies z.ZodType<Pick<Recipe, 'slug' | 'title'>>;
 
+const chartStep = z.object({
+	type: z.nativeEnum(ChartStepType),
+	subtype: z.string().optional(),
+	value: z.string().optional(),
+}) satisfies z.ZodType<ChartStep>;
+
 const fragment = z.object({
 	createdAt: z.coerce.date(),
 	cuisines: z.array(z.string()),
@@ -90,6 +98,7 @@ const recipes = defineCollection({
 		description: z.string().optional(),
 		notes: z.array(z.string()),
 		preconditions: z.array(z.string()),
+		chart: z.array(chartStep),
 		recipes: z.array(subrecipe),
 		source: z.string().optional(),
 		steps: z.array(stepsSection),

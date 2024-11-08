@@ -13,7 +13,7 @@ export const mapPreconditions = (ingredients: RecipeIngredient[]): string[] => {
 				return `warm ${name} to room temperature`;
 			}
 
-			if (name === 'chicken stock') {
+			if (name.endsWith('broth')) {
 				return `unfreeze ${name} if frozen`;
 			}
 

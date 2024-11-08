@@ -45,7 +45,6 @@ export function RecipePage(props: Props) {
 						</Stack>
 						<RecipeMeta {...props} />
 					</Stack>
-
 					{description && (
 						<TextContent variant="intro">
 							<Markdown text={description} forceBlock />

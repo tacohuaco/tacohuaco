@@ -14,6 +14,7 @@ import { RecipeSteps } from './RecipeSteps';
 import { IngredientsExplorer } from './IngredientsExplorer';
 import { useScale } from '../hooks/useScale';
 import { RecipeScale } from './RecipeScale';
+import { RecipeChart } from './RecipeChart';
 
 const YieldsText = ({ amount, unit }: Yields) => {
 	const { minAmount: printedAmount, unit: printedUnit } = formatOption({
@@ -26,10 +27,13 @@ const YieldsText = ({ amount, unit }: Yields) => {
 };
 
 export function RecipeBody(recipe: Recipe) {
+	console.log('🐿️ recipe', recipe);
+
 	const {
 		ingredients,
 		notes,
 		preconditions,
+		chart,
 		source,
 		steps,
 		tips,
@@ -118,6 +122,10 @@ export function RecipeBody(recipe: Recipe) {
 				<Collapsible label="Explore ingredients">
 					<VisuallyHidden as="h2">Ingredients explorer</VisuallyHidden>
 					<IngredientsExplorer ingredients={ingredients} />
+				</Collapsible>
+				<Collapsible label="Recipe chart β">
+					<VisuallyHidden as="h2">Recipe chart β</VisuallyHidden>
+					<RecipeChart chart={chart} />
 				</Collapsible>
 			</Stack>
 		</Grid>
