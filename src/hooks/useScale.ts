@@ -32,9 +32,9 @@ function getRatio(amount: number, nextAmout: number) {
 function scaleIngredients(
 	ingredientsSections: Recipe['ingredients'],
 	baseAmount: number,
-	currentAmout: number
+	currentAmount: number
 ): Recipe['ingredients'] {
-	const ratio = getRatio(baseAmount, currentAmout);
+	const ratio = getRatio(baseAmount, currentAmount);
 	return ingredientsSections.map((section) => ({
 		...section,
 		ingredients: section.ingredients.map(
@@ -48,11 +48,11 @@ export function useScale({ ingredients, yields }: Recipe) {
 
 	const baseAmount = yields.amount;
 
-	const [currentAmout, setCurrentAmout] = useState(baseAmount);
+	const [currentAmount, setCurrentAmout] = useState(baseAmount);
 
 	const scaledIngredients = useMemo(
-		() => scaleIngredients(ingredients, baseAmount, currentAmout),
-		[currentAmout]
+		() => scaleIngredients(ingredients, baseAmount, currentAmount),
+		[currentAmount]
 	);
 
 	const handleLess = useMemo(
@@ -66,7 +66,7 @@ export function useScale({ ingredients, yields }: Recipe) {
 
 	return {
 		isScalingEnabled,
-		currentAmout,
+		currentAmount,
 		scaledIngredients,
 		handleLess,
 		handleMore,

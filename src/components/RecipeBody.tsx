@@ -39,7 +39,7 @@ export function RecipeBody(recipe: Recipe) {
 	} = recipe;
 	const {
 		isScalingEnabled,
-		currentAmout,
+		currentAmount,
 		scaledIngredients,
 		handleLess,
 		handleMore,
@@ -67,7 +67,7 @@ export function RecipeBody(recipe: Recipe) {
 					)}
 				</Stack>
 				<Text variant="italic">
-					<YieldsText amount={currentAmout} unit={yields.unit} />
+					<YieldsText amount={currentAmount} unit={yields.unit} />
 				</Text>
 				<RecipeIngredients
 					ingredients={scaledIngredients}
