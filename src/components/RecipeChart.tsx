@@ -140,6 +140,44 @@ function PictogramRest() {
 	);
 }
 
+function PictogramSoak() {
+	return (
+		<Stack
+			css={{
+				pointerEvents: 'none',
+				userSelect: 'none',
+				gap: '0.1rem',
+				alignItems: 'center',
+				justifyContent: 'flex-end',
+				width: '2.2rem',
+				height: '2.0rem',
+				fontSize: '1.8rem',
+			}}
+		>
+			<Stack
+				css={{
+					width: '1.6rem',
+					height: '0.8rem',
+					borderWidth,
+					borderStyle,
+					borderColor,
+					borderRadius: `0 0 2rem 2rem`,
+				}}
+			/>
+			<Stack
+				css={{
+					width: '2.2rem',
+					height: '0.1rem',
+					borderWidth,
+					borderStyle,
+					borderColor,
+					borderRadius,
+				}}
+			/>
+		</Stack>
+	);
+}
+
 function PictogramOven() {
 	return (
 		<Stack
@@ -251,6 +289,7 @@ const PICTOGRAMS: Record<ChartStepType, ComponentType> = {
 	[ChartStepType.CookUncovered]: PictogramCookUncovered,
 	[ChartStepType.CookCovered]: PictogramCookCovered,
 	[ChartStepType.Rest]: PictogramRest,
+	[ChartStepType.Soak]: PictogramSoak,
 };
 
 function Subtype({ type, subtype }: { type: ChartStepType; subtype: string }) {

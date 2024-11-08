@@ -33,6 +33,7 @@ export enum ChartStepType {
 	CookCovered = 'CookCovered',
 	CookUncovered = 'CookUncovered',
 	Rest = 'Rest',
+	Soak = 'Soak',
 }
 
 export interface ChartStep {

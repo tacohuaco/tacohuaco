@@ -69,7 +69,7 @@ export const mapChart = (
 					continue;
 				}
 				chartSteps.push({
-					type: ChartStepType.Rest,
+					type: action === 'leave' ? ChartStepType.Rest : ChartStepType.Soak,
 					value: `${value} ${unit ?? ''}`.trim(),
 				});
 			}
