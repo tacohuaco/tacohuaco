@@ -8,7 +8,6 @@ import { Collapsible } from '../components/Collapsible';
 import { VisuallyHidden } from '../components/VisuallyHidden';
 import { formatOption } from '../util/olivier';
 import type { Recipe, Yields } from '../types/Recipe';
-import { asList } from '../util/asList';
 import { RecipeIngredients } from './RecipeIngredients';
 import { RecipeSteps } from './RecipeSteps';
 import { IngredientsExplorer } from './IngredientsExplorer';
@@ -32,7 +31,6 @@ export function RecipeBody(recipe: Recipe) {
 	const {
 		ingredients,
 		notes,
-		preconditions,
 		chart,
 		source,
 		steps,
@@ -90,11 +88,6 @@ export function RecipeBody(recipe: Recipe) {
 			<Stack as="section" gap="l">
 				<Stack gap="m">
 					<Heading level={2}>Directions</Heading>
-					{preconditions.length > 0 && (
-						<Text>
-							<strong>Before you start:</strong> {asList(preconditions)}.
-						</Text>
-					)}
 					<RecipeChart chart={chart} />
 					<RecipeSteps steps={steps} ingredients={scaledIngredients} />
 				</Stack>

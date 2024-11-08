@@ -65,6 +65,12 @@ test('map recipe', () => {
 	];
 	expect(mapRecipe(recipe, allIngredients, allTips)).toMatchInlineSnapshot(`
 		{
+		  "chart": [
+		    {
+		      "subtype": "butter",
+		      "type": "WarmToRoomTemp",
+		    },
+		  ],
 		  "createdAt": 2023-09-18T12:12:59.151Z,
 		  "cuisines": [
 		    "Mexican",
@@ -144,9 +150,6 @@ test('map recipe', () => {
 		    "Do it gooder",
 		  ],
 		  "overnight": false,
-		  "preconditions": [
-		    "warm butter to room temperature",
-		  ],
 		  "recipes": [],
 		  "seasons": [],
 		  "slug": "salsa-verde-de",

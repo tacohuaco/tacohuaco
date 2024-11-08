@@ -90,7 +90,6 @@ export interface Recipe {
 	time?: number;
 	tools: string[];
 	notes: string[];
-	preconditions: string[];
 	chart: ChartStep[];
 	tips: string[];
 	warnings: string[];

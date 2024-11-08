@@ -97,7 +97,6 @@ const recipes = defineCollection({
 	schema: fragment.extend({
 		description: z.string().optional(),
 		notes: z.array(z.string()),
-		preconditions: z.array(z.string()),
 		chart: z.array(chartStep),
 		recipes: z.array(subrecipe),
 		source: z.string().optional(),

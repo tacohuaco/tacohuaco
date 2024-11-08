@@ -4,7 +4,6 @@ import type { IngredientModel, RecipeModelRaw, TipModel } from '../types';
 import { getAllIngredients } from '../../src/util/getAllIngredients';
 import { mapFlags } from './mapFlags';
 import { mapIngredients } from './mapIngredients';
-import { mapPreconditions } from './mapPreconditions';
 import { mapSeasons } from './mapSeasons';
 import { mapSteps } from './mapSteps';
 import { mapTips } from './mapTips';
@@ -79,7 +78,6 @@ export function mapRecipe(
 		tools: mapTools(recipe.tools, recipe.subrecipes, ingredientsSections),
 		notes: mapNotes(recipe.notes),
 		seasons: mapSeasons(ingredients),
-		preconditions: mapPreconditions(ingredients),
 		chart: mapChart(ingredients, stepsSections),
 		description: mapMaybeString(recipe.description),
 		source: mapMaybeString(recipe.source),
