@@ -26,8 +26,6 @@ const YieldsText = ({ amount, unit }: Yields) => {
 };
 
 export function RecipeBody(recipe: Recipe) {
-	console.log('🐿️ recipe', recipe);
-
 	const {
 		ingredients,
 		notes,
@@ -88,8 +86,10 @@ export function RecipeBody(recipe: Recipe) {
 			<Stack as="section" gap="l">
 				<Stack gap="m">
 					<Heading level={2}>Directions</Heading>
-					<RecipeChart chart={chart} />
-					<RecipeSteps steps={steps} ingredients={scaledIngredients} />
+					<Stack gap="l">
+						<RecipeChart chart={chart} />
+						<RecipeSteps steps={steps} ingredients={scaledIngredients} />
+					</Stack>
 				</Stack>
 				<Stack gap="m">
 					{(notes.length > 0 || tips.length > 0 || source) && (
