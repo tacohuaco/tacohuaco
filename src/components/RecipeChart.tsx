@@ -294,7 +294,8 @@ const PICTOGRAMS: Record<ChartStepType, ComponentType> = {
 
 function Subtype({ type, subtype }: { type: ChartStepType; subtype: string }) {
 	if (type === ChartStepType.WarmToRoomTemp) {
-		return <TextTypo variant="small">{subtype}</TextTypo>;
+		const valueToPrint = subtype.replaceAll(/.* broth/g, 'broth').trim();
+		return <TextTypo variant="small">{valueToPrint}</TextTypo>;
 	}
 
 	return null;
