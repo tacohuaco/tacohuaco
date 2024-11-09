@@ -9,56 +9,15 @@ type Props = {
 	chart: readonly ChartStep[];
 };
 
+type PictogramProps = {
+	covered: boolean;
+};
+
 const borderWidth = 2;
 const borderStyle = 'solid';
 const borderColor = 'border';
 const borderRadius = '0.2rem';
 const borderRadiusSmaller = '0.15rem';
-
-function PotBase() {
-	return (
-		<Flex
-			css={{
-				alignItems: 'center',
-				gap: '2.1rem',
-				justifyContent: 'center',
-				width: '2.2rem',
-				height: '1.6rem',
-				borderWidth,
-				borderStyle,
-				borderColor,
-				borderRadius: `0 0 ${borderRadius} ${borderRadius}`,
-			}}
-		>
-			<Box
-				css={{
-					width: '0.3rem',
-					height: '0.4rem',
-					marginTop: '-0.5rem',
-					marginLeft: '-0.7rem',
-					borderWidth,
-					borderRightWidth: 0,
-					borderColor,
-					borderStyle,
-					borderRadius: `${borderRadius} 0 0 ${borderRadius}`,
-				}}
-			/>
-			<Box
-				css={{
-					width: '0.3rem',
-					height: '0.4rem',
-					marginTop: '-0.5rem',
-					marginRight: '-0.7rem',
-					borderWidth,
-					borderLeftWidth: 0,
-					borderColor,
-					borderStyle,
-					borderRadius: `0 ${borderRadius} ${borderRadius} 0`,
-				}}
-			/>
-		</Flex>
-	);
-}
 
 function PictogramWarmToRoomTemp() {
 	return (
@@ -102,7 +61,7 @@ function PictogramRefrigerate() {
 	);
 }
 
-function PictogramRest() {
+function PictogramRest({ covered }: PictogramProps) {
 	return (
 		<Stack
 			css={{
@@ -116,6 +75,19 @@ function PictogramRest() {
 				fontSize: '1.8rem',
 			}}
 		>
+			{covered && (
+				<Stack
+					css={{
+						mb: '-0.2rem',
+						width: '1.8rem',
+						height: '0.8rem',
+						borderWidth,
+						borderStyle,
+						borderColor,
+						borderRadius: `2rem 2rem 0 0`,
+					}}
+				/>
+			)}
 			<Stack
 				css={{
 					width: '1.8rem',
@@ -235,59 +207,85 @@ function PictogramOven() {
 	);
 }
 
-function PictogramCookUncovered() {
-	return (
-		<Stack
-			pt="0.4rem"
-			css={{
-				pointerEvents: 'none',
-				userSelect: 'none',
-			}}
-		>
-			<PotBase />
-		</Stack>
-	);
-}
-
-function PictogramCookCovered() {
+function PictogramCook({ covered }: PictogramProps) {
 	return (
 		<Stack>
+			{covered && (
+				<Flex
+					css={{
+						justifyContent: 'center',
+						width: '2.2rem',
+						height: '0.4rem',
+						borderWidth,
+						borderBottomWidth: 0,
+						borderStyle,
+						borderColor,
+						borderRadius: `${borderRadius} ${borderRadius} 0 0`,
+					}}
+				>
+					<Box
+						css={{
+							width: '0.4rem',
+							height: '0.3rem',
+							marginTop: '-0.3rem',
+							borderWidth,
+							borderBottomWidth: 0,
+							borderColor,
+							borderStyle,
+							borderRadius: `${borderRadius} ${borderRadius} 0 0`,
+						}}
+					/>
+				</Flex>
+			)}
 			<Flex
 				css={{
+					alignItems: 'center',
+					gap: '2.1rem',
 					justifyContent: 'center',
 					width: '2.2rem',
-					height: '0.4rem',
+					height: '1.6rem',
 					borderWidth,
-					borderBottomWidth: 0,
 					borderStyle,
 					borderColor,
-					borderRadius: `${borderRadius} ${borderRadius} 0 0`,
+					borderRadius: `0 0 ${borderRadius} ${borderRadius}`,
 				}}
 			>
 				<Box
 					css={{
-						width: '0.4rem',
-						height: '0.3rem',
-						marginTop: '-0.3rem',
+						width: '0.3rem',
+						height: '0.4rem',
+						marginTop: '-0.5rem',
+						marginLeft: '-0.7rem',
 						borderWidth,
-						borderBottomWidth: 0,
+						borderRightWidth: 0,
 						borderColor,
 						borderStyle,
-						borderRadius: `${borderRadius} ${borderRadius} 0 0`,
+						borderRadius: `${borderRadius} 0 0 ${borderRadius}`,
+					}}
+				/>
+				<Box
+					css={{
+						width: '0.3rem',
+						height: '0.4rem',
+						marginTop: '-0.5rem',
+						marginRight: '-0.7rem',
+						borderWidth,
+						borderLeftWidth: 0,
+						borderColor,
+						borderStyle,
+						borderRadius: `0 ${borderRadius} ${borderRadius} 0`,
 					}}
 				/>
 			</Flex>
-			<PotBase />
 		</Stack>
 	);
 }
 
-const PICTOGRAMS: Record<ChartStepType, ComponentType> = {
+const PICTOGRAMS: Record<ChartStepType, ComponentType<PictogramProps>> = {
 	[ChartStepType.WarmToRoomTemp]: PictogramWarmToRoomTemp,
 	[ChartStepType.Refrigerate]: PictogramRefrigerate,
 	[ChartStepType.PreheatOven]: PictogramOven,
-	[ChartStepType.CookUncovered]: PictogramCookUncovered,
-	[ChartStepType.CookCovered]: PictogramCookCovered,
+	[ChartStepType.Cook]: PictogramCook,
 	[ChartStepType.Rest]: PictogramRest,
 	[ChartStepType.Soak]: PictogramSoak,
 };
@@ -301,16 +299,14 @@ function Subtype({ type, subtype }: { type: ChartStepType; subtype: string }) {
 	return null;
 }
 
-function Value({ value }: { value: string }) {
+function Value({ value, overnight }: { value: string; overnight: boolean }) {
 	const valueToPrint = value
 		.replaceAll('minutes', 'm')
 		.replaceAll(/hours?/g, 'h')
 		.replaceAll(/days?/g, 'd')
 		.replaceAll(/weeks?/g, 'w')
-		.replaceAll('overnight', '')
 		.trim();
 
-	const isOvernight = value.includes('overnight');
 	return (
 		<Stack alignItems="center">
 			{valueToPrint && (
@@ -318,7 +314,7 @@ function Value({ value }: { value: string }) {
 					{valueToPrint}
 				</TextTypo>
 			)}
-			{isOvernight && (
+			{overnight && (
 				<TextTypo variant="small" my="-0.1rem">
 					night
 				</TextTypo>
@@ -331,9 +327,9 @@ function RecipeChartStep({ step }: { step: ChartStep }) {
 	const Pictogram = PICTOGRAMS[step.type] ?? 'div';
 	return (
 		<Stack gap="s" alignItems="center">
-			<Pictogram />
+			<Pictogram covered={step.covered} />
 			{step.subtype && <Subtype type={step.type} subtype={step.subtype} />}
-			{step.value && <Value value={step.value} />}
+			{step.value && <Value value={step.value} overnight={step.overnight} />}
 		</Stack>
 	);
 }

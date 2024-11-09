@@ -68,6 +68,8 @@ const chartStep = z.object({
 	type: z.nativeEnum(ChartStepType),
 	subtype: z.string().optional(),
 	value: z.string().optional(),
+	overnight: z.boolean(),
+	covered: z.boolean(),
 }) satisfies z.ZodType<ChartStep>;
 
 const fragment = z.object({

@@ -30,8 +30,7 @@ export enum ChartStepType {
 	PreheatOven = 'PreheatOven',
 	WarmToRoomTemp = 'WarmToRoomTemp',
 	Refrigerate = 'Refrigerate',
-	CookCovered = 'CookCovered',
-	CookUncovered = 'CookUncovered',
+	Cook = 'Cook',
 	Rest = 'Rest',
 	Soak = 'Soak',
 }
@@ -40,6 +39,8 @@ export interface ChartStep {
 	type: ChartStepType;
 	subtype?: string;
 	value?: string;
+	overnight: boolean;
+	covered: boolean;
 }
 
 // Just enough data to render a recipe card and search
