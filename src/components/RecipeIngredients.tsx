@@ -55,8 +55,9 @@ function IngredientItem({ options }: { options: RecipeIngredient[] }) {
 						index === 0 ||
 						option.minAmount !== options[0].minAmount ||
 						option.maxAmount !== options[0].maxAmount;
+
 					return (
-						<Group key={name} separator=" ">
+						<Group key={[name, option.modifier].join('-')} separator=" ">
 							{shouldShowAmount && <b>{amount}</b>}
 							{shouldShowAmount && suffix}
 							<IngredientName ingredient={option} printName={name} />
@@ -85,9 +86,14 @@ export function RecipeIngredients({ ingredients, extras }: Props) {
 					<Stack key={section.name} gap="m">
 						{section.name && <Heading level={3}>{section.name}</Heading>}
 						<List>
-							{section.ingredients.map((options) => (
-								<IngredientItem key={options[0].name} options={options} />
-							))}
+							{section.ingredients.map((options) => {
+								return (
+									<IngredientItem
+										key={[options[0].name, options[0].modifier].join('-')}
+										options={options}
+									/>
+								);
+							})}
 						</List>
 					</Stack>
 				);

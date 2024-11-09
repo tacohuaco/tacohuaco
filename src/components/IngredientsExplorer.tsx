@@ -45,9 +45,9 @@ export function IngredientsExplorer({ ingredients }: Props) {
 					</tr>
 				</thead>
 				<tbody>
-					{sorted.map((ingredient) => {
+					{sorted.map((ingredient, index) => {
 						return (
-							<tr key={ingredient.name}>
+							<tr key={index}>
 								<th>{upperFirst(ingredient.name)}</th>
 								<td>{KINDS[ingredient.kind]}</td>
 								<td>
