@@ -61,7 +61,7 @@ export const mapChart = (
 			if (/\b(leave|soak).*(for|overnight)/.test(lowCaseText)) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(leave|soak).*for\D+([\d-]+).*(minutes|hours?|days?)/
+						/(leave|soak).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
 					) ??
 					lowCaseText.match(/(leave|soak).*(overnight)/) ??
 					[];
@@ -81,7 +81,7 @@ export const mapChart = (
 			) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?|days?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
 					) ?? [];
 				if (!action) {
 					continue;
@@ -89,7 +89,10 @@ export const mapChart = (
 				const [firstAmount] = value.split('-');
 				const isCovered = /\bcover(ed)?\b/.test(lowCaseText);
 
-				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
+				if (
+					Number.parseInt(firstAmount) >= 10 ||
+					unit.startsWith('minute') === false
+				) {
 					chartSteps.push({
 						type: isCovered
 							? ChartStepType.CookCovered
@@ -102,7 +105,7 @@ export const mapChart = (
 
 			if (/\brefrigerate/.test(lowCaseText)) {
 				const [, value, unit] =
-					lowCaseText.match(/([\d-]+) (minutes|hours?)/) ?? [];
+					lowCaseText.match(/([\d-]+) (minutes|hours?|weeks?|months?)/) ?? [];
 				const isOvernight = lowCaseText.includes('overnight');
 				chartSteps.push({
 					type: ChartStepType.Refrigerate,

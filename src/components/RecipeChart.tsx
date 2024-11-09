@@ -312,7 +312,7 @@ function Value({ value }: { value: string }) {
 	return (
 		<Stack alignItems="center">
 			{valueToPrint && (
-				<TextTypo variant="small" my="-0.1rem">
+				<TextTypo variant="small" my="-0.1rem" css={{ whiteSpace: 'nowrap' }}>
 					{valueToPrint}
 				</TextTypo>
 			)}
@@ -338,7 +338,7 @@ function RecipeChartStep({ step }: { step: ChartStep }) {
 
 export function RecipeChart({ chart }: Props) {
 	return (
-		<Stack direction="row" gap="l" aria-hidden>
+		<Stack direction="row" flexWrap="wrap" columnGap="l" rowGap="m" aria-hidden>
 			{chart.map((step, index) => (
 				<RecipeChartStep key={index} step={step} />
 			))}
