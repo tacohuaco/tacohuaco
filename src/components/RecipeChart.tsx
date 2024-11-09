@@ -209,7 +209,7 @@ function PictogramOven() {
 
 function PictogramCook({ covered }: PictogramProps) {
 	return (
-		<Stack>
+		<Stack paddingTop={covered ? 0 : '0.4rem'}>
 			{covered && (
 				<Flex
 					css={{
