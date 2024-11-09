@@ -60,11 +60,11 @@ export function RecipeBody(recipe: Recipe) {
 					alignItems="center"
 				>
 					<Heading level={2}>Ingredients</Heading>
-					{isScalingEnabled && (
-						<div>
+					<div>
+						{isScalingEnabled && (
 							<RecipeScale onLess={handleLess} onMore={handleMore} />
-						</div>
-					)}
+						)}
+					</div>
 				</Stack>
 				<Text variant="italic">
 					<YieldsText amount={currentAmount} unit={yields.unit} />
