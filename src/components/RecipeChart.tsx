@@ -305,9 +305,10 @@ function Value({ value }: { value: string }) {
 		.replaceAll('minutes', 'm')
 		.replaceAll(/hours?/g, 'h')
 		.replaceAll(/days?/g, 'd')
-		.replaceAll('or overnight', '')
+		.replaceAll(/weeks?/g, 'w')
 		.replaceAll('overnight', '')
 		.trim();
+
 	const isOvernight = value.includes('overnight');
 	return (
 		<Stack alignItems="center">

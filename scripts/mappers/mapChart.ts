@@ -58,19 +58,25 @@ export const mapChart = (
 				continue;
 			}
 
-			if (/\b(leave|soak).*(for|overnight)/.test(lowCaseText)) {
+			if (/\b(leave|rest|soak).*(for|overnight)/.test(lowCaseText)) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(leave|soak).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
+						/(leave||rest|soak).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
 					) ??
-					lowCaseText.match(/(leave|soak).*(overnight)/) ??
+					lowCaseText.match(/(leave|rest|soak).*(overnight)/) ??
 					[];
 				if (!action) {
 					continue;
 				}
+				const isOvernight = lowCaseText.includes('overnight');
 				chartSteps.push({
-					type: action === 'leave' ? ChartStepType.Rest : ChartStepType.Soak,
-					value: `${value} ${unit ?? ''}`.trim(),
+					type: action === 'soak' ? ChartStepType.Soak : ChartStepType.Rest,
+					value: [
+						value && `${value} ${unit ?? ''}`.trim(),
+						isOvernight ? 'overnight' : '',
+					]
+						.filter(Boolean)
+						.join(' '),
 				});
 			}
 
@@ -81,7 +87,7 @@ export const mapChart = (
 			) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?)/
 					) ?? [];
 				if (!action) {
 					continue;
@@ -89,10 +95,7 @@ export const mapChart = (
 				const [firstAmount] = value.split('-');
 				const isCovered = /\bcover(ed)?\b/.test(lowCaseText);
 
-				if (
-					Number.parseInt(firstAmount) >= 10 ||
-					unit.startsWith('minute') === false
-				) {
+				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
 					chartSteps.push({
 						type: isCovered
 							? ChartStepType.CookCovered
@@ -112,7 +115,9 @@ export const mapChart = (
 					value: [
 						value && unit && `${value} ${unit}`,
 						isOvernight ? 'overnight' : '',
-					].join(' or '),
+					]
+						.filter(Boolean)
+						.join(' '),
 				});
 			}
 		}
