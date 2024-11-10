@@ -54,17 +54,15 @@ export const mapChart = (
 			if (/(leave|rest|cool down|soak).*(for|overnight)/.test(lowCaseText)) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(leave|rest|cool down|soak).*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?)/
-					) ??
-					lowCaseText.match(/(leave|rest|cool down|soak).*(overnight)/) ??
-					[];
+						/(leave|rest|cool down|soak)(?:.*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?))?/
+					) ?? [];
 
 				if (!action) {
 					continue;
 				}
 				chartSteps.push({
 					type: action === 'soak' ? ChartStepType.Soak : ChartStepType.Rest,
-					value: value && `${value} ${unit ?? ''}`.trim(),
+					value: `${value ?? ''} ${unit ?? ''}`.trim(),
 					overnight: isOvernight(lowCaseText),
 					covered: isCovered(lowCaseText),
 				});

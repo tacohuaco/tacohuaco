@@ -5,6 +5,8 @@ import { Stack } from './Stack';
 import { Flex } from './Flex';
 import { TextTypo } from './TextTypo';
 
+// TODO: Find a way to differentiate cooking on the stove and in the oven
+
 type Props = {
 	chart: readonly ChartStep[];
 };
@@ -299,7 +301,13 @@ function Subtype({ type, subtype }: { type: ChartStepType; subtype: string }) {
 	return null;
 }
 
-function Value({ value, overnight }: { value: string; overnight: boolean }) {
+function Value({
+	value = '',
+	overnight,
+}: {
+	value?: string;
+	overnight: boolean;
+}) {
 	const valueToPrint = value
 		.replaceAll('minutes', 'm')
 		.replaceAll(/hours?/g, 'h')
@@ -329,7 +337,7 @@ function RecipeChartStep({ step }: { step: ChartStep }) {
 		<Stack gap="s" alignItems="center">
 			<Pictogram covered={step.covered} />
 			{step.subtype && <Subtype type={step.type} subtype={step.subtype} />}
-			{step.value && <Value value={step.value} overnight={step.overnight} />}
+			<Value value={step.value} overnight={step.overnight} />
 		</Stack>
 	);
 }
