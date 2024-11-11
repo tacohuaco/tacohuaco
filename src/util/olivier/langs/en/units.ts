@@ -33,6 +33,7 @@ export const UNITS = [
 	['stick', 'sticks'],
 	['straw', 'straws'],
 	['tablespoon', 'tablespoons', 'tbsp', 'tbsp.'],
+	['taco', 'tacos'],
 	['teaspoon', 'teaspoons', 'tsp', 'tsp.'],
 	['tray', 'trays'],
 ];
