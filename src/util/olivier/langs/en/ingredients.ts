@@ -133,6 +133,8 @@ export const INGREDIENTS = [
 		['pole corn', 'pole corns'],
 	],
 	[['corn', 'corns']],
+	// This is a recipe, so both names should match its name for proper linking
+	[['pickled onions', 'pickled onions']],
 	[
 		['scallion', 'scallions'],
 		['green onion', 'green onions'],
