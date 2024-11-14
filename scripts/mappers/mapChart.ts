@@ -85,7 +85,9 @@ export const mapChart = (
 
 				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
 					chartSteps.push({
-						type: ChartStepType.Cook,
+						type: ['bake', 'braise', 'roast'].includes(action)
+							? ChartStepType.CookInOven
+							: ChartStepType.Cook,
 						subtype: action,
 						value: `${value} ${unit}`,
 						covered: isCovered(lowCaseText),

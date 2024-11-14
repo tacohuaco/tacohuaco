@@ -31,6 +31,7 @@ export enum ChartStepType {
 	WarmToRoomTemp = 'WarmToRoomTemp',
 	Refrigerate = 'Refrigerate',
 	Cook = 'Cook',
+	CookInOven = 'CookInOven',
 	Rest = 'Rest',
 	Soak = 'Soak',
 }

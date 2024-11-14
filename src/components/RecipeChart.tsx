@@ -283,11 +283,72 @@ function PictogramCook({ covered }: PictogramProps) {
 	);
 }
 
+function PictogramCookInOven({ covered }: PictogramProps) {
+	return (
+		<Stack
+			css={{
+				pointerEvents: 'none',
+				userSelect: 'none',
+				gap: '0.2rem',
+				alignItems: 'center',
+				justifyContent: 'center',
+				width: '2.2rem',
+				height: '2rem',
+				borderWidth,
+				borderStyle,
+				borderColor,
+				borderRadius,
+			}}
+		>
+			<Stack paddingTop={covered ? '0.3rem' : '0.7rem'}>
+				{covered && (
+					<Flex
+						css={{
+							justifyContent: 'center',
+							width: '1.8rem',
+							height: '0.25rem',
+							borderWidth,
+							borderBottomWidth: 0,
+							borderStyle,
+							borderColor,
+							borderRadius: `10rem 10rem 0 0`,
+						}}
+					>
+						<Box
+							css={{
+								width: '0.5rem',
+								height: '0.25rem',
+								marginTop: '-0.3rem',
+								borderWidth,
+								borderBottomWidth: 0,
+								borderColor,
+								borderStyle,
+								borderRadius: `${borderRadius} ${borderRadius} 0 0`,
+							}}
+						/>
+					</Flex>
+				)}
+				<Flex
+					css={{
+						width: '1.8rem',
+						height: '0.7rem',
+						borderWidth,
+						borderStyle,
+						borderColor,
+						borderRadius: `0 0 0.6rem 0.6rem`,
+					}}
+				/>
+			</Stack>
+		</Stack>
+	);
+}
+
 const PICTOGRAMS: Record<ChartStepType, ComponentType<PictogramProps>> = {
 	[ChartStepType.WarmToRoomTemp]: PictogramWarmToRoomTemp,
 	[ChartStepType.Refrigerate]: PictogramRefrigerate,
 	[ChartStepType.PreheatOven]: PictogramOven,
 	[ChartStepType.Cook]: PictogramCook,
+	[ChartStepType.CookInOven]: PictogramCookInOven,
 	[ChartStepType.Rest]: PictogramRest,
 	[ChartStepType.Soak]: PictogramSoak,
 };
