@@ -35,7 +35,7 @@ function PictogramWarmToRoomTemp() {
 				fontSize: '1.8rem',
 			}}
 		>
-			☀
+			☀&#xFE0E;
 		</Stack>
 	);
 }
@@ -58,7 +58,7 @@ function PictogramRefrigerate() {
 				fontSize: '1.8rem',
 			}}
 		>
-			❄
+			❄&#xFE0E;
 		</Stack>
 	);
 }
