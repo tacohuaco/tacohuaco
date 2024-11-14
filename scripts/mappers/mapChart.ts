@@ -76,7 +76,7 @@ export const mapChart = (
 			) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|braise|boil|simmer|poach).*for\D+([\d-]+).*(minutes|hours?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach)\b.*for\D+([\d-]+).*(minutes|hours?)/
 					) ?? [];
 				if (!action) {
 					continue;
