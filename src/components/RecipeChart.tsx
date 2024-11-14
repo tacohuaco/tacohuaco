@@ -35,6 +35,8 @@ function PictogramWarmToRoomTemp() {
 				fontSize: '1.8rem',
 			}}
 		>
+			{/* Use Unicode variation selector character (&#xFE0E) to force text
+			    rendering of a pictogram */}
 			☀&#xFE0E;
 		</Stack>
 	);
@@ -58,6 +60,8 @@ function PictogramRefrigerate() {
 				fontSize: '1.8rem',
 			}}
 		>
+			{/* Use Unicode variation selector character (&#xFE0E) to force text
+			    rendering of a pictogram */}
 			❄&#xFE0E;
 		</Stack>
 	);
