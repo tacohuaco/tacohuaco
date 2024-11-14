@@ -81,9 +81,13 @@ export const mapChart = (
 				if (!action) {
 					continue;
 				}
-				const [firstAmount] = value.split('-');
+				const [firstAmount, secondAmount] = value.split('-');
 
-				if (Number.parseInt(firstAmount) >= 10 || unit.startsWith('hour')) {
+				if (
+					Number.parseInt(firstAmount) >= 7 ||
+					Number.parseInt(secondAmount) >= 7 ||
+					unit.startsWith('hour')
+				) {
 					chartSteps.push({
 						type: ['bake', 'braise', 'roast'].includes(action)
 							? ChartStepType.CookInOven
