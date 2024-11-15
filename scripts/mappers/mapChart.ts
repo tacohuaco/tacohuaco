@@ -54,7 +54,7 @@ export const mapChart = (
 			if (/(leave|rest|cool down|soak).*(for|overnight)/.test(lowCaseText)) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(leave|rest|cool down|soak)(?:.*for\D+([\d-]+).*(minutes|hours?|days?|weeks?|months?))?/
+						/(leave|rest|cool down|soak)(?:.*for\D+([\d-.]+).*(minutes|hours?|days?|weeks?|months?))?/
 					) ?? [];
 
 				if (!action) {
@@ -76,7 +76,7 @@ export const mapChart = (
 			) {
 				const [, action, value, unit] =
 					lowCaseText.match(
-						/(cook|bake|fry|roast|braise|boil|simmer|poach)\b.*for\D+([\d-]+).*(minutes|hours?)/
+						/(cook|bake|fry|roast|braise|boil|simmer|poach)\b.*for\D+([\d-.]+).*(minutes|hours?)/
 					) ?? [];
 				if (!action) {
 					continue;
@@ -103,7 +103,7 @@ export const mapChart = (
 
 			if (/refrigerate/.test(lowCaseText)) {
 				const [, value, unit] =
-					lowCaseText.match(/([\d-]+) (minutes|hours?|weeks?|months?)/) ?? [];
+					lowCaseText.match(/([\d-.]+) (minutes|hours?|weeks?|months?)/) ?? [];
 				chartSteps.push({
 					type: ChartStepType.Refrigerate,
 					value: value && unit && `${value} ${unit}`,
