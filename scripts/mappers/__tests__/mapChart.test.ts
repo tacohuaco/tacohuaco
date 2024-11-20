@@ -65,21 +65,29 @@ test('map chart', () => {
 	expect(mapChart(ingredients, stepSections)).toMatchInlineSnapshot(`
 		[
 		  {
+		    "covered": false,
+		    "overnight": false,
 		    "subtype": "butter",
 		    "type": "WarmToRoomTemp",
 		  },
 		  {
+		    "covered": false,
+		    "overnight": false,
 		    "subtype": "chicken broth",
 		    "type": "WarmToRoomTemp",
 		  },
 		  {
+		    "covered": true,
+		    "overnight": false,
 		    "subtype": "cook",
-		    "type": "CookCovered",
+		    "type": "Cook",
 		    "value": "3 hours",
 		  },
 		  {
+		    "covered": true,
+		    "overnight": true,
 		    "type": "Refrigerate",
-		    "value": "4 hours or overnight",
+		    "value": "4 hours",
 		  },
 		]
 	`);

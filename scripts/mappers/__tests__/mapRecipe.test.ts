@@ -67,6 +67,8 @@ test('map recipe', () => {
 		{
 		  "chart": [
 		    {
+		      "covered": false,
+		      "overnight": false,
 		      "subtype": "butter",
 		      "type": "WarmToRoomTemp",
 		    },
