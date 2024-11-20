@@ -41,7 +41,7 @@ const button = cva({
 		},
 		_focus: {
 			outline: 0,
-			boxShadow: `0 0 0 2px token(colors.bg), 0 0 0 4px token(colors.accent)`,
+			boxShadow: `0 0 0 2px token(colors.background), 0 0 0 4px token(colors.accent)`,
 		},
 		_disabled: {
 			opacity: 0.5,

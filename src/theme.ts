@@ -91,10 +91,10 @@ export const theme = {
 				shadows: {
 					popover: { value: '0 6px 20px -2px hsla(0,0%,0%,0.2)' },
 					menu: {
-						value: `5px 5px 0 -2px ${colors.bg}, 5px 5px 0 ${colors.accent}`,
+						value: `5px 5px 0 -2px var(--colors-background), 5px 5px 0 var(--colors-accent)`,
 					},
-					input: { value: `5px 5px 0 ${colors.accent}` },
-					heading: { value: `2px 2px 0 ${colors.light}` },
+					input: { value: `5px 5px 0 var(--colors-accent)` },
+					heading: { value: `2px 2px 0 var(--colors-light)` },
 				},
 				easings: {
 					expand: { value: 'ease-in-out' },
