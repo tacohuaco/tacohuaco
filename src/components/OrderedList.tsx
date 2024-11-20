@@ -17,7 +17,7 @@ const listItem = cva({
 			width: '1.5em',
 			height: '1.5em',
 			textAlign: 'center',
-			color: 'bg',
+			color: 'background',
 			backgroundColor: 'accent',
 			fontFamily: 'ui',
 			fontSize: 'xs',

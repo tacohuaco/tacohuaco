@@ -117,7 +117,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 						right: 0,
 						marginTop: 's',
 						padding: 'xs',
-						backgroundColor: 'bg',
+						backgroundColor: 'background',
 						border: 'input',
 						borderColor: 'accent',
 						borderRadius: 'button',

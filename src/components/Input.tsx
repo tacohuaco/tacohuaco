@@ -15,10 +15,10 @@ export const Input = (props: InputProps) => (
 			fontFamily: 'ui',
 			fontSize: 'm',
 			fontWeight: 'ui',
-			backgroundColor: 'bg',
-			color: 'base',
+			backgroundColor: 'background',
+			color: 'text',
 			border: 'input',
-			borderColor: 'base',
+			borderColor: 'text',
 			borderRadius: 'button',
 			appearance: 'none',
 			_focus: {

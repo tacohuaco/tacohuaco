@@ -16,7 +16,7 @@ function CollapsibleButton({ children }: { children: ReactNode }) {
 				fontSize: 's',
 				lineHeight: 'base',
 				textDecoration: 'underline',
-				color: 'base',
+				color: 'text',
 				_hover: {
 					color: 'accent',
 					cursor: 'pointer',

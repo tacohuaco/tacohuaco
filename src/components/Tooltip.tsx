@@ -49,7 +49,7 @@ export function Tooltip({ value, children }: Props) {
 					fontFamily: 'ui',
 					fontSize: 'xs',
 					fontWeight: 'normal',
-					color: 'bg',
+					color: 'background',
 					textAlign: 'center',
 					borderRadius: 'base',
 					backgroundColor: 'accent',

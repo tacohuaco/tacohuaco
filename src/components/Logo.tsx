@@ -51,7 +51,7 @@ export function Logo() {
 					css={{
 						marginBottom: 'xs',
 						color: 'accent',
-						backgroundColor: 'bg',
+						backgroundColor: 'background',
 						fontFamily: 'ui',
 						fontWeight: 'bold',
 						fontSize: 'm',

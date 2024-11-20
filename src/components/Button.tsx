@@ -31,12 +31,12 @@ const button = cva({
 		},
 		_hover: {
 			cursor: 'pointer',
-			color: 'bg',
+			color: 'background',
 			backgroundColor: 'accent',
 		},
 		_active: {
 			cursor: 'pointer',
-			color: 'bg',
+			color: 'background',
 			backgroundColor: 'accent',
 		},
 		_focus: {

@@ -1,15 +1,29 @@
 import { type Config } from '@pandacss/dev';
 
 export const colors = {
-	bg: '#fff',
-	base: '#362a1b',
+	background: '#fff',
+	text: '#362a1b',
 	primary: '#362a1b',
 	border: '#362a1b',
 	dim: '#664f33',
 	light: '#eee6dd',
 	accent: '#c94a4a',
 	moon: '#7277c0',
+	selection: '#faebaf',
 };
+
+export const colorsDark = {
+	background: '#362a1b',
+	text: '#d7cbc1',
+	primary: '#d7cbc1',
+	border: '#d7cbc1',
+	dim: '#d1c1b8',
+	light: '#5e4f3d',
+	accent: '#f06958',
+	moon: '#7277c0',
+	selection: '#61656b',
+};
+
 export const lineHeights = {
 	base: '1.5',
 	small: '1.4',
@@ -17,20 +31,24 @@ export const lineHeights = {
 	code: '1.3',
 };
 
+function createPalette(
+	light: Record<string, string>,
+	dark: Record<string, string>
+) {
+	const palette: Record<string, { value: { base: string; _osDark: string } }> =
+		{};
+	for (const name in light) {
+		palette[name] = {
+			value: { base: light[name], _osDark: dark[name] },
+		};
+	}
+	return palette;
+}
+
 export const theme = {
 	theme: {
 		extend: {
 			tokens: {
-				colors: {
-					bg: { value: colors.bg },
-					base: { value: colors.base },
-					primary: { value: colors.primary },
-					border: { value: colors.border },
-					dim: { value: colors.dim },
-					light: { value: colors.light },
-					accent: { value: colors.accent },
-					moon: { value: colors.moon },
-				},
 				fonts: {
 					body: { value: "ProximaNova, 'Helvetica Neue', Arial, sans-serif" },
 					heading: { value: "AzoSans, 'Helvetica Neue', Arial, sans-serif" },
@@ -90,6 +108,7 @@ export const theme = {
 				},
 			},
 			semanticTokens: {
+				colors: createPalette(colors, colorsDark),
 				fontSizes: {
 					root: { value: '1.125em' },
 					article: { value: '1.1rem' },

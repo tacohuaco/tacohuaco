@@ -10,7 +10,7 @@ const heading = cva({
 	variants: {
 		level: {
 			1: {
-				color: 'base',
+				color: 'text',
 				fontWeight: 'normal',
 				fontSize: 'xxl',
 				letterSpacing: 'base',
@@ -23,7 +23,7 @@ const heading = cva({
 				letterSpacing: 'uppercase',
 			},
 			3: {
-				color: 'base',
+				color: 'text',
 				fontSize: 'l',
 				letterSpacing: 'heading',
 			},

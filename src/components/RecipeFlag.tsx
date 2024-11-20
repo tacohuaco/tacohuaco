@@ -79,7 +79,7 @@ const Circle = ({
 				fontFamily: 'ui',
 				fontSize: 'xs',
 				fontWeight: 'ui',
-				color: 'bg',
+				color: 'background',
 				borderWidth: '0.2em',
 				borderRadius: 'round',
 				'a:hover &': {

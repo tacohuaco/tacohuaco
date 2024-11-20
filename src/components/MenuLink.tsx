@@ -10,7 +10,7 @@ const menuLink = cva({
 		margin: 'calc(0.25rem + 2px)',
 		padding: 'xs',
 		color: 'accent',
-		backgroundColor: 'bg',
+		backgroundColor: 'background',
 		fontFamily: 'ui',
 		fontWeight: 'normal',
 		fontSize: 'm',
@@ -46,12 +46,12 @@ const menuLink = cva({
 				fontWeight: 'bold',
 				borderWidth: 2,
 				_hover: {
-					color: 'bg',
+					color: 'background',
 					backgroundColor: 'accent',
 				},
 				_focusVisible: {
 					outline: 0,
-					color: 'bg',
+					color: 'background',
 					backgroundColor: 'accent',
 				},
 			},
