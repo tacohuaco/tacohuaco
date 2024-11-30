@@ -5,7 +5,7 @@ export function getHygraphImageUrl(
 	{
 		width,
 		height,
-		quality = 65,
+		quality = 50,
 		webP = true,
 	}: { width: number; height: number; quality?: number; webP?: boolean }
 ) {
@@ -13,7 +13,7 @@ export function getHygraphImageUrl(
 		baseUrl,
 		`resize=width:${width * 2},height:${height * 2},fit:max`,
 		`quality=value:${quality}`,
-		webP && 'auto_image', // enable WebP
+		webP && 'format=avif', // enable WebP
 		handle,
 	]
 		.filter(Boolean)

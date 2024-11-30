@@ -52,9 +52,11 @@ export function RecipeCard<C extends ElementType = 'div'>({
 							{images.length > 0 && (
 								<HygraphImage
 									handle={images[0].handle}
-									width={700}
-									height={700}
+									width={480}
+									height={480}
+									quality={30}
 									alt=""
+									loading="lazy"
 								/>
 							)}
 						</Frame>
