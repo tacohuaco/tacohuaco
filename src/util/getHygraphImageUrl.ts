@@ -1,4 +1,4 @@
-const baseUrl = 'https://media.graphassets.com';
+const baseUrl = 'https://eu-central-1.graphassets.com/Aeh74QOS5TIWHefSmr6nTz';
 
 export function getHygraphImageUrl(
 	handle: string,
@@ -11,9 +11,9 @@ export function getHygraphImageUrl(
 ) {
 	return [
 		baseUrl,
-		`resize=w:${width * 2},h:${height * 2},fit:max`,
+		`resize=width:${width * 2},height:${height * 2},fit:max`,
 		`quality=value:${quality}`,
-		webP && 'auto_image/', // enable WebP
+		webP && 'auto_image', // enable WebP
 		handle,
 	]
 		.filter(Boolean)
