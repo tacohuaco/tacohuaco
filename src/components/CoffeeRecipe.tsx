@@ -5,7 +5,7 @@ import {
 	type CoffeeRecipe as CoffeeRecipeType,
 	type Step,
 	Action,
-} from '../util/cafe';
+} from '../util/cafe/types';
 import Group from 'react-group';
 
 // HACK: Importing this library breaks the build on Netlify

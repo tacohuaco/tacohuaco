@@ -1,7 +1,7 @@
 import { Stack } from '../components/Stack';
 import { CoffeeRecipe } from '../components/CoffeeRecipe';
 import { PageWithTitle } from './PageWithTitle';
-import { type CoffeeRecipe as CoffeeRecipeType } from '../util/cafe';
+import { type CoffeeRecipe as CoffeeRecipeType } from '../util/cafe/types';
 
 type Props = {
 	url: string;
