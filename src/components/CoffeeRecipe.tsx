@@ -8,8 +8,6 @@ import {
 } from '../util/cafe/types';
 import Group from 'react-group';
 
-// HACK: Importing this library breaks the build on Netlify
-// https://github.com/sindresorhus/parse-ms
 function parseSeconds(seconds: number) {
 	return {
 		days: Math.trunc(seconds / 86_400),
