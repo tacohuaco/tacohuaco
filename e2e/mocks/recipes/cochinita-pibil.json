@@ -1,5 +1,26 @@
 {
   "cuisines": ["Mexican"],
+  "chart": [
+    {
+      "type": "Refrigerate",
+      "value": "4 hours",
+      "overnight": true,
+      "covered": true
+    },
+    {
+      "type": "PreheatOven",
+      "value": "120C",
+      "overnight": false,
+      "covered": false
+    },
+    {
+      "type": "CookInOven",
+      "subtype": "braise",
+      "value": "2 hours",
+      "covered": true,
+      "overnight": false
+    }
+  ],
   "createdAt": "2023-03-30T17:36:02.503Z",
   "description": "Cochinita pibil is a legendary Mexican dish, known for being full of flavors and traditions, and typically is cooked underground using maguey leaves. The version here is a very simplified way of cooking it at home, which basically only calls for some supervision during the preparation. It is perfect for those days when one is working at home, since after marinating the meat overnight, you only need to cook it in the oven for some hours. \n\nTry to cook it and serve it in different presentations and enjoy this legendary dish!\n\n",
   "ingredients": [

@@ -1,5 +1,13 @@
 {
   "cuisines": ["Swedish"],
+  "chart": [
+    {
+      "type": "PreheatOven",
+      "value": "240C",
+      "overnight": false,
+      "covered": false
+    }
+  ],
   "createdAt": "2022-08-09T13:42:43.666Z",
   "description": "Crispy, buttery, garlicky, and very pretty potatoes. Take some time to cut the potatoes and probably you will not want to make enough of them to have a full meal. A great addition to any celebration feast,\nthey are like gold — small and precious.",
   "ingredients": [

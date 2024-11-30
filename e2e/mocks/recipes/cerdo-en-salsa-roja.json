@@ -1,5 +1,21 @@
 {
   "cuisines": ["Mexican"],
+  "chart": [
+    {
+      "type": "Cook",
+      "subtype": "cook",
+      "value": "30 minutes",
+      "covered": false,
+      "overnight": false
+    },
+    {
+      "type": "Cook",
+      "subtype": "boil",
+      "value": "40 minutes",
+      "covered": true,
+      "overnight": false
+    }
+  ],
   "createdAt": "2024-01-29T16:23:41.563Z",
   "description": "This is one of Artem’s favorite Mexican recipes and it can be very very very spicy — if you add a lot of chiles. It takes a bit of time to cook but doesn’t take a lot of attention, and you could cook a lot of it at once and then eat it for several days.\n\nIt makes an amazing lunch with beans ([refried](/recipes/frijoles-refritos/) or just boiled) and warmed-up tortillas.",
   "ingredients": [
