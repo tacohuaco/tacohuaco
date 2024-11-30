@@ -8,21 +8,13 @@ import {
 } from '../util/cafe/types';
 import Group from 'react-group';
 
-function parseSeconds(seconds: number) {
-	return {
-		days: Math.trunc(seconds / 86_400),
-		hours: Math.trunc(seconds / 3600) % 24,
-		minutes: Math.trunc(seconds / 60) % 60,
-		seconds: Math.trunc(seconds) % 60,
-	};
-}
-
 type Props = {
 	recipe: CoffeeRecipeType;
 };
 
 const formatDuration = (durationSec: number) => {
-	const { minutes, seconds } = parseSeconds(durationSec);
+	const minutes = Math.trunc(durationSec / 60) % 60;
+	const seconds = Math.trunc(durationSec) % 60;
 	if (minutes) {
 		return `${minutes} minutes`;
 	}
