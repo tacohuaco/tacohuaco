@@ -10,15 +10,12 @@ import Group from 'react-group';
 
 // HACK: Importing this library breaks the build on Netlify
 // https://github.com/sindresorhus/parse-ms
-function parseMilliseconds(milliseconds: number) {
+function parseSeconds(seconds: number) {
 	return {
-		days: Math.trunc(milliseconds / 86_400_000),
-		hours: Math.trunc(milliseconds / 3_600_000) % 24,
-		minutes: Math.trunc(milliseconds / 60_000) % 60,
-		seconds: Math.trunc(milliseconds / 1000) % 60,
-		milliseconds: Math.trunc(milliseconds) % 1000,
-		microseconds: Math.trunc(milliseconds * 1000) % 1000,
-		nanoseconds: Math.trunc(milliseconds * 1e6) % 1000,
+		days: Math.trunc(seconds / 86_400),
+		hours: Math.trunc(seconds / 3600) % 24,
+		minutes: Math.trunc(seconds / 60) % 60,
+		seconds: Math.trunc(seconds) % 60,
 	};
 }
 
@@ -27,7 +24,7 @@ type Props = {
 };
 
 const formatDuration = (durationSec: number) => {
-	const { minutes, seconds } = parseMilliseconds(durationSec * 1000);
+	const { minutes, seconds } = parseSeconds(durationSec);
 	if (minutes) {
 		return `${minutes} minutes`;
 	}
@@ -37,7 +34,7 @@ const formatDuration = (durationSec: number) => {
 	return '';
 };
 
-const getCoffeAmount = (ratio: number, waterAmount: number) =>
+const getCoffeeAmount = (ratio: number, waterAmount: number) =>
 	Math.floor(waterAmount / ratio);
 
 const getWaterAmount = (step: Step, recipe: CoffeeRecipeType) => {
@@ -54,9 +51,11 @@ const getWaterAmount = (step: Step, recipe: CoffeeRecipeType) => {
 	}
 
 	if (typeof step.amount === 'function') {
-		return `${Math.floor(
-			step.amount({ amount: recipe.defaultAmount, ratio: recipe.ratio })
-		)} g`;
+		return `${
+			Math.floor(
+				step.amount({ amount: recipe.defaultAmount, ratio: recipe.ratio }) / 10
+			) * 10
+		} g`;
 	}
 
 	return '';
@@ -99,7 +98,7 @@ export function CoffeeRecipe({ recipe }: Props) {
 				<Text variant="italic">Brew coffee using {recipe.brewer}</Text>
 				<Stack gap="xxs">
 					<Text variant="small">
-						<b>{getCoffeAmount(recipe.ratio, recipe.defaultAmount)} g</b> of
+						<b>{getCoffeeAmount(recipe.ratio, recipe.defaultAmount)} g</b> of
 						coffee for <b>{recipe.defaultAmount} g</b> of water at{' '}
 						{recipe.temperature}&#8202;˚C
 					</Text>
