@@ -30,6 +30,7 @@ interface CustomStep extends GenericStep {
 export type Step = PourStep | ShakeStep | CustomStep;
 
 export interface CoffeeRecipe {
+	slug: string;
 	name: string;
 	brewer: string;
 	ratio: number; // 15 → 1:15

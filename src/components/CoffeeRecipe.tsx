@@ -1,5 +1,4 @@
 import { Stack } from './Stack';
-import { Heading } from './Heading';
 import { Text } from './Text';
 import {
 	type CoffeeRecipe as CoffeeRecipeType,
@@ -83,9 +82,7 @@ const getWaitText = (step: Step) => {
 export function CoffeeRecipe({ recipe }: Props) {
 	return (
 		<Stack key={recipe.name} gap="m">
-			<Stack gap="s">
-				<Heading level={2}>{recipe.name}</Heading>
-				<Text variant="italic">Brew coffee using {recipe.brewer}</Text>
+			<Stack gap="l">
 				<Stack gap="xxs">
 					<Text variant="small">
 						<b>{getCoffeeAmount(recipe.ratio, recipe.defaultAmount)} g</b> of

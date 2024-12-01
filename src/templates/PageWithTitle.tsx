@@ -2,17 +2,15 @@ import type { ReactNode } from 'react';
 import { Box } from '../components/Box';
 import { Stack } from '../components/Stack';
 import { Heading } from '../components/Heading';
-import { Page } from './Page';
+import { Page, type PageProps } from './Page';
 
-type Props = {
-	children: ReactNode;
-	url: string;
+type Props = PageProps & {
 	title: ReactNode;
 };
 
-export function PageWithTitle({ url, title, children }: Props) {
+export function PageWithTitle({ title, children, ...props }: Props) {
 	return (
-		<Page url={url}>
+		<Page {...props}>
 			<Stack gap="xl">
 				<Stack as="main" gap="l">
 					<Heading level={1}>{title}</Heading>

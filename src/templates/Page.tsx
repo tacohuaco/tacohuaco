@@ -4,20 +4,21 @@ import { Stack } from '../components/Stack';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
-type Props = {
+export type PageProps = {
 	children: ReactNode;
+	extraFooter?: ReactNode;
 	url: string;
 };
 
-export function Page({ children, url }: Props) {
+export function Page({ children, extraFooter, url }: PageProps) {
 	return (
-		<Box mx="auto" py="l" px="contentPaddingX" maxWidth="59rem">
-			<Stack gap="xl">
+		<Box mx="auto" px="contentPaddingX" maxWidth="59rem">
+			<Stack gap="xl" minHeight="100vh" py="l">
 				<Stack gap="l">
 					<Header url={url} />
 					{children}
 				</Stack>
-				<Footer />
+				<Footer extraFooter={extraFooter} />
 			</Stack>
 		</Box>
 	);

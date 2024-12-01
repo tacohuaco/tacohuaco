@@ -1,7 +1,15 @@
 import { Action, type CoffeeRecipe } from './types';
 
+// TODO: French press
+// TODO: Turkish coffee
+// TODO: Moka pot
+// TODO: Make them look like cards (full screen kinda?)
+// TODO: Show one at a time and add a menu
+// TODO: Merge both pour over recipes into one and change depending on the volume
+
 export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
+		slug: 'aeropress',
 		name: 'Aeropress',
 		brewer: 'Aeropress',
 		ratio: 18,
@@ -25,8 +33,9 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		],
 	},
 	{
+		slug: 'pour-over-one-cup',
 		name: 'V60/Chemex (one cup)',
-		brewer: 'Chemex',
+		brewer: 'V60, Chemex, or any other pour over brewer',
 		ratio: 16,
 		defaultAmount: 200,
 		grind: 'Medium-coarse grind (18 on Baratza Encore)',
@@ -60,8 +69,9 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		],
 	},
 	{
+		slug: 'pour-over',
 		name: 'V60/Chemex (multiple cups)',
-		brewer: 'Chemex',
+		brewer: 'V60, Chemex, or any other pour over brewer',
 		ratio: 16.5,
 		defaultAmount: 500,
 		grind: 'Medium-coarse grind (18 on Baratza Encore)',

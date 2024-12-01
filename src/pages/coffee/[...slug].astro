@@ -1,0 +1,28 @@
+---
+import { CoffeeRecipePage } from '../../templates/CoffeeRecipePage';
+import { COFFEE_RECIPES } from '../../util/cafe';
+
+import Layout from '../../layouts/Layout.astro';
+import type { CoffeeRecipe } from '../../util/cafe/types';
+
+type Props = CoffeeRecipe;
+
+export function getStaticPaths() {
+	return COFFEE_RECIPES.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+const recipe = Astro.props;
+const url = `/coffee/${recipe.slug}/`;
+---
+
+<Layout
+	url={url}
+	title={`${recipe.name} coffee recipe`}
+	pageTitle={`${recipe.name} coffee recipe by Tacohuaco`}
+	description={`How to brew coffee using ${recipe.brewer}`}
+>
+	<CoffeeRecipePage url={url} {...recipe} />
+</Layout>
