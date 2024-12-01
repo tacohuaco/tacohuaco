@@ -1,5 +1,7 @@
 import { Action, type CoffeeRecipe } from './types';
 
+export const ONE_CUP = 200;
+
 // TODO: French press
 // TODO: Turkish coffee
 // TODO: Moka pot
@@ -13,13 +15,13 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		name: 'Aeropress',
 		brewer: 'Aeropress',
 		ratio: 18,
-		defaultAmount: 200,
-		grind: 'Slightly fine grind (16 on Baratza Encore)',
+		defaultAmount: ONE_CUP,
+		grind: 'slightly fine grind, 16 on Baratza Encore',
 		temperature: 93,
 		steps: [
 			{
 				action: Action.Pour,
-				amount: ({ amount }) => amount,
+				amount: 1,
 				time: 120,
 			},
 			{
@@ -33,17 +35,20 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		],
 	},
 	{
-		slug: 'pour-over-one-cup',
-		name: 'V60/Chemex (one cup)',
-		brewer: 'V60, Chemex, or any other pour over brewer',
-		ratio: 16,
-		defaultAmount: 200,
-		grind: 'Medium-coarse grind (18 on Baratza Encore)',
+		slug: 'pour-over',
+		name: 'Pour-over',
+		brewer: 'V60, Chemex, Kalita, or any other pour over brewer',
+		ratio: 16.5,
+		defaultAmount: ONE_CUP,
+		grind: 'medium-coarse grind, 18 on Baratza Encore',
 		temperature: 93,
 		steps: [
 			{
+				action: Action.Rinse,
+			},
+			{
 				action: Action.Pour,
-				amount: 50,
+				amount: 0.15,
 			},
 			{
 				action: Action.Shake,
@@ -51,12 +56,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 			},
 			{
 				action: Action.Pour,
-				amount: 50,
-				time: 10,
-			},
-			{
-				action: Action.Pour,
-				amount: 50,
+				amount: 0.5,
 				time: 10,
 			},
 			{
@@ -67,19 +67,13 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 				action: Action.Shake,
 			},
 		],
-	},
-	{
-		slug: 'pour-over',
-		name: 'V60/Chemex (multiple cups)',
-		brewer: 'V60, Chemex, or any other pour over brewer',
-		ratio: 16.5,
-		defaultAmount: 500,
-		grind: 'Medium-coarse grind (18 on Baratza Encore)',
-		temperature: 93,
-		steps: [
+		stepsOneCup: [
+			{
+				action: Action.Rinse,
+			},
 			{
 				action: Action.Pour,
-				amount: ({ amount }) => amount * 0.15,
+				amount: 0.25,
 			},
 			{
 				action: Action.Shake,
@@ -87,12 +81,17 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 			},
 			{
 				action: Action.Pour,
-				amount: ({ amount }) => amount * 0.5,
+				amount: 0.25,
 				time: 10,
 			},
 			{
 				action: Action.Pour,
-				amount: null,
+				amount: 0.25,
+				time: 10,
+			},
+			{
+				action: Action.Pour,
+				amount: 0.25,
 			},
 			{
 				action: Action.Shake,

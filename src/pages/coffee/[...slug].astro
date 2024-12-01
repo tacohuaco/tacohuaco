@@ -1,11 +1,11 @@
 ---
 import { CoffeeRecipePage } from '../../templates/CoffeeRecipePage';
 import { COFFEE_RECIPES } from '../../util/cafe';
-
 import Layout from '../../layouts/Layout.astro';
-import type { CoffeeRecipe } from '../../util/cafe/types';
+import type { CoffeeRecipe as CoffeeRecipeType } from '../../util/cafe/types';
+import { CoffeeRecipe } from '../../components/CoffeeRecipe';
 
-type Props = CoffeeRecipe;
+type Props = CoffeeRecipeType;
 
 export function getStaticPaths() {
 	return COFFEE_RECIPES.map((post) => ({
@@ -24,5 +24,7 @@ const url = `/coffee/${recipe.slug}/`;
 	pageTitle={`${recipe.name} coffee recipe by Tacohuaco`}
 	description={`How to brew coffee using ${recipe.brewer}`}
 >
-	<CoffeeRecipePage url={url} {...recipe} />
+	<CoffeeRecipePage url={url} {...recipe}>
+		<CoffeeRecipe recipe={recipe} client:visible />
+	</CoffeeRecipePage>
 </Layout>

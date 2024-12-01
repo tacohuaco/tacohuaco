@@ -1,11 +1,16 @@
 import { Stack } from './Stack';
-import { Text } from './Text';
+import { OrderedList, OrderedListItem } from './OrderedList';
 import {
 	type CoffeeRecipe as CoffeeRecipeType,
 	type Step,
 	Action,
 } from '../util/cafe/types';
 import Group from 'react-group';
+import { useCoffeeScale } from '../hooks/useCoffeeScale';
+import { RecipeScale } from './RecipeScale';
+import { ONE_CUP } from '../util/cafe';
+import { TextTypo } from './TextTypo';
+import { CoffeeRecipeMeta } from './CoffeeRecipeMeta';
 
 type Props = {
 	recipe: CoffeeRecipeType;
@@ -26,7 +31,7 @@ const formatDuration = (durationSec: number) => {
 const getCoffeeAmount = (ratio: number, waterAmount: number) =>
 	Math.floor(waterAmount / ratio);
 
-const getWaterAmount = (step: Step, recipe: CoffeeRecipeType) => {
+const getWaterAmount = (step: Step, currentAmount: number) => {
 	if (step.action !== Action.Pour) {
 		return '';
 	}
@@ -35,27 +40,22 @@ const getWaterAmount = (step: Step, recipe: CoffeeRecipeType) => {
 		return 'the rest';
 	}
 
-	if (typeof step.amount === 'number') {
-		return `${step.amount} g`;
-	}
-
-	if (typeof step.amount === 'function') {
-		return `${
-			Math.floor(
-				step.amount({ amount: recipe.defaultAmount, ratio: recipe.ratio }) / 10
-			) * 10
-		} g`;
-	}
-
-	return '';
+	return `${Math.floor((currentAmount * step.amount) / 10) * 10} g`;
 };
 
-const getStepText = (step: Step, recipe: CoffeeRecipeType) => {
+const getStepText = (
+	step: Step,
+	recipe: CoffeeRecipeType,
+	currentAmount: number
+) => {
 	switch (step.action) {
+		case Action.Rinse: {
+			return <>Rinse the filter, and discard the dirty water.</>;
+		}
 		case Action.Pour: {
 			return (
 				<>
-					Pour <b>{getWaterAmount(step, recipe)}</b> of the water.
+					Pour <b>{getWaterAmount(step, currentAmount)}</b> of the water.
 				</>
 			);
 		}
@@ -80,29 +80,61 @@ const getWaitText = (step: Step) => {
 };
 
 export function CoffeeRecipe({ recipe }: Props) {
+	const { isScalingEnabled, currentAmount, handleLess, handleMore } =
+		useCoffeeScale(recipe);
+
+	// Special case for one cup if the recipe has it
+	const steps =
+		recipe.stepsOneCup && currentAmount <= ONE_CUP
+			? recipe.stepsOneCup
+			: recipe.steps;
+
 	return (
 		<Stack key={recipe.name} gap="m">
 			<Stack gap="l">
-				<Stack gap="xxs">
-					<Text variant="small">
-						<b>{getCoffeeAmount(recipe.ratio, recipe.defaultAmount)} g</b> of
-						coffee for <b>{recipe.defaultAmount} g</b> of water at{' '}
-						{recipe.temperature}&#8202;˚C
-					</Text>
-					<Text variant="small">{recipe.grind}</Text>
-				</Stack>
-				<Stack gap="m" as="ol">
-					{recipe.steps.map((step, index) => (
-						<Stack key={index} gap="s">
-							<Text as="li">
+				<CoffeeRecipeMeta
+					coffeeAmount={getCoffeeAmount(recipe.ratio, currentAmount)}
+					waterAmount={currentAmount}
+				>
+					{isScalingEnabled && (
+						<RecipeScale onLess={handleLess} onMore={handleMore} />
+					)}
+				</CoffeeRecipeMeta>
+				<OrderedList maxWidth="35rem">
+					<OrderedListItem>
+						<Stack gap="xs">
+							<TextTypo>
+								Boil water to{' '}
+								<TextTypo as="b">{`${recipe.temperature}C`}</TextTypo>.
+							</TextTypo>
+							{recipe.temperature < 100 && (
+								<TextTypo>
+									(If your kettle doesn’t have a temperature setting, let the
+									water cool down for 30 seconds before brewing coffee.)
+								</TextTypo>
+							)}
+						</Stack>
+					</OrderedListItem>
+					<OrderedListItem>
+						<TextTypo>
+							Grind <b>{getCoffeeAmount(recipe.ratio, currentAmount)} g</b> of
+							coffee ({recipe.grind}).
+						</TextTypo>
+					</OrderedListItem>
+					{steps.map((step, index) => (
+						<OrderedListItem key={index} pause={(step.time ?? 0) > 30}>
+							<TextTypo>
 								<Group>
-									{getStepText(step, recipe)}
+									{getStepText(step, recipe, currentAmount)}
 									{getWaitText(step)}
 								</Group>
-							</Text>
-						</Stack>
+							</TextTypo>
+						</OrderedListItem>
 					))}
-				</Stack>
+					<OrderedListItem>
+						<TextTypo>Enjoy your coffee! ☕️</TextTypo>
+					</OrderedListItem>
+				</OrderedList>
 			</Stack>
 		</Stack>
 	);

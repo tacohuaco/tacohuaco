@@ -52,7 +52,6 @@ export const typoLite = (text: MaybeText) =>
 			dashesBasic,
 			ellipses,
 			numberUnits,
-			degreeSigns,
 			// English rules
 			quotes,
 			// Custom rules

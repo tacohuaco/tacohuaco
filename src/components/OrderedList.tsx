@@ -58,7 +58,7 @@ export function OrderedList(props: Omit<StackProps<'ol'>, 'as' | 'ml'>) {
 export function OrderedListItem({
 	pause,
 	...props
-}: BoxProps<'li'> & { pause: boolean }) {
+}: BoxProps<'li'> & { pause?: boolean }) {
 	return (
 		<Box
 			as="li"

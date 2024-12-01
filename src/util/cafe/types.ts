@@ -1,21 +1,23 @@
-type Amount =
-	| number
-	| null
-	| ((props: { amount: number; ratio: number }) => number);
+type Amount = number | null;
 
 export enum Action {
-	Pour,
-	Shake,
-	Custom,
+	Rinse = 'Rinse',
+	Pour = 'Pour',
+	Shake = 'Shake',
+	Custom = 'Custom',
 }
 
 interface GenericStep {
 	time?: number;
 }
 
+interface RinseStep extends GenericStep {
+	action: Action.Rinse;
+}
+
 interface PourStep extends GenericStep {
 	action: Action.Pour;
-	amount: Amount;
+	amount: Amount; // 0.25 → amount / 4
 }
 
 interface ShakeStep extends GenericStep {
@@ -27,7 +29,7 @@ interface CustomStep extends GenericStep {
 	message: string;
 }
 
-export type Step = PourStep | ShakeStep | CustomStep;
+export type Step = RinseStep | PourStep | ShakeStep | CustomStep;
 
 export interface CoffeeRecipe {
 	slug: string;
@@ -38,4 +40,5 @@ export interface CoffeeRecipe {
 	grind: string;
 	temperature: number;
 	steps: Step[];
+	stepsOneCup?: Step[];
 }
