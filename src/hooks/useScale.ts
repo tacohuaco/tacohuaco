@@ -25,8 +25,8 @@ function getNextAmount(amount: number) {
 	return amount + 100;
 }
 
-function getRatio(amount: number, nextAmout: number) {
-	return nextAmout / amount;
+function getRatio(amount: number, nextAmount: number) {
+	return nextAmount / amount;
 }
 
 function scaleIngredients(
@@ -48,7 +48,7 @@ export function useScale({ ingredients, yields }: Recipe) {
 
 	const baseAmount = yields.amount;
 
-	const [currentAmount, setCurrentAmout] = useState(baseAmount);
+	const [currentAmount, setCurrentAmount] = useState(baseAmount);
 
 	const scaledIngredients = useMemo(
 		() => scaleIngredients(ingredients, baseAmount, currentAmount),
@@ -56,11 +56,11 @@ export function useScale({ ingredients, yields }: Recipe) {
 	);
 
 	const handleLess = useMemo(
-		() => () => setCurrentAmout((x) => getPrevAmount(x)),
+		() => () => setCurrentAmount((x) => getPrevAmount(x)),
 		[]
 	);
 	const handleMore = useMemo(
-		() => () => setCurrentAmout((x) => getNextAmount(x)),
+		() => () => setCurrentAmount((x) => getNextAmount(x)),
 		[]
 	);
 
