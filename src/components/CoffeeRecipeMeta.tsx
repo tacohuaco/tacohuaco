@@ -18,35 +18,36 @@ export function CoffeeRecipeMeta({
 		<Stack gap="m" direction="row" alignItems="center">
 			<Stack as="span" direction="row" gap="s" alignItems="baseline">
 				<Stack as="span" alignItems="center">
-					<Text
+					<Box
 						css={{
+							fontFamily: 'body',
 							fontSize: '2rem',
 							fontVariant: 'tabular-nums',
 						}}
 					>
 						{coffeeAmount}&thinsp;g
-					</Text>
+					</Box>
 					<Text variant="small" mt="-xs">
 						coffee
 					</Text>
 				</Stack>
 				<Box
 					css={{
-						// marginTop: '0.5rem',
 						height: '1.5rem',
 						width: '2px',
 						backgroundColor: 'dim',
 					}}
 				/>
 				<Stack as="span" alignItems="center">
-					<Text
+					<Box
 						css={{
+							fontFamily: 'body',
 							fontSize: '2rem',
 							fontVariant: 'tabular-nums',
 						}}
 					>
 						{waterAmount}&thinsp;g
-					</Text>
+					</Box>
 					<Text variant="small" mt="-xs">
 						water
 					</Text>
