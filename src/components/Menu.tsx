@@ -18,6 +18,10 @@ const ITEMS: Item[] = [
 		href: '/recipes/',
 	},
 	{
+		title: 'Coffee',
+		href: '/coffee/',
+	},
+	{
 		title: 'Search',
 		href: '/search/',
 	},

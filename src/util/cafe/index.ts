@@ -55,8 +55,35 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		],
 	},
 	{
+		slug: 'moka-pot',
+		name: 'Moka pot',
+		brewer: 'Moka pot',
+		ratio: 8,
+		defaultAmount: 140,
+		grind: 'very fine grind',
+		temperature: 100,
+		steps: [
+			{
+				action: Action.Custom,
+				message: 'Pour all water into the Moka pot',
+			},
+			{
+				action: Action.Custom,
+				message: 'Place the Moka pot on the stove on low heat',
+			},
+			{
+				action: Action.Custom,
+				message: 'Heat until the coffee starts to come out, lower the heat',
+			},
+			{
+				action: Action.Custom,
+				message: 'Heat until all the coffee is out, remove from the heat',
+			},
+		],
+	},
+	{
 		slug: 'pour-over',
-		name: 'Pour-over',
+		name: 'Pour-over (V60, Chemex, Kalita, etc.)',
 		brewer: 'V60, Chemex, Kalita, or any other pour over brewer',
 		ratio: 16.5,
 		defaultAmount: ONE_CUP,
@@ -115,6 +142,30 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 			},
 			{
 				action: Action.Shake,
+			},
+		],
+	},
+	{
+		slug: 'turkish',
+		name: 'Turkish (cezve)',
+		brewer: 'cezve',
+		ratio: 10,
+		defaultAmount: 100,
+		grind: 'very fine grind',
+		temperature: 93,
+		steps: [
+			{
+				action: Action.Pour,
+				amount: 1,
+			},
+			{
+				action: Action.Custom,
+				message:
+					'Heat on medium-low heat until starts to rise, then immediately remove from the heat.',
+			},
+			{
+				action: Action.Custom,
+				message: 'Carefully pour into cup, and let it sit for a bit',
 			},
 		],
 	},
