@@ -55,7 +55,7 @@ const getStepText = (
 		case Action.Pour: {
 			return (
 				<>
-					Pour <b>{getWaterAmount(step, currentAmount)}</b> of the water.
+					Pour <b>{getWaterAmount(step, currentAmount)}</b> of water.
 				</>
 			);
 		}

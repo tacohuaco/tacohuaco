@@ -22,11 +22,31 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 			{
 				action: Action.Pour,
 				amount: 1,
-				time: 120,
+				time: 60 * 2,
 			},
 			{
 				action: Action.Shake,
 				time: 30,
+			},
+			{
+				action: Action.Custom,
+				message: 'Slowly press the plunger.',
+			},
+		],
+	},
+	{
+		slug: 'french-press',
+		name: 'French press',
+		brewer: 'French press',
+		ratio: 16.5,
+		defaultAmount: ONE_CUP,
+		grind: 'coarse grind',
+		temperature: 93,
+		steps: [
+			{
+				action: Action.Pour,
+				amount: 1,
+				time: 60 * 4,
 			},
 			{
 				action: Action.Custom,
