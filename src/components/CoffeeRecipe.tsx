@@ -104,7 +104,7 @@ export function CoffeeRecipe({ recipe }: Props) {
 					<OrderedListItem>
 						<Stack gap="xs">
 							<TextTypo>
-								Boil water to{' '}
+								Heat water to{' '}
 								<TextTypo as="b">{`${recipe.temperature}C`}</TextTypo>.
 							</TextTypo>
 							{recipe.temperature < 100 && (
