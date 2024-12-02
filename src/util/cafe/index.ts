@@ -2,18 +2,11 @@ import { Action, type CoffeeRecipe } from './types';
 
 export const ONE_CUP = 200;
 
-// TODO: French press
-// TODO: Turkish coffee
-// TODO: Moka pot
-// TODO: Make them look like cards (full screen kinda?)
-// TODO: Show one at a time and add a menu
-// TODO: Merge both pour over recipes into one and change depending on the volume
-
 export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
 		slug: 'aeropress',
 		name: 'Aeropress',
-		brewer: 'Aeropress',
+		brewer: 'an Aeropress',
 		ratio: 18,
 		defaultAmount: ONE_CUP,
 		grind: 'slightly fine grind, 16 on Baratza Encore',
@@ -35,9 +28,21 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		],
 	},
 	{
+		slug: 'cafe-de-olla',
+		name: 'Café de olla',
+		brewer: 'a clay pot',
+		ratio: 22.7,
+		defaultAmount: 500,
+		grind: '',
+		temperature: 100,
+		steps: [],
+		description:
+			'Check out our family [Café de olla recipe](/recipes/cafe-de-olla/).',
+	},
+	{
 		slug: 'french-press',
 		name: 'French press',
-		brewer: 'French press',
+		brewer: 'a French press',
 		ratio: 16.5,
 		defaultAmount: ONE_CUP,
 		grind: 'coarse grind',
@@ -57,7 +62,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
 		slug: 'moka-pot',
 		name: 'Moka pot',
-		brewer: 'Moka pot',
+		brewer: 'a Moka pot',
 		ratio: 8,
 		defaultAmount: 140,
 		grind: 'very fine grind',
@@ -84,7 +89,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
 		slug: 'pour-over',
 		name: 'Pour-over (V60, Chemex, Kalita, etc.)',
-		brewer: 'V60, Chemex, Kalita, or any other pour over brewer',
+		brewer: 'a V60, Chemex, Kalita, or any other pour over brewer',
 		ratio: 16.5,
 		defaultAmount: ONE_CUP,
 		grind: 'medium-coarse grind, 18 on Baratza Encore',
@@ -148,7 +153,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
 		slug: 'turkish',
 		name: 'Turkish (cezve)',
-		brewer: 'cezve',
+		brewer: 'a cezve',
 		ratio: 10,
 		defaultAmount: 100,
 		grind: 'very fine grind',

@@ -89,6 +89,10 @@ export function CoffeeRecipe({ recipe }: Props) {
 			? recipe.stepsOneCup
 			: recipe.steps;
 
+	if (steps.length === 0) {
+		return null;
+	}
+
 	return (
 		<Stack key={recipe.name} gap="m">
 			<Stack gap="l">

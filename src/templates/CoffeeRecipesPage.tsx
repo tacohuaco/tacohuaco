@@ -18,11 +18,15 @@ export function CoffeeRecipesPage({ url, title, coffeeRecipes }: Props) {
 			extraFooter={
 				<>
 					Icons by{' '}
-					<Link href="https://thenounproject.com/creator/yusufmahfudin732">
+					<Link href="https://thenounproject.com/creator/yusufmahfudin732/">
 						Mahfudin yusuf
+					</Link>
+					,{' '}
+					<Link href="https://thenounproject.com/creator/gulalicon/">
+						Gulalicon
 					</Link>{' '}
 					and{' '}
-					<Link href="https://thenounproject.com/creator/seren.crea">
+					<Link href="https://thenounproject.com/creator/seren.crea/">
 						Serena
 					</Link>
 					.

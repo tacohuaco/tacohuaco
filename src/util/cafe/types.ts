@@ -35,6 +35,7 @@ export interface CoffeeRecipe {
 	slug: string;
 	name: string;
 	brewer: string;
+	description?: string;
 	ratio: number; // 15 → 1:15
 	defaultAmount: number;
 	grind: string;

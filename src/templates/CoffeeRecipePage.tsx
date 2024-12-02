@@ -2,20 +2,30 @@ import { PageWithTitle } from './PageWithTitle';
 import { type CoffeeRecipe as CoffeeRecipeType } from '../util/cafe/types';
 import { Stack } from '../components/Stack';
 import type { ReactNode } from 'react';
-import { TextTypo } from '../components/TextTypo';
+import { Markdown } from '../components/Markdown';
+import { TextContent } from '../components/TextContent';
+import Group from 'react-group';
 
 type Props = CoffeeRecipeType & {
 	url: string;
 	children: ReactNode;
 };
 
-export function CoffeeRecipePage({ url, children, ...recipe }: Props) {
+export function CoffeeRecipePage({
+	url,
+	description,
+	children,
+	...recipe
+}: Props) {
 	return (
 		<PageWithTitle url={url} title={`${recipe.name} coffee recipe`}>
 			<Stack gap="l">
-				<TextTypo variant="intro">
-					Brew awesome coffee using {recipe.brewer}.
-				</TextTypo>
+				<TextContent variant="intro">
+					<Group>
+						<>Brew awesome coffee in {recipe.brewer}.</>
+						{description && <Markdown text={description} />}
+					</Group>
+				</TextContent>
 				{children}
 			</Stack>
 		</PageWithTitle>
