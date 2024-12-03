@@ -1,5 +1,5 @@
+import { Box } from './Box';
 import { MenuLink } from './MenuLink';
-import { Stack } from './Stack';
 
 type Props = {
 	current: string;
@@ -33,7 +33,14 @@ const ITEMS: Item[] = [
 
 export function Menu({ current }: Props) {
 	return (
-		<Stack as="ul" gap="m" direction={{ base: 'column', tablet: 'row' }}>
+		<Box
+			as="ul"
+			textAlign="center"
+			rowGap="m"
+			columnGap={{ base: 0, tablet: 'm' }}
+			display={{ base: 'grid', tablet: 'flex' }}
+			gridTemplateColumns="repeat(auto-fit, minmax(8rem, 1fr))"
+		>
 			{ITEMS.map(({ title, href }) => (
 				<li key={href}>
 					<MenuLink href={href} isCurrent={current.startsWith(href)}>
@@ -41,6 +48,6 @@ export function Menu({ current }: Props) {
 					</MenuLink>
 				</li>
 			))}
-		</Stack>
+		</Box>
 	);
 }
