@@ -1,6 +1,8 @@
 import { Action, type CoffeeRecipe } from './types';
 
-export const ONE_CUP = 200;
+export const ONE_CUP_GRAMS = 200;
+export const GRAMS_IN_TABLESPOON_COFFEE_BEANS = 4.5;
+export const GRAMS_IN_TABLESPOON_GROUND_COFFEE = 2;
 
 export const COFFEE_RECIPES: CoffeeRecipe[] = [
 	{
@@ -8,13 +10,13 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		name: 'Aeropress',
 		brewer: 'an Aeropress',
 		ratio: 18,
-		defaultAmount: ONE_CUP,
+		defaultAmount: ONE_CUP_GRAMS,
 		grind: 'slightly fine grind, 16 on Baratza Encore',
 		temperature: 93,
 		steps: [
 			{
-				action: Action.Pour,
-				amount: 1,
+				action: Action.Custom,
+				message: 'Add all the water to the Aeropress.',
 				time: 60 * 2,
 			},
 			{
@@ -44,13 +46,13 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		name: 'French press',
 		brewer: 'a French press',
 		ratio: 16.5,
-		defaultAmount: ONE_CUP,
+		defaultAmount: ONE_CUP_GRAMS,
 		grind: 'coarse grind',
 		temperature: 93,
 		steps: [
 			{
-				action: Action.Pour,
-				amount: 1,
+				action: Action.Custom,
+				message: 'Add all the water to a French press.',
 				time: 60 * 4,
 			},
 			{
@@ -91,7 +93,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		name: 'Pour-over (V60, Chemex, Kalita, etc.)',
 		brewer: 'a V60, Chemex, Kalita, or any other pour over brewer',
 		ratio: 16.5,
-		defaultAmount: ONE_CUP,
+		defaultAmount: ONE_CUP_GRAMS,
 		grind: 'medium-coarse grind, 18 on Baratza Encore',
 		temperature: 93,
 		steps: [
@@ -160,8 +162,8 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		temperature: 93,
 		steps: [
 			{
-				action: Action.Pour,
-				amount: 1,
+				action: Action.Custom,
+				message: 'Add all the water to a cezve.',
 			},
 			{
 				action: Action.Custom,

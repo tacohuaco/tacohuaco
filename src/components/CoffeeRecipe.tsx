@@ -8,13 +8,21 @@ import {
 import Group from 'react-group';
 import { useCoffeeScale } from '../hooks/useCoffeeScale';
 import { RecipeScale } from './RecipeScale';
-import { ONE_CUP } from '../util/cafe';
+import {
+	GRAMS_IN_TABLESPOON_COFFEE_BEANS,
+	GRAMS_IN_TABLESPOON_GROUND_COFFEE,
+	ONE_CUP_GRAMS,
+} from '../util/cafe';
 import { TextTypo } from './TextTypo';
 import { CoffeeRecipeMeta } from './CoffeeRecipeMeta';
 
 type Props = {
 	recipe: CoffeeRecipeType;
 };
+
+const roundToTen = (value: number) => Math.floor(value / 10) * 10;
+
+const roundToHalf = (value: number) => Math.round(value * 2) / 2;
 
 const formatDuration = (durationSec: number) => {
 	const minutes = Math.trunc(durationSec / 60) % 60;
@@ -28,8 +36,14 @@ const formatDuration = (durationSec: number) => {
 	return '';
 };
 
-const getCoffeeAmount = (ratio: number, waterAmount: number) =>
+const getCoffeeAmountInGrams = (ratio: number, waterAmount: number) =>
 	Math.floor(waterAmount / ratio);
+
+const getCoffeeBeansAmountInTablespoons = (coffeeInGrams: number) =>
+	roundToHalf(coffeeInGrams / GRAMS_IN_TABLESPOON_COFFEE_BEANS);
+
+const getGroundCoffeeAmountInTablespoons = (coffeeInGrams: number) =>
+	roundToHalf(coffeeInGrams / GRAMS_IN_TABLESPOON_GROUND_COFFEE);
 
 const getWaterAmount = (step: Step, currentAmount: number) => {
 	if (step.action !== Action.Pour) {
@@ -40,7 +54,7 @@ const getWaterAmount = (step: Step, currentAmount: number) => {
 		return 'the rest';
 	}
 
-	return `${Math.floor((currentAmount * step.amount) / 10) * 10} g`;
+	return `${roundToTen(currentAmount * step.amount)} g`;
 };
 
 const getStepText = (
@@ -85,7 +99,7 @@ export function CoffeeRecipe({ recipe }: Props) {
 
 	// Special case for one cup if the recipe has it
 	const steps =
-		recipe.stepsOneCup && currentAmount <= ONE_CUP
+		recipe.stepsOneCup && currentAmount <= ONE_CUP_GRAMS
 			? recipe.stepsOneCup
 			: recipe.steps;
 
@@ -93,11 +107,13 @@ export function CoffeeRecipe({ recipe }: Props) {
 		return null;
 	}
 
+	const coffeeInGrams = getCoffeeAmountInGrams(recipe.ratio, currentAmount);
+
 	return (
 		<Stack key={recipe.name} gap="m">
 			<Stack gap="l">
 				<CoffeeRecipeMeta
-					coffeeAmount={getCoffeeAmount(recipe.ratio, currentAmount)}
+					coffeeAmount={getCoffeeAmountInGrams(recipe.ratio, currentAmount)}
 					waterAmount={currentAmount}
 				>
 					{isScalingEnabled && (
@@ -127,8 +143,13 @@ export function CoffeeRecipe({ recipe }: Props) {
 					</OrderedListItem>
 					<OrderedListItem>
 						<TextTypo>
-							Grind <b>{getCoffeeAmount(recipe.ratio, currentAmount)} g</b> of
-							coffee ({recipe.grind}).
+							Grind <b>{coffeeInGrams} g</b> of coffee ({recipe.grind}).
+						</TextTypo>
+						<TextTypo>
+							(It’s roughly {getCoffeeBeansAmountInTablespoons(coffeeInGrams)}{' '}
+							tablespoons of coffee beans or{' '}
+							{getGroundCoffeeAmountInTablespoons(coffeeInGrams)} tablespoons of
+							ground coffee.)
 						</TextTypo>
 					</OrderedListItem>
 					{steps.map((step, index) => (
