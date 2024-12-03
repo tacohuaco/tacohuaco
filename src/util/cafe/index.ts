@@ -67,24 +67,37 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 		brewer: 'a Moka pot',
 		ratio: 8,
 		defaultAmount: 140,
-		grind: 'very fine grind',
+		grind: 'fine grind',
 		temperature: 100,
 		steps: [
 			{
 				action: Action.Custom,
-				message: 'Pour all water into the Moka pot',
+				message: 'Put the coffee into the basket.',
 			},
 			{
 				action: Action.Custom,
-				message: 'Place the Moka pot on the stove on low heat',
+				message:
+					'Fill the Moka pot’s base with hot water around halfway up to the pressure release valve.',
 			},
 			{
 				action: Action.Custom,
-				message: 'Heat until the coffee starts to come out, lower the heat',
+				message: 'Put the basket inside the base.',
 			},
 			{
 				action: Action.Custom,
-				message: 'Heat until all the coffee is out, remove from the heat',
+				message: 'Tightly screw the top onto the base.',
+			},
+			{
+				action: Action.Custom,
+				message: 'Place the Moka pot on the stove on low heat.',
+			},
+			{
+				action: Action.Custom,
+				message: 'Heat until the coffee starts to come out, turn off the heat.',
+			},
+			{
+				action: Action.Custom,
+				message: 'Heat until all the coffee is out, remove from the heat.',
 			},
 		],
 	},
@@ -172,7 +185,7 @@ export const COFFEE_RECIPES: CoffeeRecipe[] = [
 			},
 			{
 				action: Action.Custom,
-				message: 'Carefully pour into cup, and let it sit for a bit',
+				message: 'Carefully pour into cup, and let it sit for a bit.',
 			},
 		],
 	},
