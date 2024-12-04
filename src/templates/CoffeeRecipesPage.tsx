@@ -3,6 +3,7 @@ import { CoffeeRecipeCard } from '../components/CoffeeRecipeCard';
 import { PageWithTitle } from './PageWithTitle';
 import { type CoffeeRecipe as CoffeeRecipeType } from '../util/cafe/types';
 import { Link } from '../components/Link';
+import { TextTypo } from '../components/TextTypo';
 
 type Props = {
 	url: string;
@@ -17,7 +18,7 @@ export function CoffeeRecipesPage({ url, title, coffeeRecipes }: Props) {
 			title={title}
 			extraFooter={
 				<>
-					Icons by{' '}
+					Coffee icons by{' '}
 					<Link href="https://thenounproject.com/creator/yusufmahfudin732/">
 						Mahfudin yusuf
 					</Link>
@@ -34,6 +35,9 @@ export function CoffeeRecipesPage({ url, title, coffeeRecipes }: Props) {
 			}
 		>
 			<Stack gap="l">
+				<TextTypo variant="intro">
+					How we make coffee at home and while traveling.
+				</TextTypo>
 				{coffeeRecipes.map((recipe) => (
 					<CoffeeRecipeCard key={recipe.name} recipe={recipe} />
 				))}
