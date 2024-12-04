@@ -41,6 +41,7 @@ const menuLink = cva({
 				},
 			},
 			current: {
+				marginBlock: 0,
 				border: 'input',
 				boxShadow: 'menu',
 				fontWeight: 'bold',

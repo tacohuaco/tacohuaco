@@ -42,11 +42,11 @@ export function Menu({ current }: Props) {
 			gridTemplateColumns="repeat(auto-fit, minmax(8rem, 1fr))"
 		>
 			{ITEMS.map(({ title, href }) => (
-				<li key={href}>
+				<Box as="li" key={href} width={{ tablet: '6rem' }}>
 					<MenuLink href={href} isCurrent={current.startsWith(href)}>
 						{title}
 					</MenuLink>
-				</li>
+				</Box>
 			))}
 		</Box>
 	);
