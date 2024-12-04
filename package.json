@@ -31,11 +31,11 @@
   ],
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/react": "^3.6.2",
+    "@astrojs/react": "^4.0.0",
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
     "@pandacss/dev": "^0.47.1",
-    "astro": "^4.16.10",
+    "astro": "^5.0.2",
     "downshift": "^9.0.8",
     "format-quantity": "^3.0.0",
     "lunr": "^2.3.9",
