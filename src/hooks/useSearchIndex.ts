@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import lunr from 'lunr';
 import deburr from 'lodash/deburr';
-import { sentenceCase } from 'sentence-case';
 import { Month } from '../util/olivier';
 import { ALL_INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 import { getAllIngredients } from '../util/getAllIngredients';
 import type { RecipeFragment } from '../types/Recipe';
+import { formatTagName } from '../util/formatTagName';
 
 export const MONTH_TO_NAME: Record<string, string> = {
 	[Month.January]: 'January',
@@ -89,7 +89,7 @@ export function useSearchIndex(recipes: readonly RecipeFragment[]) {
 					// to words and then split into an array so Lunr indexes
 					// them as separate words
 					tags: [
-						...tags.map((x) => sentenceCase(x).split(' ')),
+						...tags.map((x) => formatTagName(x).split(' ')),
 						vegan ? FLAG_VEGAN : [],
 						vegetarian ? FLAG_VEGETARIAN : [],
 					].flat(),

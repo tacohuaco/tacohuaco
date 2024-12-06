@@ -1,6 +1,5 @@
 import { useMemo, useCallback } from 'react';
 import uniq from 'lodash/uniq';
-import { sentenceCase } from 'sentence-case';
 import { useSearchResults } from '../hooks/useSearchResults';
 import {
 	MONTH_TO_NAME,
@@ -17,6 +16,7 @@ import { INGREDIENTS } from '../util/olivier/langs/en/ingredients';
 import { useUrlState } from './useUrlState';
 import type { RecipeFragment } from '../types/Recipe';
 import { getAllIngredients } from '../util/getAllIngredients';
+import { formatTagName } from '../util/formatTagName';
 
 const DEFAULT_AUTOCOMPLETE_ITEMS = [
 	...Object.values(MONTH_TO_NAME),
@@ -62,7 +62,7 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 
 		allIngredients.push(...ingredientNames);
 
-		const tagNames = recipe.tags.map((x) => sentenceCase(x).toLowerCase());
+		const tagNames = recipe.tags.map((x) => formatTagName(x).toLowerCase());
 		allTags.push(...tagNames);
 
 		allCuisines.push(...recipe.cuisines);

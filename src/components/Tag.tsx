@@ -2,8 +2,6 @@ import type { ComponentProps } from 'react';
 import { Box } from './Box';
 import { Link } from './Link';
 
-// TODO: New year → New Year
-
 export function Tag(props: ComponentProps<typeof Link>) {
 	return (
 		<Box

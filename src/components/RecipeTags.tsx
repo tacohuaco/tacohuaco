@@ -1,8 +1,8 @@
 import { type ReactNode } from 'react';
-import { sentenceCase } from 'sentence-case';
-import { paramCase } from 'param-case';
+import { kebabCase } from 'change-case';
 import { Stack } from './Stack';
 import { Tag } from './Tag';
+import { formatTagName } from '../util/formatTagName';
 
 type Props = {
 	tags?: readonly string[];
@@ -14,8 +14,8 @@ export function RecipeTags({ tags = [], children }: Props) {
 		<Stack gap="s" direction="row" flexWrap="wrap">
 			{children}
 			{tags.map((tag) => (
-				<Tag key={tag} href={`/tags/${paramCase(tag)}/`}>
-					{sentenceCase(tag)}
+				<Tag key={tag} href={`/tags/${kebabCase(tag)}/`}>
+					{formatTagName(tag)}
 				</Tag>
 			))}
 		</Stack>

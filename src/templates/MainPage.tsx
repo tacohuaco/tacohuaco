@@ -6,6 +6,10 @@ import type { Recipe } from '../types/Recipe';
 import { Page } from './Page';
 import { IngredientsSeasonChart } from '../components/IngredientsSeasonChart';
 import { Heading } from '../components/Heading';
+import { CuisinesLinks } from '../components/CuisinesLinks';
+import { TagsLinks } from '../components/TagsLinks';
+
+// TODO: Fix focus outline on QuotedLink
 
 type Props = {
 	url: string;
@@ -15,6 +19,9 @@ type Props = {
 	favoriteRecipes: Recipe[];
 	ingredientsInSeason: string[];
 	ingredientsNextSeason: string[];
+	cuisines: [string, number][];
+	meals: [string, number][];
+	tags: [string, number][];
 };
 
 export function MainPage({
@@ -25,6 +32,9 @@ export function MainPage({
 	favoriteRecipes,
 	ingredientsInSeason,
 	ingredientsNextSeason,
+	cuisines,
+	meals,
+	tags,
 }: Props) {
 	return (
 		<Page url={url}>
@@ -55,12 +65,30 @@ export function MainPage({
 						recipes={favoriteRecipes}
 					/>
 				)}
-				<Stack as="section" gap="l">
-					<Stack as="section" gap="s">
+				<Stack as="section" gap="xl" direction="row">
+					<Stack as="section" gap="m">
 						<Heading as="h2" level={1}>
-							Seasonal ingredients
+							Cuisines
 						</Heading>
+						<CuisinesLinks cuisines={cuisines} />
 					</Stack>
+					<Stack as="section" gap="m">
+						<Heading as="h2" level={1}>
+							Meals
+						</Heading>
+						<TagsLinks tags={meals} />
+					</Stack>
+					<Stack as="section" gap="m">
+						<Heading as="h2" level={1}>
+							Tags
+						</Heading>
+						<TagsLinks tags={tags} columns={2} />
+					</Stack>
+				</Stack>
+				<Stack as="section" gap="l">
+					<Heading as="h2" level={1}>
+						Seasonal ingredients
+					</Heading>
 					<IngredientsSeasonChart />
 				</Stack>
 			</Stack>

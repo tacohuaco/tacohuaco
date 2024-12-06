@@ -1,4 +1,5 @@
 ---
+import countBy from 'lodash/countBy';
 import orderBy from 'lodash/orderBy';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
@@ -19,7 +20,7 @@ function getNewRecipes(recipes: Recipe[]): Recipe[] {
 }
 
 // Order recipes by the lengths of the seasons list:
-// recipes with shorter season first, and discard fondational recipes
+// recipes with shorter season first, and discard foundational recipes
 function getRecipesInSeason(recipes: Recipe[], seasonMonth: number): Recipe[] {
 	return orderBy(
 		recipes
@@ -42,6 +43,27 @@ function getFavoriteRecipes(recipes: Recipe[]) {
 		(x) => x.seasons.length
 	);
 }
+
+function getCuisines(recipes: Recipe[]) {
+	const allCuisines = recipes.flatMap((x) => x.cuisines);
+	return orderBy(Object.entries(countBy(allCuisines)), (x) => -x[1]);
+}
+
+const MEAL_TAGS = ['Lunch', 'Dinner', 'Breakfast', 'Brunch'];
+
+function getMeals(recipes: Recipe[]) {
+	const allTags = recipes
+		.flatMap((x) => x.tags)
+		.filter((x) => MEAL_TAGS.includes(x));
+	return orderBy(Object.entries(countBy(allTags)), (x) => -x[1]);
+}
+
+function getTags(recipes: Recipe[]) {
+	const allTags = recipes
+		.flatMap((x) => x.tags)
+		.filter((x) => MEAL_TAGS.includes(x) === false);
+	return orderBy(Object.entries(countBy(allTags)), (x) => -x[1]);
+}
 ---
 
 <Layout
@@ -55,5 +77,8 @@ function getFavoriteRecipes(recipes: Recipe[]) {
 		favoriteRecipes: getFavoriteRecipes(allRecipes),
 		ingredientsInSeason: getIngredientsInSeason(CURRENT_SEASON),
 		ingredientsNextSeason: getIngredientsInSeason(NEXT_SEASON),
+		cuisines: getCuisines(allRecipes),
+		meals: getMeals(allRecipes),
+		tags: getTags(allRecipes),
 	}}
 />
