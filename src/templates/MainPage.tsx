@@ -4,6 +4,8 @@ import { VisuallyHidden } from '../components/VisuallyHidden';
 import { Text } from '../components/Text';
 import type { Recipe } from '../types/Recipe';
 import { Page } from './Page';
+import { IngredientsSeasonChart } from '../components/IngredientsSeasonChart';
+import { Heading } from '../components/Heading';
 
 type Props = {
 	url: string;
@@ -53,6 +55,14 @@ export function MainPage({
 						recipes={favoriteRecipes}
 					/>
 				)}
+				<Stack as="section" gap="l">
+					<Stack as="section" gap="s">
+						<Heading as="h2" level={1}>
+							Seasonal ingredients
+						</Heading>
+					</Stack>
+					<IngredientsSeasonChart />
+				</Stack>
 			</Stack>
 		</Page>
 	);
