@@ -3,7 +3,7 @@ import { Text } from './Text';
 import { VisuallyHidden } from './VisuallyHidden';
 import { Month } from '../util/olivier';
 import { SEASONS } from '../util/olivier/regions/valencia';
-import { Box } from './Box';
+import { Stack } from './Stack';
 
 const CURRENT_SEASON = new Date().getMonth() + 1;
 
@@ -40,47 +40,35 @@ const MONTH_NAMES: Record<Month, string> = {
 
 export function IngredientsSeasonChart() {
 	return (
-		<Box as="table" width="28rem" mx="auto" borderCollapse="collapse">
-			<thead>
-				<tr>
-					<th>
-						<VisuallyHidden>Ingredient</VisuallyHidden>
-					</th>
-					{ALL_MONTHS.map((month) => (
-						<th key={month}>
-							<VisuallyHidden>{MONTH_NAMES[month]}</VisuallyHidden>
-						</th>
-					))}
-				</tr>
-			</thead>
-			<tbody>
-				{Object.entries(SEASONS).map(([ingredient, monthsInSeason]) => {
-					const ingredientInSeason = monthsInSeason.includes(CURRENT_SEASON);
-					return (
-						<Box
-							as="tr"
-							key={ingredient}
-							css={{ _hover: { backgroundColor: 'light' } }}
+		<Stack as="dl" mx="auto" gap={{ base: 'm', tablet: 'xxs' }}>
+			{Object.entries(SEASONS).map(([ingredient, monthsInSeason]) => {
+				const ingredientInSeason = monthsInSeason.includes(CURRENT_SEASON);
+				return (
+					<Stack
+						key={ingredient}
+						direction={{ base: 'column', tablet: 'row' }}
+						columnGap="l"
+						rowGap="xs"
+						css={{ _hover: { backgroundColor: 'light' } }}
+					>
+						<Text
+							as="dt"
+							variant="body"
+							width="6rem"
+							fontWeight={ingredientInSeason ? 'bold' : undefined}
 						>
-							<Text
-								as="th"
-								variant="body"
-								textAlign="left"
-								fontWeight={ingredientInSeason ? 'bold' : undefined}
-							>
-								{upperFirst(ingredient)}
-							</Text>
+							{upperFirst(ingredient)}
+						</Text>
+						<Stack as="dd" direction="row" gap="xxs">
 							{ALL_MONTHS.map((month) => {
 								const monthName = MONTH_NAMES[month];
 								const inSeason = monthsInSeason.includes(month);
 								return (
 									<Text
-										as="td"
+										as="span"
 										key={month}
-										title={monthName}
+										title={inSeason ? monthName : undefined}
 										width="1.5rem"
-										borderBlock="2px solid"
-										borderColor="background"
 										bg={inSeason ? 'accent' : undefined}
 										color={inSeason ? 'background' : 'light'}
 										fontWeight={month === CURRENT_SEASON ? 'bold' : undefined}
@@ -96,10 +84,10 @@ export function IngredientsSeasonChart() {
 									</Text>
 								);
 							})}
-						</Box>
-					);
-				})}
-			</tbody>
-		</Box>
+						</Stack>
+					</Stack>
+				);
+			})}
+		</Stack>
 	);
 }
