@@ -17,6 +17,7 @@ type Props = {
 	recipesInSeason: Recipe[];
 	recipesNextSeason: Recipe[];
 	favoriteRecipes: Recipe[];
+	quickRecipes: Recipe[];
 	ingredientsInSeason: string[];
 	ingredientsNextSeason: string[];
 	cuisines: [string, number][];
@@ -30,6 +31,7 @@ export function MainPage({
 	recipesInSeason,
 	recipesNextSeason,
 	favoriteRecipes,
+	quickRecipes,
 	ingredientsInSeason,
 	ingredientsNextSeason,
 	cuisines,
@@ -59,12 +61,14 @@ export function MainPage({
 						</Text>
 					</RecipeListSection>
 				)}
-				{favoriteRecipes.length > 0 && (
-					<RecipeListSection
-						title="Our favorite recipes"
-						recipes={favoriteRecipes}
-					/>
-				)}
+				<RecipeListSection
+					title="Recipes under 30 minutes"
+					recipes={quickRecipes}
+				/>
+				<RecipeListSection
+					title="Our favorite recipes"
+					recipes={favoriteRecipes}
+				/>
 				<Stack as="section" gap="m">
 					<Heading as="h2" level={1}>
 						Cuisines

@@ -1,6 +1,7 @@
 ---
 import countBy from 'lodash/countBy';
 import orderBy from 'lodash/orderBy';
+import intersection from 'lodash/intersection';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { MainPage } from '../templates/MainPage';
@@ -8,7 +9,7 @@ import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
 import type { Recipe } from '../types/Recipe';
 import { SEASONS } from '../util/olivier/regions/valencia';
 
-// TODO: List of quick recipes
+const MEAL_TAGS = ['Lunch', 'Dinner', 'Breakfast', 'Brunch'];
 
 const entries = await getCollection('recipes');
 const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
@@ -39,6 +40,16 @@ function getIngredientsInSeason(seasonMonth: number) {
 	return inSeason.map(([ingredient]) => ingredient);
 }
 
+// Recipes under 30 minutes
+function getQuickRecipes(recipes: Recipe[]) {
+	return orderBy(
+		recipes
+			.filter((x) => (x.time ?? Infinity) <= 30)
+			.filter((x) => intersection(x.tags, MEAL_TAGS).length > 0),
+		(x) => x.time
+	);
+}
+
 function getFavoriteRecipes(recipes: Recipe[]) {
 	return orderBy(
 		recipes.filter((x) => x.favorite),
@@ -52,8 +63,6 @@ function getCuisines(recipes: Recipe[]) {
 		.filter((x) => x !== 'Klatzlandian');
 	return orderBy(Object.entries(countBy(allCuisines)), (x) => -x[1]);
 }
-
-const MEAL_TAGS = ['Lunch', 'Dinner', 'Breakfast', 'Brunch'];
 
 function getMeals(recipes: Recipe[]) {
 	const allTags = recipes
@@ -79,6 +88,7 @@ function getTags(recipes: Recipe[]) {
 		recipesInSeason: getRecipesInSeason(allRecipes, CURRENT_SEASON),
 		recipesNextSeason: getRecipesInSeason(allRecipes, NEXT_SEASON),
 		favoriteRecipes: getFavoriteRecipes(allRecipes),
+		quickRecipes: getQuickRecipes(allRecipes),
 		ingredientsInSeason: getIngredientsInSeason(CURRENT_SEASON),
 		ingredientsNextSeason: getIngredientsInSeason(NEXT_SEASON),
 		cuisines: getCuisines(allRecipes),
