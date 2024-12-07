@@ -65,25 +65,23 @@ export function MainPage({
 						recipes={favoriteRecipes}
 					/>
 				)}
-				<Stack as="section" gap="xl" direction="row">
-					<Stack as="section" gap="m">
-						<Heading as="h2" level={1}>
-							Cuisines
-						</Heading>
-						<CuisinesLinks cuisines={cuisines} />
-					</Stack>
-					<Stack as="section" gap="m">
-						<Heading as="h2" level={1}>
-							Meals
-						</Heading>
-						<TagsLinks tags={meals} />
-					</Stack>
-					<Stack as="section" gap="m">
-						<Heading as="h2" level={1}>
-							Tags
-						</Heading>
-						<TagsLinks tags={tags} columns={2} />
-					</Stack>
+				<Stack as="section" gap="m">
+					<Heading as="h2" level={1}>
+						Cuisines
+					</Heading>
+					<CuisinesLinks cuisines={cuisines} />
+				</Stack>
+				<Stack as="section" gap="m">
+					<Heading as="h2" level={1}>
+						Meals
+					</Heading>
+					<TagsLinks tags={meals} />
+				</Stack>
+				<Stack as="section" gap="m">
+					<Heading as="h2" level={1}>
+						Tags
+					</Heading>
+					<TagsLinks tags={tags} />
 				</Stack>
 				<Stack as="section" gap="l">
 					<Heading as="h2" level={1}>

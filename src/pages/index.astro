@@ -8,6 +8,8 @@ import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
 import type { Recipe } from '../types/Recipe';
 import { SEASONS } from '../util/olivier/regions/valencia';
 
+// TODO: List of quick recipes
+
 const entries = await getCollection('recipes');
 const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
 
@@ -45,7 +47,9 @@ function getFavoriteRecipes(recipes: Recipe[]) {
 }
 
 function getCuisines(recipes: Recipe[]) {
-	const allCuisines = recipes.flatMap((x) => x.cuisines);
+	const allCuisines = recipes
+		.flatMap((x) => x.cuisines)
+		.filter((x) => x !== 'Klatzlandian');
 	return orderBy(Object.entries(countBy(allCuisines)), (x) => -x[1]);
 }
 

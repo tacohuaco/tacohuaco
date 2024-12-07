@@ -7,12 +7,16 @@ import { formatTagName } from '../util/formatTagName';
 
 type TagsLinksProps = {
 	tags: [string, number][];
-	columns?: number;
 };
 
-export function TagsLinks({ tags, columns = 1 }: TagsLinksProps) {
+export function TagsLinks({ tags }: TagsLinksProps) {
 	return (
-		<Box as="ul" rowGap="s" columnGap="xl" css={{ columns }}>
+		<Box
+			as="ul"
+			rowGap="s"
+			columnGap={{ base: 'm', tablet: 'l', desktop: 'xl' }}
+			css={{ columns: { base: 2, tablet: 3, desktop: 4 } }}
+		>
 			{tags.map(([tag, count]) => (
 				<Box key={tag} as="li">
 					<QuotedLink href={`/tags/${kebabCase(tag)}/`}>

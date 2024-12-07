@@ -11,7 +11,12 @@ type CuisinesLinksProps = {
 
 export function CuisinesLinks({ cuisines }: CuisinesLinksProps) {
 	return (
-		<Stack as="ul" gap="s">
+		<Box
+			as="ul"
+			rowGap="s"
+			columnGap={{ base: 'm', tablet: 'l', desktop: 'xl' }}
+			css={{ columns: { base: 2, tablet: 3, desktop: 4 } }}
+		>
 			{cuisines.map(([cuisine, count]) => (
 				<Box key={cuisine} as="li">
 					<QuotedLink href={`/cuisines/${kebabCase(cuisine)}/`}>
@@ -24,6 +29,6 @@ export function CuisinesLinks({ cuisines }: CuisinesLinksProps) {
 					</QuotedLink>
 				</Box>
 			))}
-		</Stack>
+		</Box>
 	);
 }
