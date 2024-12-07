@@ -1,3 +1,4 @@
+import orderBy from 'lodash/orderBy';
 import upperFirst from 'lodash/upperFirst';
 import { Text } from './Text';
 import { VisuallyHidden } from './VisuallyHidden';
@@ -39,9 +40,14 @@ const MONTH_NAMES: Record<Month, string> = {
 };
 
 export function IngredientsSeasonChart() {
+	// Show ingredients in season first
+	const ingredients = orderBy(
+		Object.entries(SEASONS),
+		(x) => x[1].includes(CURRENT_SEASON) === false
+	);
 	return (
 		<Stack as="dl" mx="auto" gap={{ base: 'm', tablet: 'xxs' }}>
-			{Object.entries(SEASONS).map(([ingredient, monthsInSeason]) => {
+			{ingredients.map(([ingredient, monthsInSeason]) => {
 				const ingredientInSeason = monthsInSeason.includes(CURRENT_SEASON);
 				return (
 					<Stack
