@@ -70,7 +70,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 			const { title, slug } = splitItemToTitleAndSlug(inputValue);
 
 			if (slug) {
-				window.location.href = `${window.location.origin}/recipes/${slug}/`;
+				globalThis.location.href = `${globalThis.location.origin}/recipes/${slug}/`;
 				return;
 			}
 

@@ -44,7 +44,7 @@ function scaleIngredients(
 }
 
 export function useScale({ ingredients, yields }: Recipe) {
-	const isScalingEnabled = typeof window !== 'undefined';
+	const isScalingEnabled = typeof globalThis !== 'undefined';
 
 	const baseAmount = yields.amount;
 
