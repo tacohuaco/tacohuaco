@@ -35,9 +35,9 @@ const menuLink = cva({
 				},
 				_focusVisible: {
 					border: 0,
-					outline: 'input',
-					outlineColor: 'accent',
+					outline: 'focus',
 					outlineOffset: 0,
+					borderRadius: '0.15em',
 				},
 			},
 			current: {

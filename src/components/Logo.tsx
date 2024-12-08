@@ -41,8 +41,8 @@ const getTacoProps = (): ComponentProps<typeof Taco> => {
 
 export function Logo() {
 	return (
-		<QuotedLink href="/" mb="-xxs" mx={{ base: 'auto', tablet: 0 }}>
-			<Stack as="span" gap="s" direction="row" mt="xs">
+		<QuotedLink href="/" mb="-xxs" mt={-6} mx={{ base: 'auto', tablet: 0 }}>
+			<Stack as="span" gap="s" direction="row" pt="s">
 				<Box as="span" mt={-11} pb="s">
 					<Taco height={34} {...getTacoProps()} />
 				</Box>

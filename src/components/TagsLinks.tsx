@@ -13,13 +13,16 @@ export function TagsLinks({ tags }: TagsLinksProps) {
 	return (
 		<Box
 			as="ul"
-			rowGap="s"
 			columnGap={{ base: 'm', tablet: 'l', desktop: 'xl' }}
 			css={{ columns: { base: 2, tablet: 3, desktop: 4 } }}
 		>
 			{tags.map(([tag, count]) => (
-				<Box key={tag} as="li">
-					<QuotedLink href={`/tags/${kebabCase(tag)}/`}>
+				<Box key={tag} as="li" mb="s">
+					<QuotedLink
+						href={`/tags/${kebabCase(tag)}/`}
+						display="block"
+						width="fit-content"
+					>
 						<Stack as="span" gap="xs" direction="row">
 							<Text as="u">{formatTagName(tag)}</Text>
 							<Text as="span" color="dim">
