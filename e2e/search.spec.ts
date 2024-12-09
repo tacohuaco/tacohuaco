@@ -15,13 +15,10 @@ test('search for a recipe, ingredient', async ({ page }) => {
 	expect(input).toBeEnabled();
 
 	await input.fill('cucumbers');
-	await input.press('ArrowDown', { delay: 500 });
 	await input.press('Enter', { delay: 500 });
 
 	// The recipe card is visible
-	await expect(
-		page.getByRole('link', { name: 'Quick pickled cucumbers' })
-	).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Tzatziki' })).toBeVisible();
 });
 
 test('search for a recipe, recipe name', async ({ page }) => {
