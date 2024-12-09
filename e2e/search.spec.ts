@@ -17,6 +17,8 @@ test('search for a recipe, ingredient', async ({ page }) => {
 	await input.fill('cucumbers');
 	await input.press('Enter', { delay: 500 });
 
+	await page.waitForTimeout(2000);
+
 	// The recipe card is visible
 	await expect(page.getByRole('link', { name: 'Tzatziki' })).toBeVisible();
 });
