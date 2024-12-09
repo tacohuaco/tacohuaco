@@ -14,7 +14,7 @@ function getNextAmount(amount: number) {
 }
 
 export function useCoffeeScale({ defaultAmount }: CoffeeRecipe) {
-	const isScalingEnabled = typeof globalThis !== 'undefined';
+	const isScalingEnabled = typeof window !== 'undefined';
 
 	const [currentAmount, setCurrentAmount] = useState(defaultAmount);
 

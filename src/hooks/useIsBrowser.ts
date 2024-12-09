@@ -1,8 +1,8 @@
 const canUseDOM = () =>
 	Boolean(
-		typeof globalThis !== 'undefined' &&
-			globalThis.document &&
-			globalThis.document.createElement
+		typeof window !== 'undefined' &&
+			window.document &&
+			window.document.createElement
 	);
 
 /**
