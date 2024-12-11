@@ -175,6 +175,10 @@ export const INGREDIENTS = [
 		['leaf beet', 'leaf beets'],
 	],
 	[
+		['chile de árbol', 'chiles de árbol'],
+		['chile de arbol', 'chiles de arbol'],
+	],
+	[
 		// https://www.thespruceeats.com/different-spellings-of-chile-2342844
 		['chile', 'chiles'],
 		['chili', 'chilies', 'chili', 'chilis'],
