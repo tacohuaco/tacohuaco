@@ -3,6 +3,7 @@ import { Text } from './Text';
 import { Box } from './Box';
 import { Tooltip } from './Tooltip';
 import type { FlagName } from '../types/Flags';
+import { VisuallyHidden } from './VisuallyHidden';
 
 type Props = {
 	type: FlagName;
@@ -98,7 +99,8 @@ const Circle = ({
 			{body}
 		</TooltipWithLink>
 	) : (
-		<Box aria-label={title} title={title}>
+		<Box title={title}>
+			<VisuallyHidden>{title}</VisuallyHidden>
 			{body}
 		</Box>
 	);
