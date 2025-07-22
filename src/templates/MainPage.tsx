@@ -5,6 +5,7 @@ import { Text } from '../components/Text';
 import type { Recipe } from '../types/Recipe';
 import { Page } from './Page';
 import { IngredientsSeasonChart } from '../components/IngredientsSeasonChart';
+import { IngredientsMonthlyList } from '../components/IngredientsMonthlyList';
 import { Heading } from '../components/Heading';
 import { CuisinesLinks } from '../components/CuisinesLinks';
 import { TagsLinks } from '../components/TagsLinks';
@@ -92,6 +93,12 @@ export function MainPage({
 						Seasonal ingredients
 					</Heading>
 					<IngredientsSeasonChart />
+				</Stack>
+				<Stack as="section" gap="l">
+					<Heading as="h2" level={1}>
+						Ingredients by month
+					</Heading>
+					<IngredientsMonthlyList />
 				</Stack>
 			</Stack>
 		</Page>
