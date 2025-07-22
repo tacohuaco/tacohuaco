@@ -5,6 +5,8 @@ import { Month } from '../util/olivier';
 import { SEASONS } from '../util/olivier/regions/valencia';
 import { Stack } from './Stack';
 
+const CURRENT_SEASON = new Date().getMonth() + 1;
+
 const ALL_MONTHS = [
 	Month.January,
 	Month.February,
@@ -47,27 +49,46 @@ function getIngredientsByMonth() {
 	});
 }
 
-function formatIngredientsList(ingredients: string[]): string {
-	if (ingredients.length === 0) {
-		return '';
-	}
-
-	const [first, ...rest] = ingredients;
-	return [upperFirst(first), ...rest].join(', ') + '.';
-}
-
 export function IngredientsMonthlyList() {
 	const ingredientsByMonth = getIngredientsByMonth();
 
 	return (
 		<Stack gap="m">
 			{ingredientsByMonth.map((ingredients, index) => {
+				if (ingredients.length === 0) {
+					return null;
+				}
+
+				const month = (index + 1) as Month;
+
 				return (
 					<Stack key={index} gap="s">
 						<Heading as="h3" level={3}>
-							{MONTH_NAMES[(index + 1) as Month]}
+							{MONTH_NAMES[month]}
 						</Heading>
-						<Text>{formatIngredientsList(ingredients)}</Text>
+						<Text>
+							{ingredients.map((ingredient, ingredientIndex) => {
+								const isCurrentlyInSeason =
+									SEASONS[ingredient]?.includes(CURRENT_SEASON) ?? false;
+								const isFirst = ingredientIndex === 0;
+								const displayName = isFirst
+									? upperFirst(ingredient)
+									: ingredient;
+								const isLast = ingredientIndex === ingredients.length - 1;
+
+								return (
+									<Text
+										key={ingredient}
+										as="span"
+										fontWeight={isCurrentlyInSeason ? 'bold' : undefined}
+									>
+										{displayName}
+										{isLast ? '' : ', '}
+									</Text>
+								);
+							})}
+							.
+						</Text>
 					</Stack>
 				);
 			})}
