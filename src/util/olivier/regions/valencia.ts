@@ -29,6 +29,7 @@ export const SEASONS: Record<string, Month[]> = {
 	[`avocado`]:      [ Jan, Feb, Mar, Apr,                               Nov, Dec ],
 	[`beetroot`]:     [                               Jul, Aug, Sep, Oct, Nov      ],
 	[`blackberry`]:   [                                    Aug                     ],
+	[`blueberry`]:    [                          Jun, Jul,                         ],
 	[`broccoli`]:     [                                              Oct, Nov, Dec ],
 	[`cabbage`]:      [ Jan, Feb, Mar,                          Sep, Oct, Nov, Dec ],
 	[`young carrot`]: [                Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec ],
