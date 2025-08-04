@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { CalendarPage } from '../templates/CalendarPage';
+import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
+import type { Recipe } from '../types/Recipe';
+import { SEASONS } from '../util/olivier/regions/valencia';
+import { Month } from '../util/olivier';
+
+const ALL_MONTHS = [
+	Month.January,
+	Month.February,
+	Month.March,
+	Month.April,
+	Month.May,
+	Month.June,
+	Month.July,
+	Month.August,
+	Month.September,
+	Month.October,
+	Month.November,
+	Month.December,
+];
+
+const MONTH_NAMES: Record<Month, string> = {
+	[Month.January]: 'January',
+	[Month.February]: 'February',
+	[Month.March]: 'March',
+	[Month.April]: 'April',
+	[Month.May]: 'May',
+	[Month.June]: 'June',
+	[Month.July]: 'July',
+	[Month.August]: 'August',
+	[Month.September]: 'September',
+	[Month.October]: 'October',
+	[Month.November]: 'November',
+	[Month.December]: 'December',
+} as const;
+
+const entries = await getCollection('recipes');
+const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
+
+function getIngredientsInSeason(seasonMonth: Month): string[] {
+	const inSeason = Object.entries(SEASONS).filter(([, months]) =>
+		months.includes(seasonMonth)
+	);
+	return inSeason.map(([ingredient]) => ingredient);
+}
+
+function getRecipesInSeason(recipes: Recipe[], seasonMonth: Month): Recipe[] {
+	return recipes
+		.filter((x) => x.seasons.includes(seasonMonth))
+		.filter((x) => x.tags.includes('Foundation') === false);
+}
+
+const months = ALL_MONTHS.map((month) => ({
+	monthName: MONTH_NAMES[month],
+	ingredients: getIngredientsInSeason(month),
+	recipes: getRecipesInSeason(allRecipes, month),
+}));
+---
+
+<Layout
+	url="/cal"
+	pageTitle="Calendar - Tacohuaco"
+	component={CalendarPage}
+	props={{ months }}
+/>
