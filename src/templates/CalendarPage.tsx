@@ -7,43 +7,67 @@ import Group from 'react-group';
 import { Link } from '../components/Link';
 import capitalize from 'lodash/capitalize';
 
-// Snack emoji mapping using shared stems to handle singular/plural variations
-const SNACK_TO_EMOJI: Record<string, string> = {
+// Ingredient emoji mapping
+// Ingredient lists use singular names but snacks are usually plural
+const INGREDIENT_TO_EMOJI: Record<string, string> = {
 	apple: '🍎',
+	apples: '🍎',
 	apricot: '🍑',
+	apricots: '🍑',
+	avocado: '🥑',
+	avocadoes: '🥑',
 	banana: '🍌',
-	berr: '🫐', // Matches "berry" and "berries"
-	blueberr: '🫐', // Matches "blueberry" and "blueberries"
-	cherr: '🍒', // Matches "cherry" and "cherries"
+	bananas: '🍌',
+	beetroot: '🫜',
+	beetroots: '🫜',
+	berries: '🫐',
+	blackberry: '🫐',
+	blueberries: '🫐',
+	broccoli: '🥦',
+	'young carrot': '🥕',
+	'young carrots': '🥕',
+	cherry: '🍒',
+	cherries: '🍒',
+	cucumber: '🥒',
+	cucumbers: '🥒',
+	eggplant: '🍆',
+	eggplants: '🍆',
+	'garrofó bean': '🫘',
 	grape: '🍇',
+	grapes: '🍇',
 	kiwi: '🥝',
 	mandarin: '🍊',
+	mandarins: '🍊',
 	mango: '🥭',
+	mangoes: '🥭',
 	melon: '🍈',
+	nectarine: '🍑',
+	nectarines: '🍑',
 	orange: '🍊',
+	oranges: '🍊',
 	peach: '🍑',
+	peaches: '🍑',
 	pear: '🍐',
+	pears: '🍐',
 	pineapple: '🍍',
-	strawberr: '🍓', // Matches "strawberry" and "strawberries"
+	pineapples: '🍍',
+	pumpkin: '🎃',
+	pumpkins: '🎃',
+	'young potato': '🥔',
+	'young potatos': '🥔',
+	'sweet potato': '🍠',
+	'sweet potatos': '🍠',
+	spinach: '🍃',
+	strawberry: '🍓',
+	strawberries: '🍓',
+	tomato: '🍅',
+	tomatoes: '🍅',
 	watermelon: '🍉',
 };
 
-function getSnackEmoji(snack: string): string {
-	const normalizedSnack = snack.toLowerCase().trim();
-
-	// Try exact match first
-	if (SNACK_TO_EMOJI[normalizedSnack]) {
-		return SNACK_TO_EMOJI[normalizedSnack];
-	}
-
-	// Try matching by shared stem (for singular/plural variations)
-	for (const [stem, emoji] of Object.entries(SNACK_TO_EMOJI)) {
-		if (normalizedSnack.startsWith(stem)) {
-			return emoji;
-		}
-	}
-
-	return '';
+function getIngredientEmoji(ingredient: string): string | undefined {
+	const normalizedIngredient = ingredient.toLowerCase().trim();
+	return INGREDIENT_TO_EMOJI[normalizedIngredient];
 }
 
 interface SeasonalMonth {
@@ -109,15 +133,20 @@ function RecipeName({
 	return <Link href={`/recipes/${recipe.slug}`}>{nameToDisplay}</Link>;
 }
 
-function SnackName({ name, first }: { name: string; first: boolean }) {
-	const emoji = getSnackEmoji(name);
+function IngredientName({ name, first }: { name: string; first?: boolean }) {
+	const emoji = getIngredientEmoji(name);
 	const nameToDisplay = first ? capitalize(name) : name;
 
 	return (
-		<>
+		<nobr>
 			{nameToDisplay}
-			{emoji && ` ${emoji}`}
-		</>
+			{emoji && (
+				<Text as="span" fontStyle="normal">
+					{' '}
+					{emoji}
+				</Text>
+			)}
+		</nobr>
 	);
 }
 
@@ -149,7 +178,7 @@ function MonthRecipesSection({
 					<Group separator=", ">
 						{recipes[0].map((x, index) =>
 							isSnacks ? (
-								<SnackName key={x} name={x} first={index === 0} />
+								<IngredientName key={x} name={x} first={index === 0} />
 							) : (
 								<RecipeName
 									key={x}
@@ -169,7 +198,7 @@ function MonthRecipesSection({
 					<Group separator=", ">
 						{recipes[1].map((x, index) =>
 							isSnacks ? (
-								<SnackName key={x} name={x} first={index === 0} />
+								<IngredientName key={x} name={x} first={index === 0} />
 							) : (
 								<RecipeName
 									key={x}
@@ -198,7 +227,13 @@ export function CalendarPage({ url, title, months, allRecipes }: Props) {
 								{month.monthName}
 							</Heading>
 							<Text variant="intro">
-								In season: {month.ingredients.join(', ')}.
+								In season:{' '}
+								<Group separator=", ">
+									{month.ingredients.map((ingredient) => (
+										<IngredientName key={ingredient} name={ingredient} />
+									))}
+								</Group>
+								.
 							</Text>
 							<MonthRecipesSection
 								label="Breakfasts"
