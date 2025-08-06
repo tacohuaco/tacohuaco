@@ -15,6 +15,36 @@ export enum Month {
 	December = 12,
 }
 
+export const ALL_MONTHS = [
+	Month.January,
+	Month.February,
+	Month.March,
+	Month.April,
+	Month.May,
+	Month.June,
+	Month.July,
+	Month.August,
+	Month.September,
+	Month.October,
+	Month.November,
+	Month.December,
+] as const;
+
+export const MONTH_NAMES: Record<Month, string> = {
+	[Month.January]: 'January',
+	[Month.February]: 'February',
+	[Month.March]: 'March',
+	[Month.April]: 'April',
+	[Month.May]: 'May',
+	[Month.June]: 'June',
+	[Month.July]: 'July',
+	[Month.August]: 'August',
+	[Month.September]: 'September',
+	[Month.October]: 'October',
+	[Month.November]: 'November',
+	[Month.December]: 'December',
+} as const;
+
 export interface Ingredient {
 	readonly name: string;
 	readonly minAmount?: Amount;

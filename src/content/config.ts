@@ -12,6 +12,7 @@ import {
 	type StepsSection,
 	type Yields,
 } from '../types/Recipe';
+import type { CalendarMonth } from '../../scripts/types';
 
 // TODO: Find a better way to sync TypeScript interface and Zod scheme
 
@@ -111,6 +112,20 @@ const recipes = defineCollection({
 	}) satisfies z.ZodType<Recipe>,
 });
 
+const calendarMonths = defineCollection({
+	type: 'data',
+	schema: z.object({
+		name: z.string(),
+		month: z.nativeEnum(Month),
+		breakfasts: z.tuple([z.array(z.string()), z.array(z.string())]),
+		lunches: z.tuple([z.array(z.string()), z.array(z.string())]),
+		specials: z.tuple([z.array(z.string()), z.array(z.string())]),
+		sweets: z.tuple([z.array(z.string()), z.array(z.string())]),
+		snacks: z.tuple([z.array(z.string()), z.array(z.string())]),
+	}) satisfies z.ZodType<CalendarMonth>,
+});
+
 export const collections = {
 	recipes,
+	calendarMonths,
 };

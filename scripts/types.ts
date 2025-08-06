@@ -1,4 +1,5 @@
 import type { Asset } from '../src/types/Asset';
+import type { Month } from '../src/util/olivier';
 
 export type Maybe<T> = T | null;
 
@@ -61,4 +62,28 @@ export interface TipModel {
 export interface IngredientModel {
 	name: string;
 	warnings: string[];
+}
+
+// Each section is a comma-separated list of recipe names
+// 'month recipe1, month recipe1'
+export interface CalendarMonthModelRaw {
+	// Month name or 'all' for generic recipes
+	name: string;
+	breakfasts: string;
+	lunches: string;
+	specials: string;
+	sweets: string;
+	snacks: string;
+}
+
+// Each section contains a nested array of recipe names:
+// [['month recipe1', 'month recipe1'], ['generic recipe1', 'generic recipe1']]
+export interface CalendarMonth {
+	name: string;
+	month: Month;
+	breakfasts: [string[], string[]];
+	lunches: [string[], string[]];
+	specials: [string[], string[]];
+	sweets: [string[], string[]];
+	snacks: [string[], string[]];
 }

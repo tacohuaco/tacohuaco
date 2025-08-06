@@ -11,6 +11,7 @@ yarn.lock
 .astro/
 dist/
 src/content/recipes/
+src/content/calendarMonths/
 src/data/*.json
 /test-results/
 /playwright-report/
