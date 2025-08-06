@@ -5,6 +5,7 @@ import type { Recipe } from '../types/Recipe';
 import { PageWithTitle } from './PageWithTitle';
 import Group from 'react-group';
 import { Link } from '../components/Link';
+import capitalize from 'lodash/capitalize';
 
 interface SeasonalMonth {
 	monthName: string;
@@ -48,9 +49,11 @@ function getNormalizedRecipeName(name: string) {
 
 function RecipeName({
 	name,
+	first,
 	allRecipes,
 }: {
 	name: string;
+	first: boolean;
 	allRecipes: Recipe[];
 }) {
 	const normalizedTitle = getNormalizedRecipeName(name);
@@ -58,11 +61,13 @@ function RecipeName({
 		(x) => x.title.toLowerCase() === normalizedTitle
 	);
 
+	const nameToDisplay = first ? capitalize(name) : name;
+
 	if (recipe === undefined) {
-		return name;
+		return nameToDisplay;
 	}
 
-	return <Link href={`/recipes/${recipe.slug}`}>{name}</Link>;
+	return <Link href={`/recipes/${recipe.slug}`}>{nameToDisplay}</Link>;
 }
 
 function MonthRecipesSection({
@@ -89,8 +94,13 @@ function MonthRecipesSection({
 			{recipes[0].length > 0 && (
 				<Text>
 					<Group separator=", ">
-						{recipes[0].map((x) => (
-							<RecipeName key={x} name={x} allRecipes={allRecipes} />
+						{recipes[0].map((x, index) => (
+							<RecipeName
+								key={x}
+								name={x}
+								first={index === 0}
+								allRecipes={allRecipes}
+							/>
 						))}
 					</Group>
 					.
@@ -100,8 +110,13 @@ function MonthRecipesSection({
 				<Text variant="small">
 					{' '}
 					<Group separator=", ">
-						{recipes[1].map((x) => (
-							<RecipeName key={x} name={x} allRecipes={allRecipes} />
+						{recipes[1].map((x, index) => (
+							<RecipeName
+								key={x}
+								name={x}
+								first={index === 0}
+								allRecipes={allRecipes}
+							/>
 						))}
 					</Group>
 					.
