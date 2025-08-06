@@ -7,6 +7,45 @@ import Group from 'react-group';
 import { Link } from '../components/Link';
 import capitalize from 'lodash/capitalize';
 
+// Snack emoji mapping using shared stems to handle singular/plural variations
+const SNACK_TO_EMOJI: Record<string, string> = {
+	apple: '🍎',
+	apricot: '🍑',
+	banana: '🍌',
+	berr: '🫐', // Matches "berry" and "berries"
+	blueberr: '🫐', // Matches "blueberry" and "blueberries"
+	cherr: '🍒', // Matches "cherry" and "cherries"
+	grape: '🍇',
+	kiwi: '🥝',
+	mandarin: '🍊',
+	mango: '🥭',
+	melon: '🍈',
+	orange: '🍊',
+	peach: '🍑',
+	pear: '🍐',
+	pineapple: '🍍',
+	strawberr: '🍓', // Matches "strawberry" and "strawberries"
+	watermelon: '🍉',
+};
+
+function getSnackEmoji(snack: string): string {
+	const normalizedSnack = snack.toLowerCase().trim();
+
+	// Try exact match first
+	if (SNACK_TO_EMOJI[normalizedSnack]) {
+		return SNACK_TO_EMOJI[normalizedSnack];
+	}
+
+	// Try matching by shared stem (for singular/plural variations)
+	for (const [stem, emoji] of Object.entries(SNACK_TO_EMOJI)) {
+		if (normalizedSnack.startsWith(stem)) {
+			return emoji;
+		}
+	}
+
+	return '';
+}
+
 interface SeasonalMonth {
 	monthName: string;
 	ingredients: string[];
@@ -70,6 +109,18 @@ function RecipeName({
 	return <Link href={`/recipes/${recipe.slug}`}>{nameToDisplay}</Link>;
 }
 
+function SnackName({ name, first }: { name: string; first: boolean }) {
+	const emoji = getSnackEmoji(name);
+	const nameToDisplay = first ? capitalize(name) : name;
+
+	return (
+		<>
+			{nameToDisplay}
+			{emoji && ` ${emoji}`}
+		</>
+	);
+}
+
 function MonthRecipesSection({
 	label,
 	recipes,
@@ -86,6 +137,8 @@ function MonthRecipesSection({
 		return null;
 	}
 
+	const isSnacks = label.toLowerCase() === 'snacks';
+
 	return (
 		<Stack gap="s">
 			<Heading as="h3" level={3}>
@@ -94,14 +147,18 @@ function MonthRecipesSection({
 			{recipes[0].length > 0 && (
 				<Text>
 					<Group separator=", ">
-						{recipes[0].map((x, index) => (
-							<RecipeName
-								key={x}
-								name={x}
-								first={index === 0}
-								allRecipes={allRecipes}
-							/>
-						))}
+						{recipes[0].map((x, index) =>
+							isSnacks ? (
+								<SnackName key={x} name={x} first={index === 0} />
+							) : (
+								<RecipeName
+									key={x}
+									name={x}
+									first={index === 0}
+									allRecipes={allRecipes}
+								/>
+							)
+						)}
 					</Group>
 					.
 				</Text>
@@ -110,14 +167,18 @@ function MonthRecipesSection({
 				<Text variant="small">
 					{' '}
 					<Group separator=", ">
-						{recipes[1].map((x, index) => (
-							<RecipeName
-								key={x}
-								name={x}
-								first={index === 0}
-								allRecipes={allRecipes}
-							/>
-						))}
+						{recipes[1].map((x, index) =>
+							isSnacks ? (
+								<SnackName key={x} name={x} first={index === 0} />
+							) : (
+								<RecipeName
+									key={x}
+									name={x}
+									first={index === 0}
+									allRecipes={allRecipes}
+								/>
+							)
+						)}
 					</Group>
 					.
 				</Text>
