@@ -3,6 +3,8 @@ import { Heading } from '../components/Heading';
 import { Text } from '../components/Text';
 import type { Recipe } from '../types/Recipe';
 import { PageWithTitle } from './PageWithTitle';
+import Group from 'react-group';
+import { Link } from '../components/Link';
 
 interface SeasonalMonth {
 	monthName: string;
@@ -21,10 +23,52 @@ type Props = {
 	allRecipes: Recipe[];
 };
 
+// Some recipes have shorter names or point to similar recipes
+const NORMALIZED_RECIPE_NAMES: Record<string, string> = {
+	burger: 'klatz burger',
+	'caprese salad': 'caprese salad with pesto',
+	'chicken wings': 'air-fried chicken wings and legs with potatoes',
+	frittata: 'frittata with vegetables',
+	hotdogs: 'klatz hot dog',
+	'kimchi soup': 'kimchi lava soup',
+	'olivier salad': 'olivier salad with chicken',
+	pho: 'chicken pho',
+	'potato hash': 'potato hash with kimchi',
+	'pumpkin soup': 'roasted pumpkin soup',
+	'strawberry cobbler': 'blueberry cobbler',
+	svekolnik: 'svekolnik (cold borscht)',
+	'tres leches': 'pastel tres leches',
+	zapekanka: 'cottage cheesecake (zapekanka)',
+} as const;
+
+function getNormalizedRecipeName(name: string) {
+	const lowerCaseName = name.toLowerCase();
+	return NORMALIZED_RECIPE_NAMES[lowerCaseName] ?? lowerCaseName;
+}
+
+function RecipeName({
+	name,
+	allRecipes,
+}: {
+	name: string;
+	allRecipes: Recipe[];
+}) {
+	const normalizedTitle = getNormalizedRecipeName(name);
+	const recipe = allRecipes.find(
+		(x) => x.title.toLowerCase() === normalizedTitle
+	);
+
+	if (recipe === undefined) {
+		return name;
+	}
+
+	return <Link href={`/recipes/${recipe.slug}`}>{name}</Link>;
+}
+
 function MonthRecipesSection({
 	label,
 	recipes,
-	// allRecipes,
+	allRecipes,
 }: {
 	label: string;
 	recipes?: [string[], string[]];
@@ -42,9 +86,26 @@ function MonthRecipesSection({
 			<Heading as="h3" level={3}>
 				{label}
 			</Heading>
-			{recipes[0].length > 0 && <Text>{recipes[0].join(', ')}.</Text>}
+			{recipes[0].length > 0 && (
+				<Text>
+					<Group separator=", ">
+						{recipes[0].map((x) => (
+							<RecipeName key={x} name={x} allRecipes={allRecipes} />
+						))}
+					</Group>
+					.
+				</Text>
+			)}
 			{recipes[1].length > 0 && (
-				<Text variant="small">{recipes[1].join(', ')}.</Text>
+				<Text variant="small">
+					{' '}
+					<Group separator=", ">
+						{recipes[1].map((x) => (
+							<RecipeName key={x} name={x} allRecipes={allRecipes} />
+						))}
+					</Group>
+					.
+				</Text>
 			)}
 		</Stack>
 	);
