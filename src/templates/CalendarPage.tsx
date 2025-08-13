@@ -1,84 +1,8 @@
 import { Stack } from '../components/Stack';
-import { Heading } from '../components/Heading';
-import { Text } from '../components/Text';
 import type { Recipe } from '../types/Recipe';
-import { PageWithTitle } from './PageWithTitle';
-import Group from 'react-group';
-import { Link } from '../components/Link';
-import capitalize from 'lodash/capitalize';
-
-// Ingredient emoji mapping
-// Ingredient lists use singular names but snacks are usually plural
-const INGREDIENT_TO_EMOJI: Record<string, string> = {
-	apple: '🍎',
-	apples: '🍎',
-	apricot: '🍑',
-	apricots: '🍑',
-	avocado: '🥑',
-	avocadoes: '🥑',
-	banana: '🍌',
-	bananas: '🍌',
-	beetroot: '🫜',
-	beetroots: '🫜',
-	berries: '🫐',
-	blackberry: '🫐',
-	blueberries: '🫐',
-	broccoli: '🥦',
-	'young carrot': '🥕',
-	'young carrots': '🥕',
-	cherry: '🍒',
-	cherries: '🍒',
-	cucumber: '🥒',
-	cucumbers: '🥒',
-	eggplant: '🍆',
-	eggplants: '🍆',
-	'garrofó bean': '🫘',
-	grape: '🍇',
-	grapes: '🍇',
-	kiwi: '🥝',
-	mandarin: '🍊',
-	mandarins: '🍊',
-	mango: '🥭',
-	mangoes: '🥭',
-	melon: '🍈',
-	nectarine: '🍑',
-	nectarines: '🍑',
-	orange: '🍊',
-	oranges: '🍊',
-	peach: '🍑',
-	peaches: '🍑',
-	pear: '🍐',
-	pears: '🍐',
-	pineapple: '🍍',
-	pineapples: '🍍',
-	pumpkin: '🎃',
-	pumpkins: '🎃',
-	'young potato': '🥔',
-	'young potatos': '🥔',
-	'sweet potato': '🍠',
-	'sweet potatos': '🍠',
-	spinach: '🍃',
-	strawberry: '🍓',
-	strawberries: '🍓',
-	tomato: '🍅',
-	tomatoes: '🍅',
-	watermelon: '🍉',
-};
-
-function getIngredientEmoji(ingredient: string): string | undefined {
-	const normalizedIngredient = ingredient.toLowerCase().trim();
-	return INGREDIENT_TO_EMOJI[normalizedIngredient];
-}
-
-interface SeasonalMonth {
-	monthName: string;
-	ingredients: string[];
-	breakfasts?: [string[], string[]];
-	lunches?: [string[], string[]];
-	specials?: [string[], string[]];
-	sweets?: [string[], string[]];
-	snacks?: [string[], string[]];
-}
+import { useMemo, useRef, useState } from 'react';
+import { CalendarMonthPanel, type SeasonalMonth } from './CalendarMonthPanel';
+import { Box } from '../components/Box';
 
 type Props = {
 	url: string;
@@ -87,183 +11,105 @@ type Props = {
 	allRecipes: Recipe[];
 };
 
-// Some recipes have shorter names or point to similar recipes
-const NORMALIZED_RECIPE_NAMES: Record<string, string> = {
-	burger: 'klatz burger',
-	'caprese salad': 'caprese salad with pesto',
-	'chicken wings': 'air-fried chicken wings and legs with potatoes',
-	frittata: 'frittata with vegetables',
-	hotdogs: 'klatz hot dog',
-	'kimchi soup': 'kimchi lava soup',
-	'olivier salad': 'olivier salad with chicken',
-	pho: 'chicken pho',
-	'potato hash': 'potato hash with kimchi',
-	'pumpkin soup': 'roasted pumpkin soup',
-	'strawberry cobbler': 'blueberry cobbler',
-	svekolnik: 'svekolnik (cold borscht)',
-	'tres leches': 'pastel tres leches',
-	zapekanka: 'cottage cheesecake (zapekanka)',
-} as const;
+export function CalendarPage({ months, allRecipes }: Props) {
+	const defaultIndex = useMemo(() => {
+		return new Date().getMonth();
+	}, [months.length]);
 
-function getNormalizedRecipeName(name: string) {
-	const lowerCaseName = name.toLowerCase();
-	return NORMALIZED_RECIPE_NAMES[lowerCaseName] ?? lowerCaseName;
-}
+	const [activeIndex, setActiveIndex] = useState<number>(defaultIndex);
+	const tablistRef = useRef<HTMLDivElement>(null);
 
-function RecipeName({
-	name,
-	first,
-	allRecipes,
-}: {
-	name: string;
-	first: boolean;
-	allRecipes: Recipe[];
-}) {
-	const normalizedTitle = getNormalizedRecipeName(name);
-	const recipe = allRecipes.find(
-		(x) => x.title.toLowerCase() === normalizedTitle
-	);
+	const getTabElement = (index: number): HTMLButtonElement | undefined => {
+		const tabs = tablistRef.current?.querySelectorAll('[role="tab"]');
+		return tabs ? (tabs[index] as HTMLButtonElement) : undefined;
+	};
 
-	const nameToDisplay = first ? capitalize(name) : name;
-
-	if (recipe === undefined) {
-		return nameToDisplay;
-	}
-
-	return <Link href={`/recipes/${recipe.slug}`}>{nameToDisplay}</Link>;
-}
-
-function IngredientName({ name, first }: { name: string; first?: boolean }) {
-	const emoji = getIngredientEmoji(name);
-	const nameToDisplay = first ? capitalize(name) : name;
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		const last = months.length - 1;
+		switch (e.key) {
+			case 'ArrowLeft': {
+				e.preventDefault();
+				const next = activeIndex === 0 ? last : activeIndex - 1;
+				setActiveIndex(next);
+				getTabElement(next)?.focus?.();
+				break;
+			}
+			case 'ArrowRight': {
+				e.preventDefault();
+				const next = activeIndex === last ? 0 : activeIndex + 1;
+				setActiveIndex(next);
+				getTabElement(next)?.focus?.();
+				break;
+			}
+			case 'Home': {
+				e.preventDefault();
+				setActiveIndex(0);
+				getTabElement(0)?.focus?.();
+				break;
+			}
+			case 'End': {
+				e.preventDefault();
+				setActiveIndex(last);
+				getTabElement(last)?.focus?.();
+				break;
+			}
+		}
+	};
 
 	return (
-		<nobr>
-			{nameToDisplay}
-			{emoji && (
-				<Text as="span" fontStyle="normal">
-					{' '}
-					{emoji}
-				</Text>
-			)}
-		</nobr>
-	);
-}
-
-function MonthRecipesSection({
-	label,
-	recipes,
-	allRecipes,
-}: {
-	label: string;
-	recipes?: [string[], string[]];
-	allRecipes: Recipe[];
-}) {
-	if (
-		recipes === undefined ||
-		(recipes[0].length === 0 && recipes[1].length === 0)
-	) {
-		return null;
-	}
-
-	const isSnacks = label.toLowerCase() === 'snacks';
-
-	return (
-		<Stack gap="s">
-			<Heading as="h3" level={3}>
-				{label}
-			</Heading>
-			{recipes[0].length > 0 && (
-				<Text>
-					<Group separator=", ">
-						{recipes[0].map((x, index) =>
-							isSnacks ? (
-								<IngredientName key={x} name={x} first={index === 0} />
-							) : (
-								<RecipeName
-									key={x}
-									name={x}
-									first={index === 0}
-									allRecipes={allRecipes}
-								/>
-							)
-						)}
-					</Group>
-					.
-				</Text>
-			)}
-			{recipes[1].length > 0 && (
-				<Text variant="small">
-					{' '}
-					<Group separator=", ">
-						{recipes[1].map((x, index) =>
-							isSnacks ? (
-								<IngredientName key={x} name={x} first={index === 0} />
-							) : (
-								<RecipeName
-									key={x}
-									name={x}
-									first={index === 0}
-									allRecipes={allRecipes}
-								/>
-							)
-						)}
-					</Group>
-					.
-				</Text>
-			)}
-		</Stack>
-	);
-}
-
-export function CalendarPage({ url, title, months, allRecipes }: Props) {
-	return (
-		<PageWithTitle url={url} title={title}>
-			<Stack gap="xl">
-				{months.map((month) => {
+		<Stack gap="l">
+			<Stack
+				role="tablist"
+				aria-label="Months"
+				direction="row"
+				gap="xxs"
+				flexWrap="wrap"
+				innerRef={tablistRef}
+			>
+				{months.map((m, i) => {
+					const selected = i === activeIndex;
+					const tabId = `cal-tab-${i}`;
+					const panelId = `cal-panel-${i}`;
 					return (
-						<Stack key={month.monthName} gap="l">
-							<Heading as="h2" level={2}>
-								{month.monthName}
-							</Heading>
-							<Text variant="intro">
-								In season:{' '}
-								<Group separator=", ">
-									{month.ingredients.map((ingredient) => (
-										<IngredientName key={ingredient} name={ingredient} />
-									))}
-								</Group>
-								.
-							</Text>
-							<MonthRecipesSection
-								label="Breakfasts"
-								recipes={month.breakfasts}
-								allRecipes={allRecipes}
-							/>
-							<MonthRecipesSection
-								label="Lunches"
-								recipes={month.lunches}
-								allRecipes={allRecipes}
-							/>
-							<MonthRecipesSection
-								label="Specials"
-								recipes={month.specials}
-								allRecipes={allRecipes}
-							/>
-							<MonthRecipesSection
-								label="Sweets"
-								recipes={month.sweets}
-								allRecipes={allRecipes}
-							/>
-							<MonthRecipesSection
-								label="Snacks"
-								recipes={month.snacks}
-								allRecipes={allRecipes}
-							/>
-						</Stack>
+						<Box
+							as="button"
+							key={m.monthName}
+							role="tab"
+							id={tabId}
+							aria-controls={panelId}
+							aria-selected={selected}
+							tabIndex={selected ? 0 : -1}
+							onKeyDown={handleKeyDown}
+							onClick={() => setActiveIndex(i)}
+							title={m.monthName}
+							css={{
+								px: 's',
+								py: 'xs',
+								fontFamily: 'ui',
+								fontSize: 's',
+								border: 'transparent',
+								borderRadius: 'base',
+								bg: selected ? 'light' : 'transparent',
+								color: 'text',
+								cursor: 'pointer',
+								_hover: { bg: 'light' },
+								_focusVisible: {
+									outline: 0,
+									boxShadow: `0 0 0 2px token(colors.background), 0 0 0 4px token(colors.accent)`,
+								},
+							}}
+						>
+							{m.monthName}
+						</Box>
 					);
 				})}
 			</Stack>
-		</PageWithTitle>
+			<CalendarMonthPanel
+				month={months[activeIndex]}
+				allRecipes={allRecipes}
+				labelledBy={`cal-tab-${activeIndex}`}
+				id={`cal-panel-${activeIndex}`}
+			/>
+		</Stack>
 	);
 }
