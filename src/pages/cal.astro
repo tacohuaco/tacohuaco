@@ -5,7 +5,7 @@ import { CalendarPage } from '../templates/CalendarPage';
 import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
 import { SEASONS } from '../util/olivier/regions/valencia';
 import { ALL_MONTHS, Month, MONTH_NAMES } from '../util/olivier';
-import { PageWithTitle } from '../templates/PageWithTitle';
+import { Page } from '../templates/Page';
 
 const recipeEntries = await getCollection('recipes');
 const allRecipes = recipeEntries.map((x) => recipeEntryToRecipe(x));
@@ -29,8 +29,8 @@ const months = ALL_MONTHS.map((month) => ({
 }));
 ---
 
-<Layout url="/cal" title="Calendar">
-	<PageWithTitle url="/cal" title="Calendar">
+<Layout url="/cal/" title="Calendar">
+	<Page url="/cal/">
 		<CalendarPage
 			url="/cal"
 			title="Calendar"
@@ -38,5 +38,5 @@ const months = ALL_MONTHS.map((month) => ({
 			allRecipes={allRecipes}
 			client:load
 		/>
-	</PageWithTitle>
+	</Page>
 </Layout>

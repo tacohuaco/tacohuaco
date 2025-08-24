@@ -3,6 +3,7 @@ import type { Recipe } from '../types/Recipe';
 import { useMemo, useRef, useState } from 'react';
 import { CalendarMonthPanel, type SeasonalMonth } from './CalendarMonthPanel';
 import { Box } from '../components/Box';
+import { VisuallyHidden } from '../components/VisuallyHidden';
 
 type Props = {
 	url: string;
@@ -58,6 +59,7 @@ export function CalendarPage({ months, allRecipes }: Props) {
 
 	return (
 		<Stack gap="l">
+			<VisuallyHidden as="h1">Cooking calendar</VisuallyHidden>
 			<Stack
 				role="tablist"
 				aria-label="Months"

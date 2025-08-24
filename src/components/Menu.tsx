@@ -18,6 +18,10 @@ const ITEMS: Item[] = [
 		href: '/recipes/',
 	},
 	{
+		title: 'Calendar',
+		href: '/cal/',
+	},
+	{
 		title: 'Coffee',
 		href: '/coffee/',
 	},
@@ -37,12 +41,12 @@ export function Menu({ current }: Props) {
 			as="ul"
 			textAlign="center"
 			rowGap="m"
-			columnGap={{ base: 0, tablet: 'm' }}
-			display={{ base: 'grid', tablet: 'flex' }}
+			columnGap={{ base: 0, desktop: 'm' }}
+			display={{ base: 'grid', desktop: 'flex' }}
 			gridTemplateColumns="repeat(auto-fit, minmax(8rem, 1fr))"
 		>
 			{ITEMS.map(({ title, href }) => (
-				<Box as="li" key={href} width={{ tablet: '6rem' }}>
+				<Box as="li" key={href}>
 					<MenuLink href={href} isCurrent={current.startsWith(href)}>
 						{title}
 					</MenuLink>

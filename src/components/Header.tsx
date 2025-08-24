@@ -12,7 +12,7 @@ export function Header({ url }: Props) {
 			as="header"
 			gap="l"
 			justifyContent="space-between"
-			direction={{ base: 'column', tablet: 'row' }}
+			direction={{ base: 'column', desktop: 'row' }}
 		>
 			<Logo />
 			<Menu current={url} />

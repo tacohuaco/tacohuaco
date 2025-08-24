@@ -1,8 +1,9 @@
+import Group from 'react-group';
 import { Stack } from '../components/Stack';
 import { Heading } from '../components/Heading';
 import { Text } from '../components/Text';
-import Group from 'react-group';
 import { Link } from '../components/Link';
+import { VisuallyHidden } from '../components/VisuallyHidden';
 import capitalize from 'lodash/capitalize';
 import type { Recipe } from '../types/Recipe';
 
@@ -221,9 +222,9 @@ export function CalendarMonthPanel({
 	return (
 		<div role="tabpanel" aria-labelledby={labelledBy} id={id}>
 			<Stack key={month.monthName} gap="l">
-				<Heading as="h2" level={2}>
+				<VisuallyHidden as="h2" level={2}>
 					{month.monthName}
-				</Heading>
+				</VisuallyHidden>
 				<Text variant="intro">
 					In season:{' '}
 					<Group separator=", ">
