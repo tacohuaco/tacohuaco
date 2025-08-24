@@ -83,10 +83,10 @@ function getIngredientEmoji(ingredient: string): string | undefined {
 // Some recipes have shorter names or point to similar recipes
 const NORMALIZED_RECIPE_NAMES: Record<string, string> = {
 	burger: 'klatz burger',
-	'caprese salad': 'caprese salad with pesto',
 	'chicken wings': 'air-fried chicken wings and legs with potatoes',
 	frittata: 'frittata with vegetables',
 	hotdogs: 'klatz hot dog',
+	'hummus and bread': 'hummus',
 	'kimchi soup': 'kimchi lava soup',
 	'olivier salad': 'olivier salad with chicken',
 	pho: 'chicken pho',
@@ -113,6 +113,8 @@ function RecipeName({
 	allRecipes: Recipe[];
 }) {
 	const normalizedTitle = getNormalizedRecipeName(name);
+	console.log('💣 normalizedTitle', normalizedTitle);
+
 	const recipe = allRecipes.find(
 		(x) => x.title.toLowerCase() === normalizedTitle
 	);
