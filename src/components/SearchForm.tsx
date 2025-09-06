@@ -4,29 +4,25 @@ import { useEffect, useState, type FormEventHandler } from 'react';
 import { Box } from './Box';
 import { Input } from './Input';
 import { VisuallyHidden } from './VisuallyHidden';
+import { HygraphImage } from './HygraphImage';
+import { Flex } from './Flex';
 import { useIsBrowser } from '../hooks/useIsBrowser';
+import type { AutocompleteItem } from '../hooks/useSearch';
 
 const MAX_ITEMS_TO_SHOW = 12;
 
 type Props = {
-	items: readonly string[];
+	items: readonly AutocompleteItem[];
 	value: string;
 	onChange: (value?: string) => void;
 };
 
-const splitItemToTitleAndSlug = (item: string) => {
-	const match = item.match(/^(.*) +\[([^\]]+)]$/);
-	return match
-		? { title: match[1], slug: match[2] }
-		: { title: item, slug: undefined };
-};
-
-const getItemsToShow = (items: readonly string[], value: string) => {
+const getItemsToShow = (items: readonly AutocompleteItem[], value: string) => {
 	if (value === '') {
 		return [];
 	}
 
-	const filteredItems = matchSorter(items, value);
+	const filteredItems = matchSorter(items, value, { keys: ['value'] });
 
 	if (filteredItems.length === items.length) {
 		return [];
@@ -57,24 +53,22 @@ export function SearchForm({ items, value, onChange }: Props) {
 	} = useCombobox({
 		items: itemsToShow,
 		inputValue: value,
-		selectedItem: value,
+		selectedItem: null,
+		itemToString: (item) => item?.value ?? '',
 		onInputValueChange: ({ inputValue }) => {
-			const { title } = splitItemToTitleAndSlug(inputValue);
-			onChange(title);
+			onChange(inputValue ?? '');
 		},
-		onSelectedItemChange: ({ inputValue }) => {
-			if (inputValue === undefined) {
+		onSelectedItemChange: ({ selectedItem }) => {
+			if (selectedItem === undefined) {
 				return;
 			}
 
-			const { title, slug } = splitItemToTitleAndSlug(inputValue);
-
-			if (slug) {
-				window.location.href = `${window.location.origin}/recipes/${slug}/`;
+			if (selectedItem.type === 'recipe' && selectedItem.recipe) {
+				window.location.href = `${window.location.origin}/recipes/${selectedItem.recipe.slug}/`;
 				return;
 			}
 
-			onChange(title);
+			onChange(selectedItem.value);
 		},
 	});
 	const handleSubmit: FormEventHandler = (event) => {
@@ -134,13 +128,68 @@ export function SearchForm({ items, value, onChange }: Props) {
 					{isOpen &&
 						itemsToShow.map((item, index) => {
 							const isHighlighted = highlightedIndex === index;
-							const { key, ...itemProps } = getItemProps({
+							const itemProps = getItemProps({
 								refKey: 'innerRef',
-								key: item,
 								item,
 								index,
 							});
-							const { title, slug } = splitItemToTitleAndSlug(item);
+
+							if (item.type === 'recipe' && item.recipe) {
+								const hasImage = item.recipe.images.length > 0;
+								return (
+									<Flex
+										css={{
+											paddingBlock: 'xxs',
+											paddingInline: 's',
+											fontFamily: 'ui',
+											fontSize: 'm',
+											fontWeight: 'ui',
+											color: isHighlighted ? 'bg' : 'base',
+											backgroundColor: isHighlighted ? 'accent' : 'transparent',
+											cursor: 'pointer',
+											alignItems: 'center',
+											gap: 's',
+										}}
+										key={item.value}
+										{...itemProps}
+									>
+										{hasImage && (
+											<Box
+												css={{
+													width: '32px',
+													height: '32px',
+													flexShrink: 0,
+													borderRadius: 'xs',
+													overflow: 'hidden',
+													backgroundColor: 'light',
+													position: 'relative',
+												}}
+											>
+												<HygraphImage
+													handle={item.recipe.images[0].handle}
+													width={32}
+													height={32}
+													quality={30}
+													alt=""
+													loading="lazy"
+													css={{
+														width: '100%',
+														height: '100%',
+														objectFit: 'cover',
+													}}
+												/>
+											</Box>
+										)}
+										<Box>
+											{item.recipe.title}{' '}
+											<Box as="span" css={{ fontSize: 's' }}>
+												(open recipe)
+											</Box>
+										</Box>
+									</Flex>
+								);
+							}
+
 							return (
 								<Box
 									css={{
@@ -153,15 +202,10 @@ export function SearchForm({ items, value, onChange }: Props) {
 										backgroundColor: isHighlighted ? 'accent' : 'transparent',
 										cursor: 'pointer',
 									}}
-									key={key}
+									key={item.value}
 									{...itemProps}
 								>
-									{title}{' '}
-									{slug && (
-										<Box as="span" css={{ fontSize: 's' }}>
-											(open recipe)
-										</Box>
-									)}
+									{item.value}
 								</Box>
 							);
 						})}

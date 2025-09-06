@@ -44,15 +44,27 @@ const getTitle = ({
 		: `${title} [${slug}]`;
 };
 
-const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
-	const allTitles: string[] = [];
+export type AutocompleteItem = {
+	type: 'recipe' | 'text';
+	value: string;
+	recipe?: RecipeFragment;
+};
+
+const getAutocompleteItems = (
+	recipes: RecipeFragment[]
+): readonly AutocompleteItem[] => {
+	const allItems: AutocompleteItem[] = [];
 	const allIngredients: string[] = [];
 	const allTags: string[] = [];
 	const allCuisines: string[] = [];
 	const allKeywords: string[] = [];
 
 	for (const recipe of recipes) {
-		allTitles.push(getTitle(recipe));
+		allItems.push({
+			type: 'recipe',
+			value: getTitle(recipe),
+			recipe,
+		});
 
 		const ingredients = getAllIngredients(recipe.ingredients);
 
@@ -70,14 +82,20 @@ const getAutocompleteItems = (recipes: RecipeFragment[]): readonly string[] => {
 		allKeywords.push(...recipe.keywords);
 	}
 
-	return uniq([
+	const textItems = uniq([
 		...DEFAULT_AUTOCOMPLETE_ITEMS,
-		...allTitles,
 		...allIngredients,
 		...allTags,
 		...allCuisines,
 		...allKeywords,
-	]);
+	]).map(
+		(value): AutocompleteItem => ({
+			type: 'text',
+			value,
+		})
+	);
+
+	return [...allItems, ...textItems];
 };
 
 export function useSearch(recipes: RecipeFragment[]) {
