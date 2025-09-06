@@ -8,6 +8,7 @@ import { HygraphImage } from './HygraphImage';
 import { Flex } from './Flex';
 import { useIsBrowser } from '../hooks/useIsBrowser';
 import type { AutocompleteItem } from '../hooks/useSearch';
+import { Stack } from './Stack';
 
 const MAX_ITEMS_TO_SHOW = 12;
 
@@ -30,6 +31,29 @@ const getItemsToShow = (items: readonly AutocompleteItem[], value: string) => {
 
 	return filteredItems.slice(0, MAX_ITEMS_TO_SHOW);
 };
+
+function ItemContainer({
+	isHighlighted,
+	...props
+}: { isHighlighted: boolean } & React.HTMLAttributes<HTMLDivElement>) {
+	return (
+		<Flex
+			css={{
+				paddingBlock: 'xxs',
+				paddingInline: 's',
+				fontFamily: 'ui',
+				fontSize: 'm',
+				fontWeight: 'ui',
+				color: isHighlighted ? 'background' : 'base',
+				backgroundColor: isHighlighted ? 'accent' : 'transparent',
+				cursor: 'pointer',
+				alignItems: 'center',
+				gap: 's',
+			}}
+			{...props}
+		/>
+	);
+}
 
 export function SearchForm({ items, value, onChange }: Props) {
 	const [isEnabled, setIsEnabled] = useState(false);
@@ -137,38 +161,24 @@ export function SearchForm({ items, value, onChange }: Props) {
 							if (item.type === 'recipe' && item.recipe) {
 								const hasImage = item.recipe.images.length > 0;
 								return (
-									<Flex
-										css={{
-											paddingBlock: 'xxs',
-											paddingInline: 's',
-											fontFamily: 'ui',
-											fontSize: 'm',
-											fontWeight: 'ui',
-											color: isHighlighted ? 'bg' : 'base',
-											backgroundColor: isHighlighted ? 'accent' : 'transparent',
-											cursor: 'pointer',
-											alignItems: 'center',
-											gap: 's',
-										}}
+									<ItemContainer
 										key={item.value}
+										isHighlighted={isHighlighted}
 										{...itemProps}
 									>
 										{hasImage && (
 											<Box
 												css={{
-													width: '32px',
-													height: '32px',
+													width: 36,
+													height: 36,
 													flexShrink: 0,
-													borderRadius: 'xs',
-													overflow: 'hidden',
 													backgroundColor: 'light',
-													position: 'relative',
 												}}
 											>
 												<HygraphImage
 													handle={item.recipe.images[0].handle}
-													width={32}
-													height={32}
+													width={36}
+													height={36}
 													quality={30}
 													alt=""
 													loading="lazy"
@@ -180,33 +190,24 @@ export function SearchForm({ items, value, onChange }: Props) {
 												/>
 											</Box>
 										)}
-										<Box>
-											{item.recipe.title}{' '}
-											<Box as="span" css={{ fontSize: 's' }}>
-												(open recipe)
+										<Stack>
+											<Box>{item.recipe.title}</Box>
+											<Box mt="-xs" css={{ fontSize: 'xs' }}>
+												Open recipe
 											</Box>
-										</Box>
-									</Flex>
+										</Stack>
+									</ItemContainer>
 								);
 							}
 
 							return (
-								<Box
-									css={{
-										paddingBlock: 'xxs',
-										paddingInline: 's',
-										fontFamily: 'ui',
-										fontSize: 'm',
-										fontWeight: 'ui',
-										color: isHighlighted ? 'bg' : 'base',
-										backgroundColor: isHighlighted ? 'accent' : 'transparent',
-										cursor: 'pointer',
-									}}
+								<ItemContainer
 									key={item.value}
+									isHighlighted={isHighlighted}
 									{...itemProps}
 								>
 									{item.value}
-								</Box>
+								</ItemContainer>
 							);
 						})}
 				</Box>

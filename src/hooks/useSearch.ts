@@ -37,11 +37,8 @@ const getIngredientAliases = (name: string) => {
 const getTitle = ({
 	title,
 	titleEnglish,
-	slug,
-}: Pick<RecipeFragment, 'title' | 'titleEnglish' | 'slug'>) => {
-	return titleEnglish
-		? `${title} (${titleEnglish}) [${slug}]`
-		: `${title} [${slug}]`;
+}: Pick<RecipeFragment, 'title' | 'titleEnglish'>) => {
+	return titleEnglish ? `${title} (${titleEnglish})` : title;
 };
 
 export type AutocompleteItem = {
