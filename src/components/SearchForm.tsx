@@ -23,7 +23,12 @@ const getItemsToShow = (items: readonly AutocompleteItem[], value: string) => {
 		return [];
 	}
 
-	const filteredItems = matchSorter(items, value, { keys: ['value'] });
+	const filteredItems = matchSorter(items, value, {
+		keys: ['value'],
+		// Stricter matcher to reduce the number of unrelated matches (such as
+		// "cochinita con achiote" for "taco")
+		threshold: matchSorter.rankings.WORD_STARTS_WITH,
+	});
 
 	if (filteredItems.length === items.length) {
 		return [];

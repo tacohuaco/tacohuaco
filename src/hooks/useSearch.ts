@@ -65,9 +65,11 @@ const getAutocompleteItems = (
 
 		const ingredients = getAllIngredients(recipe.ingredients);
 
-		const ingredientNames = ingredients.flatMap(({ name }) =>
-			getIngredientAliases(name)
-		);
+		const ingredientNames = ingredients
+			// Filter out ingredients that are links to subrecipes, so they don't appear
+			// twice in the results
+			.filter(({ subrecipeSlug }) => subrecipeSlug === undefined)
+			.flatMap(({ name }) => getIngredientAliases(name));
 
 		allIngredients.push(...ingredientNames);
 
