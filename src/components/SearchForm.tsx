@@ -88,7 +88,7 @@ export function SearchForm({ items, value, onChange }: Props) {
 			onChange(inputValue ?? '');
 		},
 		onSelectedItemChange: ({ selectedItem }) => {
-			if (selectedItem === undefined) {
+			if (selectedItem === null) {
 				return;
 			}
 

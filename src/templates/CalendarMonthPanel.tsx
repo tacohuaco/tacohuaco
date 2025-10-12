@@ -6,6 +6,7 @@ import { Link } from '../components/Link';
 import { VisuallyHidden } from '../components/VisuallyHidden';
 import capitalize from 'lodash/capitalize';
 import type { Recipe } from '../types/Recipe';
+import { Box } from '../components/Box';
 
 export interface SeasonalMonth {
 	monthName: string;
@@ -113,8 +114,6 @@ function RecipeName({
 	allRecipes: Recipe[];
 }) {
 	const normalizedTitle = getNormalizedRecipeName(name);
-	console.log('💣 normalizedTitle', normalizedTitle);
-
 	const recipe = allRecipes.find(
 		(x) => x.title.toLowerCase() === normalizedTitle
 	);
@@ -122,7 +121,7 @@ function RecipeName({
 	const nameToDisplay = first ? capitalize(name) : name;
 
 	if (recipe === undefined) {
-		return nameToDisplay as unknown as JSX.Element;
+		return nameToDisplay;
 	}
 
 	return <Link href={`/recipes/${recipe.slug}`}>{nameToDisplay}</Link>;
@@ -133,7 +132,7 @@ function IngredientName({ name, first }: { name: string; first?: boolean }) {
 	const nameToDisplay = first ? capitalize(name) : name;
 
 	return (
-		<nobr>
+		<Box as="span" whiteSpace="nowrap">
 			{nameToDisplay}
 			{emoji && (
 				<Text as="span" fontStyle="normal">
@@ -141,7 +140,7 @@ function IngredientName({ name, first }: { name: string; first?: boolean }) {
 					{emoji}
 				</Text>
 			)}
-		</nobr>
+		</Box>
 	);
 }
 

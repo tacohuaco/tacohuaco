@@ -10,6 +10,7 @@ import type {
 	Step,
 	StepsSection,
 } from '../types/Recipe';
+import { Box } from './Box';
 
 // TODO: Responsive font size fontSize={['l', 'l', 'l', 'm']}
 
@@ -52,10 +53,10 @@ const IngredientAmount = ({
 	}
 	const printed = printOption(formatOption(ingredient));
 	return (
-		<nobr>
+		<Box as="span" whiteSpace="nowrap">
 			<em>{printed.amount}</em> {printed.suffix} {printed.modifier}{' '}
 			{printed.name}
-		</nobr>
+		</Box>
 	);
 };
 
