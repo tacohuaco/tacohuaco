@@ -16,7 +16,7 @@
     "lint": "eslint . --cache --fix",
     "format": "prettier --log-level warn --write \"**/*.{js,cjs,mjs,ts,tsx,astro,md}\"",
     "sync": "node --env-file=.env --experimental-strip-types scripts/sync.ts",
-    "sync:ci": "node --env-file=.env --experimental-strip-types scripts/syncCi.ts",
+    "sync:ci": "node --experimental-strip-types scripts/syncCi.ts",
     "prepare": "husky; panda codegen"
   },
   "type": "module",
