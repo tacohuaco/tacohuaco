@@ -1,5 +1,5 @@
-import type { Recipe, RecipeIngredient } from '../../src/types/Recipe';
-import { IngredientKind } from '../../src/util/olivier';
+import type { Recipe, RecipeIngredient } from '../../src/types/Recipe.ts';
+import { IngredientKind } from '../../src/util/olivier/types.ts';
 
 /**
  * Gluten free recipe: less than 30% of the flour amount has gluten
@@ -40,8 +40,9 @@ export const mapFlags = (
 > => {
 	return {
 		vegan: ingredients.every((x) => x.kind === IngredientKind.Vegan),
-		vegetarian: ingredients.every((x) =>
-			[IngredientKind.Vegan, IngredientKind.Vegetarian].includes(x.kind)
+		vegetarian: ingredients.every(
+			(x) =>
+				x.kind === IngredientKind.Vegan || x.kind === IngredientKind.Vegetarian
 		),
 		glutenFree: ingredients.every((x) => x.hasGluten === false),
 		lowGluten: isLowGlutenRecipe(ingredients),

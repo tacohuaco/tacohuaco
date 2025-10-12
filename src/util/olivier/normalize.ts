@@ -1,14 +1,13 @@
-import orderBy from 'lodash/orderBy';
 import { numericQuantity } from 'numeric-quantity';
 import {
 	GRAMS_IN_KILOGRAM,
 	MILLILITERS_IN_LITER,
 	TEASPOONS_IN_TABLESPOONS,
 	UNITS,
-} from './langs/en/units';
-import { ALL_INGREDIENTS } from './langs/en/ingredients';
-import { ARTICLES, WORDS_TO_NUMBERS } from './langs/en/translations';
-import type { Amount, Ingredient } from './types';
+} from './langs/en/units.ts';
+import { ALL_INGREDIENTS } from './langs/en/ingredients.ts';
+import { ARTICLES, WORDS_TO_NUMBERS } from './langs/en/translations.ts';
+import type { Amount, Ingredient } from './types.ts';
 
 const CONVERSIONS: {
 	from: string;
@@ -93,7 +92,7 @@ export function normalizeName(
 ): Pick<Ingredient, 'name' | 'modifier'> {
 	for (const aliases of ALL_INGREDIENTS) {
 		// Order aliases from longest to shortest to catch the longest name
-		const aliasesOrdered = orderBy(aliases, (x) => -x.length);
+		const aliasesOrdered = aliases.toSorted((a, b) => b.length - a.length);
 		const alias = aliasesOrdered.find((x) =>
 			new RegExp(`\\b${x}$`, 'i').test(name)
 		);

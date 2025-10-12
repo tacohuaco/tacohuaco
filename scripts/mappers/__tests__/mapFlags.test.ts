@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest';
 import { mapFlags } from '../mapFlags';
+import { IngredientKind } from '../../../src/util/olivier';
 
 test('map flags', () => {
 	const ingredients = [
@@ -8,7 +9,7 @@ test('map flags', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: 1000,
 			minAmount: 1000,
 			modifier: 'floury',
@@ -21,7 +22,7 @@ test('map flags', () => {
 			hasDairy: true,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 1,
+			kind: IngredientKind.Vegetarian,
 			maxAmount: 12,
 			minAmount: 12,
 			modifier: undefined,
@@ -34,7 +35,7 @@ test('map flags', () => {
 			hasDairy: true,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 1,
+			kind: IngredientKind.Vegetarian,
 			maxAmount: 1,
 			minAmount: 1,
 			name: 'milk',
@@ -46,7 +47,7 @@ test('map flags', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: undefined,
 			minAmount: undefined,
 			modifier: 'smoked',
@@ -59,7 +60,7 @@ test('map flags', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: undefined,
 			minAmount: undefined,
 			modifier: undefined,

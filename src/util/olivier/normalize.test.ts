@@ -1,5 +1,4 @@
 import { expect, test } from 'vitest';
-import { castArray } from 'lodash';
 import { normalize } from './normalize';
 
 test.each([
@@ -229,5 +228,5 @@ test.each([
 		},
 	],
 ])('normalize ingredient: %s', (source, result) => {
-	expect(normalize(castArray(source))).toEqual(castArray(result));
+	expect(normalize([source])).toEqual([result]);
 });

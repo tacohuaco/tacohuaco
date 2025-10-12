@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest';
 import { mapChart } from '../mapChart';
+import { IngredientKind } from '../../../src/util/olivier';
 
 test('map chart', () => {
 	const ingredients = [
@@ -8,7 +9,7 @@ test('map chart', () => {
 			hasDairy: true,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 1,
+			kind: IngredientKind.Vegetarian,
 			maxAmount: 12,
 			minAmount: 12,
 			modifier: undefined,
@@ -21,7 +22,7 @@ test('map chart', () => {
 			hasDairy: true,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 1,
+			kind: IngredientKind.Vegetarian,
 			maxAmount: 1,
 			minAmount: 1,
 			name: 'milk',
@@ -33,7 +34,7 @@ test('map chart', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: 100,
 			minAmount: 100,
 			modifier: undefined,

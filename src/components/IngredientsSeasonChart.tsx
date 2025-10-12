@@ -6,7 +6,7 @@ import { Month } from '../util/olivier';
 import { SEASONS } from '../util/olivier/regions/valencia';
 import { Stack } from './Stack';
 
-const CURRENT_SEASON = new Date().getMonth() + 1;
+const CURRENT_SEASON = (new Date().getMonth() + 1) as Month;
 
 const ALL_MONTHS = [
 	Month.January,

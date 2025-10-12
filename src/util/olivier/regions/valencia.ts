@@ -5,7 +5,7 @@
 // - list "potato" and "carrot" as "young potato" and "young carrot"
 // - remove some common ingredients such as "bell pepper" or "lime"
 
-import { Month } from '../types';
+import { Month } from '../types.ts';
 
 const Jan = Month.January;
 const Feb = Month.February;

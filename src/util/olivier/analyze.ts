@@ -6,14 +6,14 @@ import {
 	NON_VEGANS,
 	POULTRIES,
 	SUGARS,
-} from './langs/en/info';
-import { SEASONS } from './regions/valencia';
+} from './langs/en/info.ts';
+import { SEASONS } from './regions/valencia.ts';
 import {
 	IngredientKind,
 	Month,
 	type Ingredient,
 	type IngredientInfo,
-} from './types';
+} from './types.ts';
 
 function getKind(name: string): IngredientKind {
 	if (DAIRIES.includes(name) || NON_VEGANS.includes(name)) {

@@ -3,7 +3,7 @@ import {
 	type ChartStep,
 	type RecipeIngredient,
 	type StepsSection,
-} from '../../src/types/Recipe';
+} from '../../src/types/Recipe.ts';
 
 // TODO: Do something with oven/air fryer recipes:
 // arrange the tacos on a baking sheet (or in the air fryer basket) and bake for about 25 minutes in the oven (or for about 12 minutes in the air fryer at 200c), until very crispy.

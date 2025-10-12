@@ -95,7 +95,7 @@ export function RecipeSteps({ steps, ingredients }: Props) {
 					return null;
 				}
 
-				const sectionIngredients = ingredients[index]?.ingredients.flat(1);
+				const sectionIngredients = ingredients[index]?.ingredients.flat();
 				return (
 					<Stack key={section.name} gap="m">
 						{section.name && <Heading level={3}>{section.name}</Heading>}

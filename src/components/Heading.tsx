@@ -38,11 +38,11 @@ export function Heading<C extends ElementType = 'h1'>({
 	level = 1,
 	...props
 }: HeadingProps<C>) {
-	return createBox(
+	return createBox<C>(
 		{
 			...props,
 			className: heading({ level }),
-		},
+		} as BoxProps<C>,
 		level ? `h${level}` : 'h1'
 	);
 }

@@ -1,5 +1,9 @@
-import { Month, type Ingredient, type IngredientInfo } from '../util/olivier';
-import { type Asset } from './Asset';
+import type {
+	Ingredient,
+	IngredientInfo,
+	Month,
+} from '../util/olivier/types.ts';
+import { type Asset } from './Asset.ts';
 
 export type RecipeIngredient = Ingredient &
 	IngredientInfo & {
@@ -26,15 +30,17 @@ export interface Yields {
 	unit: string;
 }
 
-export enum ChartStepType {
-	PreheatOven = 'PreheatOven',
-	WarmToRoomTemp = 'WarmToRoomTemp',
-	Refrigerate = 'Refrigerate',
-	Cook = 'Cook',
-	CookInOven = 'CookInOven',
-	Rest = 'Rest',
-	Soak = 'Soak',
-}
+export const ChartStepType = {
+	PreheatOven: 'PreheatOven',
+	WarmToRoomTemp: 'WarmToRoomTemp',
+	Refrigerate: 'Refrigerate',
+	Cook: 'Cook',
+	CookInOven: 'CookInOven',
+	Rest: 'Rest',
+	Soak: 'Soak',
+} as const;
+
+export type ChartStepType = (typeof ChartStepType)[keyof typeof ChartStepType];
 
 export interface ChartStep {
 	type: ChartStepType;

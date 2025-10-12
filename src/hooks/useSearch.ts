@@ -1,5 +1,4 @@
 import { useMemo, useCallback } from 'react';
-import uniq from 'lodash/uniq';
 import { useSearchResults } from '../hooks/useSearchResults';
 import {
 	MONTH_TO_NAME,
@@ -81,13 +80,15 @@ const getAutocompleteItems = (
 		allKeywords.push(...recipe.keywords);
 	}
 
-	const textItems = uniq([
-		...DEFAULT_AUTOCOMPLETE_ITEMS,
-		...allIngredients,
-		...allTags,
-		...allCuisines,
-		...allKeywords,
-	]).map(
+	const textItems = [
+		...new Set([
+			...DEFAULT_AUTOCOMPLETE_ITEMS,
+			...allIngredients,
+			...allTags,
+			...allCuisines,
+			...allKeywords,
+		]),
+	].map(
 		(value): AutocompleteItem => ({
 			type: 'text',
 			value,

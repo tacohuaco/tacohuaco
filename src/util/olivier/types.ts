@@ -1,19 +1,21 @@
 export type Amount = number | string;
 
-export enum Month {
-	January = 1,
-	February = 2,
-	March = 3,
-	April = 4,
-	May = 5,
-	June = 6,
-	July = 7,
-	August = 8,
-	September = 9,
-	October = 10,
-	November = 11,
-	December = 12,
-}
+export const Month = {
+	January: 1,
+	February: 2,
+	March: 3,
+	April: 4,
+	May: 5,
+	June: 6,
+	July: 7,
+	August: 8,
+	September: 9,
+	October: 10,
+	November: 11,
+	December: 12,
+} as const;
+
+export type Month = (typeof Month)[keyof typeof Month];
 
 export const ALL_MONTHS = [
 	Month.January,
@@ -54,14 +56,17 @@ export interface Ingredient {
 	readonly comment?: string;
 }
 
-export enum IngredientKind {
-	Vegan,
-	Vegetarian,
-	Poultry,
-	Fish,
-	Meat,
-	Unknown,
-}
+export const IngredientKind = {
+	Vegan: 'Vegan',
+	Vegetarian: 'Vegetarian',
+	Poultry: 'Poultry',
+	Fish: 'Fish',
+	Meat: 'Meat',
+	Unknown: 'Unknown',
+} as const;
+
+export type IngredientKind =
+	(typeof IngredientKind)[keyof typeof IngredientKind];
 
 export interface IngredientInfo {
 	readonly name: string;

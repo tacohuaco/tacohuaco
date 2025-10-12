@@ -1,6 +1,5 @@
-import intersection from 'lodash/intersection';
-import { Month } from '../../src/util/olivier';
-import type { RecipeIngredient } from '../../src/types/Recipe';
+import type { RecipeIngredient } from '../../src/types/Recipe.ts';
+import type { Month } from '../../src/util/olivier/types.ts';
 
 /**
  * Recipe seasons: return months shared by all recipe ingredients
@@ -9,5 +8,12 @@ export const mapSeasons = (ingredients: RecipeIngredient[]): Month[] => {
 	const allSeasons = ingredients
 		.map((x) => x.seasons)
 		.filter((x) => x.length > 0);
-	return intersection(...allSeasons);
+
+	if (allSeasons.length === 0) {
+		return [];
+	}
+
+	return allSeasons[0].filter((month) =>
+		allSeasons.every((seasons) => seasons.includes(month))
+	);
 };

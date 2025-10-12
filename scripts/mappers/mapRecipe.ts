@@ -1,17 +1,18 @@
-import { normalizeOption, parseOption } from '../../src/util/olivier';
-import type { Recipe, Yields } from '../../src/types/Recipe';
-import type { IngredientModel, RecipeModelRaw, TipModel } from '../types';
-import { getAllIngredients } from '../../src/util/getAllIngredients';
-import { mapFlags } from './mapFlags';
-import { mapIngredients } from './mapIngredients';
-import { mapSeasons } from './mapSeasons';
-import { mapSteps } from './mapSteps';
-import { mapTips } from './mapTips';
-import { mapTools } from './mapTools';
-import { mapWarnings } from './mapWarnings';
-import { mapMaybeString } from './mapMaybeString';
-import { mapMaybeNumber } from './mapMaybeNumber';
-import { mapChart } from './mapChart';
+import type { Recipe, Yields } from '../../src/types/Recipe.ts';
+import type { IngredientModel, RecipeModelRaw, TipModel } from '../types.ts';
+import { getAllIngredients } from '../../src/util/getAllIngredients.ts';
+import { mapFlags } from './mapFlags.ts';
+import { mapIngredients } from './mapIngredients.ts';
+import { mapSeasons } from './mapSeasons.ts';
+import { mapSteps } from './mapSteps.ts';
+import { mapTips } from './mapTips.ts';
+import { mapTools } from './mapTools.ts';
+import { mapWarnings } from './mapWarnings.ts';
+import { mapMaybeString } from './mapMaybeString.ts';
+import { mapMaybeNumber } from './mapMaybeNumber.ts';
+import { mapChart } from './mapChart.ts';
+import { normalizeOption } from '../../src/util/olivier/normalize.ts';
+import { parseOption } from '../../src/util/olivier/parse.ts';
 
 function mapDate(date: string) {
 	return new Date(Date.parse(date));

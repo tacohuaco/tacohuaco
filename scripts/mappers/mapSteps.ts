@@ -1,9 +1,10 @@
-import type { Step, StepsSection } from '../../src/types/Recipe';
-import { normalizeOption, parseOption } from '../../src/util/olivier';
-import type { RecipeModelRaw } from '../types';
-import { getListLines } from './getListLines';
-import { getSubrecipeSlug } from './getSubrecipeSlug';
-import { splitBySection } from './splitBySection';
+import type { Step, StepsSection } from '../../src/types/Recipe.ts';
+import { normalizeOption } from '../../src/util/olivier/normalize.ts';
+import { parseOption } from '../../src/util/olivier/parse.ts';
+import type { RecipeModelRaw } from '../types.ts';
+import { getListLines } from './getListLines.ts';
+import { getSubrecipeSlug } from './getSubrecipeSlug.ts';
+import { splitBySection } from './splitBySection.ts';
 
 function hasPause(text: string) {
 	if (

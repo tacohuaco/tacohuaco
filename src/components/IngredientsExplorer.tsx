@@ -31,7 +31,9 @@ const printContents = (ingredient: RecipeIngredient): string =>
 	);
 
 export function IngredientsExplorer({ ingredients }: Props) {
-	const allIngredients = ingredients.map((x) => x.ingredients).flat(2);
+	const allIngredients = ingredients
+		.map((x) => x.ingredients)
+		.flat(/* Flatten 2 dimensional array */ 2);
 	const sorted = sortBy(allIngredients, (x) => x.name);
 	return (
 		<TextContent>

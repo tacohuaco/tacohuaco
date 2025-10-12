@@ -1,15 +1,15 @@
-import { UNITS } from './langs/en/units';
+import { UNITS } from './langs/en/units.ts';
 import {
 	ARTICLES,
 	CONNECTORS,
 	RANGE_SEPARATORS,
 	UNITLESS,
-} from './langs/en/translations';
-import type { Ingredient } from './types';
+} from './langs/en/translations.ts';
+import type { Ingredient } from './types.ts';
 
 type State = 'BEGINNING' | 'NUMBER' | 'UNIT' | 'NAME' | 'COMMENT';
 
-const ALL_UNITS = UNITS.flat(2);
+const ALL_UNITS = UNITS.flat(/* Flatten 2 dimensional array */ 2);
 
 const isNumber = (s: string) => /^[\d,./–—-]+$/.test(s);
 const isRangeSeparator = (s: string) =>

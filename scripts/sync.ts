@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from 'fs-extra';
 import { request, gql } from 'graphql-request';
 import type {
@@ -6,10 +8,10 @@ import type {
 	RecipeModelRaw,
 	TipModelRaw,
 } from './types';
-import { mapRecipe } from './mappers/mapRecipe';
-import { mapIngredientsModel } from './mappers/mapIngredientsModel';
-import { mapTipsModel } from './mappers/mapTipsModel';
-import { mapCalendarMonthsModel } from './mappers/mapCalendarMonthsModel';
+import { mapRecipe } from './mappers/mapRecipe.ts';
+import { mapIngredientsModel } from './mappers/mapIngredientsModel.ts';
+import { mapTipsModel } from './mappers/mapTipsModel.ts';
+import { mapCalendarMonthsModel } from './mappers/mapCalendarMonthsModel.ts';
 
 // Fetch _all_ the data from Hygraph and convert it to JSON files that could
 // be used in Astro
@@ -28,81 +30,81 @@ if (!process.env.GRAPHCMS_TOKEN) {
 const endpoint = `https://api-eu-central-1.graphcms.com/v2/${process.env.GRAPHCMS_TOKEN}/master`;
 
 const query = gql`
-  {
-  	recipes {
-  		createdAt
-  		cuisines
-  		description
-  		favorite
-  		ingredients
-  		keywords
-  		notes
-  		overnight
-  		slug
-  		source
-  		steps
-  		tags
-  		time
-  		title
-  		titleEnglish
-  		tools
-  		yields
-  		images {
-  			url
-  			handle
-  			width
-  			height
-  		}
-  		subrecipes {
-  			slug
-  			title
-  			ingredients
-  			steps
-  			tools
-  		}
-  		recipes {
-  			createdAt
-  			cuisines
-  			images {
-  				handle
-  				height
-  				url
-  				width
-  			}
-  			ingredients
-  			favorite
-  			overnight
-  			slug
-  			subrecipes {
-  				slug
-  				title
-  				ingredients
-  				steps
-  				tools
-  			}
-  			time
-  			title
-  			tags
-  		}
-  	}
-  	ingredients {
-  		name
-  		warnings
-  	}
-  	tips {
-  		content
-  		tags
-  		ingredient
-  	}
-  	calendarMonths {
-  		name
-  		breakfasts
-  		lunches
-  		specials
-  		sweets
-  		snacks
-  	}
-  }
+	{
+		recipes {
+			createdAt
+			cuisines
+			description
+			favorite
+			ingredients
+			keywords
+			notes
+			overnight
+			slug
+			source
+			steps
+			tags
+			time
+			title
+			titleEnglish
+			tools
+			yields
+			images {
+				url
+				handle
+				width
+				height
+			}
+			subrecipes {
+				slug
+				title
+				ingredients
+				steps
+				tools
+			}
+			recipes {
+				createdAt
+				cuisines
+				images {
+					handle
+					height
+					url
+					width
+				}
+				ingredients
+				favorite
+				overnight
+				slug
+				subrecipes {
+					slug
+					title
+					ingredients
+					steps
+					tools
+				}
+				time
+				title
+				tags
+			}
+		}
+		ingredients {
+			name
+			warnings
+		}
+		tips {
+			content
+			tags
+			ingredient
+		}
+		calendarMonths {
+			name
+			breakfasts
+			lunches
+			specials
+			sweets
+			snacks
+		}
+	}
 `;
 
 console.log('🌮 Syncing content...');

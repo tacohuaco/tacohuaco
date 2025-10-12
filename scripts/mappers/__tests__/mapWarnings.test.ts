@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 import { mapWarnings } from '../mapWarnings';
-import { Month } from '../../../src/util/olivier';
+import { IngredientKind, Month } from '../../../src/util/olivier';
 
 test('map tips', () => {
 	const ingredients = [
@@ -9,7 +9,7 @@ test('map tips', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: 1000,
 			minAmount: 1000,
 			modifier: 'floury',
@@ -22,7 +22,7 @@ test('map tips', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: undefined,
 			minAmount: undefined,
 			modifier: 'smoked',
@@ -35,7 +35,7 @@ test('map tips', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: undefined,
 			minAmount: undefined,
 			modifier: undefined,
@@ -48,7 +48,7 @@ test('map tips', () => {
 			hasDairy: false,
 			hasGluten: false,
 			hasSugar: false,
-			kind: 0,
+			kind: IngredientKind.Vegan,
 			maxAmount: undefined,
 			minAmount: undefined,
 			modifier: undefined,

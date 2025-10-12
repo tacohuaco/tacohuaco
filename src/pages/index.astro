@@ -8,14 +8,15 @@ import { MainPage } from '../templates/MainPage';
 import { recipeEntryToRecipe } from '../util/recipeEntryToRecipe';
 import type { Recipe } from '../types/Recipe';
 import { SEASONS } from '../util/olivier/regions/valencia';
+import type { Month } from '../util/olivier';
 
 const MEAL_TAGS = ['Lunch', 'Dinner', 'Breakfast', 'Brunch'];
 
 const entries = await getCollection('recipes');
 const allRecipes = entries.map((x) => recipeEntryToRecipe(x));
 
-const CURRENT_SEASON = new Date().getMonth() + 1;
-const NEXT_SEASON = CURRENT_SEASON === 12 ? 1 : CURRENT_SEASON + 1;
+const CURRENT_SEASON = (new Date().getMonth() + 1) as Month;
+const NEXT_SEASON = (CURRENT_SEASON === 12 ? 1 : CURRENT_SEASON + 1) as Month;
 const NEW_RECIPES_TO_SHOW = 6;
 
 function getNewRecipes(recipes: Recipe[]): Recipe[] {
@@ -24,7 +25,7 @@ function getNewRecipes(recipes: Recipe[]): Recipe[] {
 
 // Order recipes by the lengths of the seasons list:
 // recipes with shorter season first, and discard foundational recipes
-function getRecipesInSeason(recipes: Recipe[], seasonMonth: number): Recipe[] {
+function getRecipesInSeason(recipes: Recipe[], seasonMonth: Month): Recipe[] {
 	return orderBy(
 		recipes
 			.filter((x) => x.seasons.includes(seasonMonth))
@@ -33,7 +34,7 @@ function getRecipesInSeason(recipes: Recipe[], seasonMonth: number): Recipe[] {
 	);
 }
 
-function getIngredientsInSeason(seasonMonth: number) {
+function getIngredientsInSeason(seasonMonth: Month) {
 	const inSeason = Object.entries(SEASONS).filter(([, months]) =>
 		months.includes(seasonMonth)
 	);

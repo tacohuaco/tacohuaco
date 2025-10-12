@@ -1,7 +1,6 @@
-import uniq from 'lodash/uniq';
-import type { RecipeModelRaw } from '../types';
-import { getListLines } from './getListLines';
-import type { IngredientsSection } from '../../src/types/Recipe';
+import type { RecipeModelRaw } from '../types.ts';
+import { getListLines } from './getListLines.ts';
+import type { IngredientsSection } from '../../src/types/Recipe.ts';
 
 export function mapTools(
 	tools: RecipeModelRaw['tools'],
@@ -26,5 +25,7 @@ export function mapTools(
 
 		return getListLines(subrecipe.tools);
 	});
-	return uniq([...recipeTools, ...subrecipeTools.flat(1)]);
+
+	// Return an array without duplicates
+	return [...new Set([...recipeTools, ...subrecipeTools.flat()])];
 }

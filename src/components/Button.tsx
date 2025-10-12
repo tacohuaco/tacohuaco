@@ -62,11 +62,11 @@ export type ButtonProps<C extends ElementType> = Omit<
 export function Button<C extends ElementType = 'button'>(
 	props: ButtonProps<C>
 ) {
-	return createBox(
+	return createBox<C>(
 		{
 			...props,
 			className: button(),
-		},
+		} as BoxProps<C>,
 		'button'
 	);
 }

@@ -1,5 +1,5 @@
-import { MONTH_NAMES, type Month } from '../../src/util/olivier';
-import type { CalendarMonth, CalendarMonthModelRaw } from '../types';
+import { MONTH_NAMES, type Month } from '../../src/util/olivier/types.ts';
+import type { CalendarMonth, CalendarMonthModelRaw } from '../types.ts';
 
 // Generic recipes that apply to all months are stored in Hygraph at this month
 const GENERIC_MONTH_NAME = 'all';

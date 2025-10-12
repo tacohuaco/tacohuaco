@@ -1,16 +1,14 @@
-import type { IngredientsSection } from '../../src/types/Recipe';
-import type { RecipeModelRaw } from '../types';
-import { getListLines } from './getListLines';
-import { splitBySection } from './splitBySection';
-import {
-	IngredientKind,
-	analyzeOption,
-	normalize,
-	parse,
-} from '../../src/util/olivier';
-import { getSubrecipeSlug } from './getSubrecipeSlug';
-import { mapFlags } from './mapFlags';
-import { mapSeasons } from './mapSeasons';
+import type { IngredientsSection } from '../../src/types/Recipe.ts';
+import type { RecipeModelRaw } from '../types.ts';
+import { getListLines } from './getListLines.ts';
+import { splitBySection } from './splitBySection.ts';
+import { getSubrecipeSlug } from './getSubrecipeSlug.ts';
+import { mapFlags } from './mapFlags.ts';
+import { mapSeasons } from './mapSeasons.ts';
+import { IngredientKind } from '../../src/util/olivier/types.ts';
+import { normalize } from '../../src/util/olivier/normalize.ts';
+import { parse } from '../../src/util/olivier/parse.ts';
+import { analyzeOption } from '../../src/util/olivier/analyze.ts';
 
 // TODO: Can we unify recipe flags and ingredient flags?
 // Kind vs vegan/vegetarian, hasGluten vs glutenFree
@@ -77,7 +75,7 @@ export function mapIngredients(
 							// Ingredient is a subrecipe link
 							const subrecipeIngredients = mapIngredients(
 								subrecipe?.ingredients
-							)[0].ingredients.flat(1);
+							)[0].ingredients.flat();
 							const flags = mapFlags(subrecipeIngredients);
 							return {
 								...option,

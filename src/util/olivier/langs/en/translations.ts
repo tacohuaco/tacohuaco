@@ -1,4 +1,4 @@
-import { GROUPS } from './info';
+import { GROUPS } from './info.ts';
 
 export const WORDS_TO_NUMBERS: Record<string, number> = {
 	zero: 0,
