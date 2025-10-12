@@ -20,7 +20,7 @@
             "minAmount": 1000,
             "maxAmount": 1000,
             "unit": "g",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -30,7 +30,7 @@
         [
           {
             "name": "olive oil",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -40,7 +40,7 @@
         [
           {
             "name": "salt",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -51,7 +51,7 @@
           {
             "name": "black pepper",
             "modifier": "freshly ground",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -64,7 +64,7 @@
             "minAmount": 40,
             "maxAmount": 40,
             "unit": "g",
-            "kind": 1,
+            "kind": "Vegetarian",
             "hasGluten": false,
             "hasDairy": true,
             "hasSugar": false,
@@ -77,7 +77,7 @@
             "minAmount": 2,
             "maxAmount": 2,
             "unit": "clove",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,

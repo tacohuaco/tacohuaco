@@ -11,7 +11,7 @@
           {
             "name": "chicken",
             "modifier": "full",
-            "kind": 2,
+            "kind": "Poultry",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -24,7 +24,7 @@
             "modifier": "big",
             "minAmount": 4,
             "maxAmount": 5,
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -36,7 +36,7 @@
             "name": "clove",
             "minAmount": 6,
             "maxAmount": 6,
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -49,7 +49,7 @@
             "modifier": "small stick",
             "minAmount": 1,
             "maxAmount": 1,
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -62,7 +62,7 @@
             "minAmount": 1,
             "maxAmount": 1,
             "unit": "clove",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -73,7 +73,7 @@
           {
             "name": "black pepper",
             "modifier": "freshly ground",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -83,7 +83,7 @@
         [
           {
             "name": "oregano",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
@@ -93,7 +93,7 @@
         [
           {
             "name": "salt",
-            "kind": 0,
+            "kind": "Vegan",
             "hasGluten": false,
             "hasDairy": false,
             "hasSugar": false,
