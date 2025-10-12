@@ -38,19 +38,19 @@ export type BoxProps<C extends ElementType> = HTMLStyledProps<C> &
  */
 export function createBox<C extends ElementType>(
 	{ as, innerRef, className, css, ...props }: BoxProps<C>,
-	/** Default HTML element */
+	/** Default HTML element. */
 	defaultElement: ElementType = 'div'
 ) {
-	const [htmlProps, styleProps, elementProps] = useMemo(() => {
-		return splitProps(props, normalizeHTMLProps.keys, isCssProperty);
-	}, [props]);
+	const [htmlProps, styleProps, elementProps] = useMemo(
+		() => splitProps(props, normalizeHTMLProps.keys, isCssProperty),
+		[props]
+	);
 
 	return createElement(as ?? defaultElement, {
 		ref: innerRef,
 		...elementProps,
 		...normalizeHTMLProps(htmlProps),
-		// Using any here for the same reason as above
-		className: cx(cssFn(styleProps as Styles[], css), className),
+		className: cx(cssFn(styleProps as Styles, css), className),
 	});
 }
 
