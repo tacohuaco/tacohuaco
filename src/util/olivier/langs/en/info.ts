@@ -45,6 +45,7 @@ export const POULTRIES = [
 	'chicken wing',
 	'chicken thigh',
 	'chicken breast',
+	'chicken chorizo',
 ];
 export const MEATS = [
 	'pork',
@@ -54,6 +55,7 @@ export const MEATS = [
 	'sausage',
 	'bacon',
 	'meat',
+	'pork chorizo',
 ];
 export const SUGARS = ['sugar', 'dried cranberry', 'marmalade'];
 

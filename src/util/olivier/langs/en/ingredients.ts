@@ -301,12 +301,17 @@ export const INGREDIENTS = [
 	/**
 	 * Meat and fish
 	 */
+	[['chicken chorizo', 'chicken chorizos']],
 	[['chicken broth', 'chicken broth', 'chicken stock']],
 	[['chicken leg', 'chicken legs']],
 	[['chicken wing', 'chicken wings']],
 	[['chicken thigh', 'chicken thighs']],
 	[['chicken breast', 'chicken breasts']],
 	[['chicken']],
+	[
+		['pork chorizo', 'pork chorizos'],
+		['chorizo', 'chorizos'],
+	],
 	[['pork']],
 	[['beef']],
 	[['salmon']],
