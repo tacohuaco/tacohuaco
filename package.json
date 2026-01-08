@@ -15,7 +15,7 @@
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix",
     "format": "prettier --log-level warn --write \"**/*.{js,cjs,mjs,ts,tsx,astro,md}\"",
-    "sync": "node --env-file=.env --experimental-strip-types scripts/sync.ts",
+    "sync": "node --env-file-if-exists=.env --experimental-strip-types scripts/sync.ts",
     "sync:ci": "node --experimental-strip-types scripts/syncCi.ts",
     "prepare": "husky; panda codegen"
   },
